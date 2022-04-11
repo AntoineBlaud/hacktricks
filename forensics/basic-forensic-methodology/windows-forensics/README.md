@@ -1,4 +1,4 @@
-# Windows Artifacts
+# Windows Forensics
 
 ## Generic Windows Artifacts
 
@@ -489,3 +489,72 @@ The ID 6005 of the "Event Log" service indicates the PC was turned On. The ID 60
 ### Logs Deletion
 
 The Security EventID 1102 indicates the logs were deleted.
+
+## Memory Acquisition
+
+KnTDD
+
+FTK Manager
+
+
+
+## Volatility
+
+```
+python vol.py -f lab.mem --profile=WinXPSP3x86 pslist
+                                               psscan    
+                                               psxview      
+                                               pstree                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+python vol.py -f grrcon.img privs -p 1096
+python vol.py -f zeus.vmem --profile=WinXPSP3x86 -p 632 handles
+python vol.py -f zeus.vmem --profile=WinXPSP3x86 -p 632 handles -t File,Mutant --silent
+python vol.py -f laqma.mem --profile=WinXPSP3x86 handles --object-type=Key --pid=1700
+
+python vol.py -f memory.dmp --profile=Win7SP0x64 memmap –p 864
+python vol.py -f memory.dmp --profile=Win7SP1x64 memdump -p 864 -D OUTDIR
+python vol.py –f mem.dmp yarascan --profile=Win7SP1x64 --offset=OFFSET --yara-file=/path/to/your/yara.rules
+
+python vol.py –f mem.dmp --profile=WinXPSP3x86 dlllist –p 3108
+python vol.py -f memory.dmp --profile=Win7SP1x64 procdump --dump-dir=OUTDIR/
+python vol.py -f memory.dmp --profile=Win7SP1x64 procdump --offset=0x000000003e1e6b30 –-dump-dir=OUTDIR/
+
+python vol.py –f stuxnet.mem --profile=WinXPSP3x86 malfind
+
+python vol.py -f stuxnet.vmem --profile=WinXPSP3x86 vadinfo -p 1928,868,680 --addr=0x01000000
+python vol.py -f stuxnet.vmem ldrmodules --profile=WinXPSP3x86 -p 1928
+python vol.py -f win7.vmem --profile=Win7SP0x86 hivelist
+python vol.py –f XPSP3.vmem --profile=WinXPSP3x86 shellbags
+python vol.py sockets -f zeus.bin --profile=WinXPSP3x86
+python vol.py -f Win2K3SP0x64.vmem --profile=Win2003SP2x64 connscan
+python vol.py –f memory.dmp --profile=Win7SP0x64 svcscan --verbose
+
+python vol.py -f memory.vmem --profile=Win7SP1x64 modules
+python vol.py -f memory.vmem --profile=Win7SP1x64 modscan
+python vol.py -f memory.vmem --profile=Win7SP1x64 unloadedmodules
+python vol.py -f memory.vmem --profile=Win7SP1x64 moddump
+python vol.py -f stuxnet.mem devicetree
+python vol.py -f memory.dmp --profile=Win7SP1x64 ssdt
+
+python vol.py -f stuxnet.vmem --profile=WinXPSP3x86 callbacks
+
+python vol.py -f rdp.mem --profile=Win2003SP2x86 sessions
+python vol.py -f rdp.mem --profile=Win2003SP2x86 deskscan
+
+python vol.py –f Win7SP1x64.dmp --profile=Win7SP1x64 mftparser --output-file=mftverbose.txt
+python vol.py -f Win7SP1x64.mem --profile=Win7SP1x64 dumpfiles -S summary.json -D output/
+python vol.py -f Win7SP1x64.raw --profile=Win7SP1x64 filescan | grep -i mft
+```
+
+## SysInternals
+
+* Process Monitor
+* Process Explorer
+* AutoRuns
+* ProcDump
+* VMMAP
+* AccessChk
+* PortMon
+* TCPView
+* PipeList
+* CoreInfo
+* RAMmap

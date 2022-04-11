@@ -116,6 +116,14 @@ echo "CIKUmMesGw==" | base64 -d | protoc --decode_raw
 #Set not removable bit
 sudo chattr +i file.txt
 sudo chattr -i file.txt #Remove the bit so you can delete it
+
+# List processes listenin
+sudo lsof -i -P -n | grep LISTEN  
+sudo netstat -tulpn | grep LISTEN  
+sudo ss -tulpn | grep LISTEN  
+sudo lsof -i:22 ## see a specific port such as 22 ##  
+sudo nmap -sTU -O IP-address-Here
+
 ```
 
 ## Bash for Windows
@@ -270,4 +278,3 @@ iptables -P INPUT DROP
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
 ```
-

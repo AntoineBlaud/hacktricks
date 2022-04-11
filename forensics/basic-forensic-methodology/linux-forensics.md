@@ -388,6 +388,39 @@ Also, **these upper-case letters can be downcased to exclude**. E.g. `--diff-fil
 
 Note that not all diffs can feature all types. For instance, diffs from the index to the working tree can never have Added entries (because the set of paths included in the diff is limited by what is in the index). Similarly, copied and renamed entries cannot appear if detection for those types is disabled.
 
+## Volatility
+
+```
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_pslist
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_pstree
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_proc_maps -p 1
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_dump_map -p 1 -s 0x400000 -D dump
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_psaux
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_lsof -p 8643
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_netstat -p 2745
+python vol.py --profile=Linuxdfrws-profilex86 -f challenge.mem linux_bash -p 2585
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_route_cache
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_arp
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_iomem
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_dmesg
+python vol.py --profile=LinuxDebian-3_2x64 -f debian.lime linux_lsmod -P
+python vol.py --profile=LinuxDebian-3_2x64 -f debian-mount.lime linux_mount
+python vol.py --profile=LinuxDebian-3_2x64 -f hiddenargs.lime linux_find_file -i 0xffff88000b96f4d8 -O backdoor.dump
+python vol.py -f injtarget.lime --profile=LinuxDebian3_2x86 linux_malfind
+python vol.py -f sharedlib.lime --profile=LinuxDebian3_2x86 linux_proc_maps -p 18550
+python vol.py --profile=LinuxDebian3_2x86 -f preload.lime linux_plthook -p 22996
+python vol.py -f hooks.lime --profile=LinuxDebian-3_2x64 linux_apihooks -p 65033
+python vol.py -f kbeast.lime --profile=LinuxDebianx86 linux_check_modules
+python vol.py --profile=LinuxDebianx86 -f kbeast.lime linux_moddump -b 0xf841a258 -D outdir
+python vol.py --profile=LinuxDebian-3_2x64 -f suskl2.lime linux_kernel_opened_files
+python vol.py --profile=LinuxDebian-3_2x64 -f psrk.lime linux_psxview
+python vol.py -f avg.hidden-proc.lime --profile=LinuxDebian-3_2x64 linux_check_creds
+python vol.py -f kbeast.lime --profile=LinuxDebianx86 linux_check_syscall -i /usr/include/x86_64-linux-gnu/asm/unistd_32.h > ksyscall
+python vol.py -f kbeast.lime --profile=LinuxDebianx86 linux_check_afinfo
+python vol.py --profile=LinuxDebian-3_2x64 -f susnf.lime linux_netfilter
+python vol.py -f avgcoder.mem --profile=LinuxCentOS63x64 linux_find_file -F "/var/run/utmp"
+```
+
 ## References
 
 * [https://cdn.ttgtmedia.com/rms/security/Malware%20Forensics%20Field%20Guide%20for%20Linux%20Systems\_Ch3.pdf](https://cdn.ttgtmedia.com/rms/security/Malware%20Forensics%20Field%20Guide%20for%20Linux%20Systems\_Ch3.pdf)
