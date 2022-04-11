@@ -368,6 +368,7 @@
 ## Pentesting Web
 
 * [CheckList](pentesting-web/checklist.md)
+* [Source Code Review](pentesting-web/source-code-review.md)
 * [SAML / OAUTH](pentesting-web/saml-oauth.md)
 * [PHP Type juggling](pentesting-web/php-type-juggling.md)
 * [HTTP Parameter Pollution](pentesting-web/http-parameter-pollution.md)
