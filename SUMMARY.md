@@ -427,6 +427,7 @@
 * [OAuth to Account takeover](pentesting-web/oauth-to-account-takeover.md)
 * [Open Redirect](pentesting-web/open-redirect.md)
 * [Parameter Pollution](pentesting-web/parameter-pollution.md)
+* [Password Reset Poisoning](pentesting-web/password-reset-poisoning.md)
 * [PostMessage Vulnerabilities](pentesting-web/postmessage-vulnerabilities.md)
 * [Race Condition](pentesting-web/race-condition.md)
 * [Rate Limit Bypass](pentesting-web/rate-limit-bypass.md)
