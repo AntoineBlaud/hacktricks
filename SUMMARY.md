@@ -367,6 +367,9 @@
 
 ## Pentesting Web
 
+* [SAML / OAUTH](pentesting-web/saml-oauth.md)
+* [PHP Type juggling](pentesting-web/php-type-juggling.md)
+* [HTTP Parameter Pollution](pentesting-web/http-parameter-pollution.md)
 * [Web Vulnerabilities Methodology](pentesting-web/web-vulnerabilities-methodology.md)
 * [Reflecting Techniques - PoCs and Polygloths CheatSheet](pentesting-web/pocs-and-polygloths-cheatsheet/README.md)
   * [Web Vulns List](pentesting-web/pocs-and-polygloths-cheatsheet/web-vulns-list.md)

@@ -12,9 +12,9 @@ Compile those projects for the architecture of the windows box where your are go
 
 You can **select the architecture** inside Visual Studio in the **left "Build" Tab** in **"Platform Target".**
 
-**(**If you can't find this options press in **"Project Tab"** and then in **"\<Project Name> Properties"**)
+\*\*(\*\*If you can't find this options press in **"Project Tab"** and then in **"\<Project Name> Properties"**)
 
-![](../.gitbook/assets/image.png)
+![](<../.gitbook/assets/image (4).png>)
 
 Then, build both projects (Build -> Build Solution) (Inside the logs will appear the path of the executable):
 
@@ -91,7 +91,7 @@ Open the SalseoLoader project using Visual Studio.
 
 ### Add before the main function: \[DllExport]
 
-![](<../.gitbook/assets/image (2).png>)
+![](<../.gitbook/assets/image (2) (1).png>)
 
 ### Install DllExport for this project
 
@@ -101,7 +101,7 @@ Open the SalseoLoader project using Visual Studio.
 
 #### **Search for DllExport package (using Browse tab), and press Install (and accept the popup)**
 
-![](<../.gitbook/assets/image (4).png>)
+![](<../.gitbook/assets/image (4) (1).png>)
 
 In your project folder have appeared the files: **DllExport.bat** and **DllExport\_Configure.bat**
 
