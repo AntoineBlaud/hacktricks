@@ -100,6 +100,7 @@
   * [SeDebug + SeImpersonate copy token](windows/windows-local-privilege-escalation/sedebug-+-seimpersonate-copy-token.md)
   * [Windows C Payloads](windows/windows-local-privilege-escalation/windows-c-payloads.md)
 * [Active Directory Methodology](windows/active-directory-methodology/README.md)
+  * [Cheat Sheet](windows/active-directory-methodology/cheat-sheet.md)
   * [Abusing Active Directory ACLs/ACEs](windows/active-directory-methodology/acl-persistence-abuse.md)
   * [AD information in printers](windows/active-directory-methodology/ad-information-in-printers.md)
   * [ASREPRoast](windows/active-directory-methodology/asreproast.md)
