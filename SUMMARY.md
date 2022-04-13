@@ -416,6 +416,7 @@
 * [HTTP Request Smuggling / HTTP Desync Attack](pentesting-web/http-request-smuggling/README.md)
   * [Request Smuggling in HTTP/2 Downgrades](pentesting-web/http-request-smuggling/request-smuggling-in-http-2-downgrades.md)
 * [HTTP Response Smuggling / Desync](pentesting-web/http-response-smuggling-desync.md)
+* [HTTP Host header attacks](pentesting-web/http-host-header-attacks.md)
 * [H2C Smuggling](pentesting-web/h2c-smuggling.md)
 * [hop-by-hop headers](pentesting-web/abusing-hop-by-hop-headers.md)
 * [IDOR](pentesting-web/idor.md)
