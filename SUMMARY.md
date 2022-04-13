@@ -634,6 +634,7 @@
 
 ## MISC
 
+* [OneCompiler](misc/onecompiler.md)
 * [Basic Python](misc/basic-python/README.md)
   * [venv](misc/basic-python/venv.md)
   * [Bypass Python sandboxes](misc/basic-python/bypass-python-sandboxes/README.md)
