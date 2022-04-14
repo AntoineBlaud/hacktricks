@@ -680,3 +680,4 @@
 * [Stealing Sensitive Information Disclosure from a Web](stealing-sensitive-information-disclosure-from-a-web.md)
 * [Post Exploitation](post-exploitation.md)
 * [Meterpreter](meterpreter.md)
+* [NodeJS remove debugging](nodejs-remove-debugging.md)

