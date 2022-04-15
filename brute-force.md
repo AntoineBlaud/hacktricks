@@ -3,14 +3,13 @@
 {% hint style="warning" %}
 **Support HackTricks and get benefits!**
 
-Do you work in a **cybersecurity company**? Do you want to see your **company advertised in HackTricks**? or do you want to have access the **latest version of the PEASS or download HackTricks in PDF**?
-Check the [**SUBSCRIPTION PLANS**](https://github.com/sponsors/carlospolop)!
+Do you work in a **cybersecurity company**? Do you want to see your **company advertised in HackTricks**? or do you want to have access the **latest version of the PEASS or download HackTricks in PDF**? Check the [**SUBSCRIPTION PLANS**](https://github.com/sponsors/carlospolop)!
 
 Discover [**The PEASS Family**](https://opensea.io/collection/the-peass-family), our collection of exclusive [**NFTs**](https://opensea.io/collection/the-peass-family)
 
 Get the [**official PEASS & HackTricks swag**](https://peass.creator-spring.com)
 
-**Join the** [**💬**](https://emojipedia.org/speech-balloon/)    [**Discord group**](https://discord.gg/hRep4RUj7f) or the [**telegram group**](https://t.me/peass)  or **follow** me on **Twitter** [**🐦**](https://github.com/carlospolop/hacktricks/tree/7af18b62b3bdc423e11444677a6a73d4043511e9/\[https:/emojipedia.org/bird/README.md)[**@carlospolopm**](https://twitter.com/carlospolopm)**.**
+**Join the** [**💬**](https://emojipedia.org/speech-balloon/) [**Discord group**](https://discord.gg/hRep4RUj7f) or the [**telegram group**](https://t.me/peass) or **follow** me on **Twitter** [**🐦**](https://github.com/carlospolop/hacktricks/tree/7af18b62b3bdc423e11444677a6a73d4043511e9/\[https:/emojipedia.org/bird/README.md)[**@carlospolopm**](https://twitter.com/carlospolopm)**.**
 
 **Share your hacking tricks submitting PRs to the** [**hacktricks github repo**](https://github.com/carlospolop/hacktricks)**.**
 {% endhint %}
@@ -637,3 +636,34 @@ Cracking Common Application Hashes
  1400 | SHA-256                                          | Raw Hash
  1700 | SHA-512                                          | Raw Hash
 ```
+
+## \*2john
+
+```bash
+1password2john.py      bitshares2john.py              encfs2john.py          keyring2john.py      makechr                   pgpsda2john.py        signal2john.py
+7z2john.pl             bitwarden2john.py              enpass2john.py         keystore2john.py     mcafee_epo2john.py        pgpwde2john.py        sipdump2john.py
+adxcsouf2john.py       bks2john.py                    enpass5tojohn.py       kirbi2john.py        monero2john.py            pkcs12kdf.py          ssh2john.py
+aem2john.py            blockchain2john.py             ethereum2john.py       known_hosts2john.py  money2john.py             potcheck.pl           sspr2john.py
+aix2john.pl            ccache2john.py                 filezilla2john.py      korelogic.conf       mongodb2john.js           prosody2john.py       staroffice2john.py
+aix2john.py            cisco2john.pl                  fuzz.dic               krb2john.py          mosquitto2john.py         protobuf              stats
+alnum.chr              codepage.pl                    fuzz_option.pl         kwallet2john.py      mozilla2john.py           pse2john.py           strip2john.py
+alnumspace.chr         cracf2john.py                  geli2john.py           lanman.chr           multibit2john.py          ps_token2john.py      telegram2john.py
+alpha.chr              dashlane2john.py               genincstats.rb         lastpass2john.py     neo2john.py               pwsafe2john.py        test_tezos2john.py
+andotp2john.py         deepsound2john.py              hccapx2john.py         latin1.chr           netntlm.pl                radius2john.pl        tezos2john.py
+androidbackup2john.py  dictionary.rfc2865             hextoraw.pl            ldif2john.pl         netscreen.py              radius2john.py        truecrypt2john.py
+androidfde2john.py     digits.chr                     htdigest2john.py       leet.pl              network2john.lua          regex_alphabets.conf  unisubst.conf
+ansible2john.py        diskcryptor2john.py            hybrid.conf            lib                  office2john.py            relbench              unrule.pl
+apex2john.py           dmg2john.py                    ibmiscanner2john.py    libreoffice2john.py  openbsd_softraid2john.py  repeats16.conf        upper.chr
+apop2john.py           dns                            ikescan2john.py        lion2john-alt.pl     opencl                    repeats32.conf        uppernum.chr
+applenotes2john.py     DPAPImk2john.py                ios7tojohn.pl          lion2john.pl         openssl2john.py           restic2john.py        utf8.chr
+aruba2john.py          dumb16.conf                    itunes_backup2john.pl  lm_ascii.chr         oui.txt                   rexgen2rules.pl       vdi2john.pl
+ascii.chr              dumb32.conf                    iwork2john.py          lotus2john.py        padlock2john.py           rules                 vmx2john.py
+atmail2john.pl         dynamic.conf                   john.bash_completion   lower.chr            pass_gen.pl               rules-by-rate.conf    zed2john.py
+axcrypt2john.py        dynamic_disabled.conf          john.conf              lowernum.chr         password.lst              rules-by-score.conf   ztex
+benchmark-unify        dynamic_flat_sse_formats.conf  john.zsh_completion    lowerspace.chr       pcap2john.py              rulestack.pl
+bestcrypt2john.py      ecryptfs2john.py               jtrconf.pm             luks2john.py         pdf2john.pl               sap2john.pl
+bestcryptve2john.py    ejabberd2john.py               jtr_rulez.pm           mac2john-alt.py      pem2john.py               sense2john.py
+bip-0039               electrum2john.py               kdcdump2john.py        mac2john.py          pfx2john.py               sha-dump.pl
+bitcoin2john.py        encdatavault2john.py           keychain2john.py       mailer               pgpdisk2john.py           sha-test.plb
+```
+
