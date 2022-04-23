@@ -67,9 +67,9 @@ This is a web service that enables you to **request temporary, limited-privilege
 Are used to assign permissions. There are 2 types:
 
 * AWS managed policies (preconfigured by AWS)
-* Customer Managed Policies: Configured by you. You can create policies based on AWS managed policies (modifying one of them and creating your own), using the policy generator (a GUI view that helps you granting and denying permissions) or writing  your own..
+* Customer Managed Policies: Configured by you. You can create policies based on AWS managed policies (modifying one of them and creating your own), using the policy generator (a GUI view that helps you granting and denying permissions) or writing your own..
 
-By **default access** is **denied**, access will be granted if an explicit role has been specified. \
+By **default access** is **denied**, access will be granted if an explicit role has been specified.\
 If **single "Deny" exist, it will override the "Allow"**, except for requests that use the AWS account's root security credentials (which are allowed by default).
 
 ```javascript
@@ -111,7 +111,7 @@ You can use a **free virtual application or a physical device**. You can use app
 
 ### Identity Federation
 
-Identity federation **allows users from identity providers which are external** to AWS to access AWS resources securely without having to supply AWS user credentials from a valid IAM user account. \
+Identity federation **allows users from identity providers which are external** to AWS to access AWS resources securely without having to supply AWS user credentials from a valid IAM user account.\
 An example of an identity provider can be your own corporate Microsoft Active Directory(via SAML) or OpenID services (like Google). Federated access will then allow the users within it to access AWS.\
 AWS Identity Federation connects via IAM roles.
 
@@ -143,7 +143,7 @@ The app uses the AssumeRoleWithWebIdentity to create temporary credentials. Howe
 
 ## KMS - Key Management Service
 
-AWS Key Management Service (AWS KMS) is a managed service that makes it easy for you to **create and control **_**customer master keys**_** (CMKs)**, the encryption keys used to encrypt your data. AWS KMS CMKs are **protected by hardware security modules** (HSMs)
+AWS Key Management Service (AWS KMS) is a managed service that makes it easy for you to **create and control \_customer master keys**\_\*\* (CMKs)\*\*, the encryption keys used to encrypt your data. AWS KMS CMKs are **protected by hardware security modules** (HSMs)
 
 KMS uses **symmetric cryptography**. This is used to **encrypt information as rest** (for example, inside a S3). If you need to **encrypt information in transit** you need to use something like **TLS**.\
 KMS is a **region specific service**.
@@ -370,17 +370,17 @@ Logs are saved in an S3 bucket. By default Server Side Encryption is used (SSE-S
 
 ### Log File Naing Convention
 
-![](<../.gitbook/assets/image (429).png>)
+![](<../../.gitbook/assets/image (429).png>)
 
 ### S3 folder structure
 
-![](<../.gitbook/assets/image (428).png>)
+![](<../../.gitbook/assets/image (428).png>)
 
 Note that the folders "_AWSLogs_" and "_CloudTrail_" are fixed folder names,
 
 **Digest** files have a similar folders path:
 
-![](<../.gitbook/assets/image (437).png>)
+![](<../../.gitbook/assets/image (437).png>)
 
 ### Aggregate Logs from Multiple Accounts
 
@@ -410,7 +410,7 @@ Note that in order to allow CloudTrail to send the logs to CloudWatch a **role**
 
 CloudTrail Event History allows you to inspect in a table the logs that have been recorded:
 
-![](<../.gitbook/assets/image (431).png>)
+![](<../../.gitbook/assets/image (431).png>)
 
 ### Insights
 
@@ -588,7 +588,7 @@ The main function of the service is to provide an automatic method of **detectin
 
 The service is backed by **machine learning**, allowing your data to be actively reviewed as different actions are taken within your AWS account. Machine learning can spot access patterns and **user behavior** by analyzing **cloud trail event** data to **alert against any unusual or irregular activity**. Any findings made by Amazon Macie are presented within a dashboard which can trigger alerts, allowing you to quickly resolve any potential threat of exposure or compromise of your data.
 
-Amazon Macie will automatically and continuously **monitor and detect new data that is stored in Amazon S3**. Using the abilities of machine learning and artificial intelligence, this service has the ability to familiarize over time, access patterns to data. \
+Amazon Macie will automatically and continuously **monitor and detect new data that is stored in Amazon S3**. Using the abilities of machine learning and artificial intelligence, this service has the ability to familiarize over time, access patterns to data.\
 Amazon Macie also uses natural language processing methods to **classify and interpret different data types and content**. NLP uses principles from computer science and computational linguistics to look at the interactions between computers and the human language. In particular, how to program computers to understand and decipher language data. The **service can automatically assign business values to data that is assessed in the form of a risk score**. This enables Amazon Macie to order findings on a priority basis, enabling you to focus on the most critical alerts first. In addition to this, Amazon Macie also has the added benefit of being able to **monitor and discover security changes governing your data**. As well as identify specific security-centric data such as access keys held within an S3 bucket.
 
 This protective and proactive security monitoring enables Amazon Macie to identify critical, sensitive, and security focused data such as API keys, secret keys, in addition to PII (personally identifiable information) and PHI data.
@@ -615,7 +615,7 @@ Pre-defined alerts categories:
 * Service disruption
 * Suspicious access
 
-The **alert summary** provides detailed information to allow you to respond appropriately. It has a description that provides a deeper level of understanding of why it was generated. It also has a breakdown of the results. 
+The **alert summary** provides detailed information to allow you to respond appropriately. It has a description that provides a deeper level of understanding of why it was generated. It also has a breakdown of the results.
 
 The user has the possibility to create new custom alerts.
 
@@ -695,9 +695,9 @@ Limitations:
 
 For every network interface that publishes data to the CloudWatch log group, it will use a different log stream. And within each of these streams, there will be the flow log event data that shows the content of the log entries. Each of these **logs captures data during a window of approximately 10 to 15 minutes**.
 
-![](<../.gitbook/assets/image (432).png>)
+![](<../../.gitbook/assets/image (432).png>)
 
-![](<../.gitbook/assets/image (433).png>)
+![](<../../.gitbook/assets/image (433).png>)
 
 ### Subnets
 
