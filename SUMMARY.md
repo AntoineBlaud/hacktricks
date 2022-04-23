@@ -554,7 +554,7 @@
   * [Airflow RBAC](cloud-security/apache-airflow/airflow-rbac.md)
 * [Atlantis](cloud-security/atlantis.md)
 * [Cloud Security Review](cloud-security/cloud-security-review.md)
-* [AWS Security](cloud-security/aws-security/README.md)
+* [AWS Security](cloud-security/aws-security.md)
   * [Cheat Sheet](cloud-security/aws-security/cheat-sheet.md)
 
 ## A.I. Exploiting

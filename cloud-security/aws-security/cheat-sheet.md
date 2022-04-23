@@ -270,6 +270,13 @@ aws iam add-role-to-instance-profile --role-name YourNewRole --instance-profile-
 # Associate Instance Profile with instance you want to use
 aws ec2 associate-iam-instance-profile --instance-id YourInstanceId --iam-instance-profile Name=YourNewRole-Instance-Profile
 
+# Get token for specific role
+aws sts assume-role --role-arn arn:aws:iam::276384657722:role/ad-LoggingRole --role-session-name ad_logging
+export AWS_ACCESS_KEY_ID=ASIAIOSFODNN7EXAMPLE
+$ export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+$ export AWS_SESSION_TOKEN=AQoDYXdzEJr...<remainder of session token>
+$ aws ec2 describe-instances --region us-west-1
+
 # Get assumed roles in instance
 aws --profile test sts get-caller-identity
 
@@ -332,3 +339,6 @@ python3 iamfinder.py enum_user --aws_id 123456789012
 # https://github.com/nccgroup/PMapper
 # Check IAM permissions
 ```
+
+
+
