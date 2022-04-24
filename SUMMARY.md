@@ -556,6 +556,7 @@
 * [Cloud Security Review](cloud-security/cloud-security-review.md)
 * [AWS Security](cloud-security/aws-security.md)
   * [Cheat Sheet](cloud-security/aws-security/cheat-sheet.md)
+  * [IAM Attack](cloud-security/aws-security/iam-attack.md)
 
 ## A.I. Exploiting
 
