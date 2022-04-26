@@ -510,6 +510,7 @@
 
 ## Cloud Security
 
+* [Azure AD Red Team](cloud-security/azure-ad-red-team.md)
 * [GCP Security](cloud-security/gcp-security/README.md)
   * [GCP - Other Services Enumeration](cloud-security/gcp-security/gcp-looting.md)
   * [GCP - Abuse GCP Permissions](cloud-security/gcp-security/gcp-interesting-permissions/README.md)
