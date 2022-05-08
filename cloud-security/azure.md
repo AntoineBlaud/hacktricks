@@ -1,8 +1,6 @@
 # Azure
 
-![](../.gitbook/assets/Azure.png)
-
-####
+![](<../.gitbook/assets/Azure (1).png>)
 
 #### Terminology
 
