@@ -638,6 +638,7 @@
 
 ## MISC
 
+* [gchq](misc/gchq.md)
 * [OneCompiler](misc/onecompiler.md)
 * [Basic Python](misc/basic-python/README.md)
   * [venv](misc/basic-python/venv.md)
