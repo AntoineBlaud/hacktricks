@@ -638,6 +638,7 @@
 
 ## MISC
 
+* [beeceptor.com](misc/beeceptor.com.md)
 * [gchq](misc/gchq.md)
 * [OneCompiler](misc/onecompiler.md)
 * [Basic Python](misc/basic-python/README.md)
