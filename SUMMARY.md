@@ -412,6 +412,7 @@
   * [phar:// deserialization](pentesting-web/file-inclusion/phar-deserialization.md)
 * [File Upload](pentesting-web/file-upload/README.md)
   * [PDF Upload - XXE and CORS bypass](pentesting-web/file-upload/pdf-upload-xxe-and-cors-bypass.md)
+  * [Exploiting insecure file extraction](pentesting-web/file-upload/exploiting-insecure-file-extraction.md)
 * [Formula Injection](pentesting-web/formula-injection.md)
 * [HTTP Request Smuggling / HTTP Desync Attack](pentesting-web/http-request-smuggling/README.md)
   * [Request Smuggling in HTTP/2 Downgrades](pentesting-web/http-request-smuggling/request-smuggling-in-http-2-downgrades.md)
@@ -505,6 +506,7 @@
     * [Video and Audio file analysis](forensics/basic-forensic-methodology/specific-software-file-type-tricks/video-and-audio-file-analysis.md)
     * [ZIPs tricks](forensics/basic-forensic-methodology/specific-software-file-type-tricks/zips-tricks.md)
   * [Windows Forensics](forensics/basic-forensic-methodology/windows-forensics/README.md)
+    * [Evtx](forensics/basic-forensic-methodology/windows-forensics/evtx.md)
     * [Windows Processes](forensics/basic-forensic-methodology/windows-forensics/windows-processes.md)
     * [Interesting Windows Registry Keys](forensics/basic-forensic-methodology/windows-forensics/interesting-windows-registry-keys.md)
 
