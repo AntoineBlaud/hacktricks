@@ -29,6 +29,8 @@ If an attacker wants to append the string "append" he can:
 
 {% embed url="https://github.com/iagox86/hash_extender" %}
 
+{% embed url="https://github.com/bwall/HashPump" %}
+
 ## References
 
 You can find this attack good explained in [https://blog.skullsecurity.org/2012/everything-you-need-to-know-about-hash-length-extension-attacks](https://blog.skullsecurity.org/2012/everything-you-need-to-know-about-hash-length-extension-attacks)
