@@ -480,6 +480,7 @@
 ## Forensics
 
 * [CTF Write-up](forensics/ctf-write-up/README.md)
+  * [CrewCTF](forensics/ctf-write-up/crewctf.md)
   * [UMDCTF](forensics/ctf-write-up/umdctf.md)
 * [Basic Forensic Methodology](forensics/basic-forensic-methodology/README.md)
   * [Baseline Monitoring](forensics/basic-forensic-methodology/file-integrity-monitoring.md)
