@@ -479,6 +479,7 @@
 
 ## Forensics
 
+* [Tools](forensics/tools.md)
 * [CTF Write-up](forensics/ctf-write-up/README.md)
   * [CrewCTF](forensics/ctf-write-up/crewctf.md)
   * [UMDCTF](forensics/ctf-write-up/umdctf.md)
