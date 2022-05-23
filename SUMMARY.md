@@ -19,6 +19,7 @@
 ## Shells
 
 * [Shells (Linux, Windows, MSFVenom)](shells/shells/README.md)
+  * [Ippsec shell](shells/shells/ippsec-shell.md)
   * [MSFVenom - CheatSheet](shells/shells/msfvenom.md)
   * [Shells - Windows](shells/shells/windows.md)
   * [Shells - Linux](shells/shells/linux.md)
