@@ -479,6 +479,8 @@
 
 ## Forensics
 
+* [CTF Write-up](forensics/ctf-write-up/README.md)
+  * [UMDCTF](forensics/ctf-write-up/umdctf.md)
 * [Basic Forensic Methodology](forensics/basic-forensic-methodology/README.md)
   * [Baseline Monitoring](forensics/basic-forensic-methodology/file-integrity-monitoring.md)
   * [Anti-Forensic Techniques](forensics/basic-forensic-methodology/anti-forensic-techniques.md)
