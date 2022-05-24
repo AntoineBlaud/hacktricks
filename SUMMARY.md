@@ -625,6 +625,10 @@
 ## Cryptography
 
 * [Cryptanalysis](cryptography/cryptanalysis/README.md)
+  * [Know Plaintext Attacks](cryptography/cryptanalysis/know-plaintext-attacks.md)
+  * [Stream cipher](cryptography/cryptanalysis/stream-cipher.md)
+  * [RC4](cryptography/cryptanalysis/rc4.md)
+  * [Shift register cipher](cryptography/cryptanalysis/shift-register-cipher.md)
   * [Substitution cipher](cryptography/cryptanalysis/substitution-cipher.md)
   * [Transposition cipher](cryptography/cryptanalysis/transposition-cipher.md)
 * [Certificates](cryptography/certificates.md)
