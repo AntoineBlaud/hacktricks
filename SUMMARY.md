@@ -624,6 +624,9 @@
 
 ## Cryptography
 
+* [Cryptanalysis](cryptography/cryptanalysis/README.md)
+  * [Substitution cipher](cryptography/cryptanalysis/substitution-cipher.md)
+  * [Transposition cipher](cryptography/cryptanalysis/transposition-cipher.md)
 * [Certificates](cryptography/certificates.md)
 * [Cipher Block Chaining CBC-MAC](cryptography/cipher-block-chaining-cbc-mac-priv.md)
 * [Crypto CTFs Tricks](cryptography/crypto-ctfs-tricks.md)
