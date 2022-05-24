@@ -625,6 +625,7 @@
 ## Cryptography
 
 * [Cryptanalysis](cryptography/cryptanalysis/README.md)
+  * [Cheat sheet maths](cryptography/cryptanalysis/cheat-sheet-maths.md)
   * [RSA](cryptography/cryptanalysis/rsa.md)
   * [AES](cryptography/cryptanalysis/aes.md)
   * [Broken CBC](cryptography/cryptanalysis/broken-cbc.md)
