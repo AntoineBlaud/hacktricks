@@ -625,6 +625,8 @@
 ## Cryptography
 
 * [Cryptanalysis](cryptography/cryptanalysis/README.md)
+  * [AES](cryptography/cryptanalysis/aes.md)
+  * [Block cipher](cryptography/cryptanalysis/block-cipher.md)
   * [Know Plaintext Attacks](cryptography/cryptanalysis/know-plaintext-attacks.md)
   * [Stream cipher](cryptography/cryptanalysis/stream-cipher.md)
   * [RC4](cryptography/cryptanalysis/rc4.md)
