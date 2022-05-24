@@ -625,6 +625,7 @@
 ## Cryptography
 
 * [Cryptanalysis](cryptography/cryptanalysis/README.md)
+  * [RSA](cryptography/cryptanalysis/rsa.md)
   * [AES](cryptography/cryptanalysis/aes.md)
   * [Broken ECB](cryptography/cryptanalysis/broken-ecb.md)
   * [Block cipher](cryptography/cryptanalysis/block-cipher.md)
