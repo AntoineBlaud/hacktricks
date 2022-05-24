@@ -261,10 +261,21 @@ e = key.e
 # Factorization Attack:
 → When n is small, go for factordb.com
 
+# When we can encrypt any messages:
+-> n=GCD(c1​−m1e​,c2​−m2e​)
+If the result is wrong, maybe what we got from the GCDGCDGCD is n∗GCD(k1,k2)n*GCD(k_{1}, k_{2})n∗GCD(k1​,k2​), and we just need to repeat the above equation and GCDGCDGCD it again.
+
 # Fermat Attack
 → When n is quite small
 
+# E is unknow:
+Use z3 
+
+# p + q is bruteforce-able
+try all from 0 to large number
+
 # When n is too big modulo is useless
+use Crypto.Util.number to solve the equation
 
 # Low Exponent Attack: 
 → Usefull when e=3 and n is quite big because pow(m,e,n) == pow(m,e)
@@ -278,6 +289,8 @@ e = key.e
 
 # Boneh Durfee Attack:
 → Allows to go slightly faster then Wiener Attack because d < n^0.292
+
+# 
 ```
 
 \
