@@ -82,3 +82,12 @@ List keys owned by the user
 ```
 gpg --list-keys
 ```
+
+### PYOTP
+
+Building a Python Script to generate TOTP for MFA (the NTPDate failed because i didn't use -q. Nmap would have worked with -sV)
+
+{% embed url="https://github.com/pyauth/pyotp" %}
+PyOTP is a Python library for generating and verifying one-time passwords. It can be used to implement two-factor (2FA) or multi-factor (MFA) authentication methods in web applications and in other systems that require users to log in.
+{% endembed %}
+
