@@ -627,6 +627,7 @@
 * [Cryptanalysis](cryptography/cryptanalysis/README.md)
   * [RSA](cryptography/cryptanalysis/rsa.md)
   * [AES](cryptography/cryptanalysis/aes.md)
+  * [Broken CBC](cryptography/cryptanalysis/broken-cbc.md)
   * [Broken ECB](cryptography/cryptanalysis/broken-ecb.md)
   * [Block cipher](cryptography/cryptanalysis/block-cipher.md)
   * [Know Plaintext Attacks](cryptography/cryptanalysis/know-plaintext-attacks.md)
