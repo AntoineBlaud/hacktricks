@@ -261,36 +261,55 @@ e = key.e
 # Factorization Attack:
 → When n is small, go for factordb.com
 
+
 # When we can encrypt any messages:
 -> n=GCD(c1​−m1e​,c2​−m2e​)
 If the result is wrong, maybe what we got from the GCDGCDGCD is n∗GCD(k1,k2)n*GCD(k_{1}, k_{2})n∗GCD(k1​,k2​), and we just need to repeat the above equation and GCDGCDGCD it again.
 
+
 # Fermat Attack
 → When n is quite small
+
 
 # E is unknow:
 Use z3 
 
+
 # p + q is bruteforce-able
 try all from 0 to large number
+
 
 # When n is too big modulo is useless
 use Crypto.Util.number to solve the equation
 
+
 # Low Exponent Attack: 
 → Usefull when e=3 and n is quite big because pow(m,e,n) == pow(m,e)
 
+
+#Low Private Exponent Attack
+if n is the modulus and d is the private exponent, with d < 1/3(n)¼, then given the
+public key (e, n), an attacker can efficiently recover d (Boneh and Durfee have
+recently improved the bound to d < n0.292).
+
+
 # ROCA: 
 → Usable when RSA key has 512 bits long n
+
 
 # Twin Primes: 
 → q = p + 2
 → Usefull is most cases when n is too bid and others attacks doesn\'t work
 
+
 # Boneh Durfee Attack:
 → Allows to go slightly faster then Wiener Attack because d < n^0.292
 
-# 
+# Partial Key Exposure Attack
+If the modulus n is k bits long, given the (k/4) least
+significant bits of d, an attacker can reconstruct all of d in time linear to (e log(e)),
+where e is the public exponent. This means that if e is small, the exposure of a
+quarter of bits of d can lead to the recovery of the whole private key d.
 ```
 
 \
@@ -338,3 +357,96 @@ res = r.recvline()
 dec = long_to_bytes(long(res.split(" ")[-1]) / 2)
 print(dec)
 ```
+
+### Pollard ‘s rho Method
+
+This method is based on a fact known as the birthday paradox. If you have 23\
+people in a room, the probability that at least 2 of them share the same birthday\
+is greater than 50%. This fact might seem surprising to many people, thus the\
+name. More generally, if you have a set with N elements and you draw elements\
+at random (with replacement) from this set, then after around 1.2(N)½ draws you\
+would expect to have drawn an element twice.
+
+Pollard’s rho method works by successively picking at random numbers less than\
+n. If p is an unknown prime divisor of n, then it follows from the above fact that\
+after around 1.2p½ draws we would expect to have drawn xi, xj such that xi ≡ xj\
+mod p. Thus we have p = gcd(xi – xj, n).
+
+For this method to be effective, one has to choose a function from Zn into Zn\
+which behaves “randomly” in Zn ( f(x) = x^2 +1 will do it), and starting with any x 0 in\
+Zn, repeatedly calculate xj = f(xi- 1 ). One does not have to calculate gcd(xj – xi, n)\
+for all previous numbers xj (which would require very large memory and would\
+make the method nearly as expensive as exhaustive search). It has been shown\
+that one needs only to compare xi with x2i. This decreases the requirement for\
+storage and the number of operations, but it can happen that we might miss an\
+early collision, which would only be caught later. The spatial description of the\
+sequence of elements xi is of the Greek letter ρ (rho), starting at the tail, iterating\
+until it meets the tail again, and then it cycles on from there until the prime p is\
+found.
+
+The runtime of this algorithm is therefore proportional to the size of the smallest\
+prime dividing n. For the size of today’s RSA moduli this method is impractical.\
+But Pollard’s rho method was used on the factorization of the eighth Fermat\
+number 2256 + 1, which unexpectedly had a small prime factor.
+
+### Elliptic Curve Method
+
+The Elliptic Curve Factorization method was introduced by H. W. Lenstra in\
+1985, and can be seen as a generalization of Pollard’s p – 1 method. The\
+success of Pollard’s method depends on n having a divisor p such that p – 1 is\
+smooth; if no such p exists, the method fails. The Elliptic Curve method\
+randomizes the choice, replacing the group Zp (used in Pollard’s method) by a\
+random elliptic curve over Zp. Because the order of the elliptic curve group\
+behaves roughly as a random integer close to p + 1, by repeatedly choosing\
+different curves, one will find with high probability a group with B-smooth order\
+(for a previously selected B), and computation in the group will provide a non-\
+trivial factor of n.
+
+The Elliptic Curve method has a (heuristic) subexponential runtime depending on\
+the size of the prime factors of n, with small factors tending to be found first. The\
+worst case is when p is roughly (n)½, which applies for RSA moduli. So although the method cannot be considered a threat against the standard (two-prime) RSA, it must nevertheless be taken into account when implementing the so-called “multi-prime” RSA, where the modulus may have more than two prime factors
+
+### Quadratic Sieve and Number Field Sieve Methods
+
+The Quadratic Sieve and the Number Field Sieve methods are the most widely\
+used general-purpose factoring methods. Both are based on a method known as\
+“Fermat Factorization”: one tries to find integers x, y, such that x^2 ≡ y^2 mod n but x\
+≠ ± y mod n. In this case we have that n divides x^2 – y^2 = (x - y)(x + y), but it does\
+not divide either term. It then follows that gcd(x - y, n) is a non-trivial factor of n. If\
+n = pq, a random solution (x, y) of the congruence x^2 ≡ y^2 mod n would give us a\
+factor of n with probability of 50%.
+
+The general approach for finding solutions (x, y) of the congruence above is to\
+choose a set of relatively small primes S = { p 1 , p 2 , ..., pt } (called factor base) and\
+enough integers ai such that bi ≡ ai^2 mod n is the product of powers of primes in\
+S. In this case every bi can be represented as a vector in the t-dimensional vector\
+space over Z 2. If we collect enough bi’s (e. g., t+1 of them), then a solution of x^2 ≡\
+y^2 mod n can be found by performing the Gaussian elimination on the matrix B =\
+\[bi], with chance of at least 50% of finding a factor of n.
+
+The first step above is called the “relation collection stage” and is highly\
+parallelizable. The second step is called the “matrix step”, in which we work with\
+a huge (sparse) matrix, and will eventually produce a non-trivial factor of n.
+
+It should be clear that the choice of the number of primes of S is very important\
+to the performance of the method: if this number is too small, the relation stage\
+will take very long time, as a very small proportion of numbers will factor over a\
+small set of primes. If we pick too many primes, the matrix will be too large to be\
+efficiently reduced. Also crucial are the methods for choosing the integers ai’s\
+and testing division by primes in S.
+
+The Quadratic Sieve (QS) Method was invented by Carl Pomerance in 1981, and\
+was until recently the fastest general-purpose factoring method. It follows the\
+approach above, introducing an efficient way to determine the integers ai’s, by\
+performing a “sieving process” (recall the “Sieve of Eratosthenes”). It has a\
+subexponential runtime and was used in the factorization of the RSA- 129\
+challenge number in 1994. The effort took around 8 months, with the factor base\
+in this case containing 524,339 primes \[11].
+
+The Number Field Sieve (NFS) Method is currently the fastest general-purpose\
+factoring method. The technique is similar to the Quadratic Sieve, but it uses a\
+factor base in the ring of integer of a suitably chosen algebraic number field \[10].\
+From the sieving step on, the QS and NFS methods coincide. For NFS, the\
+matrix is usually larger, but the initial step is more efficient. NFS has also a\
+(heuristic) subexponential runtime, which is (asymptotically) better than the QS.\
+Experiments show that NFS outperforms QS for numbers from 110-120 digits
