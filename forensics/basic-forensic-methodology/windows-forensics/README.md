@@ -1,5 +1,9 @@
 # Windows Forensics
 
+## Capture Memory
+
+{% embed url="https://www.exterro.com/ftk-imager" %}
+
 ## Generic Windows Artifacts
 
 ### Windows 10 Notifications
