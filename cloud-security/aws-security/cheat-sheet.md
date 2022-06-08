@@ -186,6 +186,8 @@ run iam__enum_roles --role-name a4 --account-id 276384657722 --word-list
 # https://github.com/grines/scour
 ```
 
+### Pentester Academy
+
 ```
 aws iam create-user --user-name Bob
 aws iam attach-group-polcy --group-name Printers --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
