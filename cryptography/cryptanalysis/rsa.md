@@ -273,8 +273,10 @@ If the result is wrong, maybe what we got from the GCDGCDGCD is n∗GCD(k1,k2)n*
 # E is unknow:
 Use z3 
 
-# p + q is bruteforce-able
+# p + q is bruteforce-able 
 try all from 0 to large number
+
+# Weak prime generation
 
 # When n is too big modulo is useless
 use Crypto.Util.number to solve the equation
