@@ -258,49 +258,41 @@ e = key.e
 #### Attacks : Public Key + Message
 
 ```
+# Chovid99's Blog
+
 # Factorization Attack:
 → When n is small, go for factordb.com
-
 
 # When we can encrypt any messages:
 -> n=GCD(c1​−m1e​,c2​−m2e​)
 If the result is wrong, maybe what we got from the GCDGCDGCD is n∗GCD(k1,k2)n*GCD(k_{1}, k_{2})n∗GCD(k1​,k2​), and we just need to repeat the above equation and GCDGCDGCD it again.
 
-
 # Fermat Attack
 → When n is quite small
-
 
 # E is unknow:
 Use z3 
 
-
 # p + q is bruteforce-able
 try all from 0 to large number
-
 
 # When n is too big modulo is useless
 use Crypto.Util.number to solve the equation
 
-
 # Low Exponent Attack: 
 → Usefull when e=3 and n is quite big because pow(m,e,n) == pow(m,e)
-
 
 #Low Private Exponent Attack
 if n is the modulus and d is the private exponent, with d < 1/3(n)¼, then given the
 public key (e, n), an attacker can efficiently recover d (Boneh and Durfee have
 recently improved the bound to d < n0.292).
 
-
 # ROCA: 
 → Usable when RSA key has 512 bits long n
-
 
 # Twin Primes: 
 → q = p + 2
 → Usefull is most cases when n is too bid and others attacks doesn\'t work
-
 
 # Boneh Durfee Attack:
 → Allows to go slightly faster then Wiener Attack because d < n^0.292
@@ -310,6 +302,13 @@ If the modulus n is k bits long, given the (k/4) least
 significant bits of d, an attacker can reconstruct all of d in time linear to (e log(e)),
 where e is the public exponent. This means that if e is small, the exposure of a
 quarter of bits of d can lead to the recovery of the whole private key d.
+
+# Short RSA Secret Exponents
+Short public exponents can be exploited when the same message is broadcast to many
+parties [1]. To illustrate this attack, suppose that a message m is broadcast to three parties
+whose public exponents are e1 = e2 = e3 = 3 and whose moduli are n1, n2, and n3. The
+encrypted messages are
+m3 mod n1, m3 mod n2, and m3 mod n3.
 ```
 
 \

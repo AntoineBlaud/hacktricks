@@ -625,6 +625,7 @@
 ## Cryptography
 
 * [Cryptanalysis](cryptography/cryptanalysis/README.md)
+  * [CTF write-ups](cryptography/cryptanalysis/ctf-write-ups.md)
   * [Cheat sheet maths](cryptography/cryptanalysis/cheat-sheet-maths.md)
   * [RSA](cryptography/cryptanalysis/rsa.md)
   * [Differential Fault Analysis on White-box AES Implementations](cryptography/cryptanalysis/differential-fault-analysis-on-white-box-aes-implementations.md)
