@@ -270,6 +270,7 @@ https://chovid99.github.io/posts/csaw-ctf-2019/
 
 # Fermat Attack
 → When n is quite small
+https://github.com/Ganapati/RsaCtfTool
 
 # E is unknow:
 Use z3 
@@ -305,6 +306,7 @@ If the modulus n is k bits long, given the (k/4) least
 significant bits of d, an attacker can reconstruct all of d in time linear to (e log(e)),
 where e is the public exponent. This means that if e is small, the exposure of a
 quarter of bits of d can lead to the recovery of the whole private key d.
+https://github.com/victini-lover/CSAW-Quals-2021-Writeups/tree/main/RSA-Pop-Quiz
 
 # Short RSA Secret Exponents
 Short public exponents can be exploited when the same message is broadcast to many
@@ -324,11 +326,13 @@ Attacks : Several public keys
 
 # Common Modulus Attack:
 → Usable when you have 2 messages, 2 public keys and n1 == n2
+https://github.com/Ganapati/RsaCtfTool
 
 # Wiener Attack:
 → Usable when private exponen d is quite small compared to N (d < n^(1/4)) 
 → https://github.com/rk700/attackrsa
 → attackrsa -t wiener -n N_VALUE -e E_VALUE
+https://github.com/Ganapati/RsaCtfTool
 ```
 
 #### Remote Service allowing to decrypt
