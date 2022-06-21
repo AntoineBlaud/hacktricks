@@ -699,6 +699,7 @@
 * [TR-069](tr-069.md)
 * [6881/udp - Pentesting BitTorrent](6881-udp-pentesting-bittorrent.md)
 * [CTF Write-ups](ctf-write-ups/README.md)
+  * [Backup Crytp](ctf-write-ups/backup-crytp.md)
   * [challenge-0521.intigriti.io](ctf-write-ups/challenge-0521.intigriti.io.md)
   * [Try Hack Me](ctf-write-ups/try-hack-me/README.md)
     * [hc0n Christmas CTF - 2019](ctf-write-ups/try-hack-me/hc0n-christmas-ctf-2019.md)

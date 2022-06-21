@@ -266,6 +266,7 @@ e = key.e
 # When we can encrypt any messages:
 -> n=GCD(c1​−m1e​,c2​−m2e​)
 If the result is wrong, maybe what we got from the GCDGCDGCD is n∗GCD(k1,k2)n*GCD(k_{1}, k_{2})n∗GCD(k1​,k2​), and we just need to repeat the above equation and GCDGCDGCD it again.
+https://chovid99.github.io/posts/csaw-ctf-2019/
 
 # Fermat Attack
 → When n is quite small
@@ -279,7 +280,7 @@ try all from 0 to large number
 # Weak prime generation
 
 # When n is too big modulo is useless
-use Crypto.Util.number to solve the equation
+https://chovid99.github.io/posts/cyber-apocalypse-ctf-2022/
 
 # Low Exponent Attack: 
 → Usefull when e=3 and n is quite big because pow(m,e,n) == pow(m,e)
