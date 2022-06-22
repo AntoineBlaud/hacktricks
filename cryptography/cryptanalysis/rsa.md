@@ -2,7 +2,7 @@
 
 Le **chiffrement RSA** (nommé par les initiales de ses trois inventeurs) est un [algorithme](https://fr.wikipedia.org/wiki/Algorithmique) de [cryptographie asymétrique](https://fr.wikipedia.org/wiki/Cryptographie\_asym%C3%A9trique), très utilisé dans le [commerce électronique](https://fr.wikipedia.org/wiki/Commerce\_%C3%A9lectronique), et plus généralement pour échanger des données confidentielles sur [Internet](https://fr.wikipedia.org/wiki/Internet). Cet algorithme a été décrit en 1977 par [Ronald Rivest](https://fr.wikipedia.org/wiki/Ronald\_Rivest), [Adi Shamir](https://fr.wikipedia.org/wiki/Adi\_Shamir) et [Leonard Adleman](https://fr.wikipedia.org/wiki/Leonard\_Adleman). RSA a été breveté[\[1\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-brevet-1) par le [Massachusetts Institute of Technology](https://fr.wikipedia.org/wiki/Massachusetts\_Institute\_of\_Technology) (MIT) en 1983 aux [États-Unis](https://fr.wikipedia.org/wiki/%C3%89tats-Unis). Le brevet a expiré le 21 septembre 2000.
 
-### Fonctionnement général\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=1) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=1)]
+### Fonctionnement général
 
 Le [chiffrement](https://fr.wikipedia.org/wiki/Chiffrement) RSA est _asymétrique_ : il utilise une paire de clés (des nombres entiers) composée d'une _clé publique_ pour [chiffrer](https://fr.wikipedia.org/wiki/Chiffrement) et d'une _clé privée_ pour [déchiffrer](https://fr.wikipedia.org/wiki/Chiffrement) des données confidentielles. Les deux clés sont créées par une personne, souvent nommée [par convention](https://fr.wikipedia.org/wiki/Langage\_de\_la\_cryptologie) _Alice_, qui souhaite que lui soient envoyées des données confidentielles. Alice rend la clé publique accessible. Cette clé est utilisée par ses correspondants (_Bob_, etc.) pour chiffrer les données qui lui sont envoyées. La clé privée est quant à elle réservée à Alice, et lui permet de déchiffrer ces données. La clé privée peut aussi être utilisée par Alice pour [signer](https://fr.wikipedia.org/wiki/Signature) une donnée qu'elle envoie, la clé publique permettant à n'importe lequel de ses correspondants de vérifier la signature.
 
@@ -10,7 +10,7 @@ Une condition indispensable est qu'il soit « calculatoirement impossible » de 
 
 Le chiffrement RSA est souvent utilisé pour communiquer une clé de [chiffrement symétrique](https://fr.wikipedia.org/wiki/Chiffrement\_sym%C3%A9trique), qui permet alors de poursuivre l'échange de façon confidentielle : Bob envoie à Alice une clé de chiffrement symétrique qui peut ensuite être utilisée par Alice et Bob pour échanger des données.
 
-### Fonctionnement détaillé\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=2) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=2)]
+### Fonctionnement détaillé
 
 Ronald Rivest, Adi Shamir et Leonard Adleman ont publié leur chiffrement en 1978 dans _A Method for Obtaining Digital Signatures and Public-key Cryptosystems_. Ils utilisent les [congruences sur les entiers](https://fr.wikipedia.org/wiki/Congruence\_sur\_les\_entiers) et le [petit théorème de Fermat](https://fr.wikipedia.org/wiki/Petit\_th%C3%A9or%C3%A8me\_de\_Fermat), pour obtenir des [fonctions à sens unique](https://fr.wikipedia.org/wiki/Fonction\_%C3%A0\_sens\_unique), avec brèche secrète (ou porte dérobée).
 
@@ -20,7 +20,7 @@ Les messages clairs et chiffrés sont des entiers inférieurs à l'entier _n_[\[
 
 La seule description des principes [mathématiques](https://fr.wikipedia.org/wiki/Math%C3%A9matiques) sur lesquels repose l'algorithme RSA n'est pas suffisante. Sa mise en œuvre concrète demande de tenir compte d'autres questions qui sont essentielles pour la sécurité. Par exemple le couple (clé privée, clé publique) doit être engendré par un procédé vraiment aléatoire qui, même s'il est connu, ne permet pas de reconstituer la clé privée. Les données chiffrées ne doivent pas être trop courtes, pour que le déchiffrement demande vraiment un calcul modulaire, et complétées de façon convenable (par exemple par l'[Optimal Asymmetric Encryption Padding](https://fr.wikipedia.org/wiki/Optimal\_Asymmetric\_Encryption\_Padding)).
 
-#### Création des clés\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=3) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=3)]
+#### Création des clés
 
 L'étape de création des clés est à la charge d'Alice. Elle n'intervient pas à chaque chiffrement car les clés peuvent être réutilisées. La difficulté première, que ne règle pas le chiffrement, est que Bob soit bien certain que la clé publique qu'il détient est celle d'Alice. Le renouvellement des clés n'intervient que si la clé privée est compromise, ou par précaution au bout d'un certain temps (qui peut se compter en années).
 
@@ -36,7 +36,7 @@ Dans tout le paragraphe précédent, on peut utiliser l’[indicatrice de Carmic
 
 Le couple (_n_, _e_) — ou (_e_, _n_)[\[3\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-RSAp122-3) — est la _clé publique_ du chiffrement, alors que sa _clé privée_ est[\[4\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-4) le nombre _d_, sachant que l'opération de déchiffrement ne demande que la clef privée _d_ et l'entier _n_, connu par la clé publique (la clé privée est parfois aussi définie comme le couple (_d_, _n_)[\[3\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-RSAp122-3) ou le triplet (_p, q_, _d_)[\[5\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-5)).
 
-#### Chiffrement du message\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=4) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=4)]
+#### Chiffrement du message
 
 Si _M_ est un entier naturel strictement inférieur à _n_ représentant un message, alors le message chiffré sera représenté par
 
@@ -44,13 +44,13 @@ Si _M_ est un entier naturel strictement inférieur à _n_ représentant un mess
 
 l'entier naturel _C_ étant choisi strictement inférieur à _n_.
 
-#### Déchiffrement du message\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=5) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=5)]
+#### Déchiffrement du message
 
 Pour déchiffrer _C_, on utilise _d_, l'inverse de _e_ modulo (_p_ – 1)(_q_ – 1), et l'on retrouve le message clair _M_ par
 
 ![{\displaystyle M\equiv C^{d}{\pmod {n\}}.}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/1221183ab1f0b1cae65f0dd666edd7fb490adeec)
 
-#### Exemple\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=6) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=6)]
+#### Exemple
 
 Un exemple avec de petits nombres premiers (en pratique il faut de très grands nombres premiers) :
 
@@ -67,7 +67,7 @@ La clé publique d'Alice est (_n_, _e_) = (33, 3), et sa clé privée est (_n_, 
 
 Le mécanisme de signature par Alice, à l'aide de sa clé privée, est analogue, en échangeant les clés.
 
-#### Justification\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=7) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=7)]
+#### Justification
 
 La démonstration repose sur le [petit théorème de Fermat](https://fr.wikipedia.org/wiki/Petit\_th%C3%A9or%C3%A8me\_de\_Fermat), à savoir que comme _p_ et _q_ sont deux nombres premiers, si _M_ n'est pas un multiple de _p_ on a la première égalité, et la seconde s'il n'est pas un multiple de _q_ :
 
@@ -97,7 +97,7 @@ Les deux égalités sont en fait réalisées pour n'importe quel entier _M_, car
 
 L'entier ![M^{ed}-M](https://wikimedia.org/api/rest\_v1/media/math/render/svg/57915051431bc63b43bf448eeb25f6f006b35bd5) est donc un multiple de _p_ et de _q_, qui sont premiers distincts, donc de leur produit _pq_ = _n_ (on peut le voir comme une conséquence de l'unicité de la [décomposition en facteurs premiers](https://fr.wikipedia.org/wiki/D%C3%A9composition\_en\_facteurs\_premiers), ou plus directement du [lemme de Gauss](https://fr.wikipedia.org/wiki/Lemme\_d'Euclide#Lien\_entre\_PGCD\_et\_PPCM), sachant que _p_ et _q_ sont premiers entre eux, étant premiers et distincts).
 
-#### Asymétrie\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=8) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=8)]
+#### Asymétrie
 
 On constate que pour chiffrer un message, il suffit de connaître _e_ et _n_. En revanche pour déchiffrer, il faut _d_ et _n_.
 
@@ -105,7 +105,7 @@ Pour calculer _d_ à l'aide de _e_ et _n_, il faut trouver l'[inverse modulaire]
 
 Le chiffrement demande donc de pouvoir vérifier que de « très grands » nombres sont des nombres premiers, pour pouvoir trouver _p_ et _q_, mais aussi que le produit de ces deux très grands nombres, ne soit pas factorisable pratiquement. En effet les algorithmes efficaces connus qui permettent de vérifier qu'un nombre n'est pas premier ne fournissent pas de factorisation.
 
-#### Théorème d'Euler\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=9) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=9)]
+#### Théorème d'Euler
 
 La valeur φ(_n_) de l'[indicatrice d'Euler](https://fr.wikipedia.org/wiki/Indicatrice\_d'Euler) en _n_ est l'[ordre du groupe](https://fr.wikipedia.org/wiki/Ordre\_\(th%C3%A9orie\_des\_groupes\)) des éléments inversibles de l’[anneau ℤ/nℤ](https://fr.wikipedia.org/wiki/Anneau\_%E2%84%A4/n%E2%84%A4). Ceci permet de voir immédiatement, par le [théorème d'Euler](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_d'Euler\_\(arithm%C3%A9tique\)) (conséquence du [théorème de Lagrange](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_de\_Lagrange)), que si _M_ est premier avec _n_, donc inversible (ce qui est le cas de « la plupart » des entiers naturels _M_ strictement inférieurs à _n_)
 
@@ -115,9 +115,9 @@ soit de justifier le chiffrement RSA (pour de tels _M_).
 
 Il s'avère que quand _n_ est un produit de nombres premiers distincts, l'égalité est vérifiée pour tout _M_[\[6\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-Demazure200863proposition\_2.19-6) (la démonstration est essentiellement celle faite ci-dessus pour RSA, dans le cas particulier où _n_ est un produit de deux nombres premiers).
 
-### Implémentation\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=10) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=10)]
+### Implémentation
 
-#### Engendrer les clefs\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=11) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=11)]
+#### Engendrer les clefs
 
 Le couple de clefs demande de choisir deux nombres premiers de grande taille, de façon qu'il soit calculatoirement impossible de factoriser leur produit.
 
@@ -125,19 +125,19 @@ Pour déterminer un nombre premier de grande taille, on utilise un procédé qui
 
 La méthode demande cependant un test de primalité très rapide. En pratique on utilise un test probabiliste, le [test de primalité de Miller-Rabin](https://fr.wikipedia.org/wiki/Test\_de\_primalit%C3%A9\_de\_Miller-Rabin)[\[7\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-7) ou une variante[\[8\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-8). Un tel test ne garantit pas exactement que le nombre soit premier, mais seulement une (très) forte probabilité qu'il le soit.
 
-**Propriétés requises\[**[**modifier**](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=12) **|** [**modifier le code**](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=12)**]**
+**Propriétés requises**
 
 Pour éviter les failles de sécurité, les deux nombres premiers ![p](https://wikimedia.org/api/rest\_v1/media/math/render/svg/81eac1e205430d1f40810df36a0edffdc367af36) et ![q](https://wikimedia.org/api/rest\_v1/media/math/render/svg/06809d64fa7c817ffc7e323f85997f783dbdf71d) choisis pour construire le couple de clefs doivent satisfaire les propriétés suivantes[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9):
 
 L'exposant ![e](https://wikimedia.org/api/rest\_v1/media/math/render/svg/cd253103f0876afc68ebead27a5aa9867d927467) choisi doit quant à lui vérifier les propriétés suivantes[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9):
 
-#### Chiffrer et déchiffrer\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=13) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=13)]
+#### Chiffrer et déchiffrer
 
 Le calcul de ![\scriptstyle M=c^{d}\mod {n}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/0ed86df60240dd9e20b80b62886dd29633eaf0ae) ne peut se faire en calculant d'abord _cd_, puis le reste modulo _n_, car cela demanderait de manipuler des entiers beaucoup trop grands. Il existe des méthodes efficaces pour le calcul de l'[exponentiation modulaire](https://fr.wikipedia.org/wiki/Exponentiation\_modulaire).
 
 On peut conserver une forme différente de la clé privée pour permettre un déchiffrement plus rapide à l'aide du [théorème des restes chinois](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_des\_restes\_chinois).
 
-### Sécurité\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=14) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=14)]
+### Sécurité
 
 [![](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/2017-fr.wp-orange-source.svg/25px-2017-fr.wp-orange-source.svg.png)](https://commons.wikimedia.org/wiki/File:2017-fr.wp-orange-source.svg?uselang=fr)
 
@@ -160,7 +160,7 @@ Les autres types d'attaques (voir [Attaques](https://fr.wikipedia.org/wiki/Chiff
 
 Il faut enfin noter que casser une clé par factorisation du nombre _n_ ne nécessite pas d'attendre d'avoir un message chiffré à disposition. Cette opération peut débuter sur base de la connaissance de la [clé publique](https://fr.wikipedia.org/wiki/Cl%C3%A9\_publique) seulement, qui est généralement libre d'accès. Dans ces conditions, si _n_ est factorisé, la [clé privée](https://fr.wikipedia.org/wiki/Cl%C3%A9\_priv%C3%A9e) s'en déduit immédiatement. Les conséquences de cette observation sont également qu'un code peut être cassé avant même son utilisation.
 
-### Applications\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=15) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=15)]
+### Applications
 
 Lorsque deux personnes souhaitent s'échanger des informations numériques de façon confidentielle, sur [Internet](https://fr.wikipedia.org/wiki/Internet) par exemple avec le [commerce électronique](https://fr.wikipedia.org/wiki/Commerce\_%C3%A9lectronique), celles-ci doivent recourir à un mécanisme de [chiffrement](https://fr.wikipedia.org/wiki/Cryptographie) de ces données numériques. RSA étant un algorithme de [chiffrement asymétrique](https://fr.wikipedia.org/wiki/Cryptographie\_asym%C3%A9trique), celui-ci hérite du domaine d'application de ces mécanismes de chiffrement. On citera :
 
@@ -169,19 +169,19 @@ Lorsque deux personnes souhaitent s'échanger des informations numériques de fa
 
 Ce dernier est en fait intégré dans un mécanisme RSA. En effet, le problème des algorithmes symétriques est qu'il faut être sûr que la clé de chiffrement ne soit divulguée qu'aux personnes qui veulent partager un secret. RSA permet de communiquer cette clé symétrique de manière sûre. Pour ce faire, Alice va tout d'abord choisir une clé symétrique. Voulant échanger un secret avec Bob elle va lui transmettre cette clé symétrique en utilisant RSA. Elle va, pour cela, chiffrer la clé symétrique avec la clé publique (RSA) de Bob, ainsi elle sera sûre que seul Bob pourra déchiffrer cette clé symétrique. Une fois que Bob reçoit le message, il le déchiffre et peut alors utiliser la clé symétrique définie par Alice pour lui envoyer des messages chiffrés que seuls lui et Alice pourront alors déchiffrer.
 
-### Attaques\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=16) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=16)]
+### Attaques
 
 Plusieurs attaques ont été proposées pour casser le chiffrement RSA[\[11\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-11).
 
-#### Attaque de Wiener\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=17) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=17)]
+#### Attaque de Wiener
 
 L'[attaque de Wiener](https://fr.wikipedia.org/wiki/Attaque\_de\_Wiener) (1989) est exploitable si l'exposant secret _d_ est inférieur à ![{\displaystyle {\frac {1}{3\}}N^{\frac {1}{4\}}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/31f4ed927296743c5934d2c34fb51284a430e0f3)[\[12\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-12). On peut retrouver dans ce cas l'exposant secret à l'aide du développement en fractions continues de ![{\frac {e}{N\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/e61bceedd1a63fbc0c421a051903584c1491fa3b)[\[13\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-wiener-13),[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9).
 
-#### Attaque de Håstad\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=18) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=18)]
+#### Attaque de Håstad
 
 L'attaque de [Håstad](https://fr.wikipedia.org/wiki/Johan\_H%C3%A5stad), l'une des premières attaques découvertes (en 1985), repose sur la possibilité que l'exposant public _e_ soit suffisamment petit. En interceptant le même message envoyé à au moins ![e](https://wikimedia.org/api/rest\_v1/media/math/render/svg/cd253103f0876afc68ebead27a5aa9867d927467) destinataires différents, il est possible de retrouver le message originel à l'aide du [théorème des restes chinois](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_des\_restes\_chinois)[\[14\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-14),[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9).
 
-#### Attaque par chronométrage (_timing attacks_)\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=19) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=19)]
+#### Attaque par chronométrage (_timing attacks_)
 
 [Paul Kocher](https://fr.wikipedia.org/wiki/Paul\_Kocher) a décrit en 1995 une nouvelle attaque contre RSA : en supposant que l’attaquante Ève en connaisse suffisamment sur les documents d'Alice et soit capable de mesurer les temps de déchiffrement de plusieurs documents chiffrés, elle serait en mesure d’en déduire rapidement la clef de déchiffrement. Il en irait de même pour la signature.
 
@@ -189,7 +189,7 @@ En 2003, Boneh et Brumley ont montré une attaque plus pratique permettant de re
 
 L'aveuglement se sert des propriétés multiplicatives de RSA en insérant dans le calcul une valeur secrète aléatoire dont l'effet peut être annulé. Cette valeur étant différente à chaque chiffrement, le temps de déchiffrement n'est plus directement corrélé aux données à chiffrer, ce qui met en échec l'attaque par chronométrage : au lieu de calculer ![\scriptstyle c^{d}{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/90005e390fce4d91ae05b2e48c134b2661e2ae41), Alice choisit d'abord une valeur aléatoire secrète _r_ et calcule ![\scriptstyle (r^{e}c)^{d}{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/887c4f329d3f129c4e78c87b48b4018c7df9468a). Le résultat de ce calcul est ![\scriptstyle rm{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/e436fbeb5f7aa438a0ca754bb4094f293fb0daba) et donc l'effet de _r_ peut être annulé en multipliant par son inverse.
 
-#### Attaque à chiffrés choisis (_Adaptive chosen ciphertext attacks_)\[[modifier](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&veaction=edit\&section=20) | [modifier le code](https://fr.wikipedia.org/w/index.php?title=Chiffrement\_RSA\&action=edit\&section=20)]
+#### Attaque à chiffrés choisis (_Adaptive chosen ciphertext attacks_)
 
 Tel que décrit dans cet article, RSA est un chiffrement déterministe, et ne peut donc pas être [sémantiquement sûr](https://fr.wikipedia.org/wiki/S%C3%A9curit%C3%A9\_s%C3%A9mantique). Une contremesure est l’utilisation d’un [schéma de remplissage](https://fr.wikipedia.org/wiki/Remplissage\_\(cryptographie\)) probabiliste de manière telle qu'aucune valeur de message, une fois chiffré, ne donne un résultat peu sûr, par exemple si _C = Me ≤ N_, une attaque simple est le calcul direct de la racine e-ième de C, qui n’aura pas été réduite modulo N.
 
@@ -272,19 +272,23 @@ https://chovid99.github.io/posts/csaw-ctf-2019/
 → When n is quite small
 https://github.com/Ganapati/RsaCtfTool
 
+
 # E is unknow:
 Use z3 
 
-# p + q is bruteforce-able 
+# p + q is bruteforce-able (sum not big)
 try all from 0 to large number
 
 # Weak prime generation
+https://ctftime.org/writeup/23033
 
 # When n is too big modulo is useless
 https://chovid99.github.io/posts/cyber-apocalypse-ctf-2022/
 
+
 # Low Exponent Attack: 
 → Usefull when e=3 and n is quite big because pow(m,e,n) == pow(m,e)
+
 
 #Low Private Exponent Attack
 if n is the modulus and d is the private exponent, with d < 1/3(n)¼, then given the
@@ -294,12 +298,17 @@ recently improved the bound to d < n0.292).
 # ROCA: 
 → Usable when RSA key has 512 bits long n
 
+
 # Twin Primes: 
 → q = p + 2
 → Usefull is most cases when n is too bid and others attacks doesn\'t work
+https://github.com/Ganapati/RsaCtfTool
+
 
 # Boneh Durfee Attack:
 → Allows to go slightly faster then Wiener Attack because d < n^0.292
+https://github.com/Ganapati/RsaCtfTool
+
 
 # Partial Key Exposure Attack
 If the modulus n is k bits long, given the (k/4) least
@@ -307,6 +316,8 @@ significant bits of d, an attacker can reconstruct all of d in time linear to (e
 where e is the public exponent. This means that if e is small, the exposure of a
 quarter of bits of d can lead to the recovery of the whole private key d.
 https://github.com/victini-lover/CSAW-Quals-2021-Writeups/tree/main/RSA-Pop-Quiz
+https://github.com/Ganapati/RsaCtfTool
+
 
 # Short RSA Secret Exponents
 Short public exponents can be exploited when the same message is broadcast to many
