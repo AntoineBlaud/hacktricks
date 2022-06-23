@@ -325,6 +325,26 @@ parties [1]. To illustrate this attack, suppose that a message m is broadcast to
 whose public exponents are e1 = e2 = e3 = 3 and whose moduli are n1, n2, and n3. The
 encrypted messages are
 m3 mod n1, m3 mod n2, and m3 mod n3.
+
+
+# Coppersmith attack 
+For example if you know the most significant bits of the message. 
+You can find the rest of the message with this method.
+The usual RSA model is this one: you have a ciphertext c a modulus N and a public exponent e. Find m such that m^e = c mod N.
+Now, this is the relaxed model we can solve: you have c = (m + x)^e, you know a part of the message, m, but you don't know x. For example the message is always something like "the password today is: [password]". Coppersmith says that if you are looking for N^1/e of the message it is then a small root and you should be able to find it pretty quickly.
+
+Another case is factoring N knowing high bits of q.
+The Factorization problem normally is: give N = pq, find q.
+ In our relaxed model we know an approximation q' of q.
+Here's how to do it with my implementation:
+let f(x) = x - q' which has a root modulo q.
+This is because x - q' = x - ( q + diff ) = x - diff mod q with the difference being diff = | q - q' |.
+What is important here if you want to find a solution:
+    we should have q >= N^0,5
+    as usual XX is the upper bound of the root, so the difference should be: |diff| < XX
+    https://github.com/pcw109550/write-up/tree/master/2020/DEFCON/coooppersmith
+
+
 ```
 
 \
