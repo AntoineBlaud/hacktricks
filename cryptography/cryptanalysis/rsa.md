@@ -330,6 +330,9 @@ m3 mod n1, m3 mod n2, and m3 mod n3.
 n = pq
 if we are given the high order 1/4 log2 n bits of p.
 
+# Hint 
+https://ctftime.org/writeup/29741
+
 
 # Coppersmith attack 
 For example if you know the most significant bits of the message. 
@@ -347,7 +350,18 @@ What is important here if you want to find a solution:
     we should have q >= N^0,5
     as usual XX is the upper bound of the root, so the difference should be: |diff| < XX
     https://github.com/pcw109550/write-up/tree/master/2020/DEFCON/coooppersmith
-
+ 
+# weak q   
+q = OpenSSL::BN.new(e).mod_inverse(p)
+q = mod_inverse(p)
+q = e ^ (-1) mod p
+q * e = 1 mod p
+q * e = k * p + 1                            # k is multiplier
+q * q * e = q * (k * p + 1)
+(q ^ 2) * e = (k * p * q) + q
+(q ^ 2) * e = (k * N) + q                          # N = p * q
+((q ^ 2) * e) - q = k * N
+q = ((k * N) / e) ^ 2
 
 ```
 
