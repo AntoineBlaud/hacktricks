@@ -326,6 +326,10 @@ whose public exponents are e1 = e2 = e3 = 3 and whose moduli are n1, n2, and n3.
 encrypted messages are
 m3 mod n1, m3 mod n2, and m3 mod n3.
 
+#Coron
+n = pq
+if we are given the high order 1/4 log2 n bits of p.
+
 
 # Coppersmith attack 
 For example if you know the most significant bits of the message. 
@@ -357,6 +361,10 @@ Attacks : Several public keys
 
 # Common Modulus Attack:
 → Usable when you have 2 messages, 2 public keys and n1 == n2
+https://github.com/Ganapati/RsaCtfTool
+
+# Common Factor Attack:
+→ Usable when you have 2 messages, and p1 = p2
 https://github.com/Ganapati/RsaCtfTool
 
 # Wiener Attack:
