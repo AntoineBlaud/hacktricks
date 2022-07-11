@@ -456,6 +456,9 @@ python3 iamfinder.py enum_user --aws_id 123456789012
 
 # https://github.com/nccgroup/PMapper
 # Check IAM permissions
+
+https://github.com/JohannesEbke/aws_list_all
+list all aws ressources
 ```
 
 
