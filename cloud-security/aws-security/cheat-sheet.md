@@ -1,5 +1,7 @@
 # Cheat Sheet
 
+![](../../.gitbook/assets/AWS.png)
+
 ## Auth methods:
 
 ```
