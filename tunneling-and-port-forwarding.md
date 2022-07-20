@@ -132,7 +132,7 @@ background# meterpreter session
 route add <IP_victim> <Netmask> <Session> # (ex: route add 10.10.10.14 255.255.255.0 8)
 use auxiliary/server/socks_proxy
 run #Proxy port 1080 by default
-echo "socks4 127.0.0.1 1080" > /etc/proxychains.conf #Proxychains
+append socks4 127.0.0.1 1080 to /etc/proxy4chains.conf 
 ```
 
 Another way:
