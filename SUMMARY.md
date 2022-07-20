@@ -516,6 +516,7 @@
     * [Evtx](forensics/basic-forensic-methodology/windows-forensics/evtx.md)
     * [Windows Processes](forensics/basic-forensic-methodology/windows-forensics/windows-processes.md)
     * [Interesting Windows Registry Keys](forensics/basic-forensic-methodology/windows-forensics/interesting-windows-registry-keys.md)
+* [Awesome-Anti-Forensic](forensics/awesome-anti-forensic.md)
 
 ## Cloud Security
 
