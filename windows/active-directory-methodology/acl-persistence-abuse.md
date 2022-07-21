@@ -431,6 +431,12 @@ The same privilege escalation could be achieved by abusing the GPO Users and Gro
 
 Additionally, we could think about leveraging logon/logoff scripts, using registry for autoruns, installing .msi, edit services and similar code execution avenues.
 
+### Download a GPO to get details
+
+```bash
+cat "\\m3c.local\sysvol\m3c.local\Policies\{11D18024-2D64-4CE7-8479-B41B164B7DAB}\machine\preferences\groups\groups.xml"
+```
+
 ## References
 
 {% embed url="https://wald0.com/?p=112" %}
