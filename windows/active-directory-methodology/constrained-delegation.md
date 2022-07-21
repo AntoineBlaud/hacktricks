@@ -72,8 +72,7 @@ dOAyPXDWoPmCbLA3jyFebHN98jzzPZgotC7vFpTv8h5jJ5zNeIxcN7PHr+qMRbBISMxxB6mkHFB1g
 SoSIEID46bIOxprG+RsD6AyYyOB2Izk7AINDtf+FOAXDBbdlioQsbCU0zQy5MT0NBTKIUMBKgAwIB
 AaELMAkbB3N2Y19zcWyjBwMFAGChAAClERgPMjAyMDA0MjIwOTEwNDFaphEYDzIwMjAwNDIyMTkwM
 DAxWqcRGA8yMDIwMDQyOTA5MDAwMVqoCxsJTTNDLkxPQ0FMqR4wHKADAgECoRUwExsGa3JidGd0Gw
-lNM0MuTE9DQUw= /impersonateuser:svc_apache /domain:m3c.local
-/msdsspn:time/M3WEBAW.M3C.LOCAL /dc:M3DC.M3C.LOCAL /ptt
+lNM0MuTE9DQUw= impersonateuser:Micheal.Crosley /domain:m3c.local /msdsspn:"time/m3webaw" /altservice:http /ptt 
 ```
 {% endcode %}
 
