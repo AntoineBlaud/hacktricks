@@ -101,6 +101,7 @@
   * [RottenPotato](windows/windows-local-privilege-escalation/rottenpotato.md)
   * [Seatbelt](windows/windows-local-privilege-escalation/seatbelt.md)
   * [SeDebug + SeImpersonate copy token](windows/windows-local-privilege-escalation/sedebug-+-seimpersonate-copy-token.md)
+  * [Always Install Elevated](windows/windows-local-privilege-escalation/always-install-elevated.md)
   * [Windows C Payloads](windows/windows-local-privilege-escalation/windows-c-payloads.md)
 * [Active Directory Methodology](windows/active-directory-methodology/README.md)
   * [Cheat Sheet](windows/active-directory-methodology/cheat-sheet.md)
