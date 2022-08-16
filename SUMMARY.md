@@ -15,6 +15,7 @@
 * [Tunneling and Port Forwarding](tunneling-and-port-forwarding.md)
 * [CSS Injection Code](css-injection-code.md)
 * [Search Exploits](search-exploits.md)
+* [Persistence](persistence.md)
 
 ## Shells
 
