@@ -120,7 +120,7 @@ ls \\victim.domain.local\C$
 
 ### Abuse different service tickets
 
-Lear about the [**available service tickets here**](silver-ticket.md#available-services).
+Lear about the [**available service tickets here**](../domain-dominance/silver-ticket.md#available-services).
 
 ## Kerberos Errors
 
