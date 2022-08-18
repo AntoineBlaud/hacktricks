@@ -133,6 +133,7 @@
 * [Domain Dominance](windows/domain-dominance/README.md)
   * [Silver Ticket](windows/domain-dominance/silver-ticket.md)
   * [Golden Ticket](windows/domain-dominance/golden-ticket.md)
+  * [Diamond ticket](windows/domain-dominance/diamond-ticket.md)
   * [Skeleton Key](windows/domain-dominance/skeleton-key.md)
 * [NTLM](windows/ntlm/README.md)
   * [Places to steal NTLM creds](windows/ntlm/places-to-steal-ntlm-creds.md)
