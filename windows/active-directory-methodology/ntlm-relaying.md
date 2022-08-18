@@ -70,7 +70,7 @@ Responder Configuration
 
 Then start up Responder on the correct interface, eth0 in my case.
 
-`sudo responder -I eth0`
+`sudo responder -I eth0  --analyze --lm --disable-ess`&#x20;
 
 ![](https://miro.medium.com/max/704/1\*x9G3fjeZFzEKkQN6RD8cdA.png)
 
