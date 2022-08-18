@@ -129,6 +129,7 @@
   * [Security Descriptors](windows/active-directory-methodology/security-descriptors.md)
   * [Misconfigured certificate Templates](windows/active-directory-methodology/misconfigured-certificate-templates.md)
   * [Unconstrained Delegation](windows/active-directory-methodology/unconstrained-delegation.md)
+  * [Relay attacks](https://app.gitbook.com/s/djPOU9Er6kcKTLO7sngF/ad/movement/mitm-and-coerced-authentications)
   * [NTLM Relaying](windows/active-directory-methodology/ntlm-relaying.md)
 * [Domain Dominance](windows/domain-dominance/README.md)
   * [Silver Ticket](windows/domain-dominance/silver-ticket.md)

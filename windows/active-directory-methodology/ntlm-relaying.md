@@ -6,6 +6,12 @@ For experienced pentesters, this probably isn’t anything groundbreaking or new
 
 ![](https://miro.medium.com/max/1050/1\*P\_fB9CnsEhWdLqZ3FQyWTA.png)
 
+NTLM relay has been used and reused in several attacks
+
+* [Remote Potato](https://pentestlab.blog/2021/05/04/remote-potato-from-domain-user-to-enterprise-admin/) by [Antonio Cocomazzi](https://twitter.com/splinter\_code) and [Andrea Pierini](https://twitter.com/decoder\_it)
+* [MSRPC Printer Spooler Relay](https://www.crowdstrike.com/blog/cve-2021-1678-printer-spooler-relay-security-advisory/) by Eyal Karni and Alex Ionescu
+* [PetitPotam](https://github.com/topotam/PetitPotam) by [Gilles Lionel](https://twitter.com/topotam77) is the newest way to trigger computer authentication
+
 Example Attack Path
 
 > Note: All the examples below are on a personal test domain, so yes, the passwords are easily crackable for this example.
