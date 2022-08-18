@@ -95,7 +95,7 @@
   * [Leaked Handle Exploitation](windows/windows-local-privilege-escalation/leaked-handle-exploitation.md)
   * [MSI Wrapper](windows/windows-local-privilege-escalation/msi-wrapper.md)
   * [Named Pipe Client Impersonation](windows/windows-local-privilege-escalation/named-pipe-client-impersonation.md)
-  * [PowerUp](windows/windows-local-privilege-escalation/powerup.md)
+  * [PowerUp / SharpUp](windows/windows-local-privilege-escalation/powerup.md)
   * [Privilege Escalation Abusing Tokens](windows/windows-local-privilege-escalation/privilege-escalation-abusing-tokens.md)
   * [Privilege Escalation with Autoruns](windows/windows-local-privilege-escalation/privilege-escalation-with-autorun-binaries.md)
   * [RottenPotato](windows/windows-local-privilege-escalation/rottenpotato.md)
