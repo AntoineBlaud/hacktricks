@@ -15,7 +15,8 @@
 * [Tunneling and Port Forwarding](tunneling-and-port-forwarding.md)
 * [CSS Injection Code](css-injection-code.md)
 * [Search Exploits](search-exploits.md)
-* [Persistence](persistence.md)
+* [Persistence](persistence/README.md)
+  * [Persistance techniques](https://app.gitbook.com/s/AHEFW4POxlzDF5ApseF3/offensive-security/persistence)
 
 ## Shells
 
