@@ -16,7 +16,8 @@
 * [CSS Injection Code](css-injection-code.md)
 * [Search Exploits](search-exploits.md)
 * [Persistence](persistence/README.md)
-  * [Persistance techniques](https://app.gitbook.com/s/AHEFW4POxlzDF5ApseF3/offensive-security/persistence)
+  * [Windows Persistance techniques](https://app.gitbook.com/s/AHEFW4POxlzDF5ApseF3/offensive-security/persistence)
+  * [AD Persistance techniques](https://app.gitbook.com/s/djPOU9Er6kcKTLO7sngF/\~/changes/rRKoBRJiGLDZSJk9gsdz/ad/persistence)
 
 ## Shells
 
