@@ -122,6 +122,7 @@
   * [Kerberos Authentication](windows/active-directory-methodology/kerberos-authentication.md)
   * [Kerberoast](windows/active-directory-methodology/kerberoast.md)
   * [MSSQL Trusted Links](windows/active-directory-methodology/mssql-trusted-links.md)
+  * [MSSQL AttackerV1](windows/active-directory-methodology/mssql-attackerv1.md)
   * [Over Pass the Hash/Pass the Key](windows/active-directory-methodology/over-pass-the-hash-pass-the-key.md)
   * [Pass the Ticket](windows/active-directory-methodology/pass-the-ticket.md)
   * [Password Spraying](windows/active-directory-methodology/password-spraying.md)
