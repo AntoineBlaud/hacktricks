@@ -151,6 +151,7 @@
   * [AtExec / SchtasksExec](windows/ntlm/atexec.md)
   * [WinRM](windows/ntlm/winrm.md)
 * [Stealing Credentials](windows/stealing-credentials/README.md)
+  * [Decrypt EFS file](windows/stealing-credentials/decrypt-efs-file.md)
   * [Credentials Protections](windows/stealing-credentials/credentials-protections.md)
   * [Mimikatz](windows/stealing-credentials/credentials-mimikatz.md)
 * [Authentication, Credentials, UAC and EFS](windows/authentication-credentials-uac-and-efs.md)

