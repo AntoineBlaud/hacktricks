@@ -108,7 +108,7 @@
   * [Windows C Payloads](windows/windows-local-privilege-escalation/windows-c-payloads.md)
 * [Active Directory Methodology](windows/active-directory-methodology/README.md)
   * [Cheat Sheet](windows/active-directory-methodology/cheat-sheet.md)
-  * [AdReaper (linux tool)](windows/active-directory-methodology/adreaper-linux-tool.md)
+  * [AD linux recon](windows/active-directory-methodology/ad-linux-recon.md)
   * [SharpView](windows/active-directory-methodology/sharpview.md)
   * [Monitoring - EDR](windows/active-directory-methodology/monitoring-edr.md)
   * [Abusing Active Directory ACLs/ACEs](windows/active-directory-methodology/acl-persistence-abuse.md)

@@ -1,2 +1,0 @@
-# AdReaper (linux tool)
-

