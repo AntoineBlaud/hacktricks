@@ -1,12 +1,16 @@
 # Linux Active Directory
 
-A linux machine can also be present inside an Active Directory environment.
+pA linux machine can also be present inside an Active Directory environment.
 
 A linux machine in an AD might be **storing different CCACHE tickets inside files. This tickets can be used and abused as any other kerberos ticket**. In order to read this tickets you will need to be the user owner of the ticket or **root** inside the machine.
 
 ### Pass The Ticket
 
 In this page you are going to find different places were you could **find kerberos tickets inside a linux host**, in the following page you can learn how to transform this CCache tickets formats to Kirbi (the format you need to use in Windows) and also how to perform a PTT attack:
+
+```python
+proxychains getST.py -spn cifs/coredc.core.cyber.local@CORE.CYBER.LOCAL -dc-ip coredc.core.cyber.local -k -no-pass "CORE.CYBER.LOCAL/COREWEBDL\$@CORE.CYBER.LOCAL"
+```
 
 {% content-ref url="../../windows/active-directory-methodology/pass-the-ticket.md" %}
 [pass-the-ticket.md](../../windows/active-directory-methodology/pass-the-ticket.md)
