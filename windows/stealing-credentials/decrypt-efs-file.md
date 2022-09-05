@@ -1,6 +1,182 @@
 # Decrypt EFS file
 
+Windows users [may](https://social.technet.microsoft.com/Forums/windows/en-US/ae94ac55-1a63-4b80-978d-042e46b2df76/how-can-i-search-for-files-encrypted-with-encrypting-file-system-efs) [unintentionally](https://social.technet.microsoft.com/Forums/windows/en-US/16625757-ba72-4eb2-a87f-2dc7157f2f2b/remove-efs-encryption-from-files-that-were-inadvertantly-encrypted-so-efs-can-be-turned-off-for) [enable](https://superuser.com/questions/1074693/how-to-disable-encrypting-file-system) EFS encryption (even from just [unpacking a ZIP file created under macOS](https://blogs.msdn.microsoft.com/asklar/2012/05/03/why-do-zip-files-from-mac-os-show-up-as-greenencrypted/)), resulting in errors like these when trying to copy files from a backup or offline system, even as root:
 
+* Windows:
+  * File Access Denied
+  * Access is denied.
+* macOS:
+  * The operation can’t be completed because you don’t have permission to access some of the items.
+  * Permission denied
+* Linux:
+  * Error splicing file: Permission denied
+  * Permission denied
+
+Despite popular perception ("[_If you don't have a copy of the certificate then your files are forever lost._](https://answers.microsoft.com/en-us/windows/forum/all/about-encrypting-file-system-efs/c7297391-728b-4fda-8f9a-00e98c7bf1a6)", "[_If you didn't export the encryption certificates from the computer that encrypted the files then the data in those files is gone forever_](https://forums.tomshardware.com/threads/cannot-move-encrypted-files-to-new-system.2861216/post-18143187)", etc.), it may be possible to create the necessary certificate from an offline system or backup thanks to [Benjamin Delpy's](https://www.youtube.com/watch?v=\_mSl8qiuxP8) [mimikatz](https://github.com/gentilkiwi/mimikatz) and his guide [_howto \~ decrypt EFS files_](https://github.com/gentilkiwi/mimikatz/wiki/howto-\~-decrypt-EFS-files). Here is an abbreviated (and by turns amplified) version:
+
+### 0. Copy necessary files
+
+From the offline system, copy these folders and paste them into the directory containing mimikatz.exe on a running system:
+
+* %USERPROFILE%\AppData\Roaming\Microsoft\\
+  * SystemCertificates\\
+  * Crypto\\
+  * Protect\\
+
+If the password is unknown, copy these two files as well:
+
+* %WINDIR%\system32\config\\
+  * SAM
+  * SYSTEM
+
+### 1. Retrieve certificate thumbprint from one of the encrypted files
+
+```
+cipher /c "D:\Users\foo\Pictures\secret.jpg"
+```
+
+### 2. Export certificate and its public key to DER
+
+```
+mimikatz # crypto::system /file:"SystemCertificates\My\Certificates\096BA4D021B50F5E78F2B9854A7461678EDAA006" /export
+...
+        Key Container  : d209e940-6952-4c9d-b906-372d5a3dbd50
+        Provider       : Microsoft Enhanced Cryptographic Provider v1.0
+...
+  Saved to file: 096BA4D021B50F5E78F2B9854A7461678EDAA006.der
+```
+
+### 3. Find the master key
+
+Check files within Crypto\RSA\\_SID_\ to find the one containing a pUniqueName which matches the key container found in step 2, e.g.,
+
+```
+mimikatz # dpapi::capi /in:"Crypto\RSA\S-1-5-21-3425643682-3879794161-2639006588-1000\43838b0ac634d4f965f7c24f0fa91b2b_a55eeef9-ab65-4716-a466-adfc937caecd"
+...
+  pUniqueName        : d209e940-6952-4c9d-b906-372d5a3dbd50
+...
+  guidMasterKey      : {92f17fce-aae6-488b-9fd8-7774c6c3eb16}
+```
+
+### 4. Recover NTLM hash if necessary
+
+If the password is unknown, recover the NTLM hash:
+
+```
+mimikatz # lsadump::sam /system:SYSTEM /SAM:SAM
+...
+RID  : 000003e8 (1000)
+User : foo
+  Hash NTLM: 31d6cfe0d16ae931b73c59d7e0c089c0
+```
+
+For domain accounts, you'll only need the NTLM hash (`/hash:xx`); for local accounts, you'll need _either_ the corresponding password (`/password:xx`) or its SHA1 hash (`/hash:xx`), which means knowing, cracking, or looking it up:1
+
+* Lookup online:
+  * [CrackStation](https://crackstation.net/)
+  * [Ntlm() Encrypt & Decrypt](https://md5decrypt.net/en/Ntlm/)
+  * [HashKiller](https://hashkiller.co.uk/Cracker)
+* Lookup offline:
+  * [Rainbow Crackalack](https://www.rainbowcrackalack.com/)
+  * [FreeRainbowTables.com](https://freerainbowtables.com/)
+* [Crack via hashcat](https://tinyapps.org/docs/hashcat.html) or similar
+
+### 5. Decrypt the master key
+
+In this example, we have a local account with an NTLM hash of 31d6cfe0d16ae931b73c59d7e0c089c0, which [corresponds to](https://hashkiller.co.uk/Tools/HashPassword) a blank password and a SHA1 hash of da39a3ee5e6b4b0d3255bfef95601890afd80709:
+
+```
+mimikatz # dpapi::masterkey /in:"Protect\S-1-5-21-3425643682-3879794161-2639006588-1000\92f17fce-aae6-488b-9fd8-7774c6c3eb16" /hash:da39a3ee5e6b4b0d3255bfef95601890afd80709
+...
+[masterkey] with hash: da39a3ee5e6b4b0d3255bfef95601890afd80709 (sha1 type)
+  key : 6e24723a56a885fc957f25d4872cbbf10589b1f08033d32174ef3618a192f0e101e41196ca76d689057737429af000af2d7e19497ef2151344dfdfdfb9a6bfd0
+  sha1: 4505118da94b7df471bbbcf6d2c6c744a612e62b
+```
+
+### 6. Decrypt the private key
+
+```
+mimikatz # dpapi::capi /in:"Crypto\RSA\S-1-5-21-3425643682-3879794161-2639006588-1000\43838b0ac634d4f965f7c24f0fa91b2b_a55eeef9-ab65-4716-a466-adfc937caecd" /masterkey:4505118da94b7df471bbbcf6d2c6c744a612e62b
+...
+        Private export : OK - 'raw_exchange_capi_0_d209e940-6952-4c9d-b906-372d5a3dbd50.pvk'
+```
+
+### 7. Build PFX certificate
+
+with [OpenSSL](https://wiki.openssl.org/index.php/Binaries):2
+
+```
+openssl.exe x509 -inform DER -outform PEM -in 096BA4D021B50F5E78F2B9854A7461678EDAA006.der -out public.pem
+
+openssl.exe rsa -inform PVK -outform PEM -in raw_exchange_capi_0_d209e940-6952-4c9d-b906-372d5a3dbd50.pvk -out private.pem
+```
+
+### 8. Install PFX certificate
+
+```
+certutil -user -p bar -importpfx cert.pfx NoChain,NoRoot
+```
+
+### 9. Access your files!
+
+Your files should now be accessible, but you may want to take this opportunity to decrypt them:
+
+```
+cipher /d "D:\Users\foo\Pictures\secret.jpg"
+
+cipher /d /s:"D:\Users\foo\Pictures\"
+```
+
+(or right click → Advanced → uncheck "Encrypt contents to secure data" → OK).
+
+### Footnotes
+
+1. Benjamin [mentions a few other possibilities](https://github.com/gentilkiwi/mimikatz/wiki/howto-\~-decrypt-EFS-files#decrypting-the-masterkey): domain backup key, CREDHIST, and extracting NTLM & SHA1 hashes along with masterkeys from a full memory dump.
+2.  [3gstudent suggests](https://github.com/gentilkiwi/mimikatz/issues/51) using cert2spc.exe and pvk2pfx.exe instead of openssl.exe:
+
+    ```
+    cert2spc.exe 096BA4D021B50F5E78F2B9854A7461678EDAA006.der public.spc
+    pvk2pfx.exe -pvk raw_exchange_capi_0_d209e940-6952-4c9d-b906-372d5a3dbd50.pvk -pi test -spc public.spc -pfx cert.pfx -f
+    ```
+
+    A potential downside of this approach is having to download the 810MB [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk) rather than [a 2MB OpenSSL binary](http://wiki.overbyte.eu/arch/openssl-1.1.1d-win64.zip); on the other hand, you don't have to trust a third party. Mount the Windows 10 SDK ISO and extract cert2spc.exe and pvk2pfx.exe via [lessmsi](https://github.com/activescott/lessmsi); find cert2spc.exe in Installers\Windows SDK Signing Tools-x86\_en-us.msi (ARM, x64, and x86 versions included) and pvk2pfx.exe in Installers\Windows SDK Desktop Tools x86-x86\_en-us.msi, Installers\Windows SDK Desktop Tools x64-x86\_en-us, and Installers\Windows SDK Desktop Tools arm64-x86\_en-us.msi.
+
+### Sources
+
+* [howto \~ decrypt EFS files](https://github.com/gentilkiwi/mimikatz/wiki/howto-\~-decrypt-EFS-files)
+* [Retrieving lost Windows 10 password, using Kali Linux, mimikatz and hashcat](https://www.tomsdev.com/blog/2017/retrieving-lost-windows-10-password-using-kali-linux-mimikatz-hashcat/)
+
+### Related
+
+* Search for EFS-encrypted files: `cipher /u /n`
+* View or backup existing certs via reykeywiz.exe or certmgr.msc
+* [Advanced EFS Data Recovery](https://www.elcomsoft.com/aefsdr.html) "helps recovering the encrypted files under various circumstances.
+  * EFS-protected disk inserted into a different PC
+  * Deleted users or user profiles
+  * User transferred into a different domain without EFS consideration
+  * Account password reset performed by system administrator without EFS consideration
+  * Damaged disk, corrupted file system, unbootable operating system
+  * Reinstalled Windows or computer upgrades
+  * Formatted system partitions with encrypted files left on another disk"
+* [Encrypting File System](https://en.wikipedia.org/wiki/Encrypting\_File\_System)
+* [About EFS (Encryption File System)](https://www.elcomsoft.com/help/en/aefsdr/about\_efs.html)
+* [So my dad asked me to help regain access to some "encrypted files"...](https://www.reddit.com/r/techsupport/comments/1sbt95/so\_my\_dad\_asked\_me\_to\_help\_regain\_access\_to\_some/)
+* [encrypted file system recovery](https://web.archive.org/web/20160103205624/http://www.beginningtoseethelight.org/efsrecovery/index.htm)
+* [Files remain encrypted after you copy the files from an encrypted folder to a WebDAV share if the files are copied by using a computer that is running Windows 7 or Windows Server 2008 R2](https://support.microsoft.com/lo-la/help/2386854/files-remain-encrypted-after-you-copy-the-files-from-an-encrypted-fold)
+* [Encrypting File System (EFS) files appear corrupted when you open them](https://support.microsoft.com/en-us/help/329741/encrypting-file-system-efs-files-appear-corrupted-when-you-open-them)
+* [HOW TO: Prevent Files from Being Encrypted When Copied to a Server](https://support.microsoft.com/gl-es/help/302093/how-to-prevent-files-from-being-encrypted-when-copied-to-a-server)
+* [To Create A Personal Information Exchange (PFX) File](https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/2018/ENU/AutoCAD-Customization/files/GUID-DC1B25FE-E063-486C-B90C-565AB5E87BBC-htm.html)
+* [MCTS 70-680: Encrypting File System (EFS)](https://www.youtube.com/watch?v=rnuCitzSgQ8)
+*   [EFS and decrypting a file](https://social.technet.microsoft.com/Forums/windowsserver/en-US/a7eebc72-2e77-4baf-a0c3-c64811fa55fb/efs-and-decrypting-a-file):
+
+    > _If you have your original profile, you can use "reccerts" tool to retrieve the private key to recovery EFS file._\
+    > ...\
+    > `reccerts.exe -path: "profile path" -password:<password>`\
+    > _But you have to contact to Microsoft Support to get this tool._
+
+***
+
+_created: 2019.10.18, updated: 2019.10.19_
 
 > A "raw" howto, for friends\
 > Of course it's always better to use a backup of the user certificate, or a recovery certificate...
