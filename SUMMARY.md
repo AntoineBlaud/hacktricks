@@ -113,6 +113,7 @@
   * [Monitoring - EDR](windows/active-directory-methodology/monitoring-edr.md)
   * [Abusing Active Directory ACLs/ACEs](windows/active-directory-methodology/acl-persistence-abuse.md)
   * [AD information in printers](windows/active-directory-methodology/ad-information-in-printers.md)
+  * [Active Directory Certificate Services](windows/active-directory-methodology/active-directory-certificate-services.md)
   * [ASREPRoast](windows/active-directory-methodology/asreproast.md)
   * [BloodHound](windows/active-directory-methodology/bloodhound.md)
   * [Constrained Delegation](windows/active-directory-methodology/constrained-delegation.md)
