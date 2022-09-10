@@ -106,6 +106,7 @@
   * [Credential Manager](windows/windows-local-privilege-escalation/credential-manager.md)
   * [Always Install Elevated](windows/windows-local-privilege-escalation/always-install-elevated.md)
   * [Windows C Payloads](windows/windows-local-privilege-escalation/windows-c-payloads.md)
+  * [Active Directory Certificate Services](windows/windows-local-privilege-escalation/active-directory-certificate-services.md)
 * [Active Directory Methodology](windows/active-directory-methodology/README.md)
   * [Cheat Sheet](windows/active-directory-methodology/cheat-sheet.md)
   * [AD linux recon](windows/active-directory-methodology/ad-linux-recon.md)
