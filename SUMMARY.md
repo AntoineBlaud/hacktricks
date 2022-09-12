@@ -660,6 +660,7 @@
   * [RC4](cryptography/cryptanalysis/rc4.md)
   * [Shift register cipher](cryptography/cryptanalysis/shift-register-cipher.md)
   * [Substitution cipher](cryptography/cryptanalysis/substitution-cipher.md)
+  * [El Gamal](cryptography/cryptanalysis/el-gamal.md)
   * [Transposition cipher](cryptography/cryptanalysis/transposition-cipher.md)
 * [Certificates](cryptography/certificates.md)
 * [Cipher Block Chaining CBC-MAC](cryptography/cipher-block-chaining-cbc-mac-priv.md)
