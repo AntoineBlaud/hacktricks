@@ -213,6 +213,7 @@
 
 ## Pentesting
 
+* [Common Ports](pentesting/common-ports.md)
 * [Pentesting Network](pentesting/pentesting-network/README.md)
   * [Spoofing LLMNR, NBT-NS, mDNS/DNS and WPAD and Relay Attacks](pentesting/pentesting-network/spoofing-llmnr-nbt-ns-mdns-dns-and-wpad-and-relay-attacks.md)
   * [Spoofing SSDP and UPnP Devices with EvilSSDP](pentesting/pentesting-network/spoofing-ssdp-and-upnp-devices.md)
