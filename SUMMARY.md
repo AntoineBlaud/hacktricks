@@ -135,6 +135,7 @@
   * [Resource-based Constrained Delegation](windows/active-directory-methodology/resource-based-constrained-delegation.md)
   * [Security Descriptors](windows/active-directory-methodology/security-descriptors.md)
   * [Misconfigured certificate Templates](windows/active-directory-methodology/misconfigured-certificate-templates.md)
+  * [Ruler (Exchange)](windows/active-directory-methodology/ruler-exchange.md)
   * [Unconstrained Delegation](windows/active-directory-methodology/unconstrained-delegation.md)
   * [Relay attacks](https://app.gitbook.com/s/djPOU9Er6kcKTLO7sngF/ad/movement/mitm-and-coerced-authentications)
   * [NTLM Relaying](windows/active-directory-methodology/ntlm-relaying.md)
