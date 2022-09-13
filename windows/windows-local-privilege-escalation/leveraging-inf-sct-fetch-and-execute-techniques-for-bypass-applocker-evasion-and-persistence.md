@@ -1,4 +1,4 @@
-# Leveraging INF-SCT Fetch & Execute Techniques For Bypass, Evasion, & Persistence
+# Leveraging INF-SCT Fetch & Execute Techniques For Bypass Applocker, Evasion, & Persistence
 
 ### Introduction
 
