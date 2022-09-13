@@ -102,6 +102,7 @@
   * [Privilege Escalation with Autoruns](windows/windows-local-privilege-escalation/privilege-escalation-with-autorun-binaries.md)
   * [RottenPotato](windows/windows-local-privilege-escalation/rottenpotato.md)
   * [Seatbelt](windows/windows-local-privilege-escalation/seatbelt.md)
+  * [Leveraging INF-SCT Fetch & Execute Techniques For Bypass, Evasion, & Persistence](windows/windows-local-privilege-escalation/leveraging-inf-sct-fetch-and-execute-techniques-for-bypass-evasion-and-persistence.md)
   * [SeDebug + SeImpersonate copy token](windows/windows-local-privilege-escalation/sedebug-+-seimpersonate-copy-token.md)
   * [Credential Manager](windows/windows-local-privilege-escalation/credential-manager.md)
   * [Always Install Elevated](windows/windows-local-privilege-escalation/always-install-elevated.md)
