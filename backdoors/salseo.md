@@ -97,7 +97,7 @@ Open the SalseoLoader project using Visual Studio.
 
 #### **Tools** --> **NuGet Package Manager** --> **Manage NuGet Packages for Solution...**
 
-![](<../.gitbook/assets/image (3).png>)
+![](<../.gitbook/assets/image (3) (1).png>)
 
 #### **Search for DllExport package (using Browse tab), and press Install (and accept the popup)**
 
