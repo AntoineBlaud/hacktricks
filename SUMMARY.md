@@ -145,6 +145,7 @@
   * [Diamond ticket](windows/domain-dominance/diamond-ticket.md)
   * [Skeleton Key](windows/domain-dominance/skeleton-key.md)
   * [Forest](windows/domain-dominance/forest/README.md)
+    * [Parent / Child](windows/domain-dominance/forest/parent-child.md)
     * [One way (inbound)](windows/domain-dominance/forest/one-way-inbound.md)
     * [One way (outboud)](windows/domain-dominance/forest/one-way-outboud.md)
     * [Bidirectional](windows/domain-dominance/forest/bidirectional.md)
