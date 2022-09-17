@@ -386,7 +386,7 @@ You need to set your timeouts in /etc/proxychains.conf lower. I recommend 800 an
 We just have to comment out the `proxy_dns` line ans everything will work perfectly.
 
 ```
-proxychains nmap -sT -PN -n -sV --top-ports 1000 10.9.20.12 10.9.20.11 10.9.20.13 10.9.20.10
+echo 10.9.30.10 10.9.30.11 |  sed -e 's/ /\n/g' | xargs -P 50 -I %  proxychains4 -q nmap --top-ports 100 -sT -Pn --open -n -T4 --min-parallelism 100 --min-rate 1 -oG proxychains_nmap --append-output  %
 ```
 
 ## Tunnels in Go
