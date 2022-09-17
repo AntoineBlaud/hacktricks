@@ -94,6 +94,7 @@
   * [Integrity Levels](windows/windows-local-privilege-escalation/integrity-levels.md)
   * [JAWS](windows/windows-local-privilege-escalation/jaws.md)
   * [JuicyPotato](windows/windows-local-privilege-escalation/juicypotato.md)
+  * [SweetPotato](windows/windows-local-privilege-escalation/sweetpotato.md)
   * [Leaked Handle Exploitation](windows/windows-local-privilege-escalation/leaked-handle-exploitation.md)
   * [MSI Wrapper](windows/windows-local-privilege-escalation/msi-wrapper.md)
   * [Named Pipe Client Impersonation](windows/windows-local-privilege-escalation/named-pipe-client-impersonation.md)
@@ -165,6 +166,7 @@
 * [Basic PowerShell for Pentesters](windows/basic-powershell-for-pentesters/README.md)
   * [PowerView](windows/basic-powershell-for-pentesters/powerview.md)
 * [AV Bypass](windows/av-bypass.md)
+* [Lateral Movement](windows/lateral-movement.md)
 
 ## Mobile Apps Pentesting
 
