@@ -15,7 +15,7 @@ The **required permissions** for this method are as follows:
 
 The script for this method uses a premade Cloud Function that is included on GitHub, meaning you will need to upload the associated .zip file and make it public on Cloud Storage (see the exploit script for more information). Once the function is created and uploaded, you can either invoke the function directly or modify the IAM policy to allow you to invoke the function. The response will include the access token belonging to the Service Account assigned to that Cloud Function.
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2020/04/image12-750x618.png)
+![](.gitbook/assets/1663772237.png)
 
 The script creates the function and waits for it to deploy, then it runs it and gets returned the access token.
 
@@ -49,7 +49,7 @@ The following **permissions are required** for this method:
 * _compute.subnetworks.useExternalIp_
 * _iam.serviceAccounts.actAs_
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2020/04/image9-750x594.png)
+![](.gitbook/assets/1663772237.png)
 
 The exploit script for this method can be found [here](https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation/blob/master/ExploitScripts/compute.instances.create.py).
 
@@ -65,7 +65,7 @@ The following **permissions are required** for this method:
 * _iam.serviceaccounts.actAs_
 * _run.services.setIamPolicy_ **OR** _run.routes.invoke_
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2020/04/image8-1000x503.png)
+![](.gitbook/assets/1663772237.png)
 
 This method uses an included Docker image that must be built and hosted to exploit correctly. The image is designed to tell Cloud Run to respond with the Service Account’s access token when an HTTP request is made.
 
@@ -80,28 +80,7 @@ Cloud Scheduler allows you to set up cron jobs targeting arbitrary HTTP endpoint
 Because we control all aspects of the HTTP request being made from Cloud Scheduler, we can set it up to hit another Google API endpoint. For example, if we wanted to create a new job that will use a specific Service Account to create a new Storage bucket on our behalf, we could run the following command:
 
 ```
-gcloud scheduler jobs create http test –schedule=’* * * * *’ –uri=’https://storage.googleapis.com/storage/v1/b?project=<PROJECT-ID>’ –message-body “{‘name’:’new-bucket-name’}” –oauth-service-account-email 111111111111-compute@developer.gserviceaccount.com –headers Content-Type=application/json
-```
-
-This command would schedule an HTTP POST request for every minute that authenticates as _111111111111-compute@developer.gserviceaccount.com_. The request will hit the Cloud Storage API endpoint and will create a new bucket with the name “new-bucket-name”.
-
-The following permissions are required for this method:
-
-* _cloudscheduler.jobs.create_
-* _cloudscheduler.locations.list_
-* _iam.serviceAccounts.actAs_
-
-To escalate our privileges with this method, we just need to **craft the HTTP request of the API we want to hit as the Service Account we pass in**. Instead of a script, you can just use the gcloud command above.
-
-A similar method may be possible with Cloud Tasks, but we were not able to do it in our testing.
-
-## orgpolicy
-
-### orgpolicy.policy.set
-
-This method does **not necessarily grant you more IAM permissions**, but it may **disable some barriers** that are preventing certain actions. For example, there is an Organization Policy constraint named _appengine.disableCodeDownload_ that prevents App Engine source code from being downloaded by users of the project. If this was enabled, you would not be able to download that source code, but you could use _orgpolicy.policy.set_ to disable the constraint and then continue with the source code download.
-
-![](https://rhinosecuritylabs.com/wp-content/uploads/2020/04/image5-1.png)
+gcloud scheduler jobs create http test –schedule=’* * * * *’ –uri=’.gitbook/assets/1663772237.png)
 
 The screenshot above shows that the _appengine.disableCodeDownload_ constraint is enforced, which means it is preventing us from downloading the source code. Using _orgpolicy.policy.set_, we can disable that enforcement and then continue on to download the source code.
 
@@ -119,7 +98,7 @@ There is another method of authenticating with GCP APIs known as API keys. By de
 
 The following screenshot shows how you would create an API key in the web console.
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2020/04/image6-1.png)
+![](.gitbook/assets/1663772238.png)
 
 With the undocumented API that was discovered, we can also create API keys through the API itself.
 
@@ -131,7 +110,7 @@ The exploit script for this method can be found [here](https://github.com/RhinoS
 
 Another undocumented API was found for listing API keys that have already been created (this can also be done in the web console). Because you can still see the API key’s value after its creation, we can pull all the API keys in the project.
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2020/04/image4-1.png)
+![](.gitbook/assets/1663772238.png)
 
 The screenshot above shows that the request is exactly the same as before, it just is a GET request instead of a POST request. This only shows a single key, but if there were additional keys in the project, those would be listed too.
 

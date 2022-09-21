@@ -39,7 +39,7 @@ Note that **iam.serviceAccountKeys.update won't work to modify the key** of a SA
 
 If you have the _**iam.serviceAccounts.implicitDelegation**_** permission on a Service Account** that has the _**iam.serviceAccounts.getAccessToken**_** permission on a third Service Account**, then you can use implicitDelegation to **create a token for that third Service Account**. Here is a diagram to help explain.
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2020/04/image2-500x493.png)
+![](.gitbook/assets/1663772236.png)
 
 You can find a script to automate the [**creation, exploit and cleaning of a vuln environment here**](https://github.com/carlospolop/gcp\_privesc\_scripts/blob/main/tests/5-iam.serviceAccounts.implicitDelegation.sh) and a python script to abuse this privilege [**here**](https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation/blob/master/ExploitScripts/iam.serviceAccounts.implicitDelegation.py). For more information check the [**original research**](https://rhinosecuritylabs.com/gcp/privilege-escalation-google-cloud-platform-part-1/).
 
@@ -259,7 +259,7 @@ There is a feature of Cloud Storage, “interoperability”, that provides a way
 
 HMAC keys belonging to your user cannot be accessed through the API and must be accessed through the web console, but what’s nice is that both the access key and secret key are available at any point. This means we could take an existing pair and store them for backup access to the account. HMAC keys belonging to Service Accounts **can** be accessed through the API, but after creation, you are not able to see the access key and secret again.
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2020/04/image2-1.png)
+![](.gitbook/assets/1663772236.png)
 
 The exploit script for this method can be found [here](https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation/blob/master/ExploitScripts/storage.hmacKeys.create.py).
 

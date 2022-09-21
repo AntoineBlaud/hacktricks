@@ -58,7 +58,7 @@ The --privileged flag allows the container to have access to the host devices.
 
 Well configured docker containers won't allow command like **fdisk -l**. However on missconfigured docker command where the flag --privileged is specified, it is possible to get the privileges to see the host drive.
 
-![](https://bestestredteam.com/content/images/2019/08/image-16.png)
+![](.gitbook/assets/1663772309.png)
 
 So to take over the host machine, it is trivial:
 

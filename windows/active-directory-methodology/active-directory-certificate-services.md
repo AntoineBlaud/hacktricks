@@ -38,7 +38,7 @@ proxychains -q certipy req -u Robet.Ortiz -p <password> -dc-ip cydc.cyber.local 
 
 ## Template Attacks - ESC1, 2, 3, 9 & 10
 
-[![image-1640805125672.png](https://hideandsec.sh/uploads/images/gallery/2021-12/scaled-1680-/mlK5E1SH1D1CzLOG-image-1640805125672.png)](https://hideandsec.sh/uploads/images/gallery/2021-12/mlK5E1SH1D1CzLOG-image-1640805125672.png)
+[![image-1640805125672.png](https://hideandsec.sh/uploads/images/gallery/2021-12/scaled-1680-/mlK5E1SH1D1CzLOG-image-1640805125672.png)](.gitbook/assets/1663772466.png)
 
 * **ESC1** : SAN authorized & Low Privileged Users can enroll & Authentication EKU
 * **ESC2** : Low Privileged Users can enroll & Any or No EKU

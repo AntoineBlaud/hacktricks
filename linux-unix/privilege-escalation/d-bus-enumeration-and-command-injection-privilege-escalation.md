@@ -14,11 +14,11 @@ I used two tools to communicate with the D-Bus interface: CLI tool named **gdbus
 sudo apt-get install d-feet
 ```
 
-![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-21.png)
+![](.gitbook/assets/1663772307.png)
 
 _Figure 1. D-Feet main window_
 
-![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-22.png)
+![](.gitbook/assets/1663772308.png)
 
 _Figure 2. D-Feet interface window_
 
@@ -28,13 +28,13 @@ We can also see the **pid of the process** that hosts each service, as well as i
 
 D-Feet also allows one to call the various methods. In the method input screen we can specify a list of Python expressions, delimited by commas, to be interpreted as the parameters to the invoked function, shown in Figure 3. Python types are marshaled to D-Bus types and passed to the service.
 
-![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-23.png)
+![](.gitbook/assets/1663772308.png)
 
 _Figure 3. Calling D-Bus Methods through D-Feet_
 
 Some methods require authentication before allowing us to invoke them. We will ignore these methods, since our goal is to elevate our privileges without credentials in the first place.
 
-![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-24.png)
+![](.gitbook/assets/1663772308.png)
 
 _Figure 4. A method that requires authorization_
 

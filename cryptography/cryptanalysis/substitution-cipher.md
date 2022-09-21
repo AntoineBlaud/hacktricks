@@ -2,7 +2,7 @@
 
 
 
-![](https://upload.wikimedia.org/wikipedia/commons/e/e0/Babington\_postscript.jpg)
+![](.gitbook/assets/1663772268.jpg)
 
 In [cryptography](https://www.wikiwand.com/en/Cryptography), a **substitution cipher** is a method of [encrypting](https://www.wikiwand.com/en/Encrypting) in which units of [plaintext](https://www.wikiwand.com/en/Plaintext) are replaced with the [ciphertext](https://www.wikiwand.com/en/Ciphertext), in a defined manner, with the help of a key; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing the inverse substitution process to extract the original message.
 
@@ -12,7 +12,7 @@ There are a number of different types of substitution cipher. If the cipher oper
 
 ### Simple substitution
 
-![ROT13 is a Caesar cipher, a type of substitution cipher. In ROT13, the alphabet is rotated 13 steps.](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/ROT13.png/600px-ROT13.png)
+![ROT13 is a Caesar cipher, a type of substitution cipher. In ROT13, the alphabet is rotated 13 steps.](.gitbook/assets/1663772268.png)
 
 [ROT13](https://www.wikiwand.com/en/ROT13) is a [Caesar cipher](https://www.wikiwand.com/en/Caesar\_cipher), a type of substitution cipher. In ROT13, the alphabet is rotated 13 steps.
 
@@ -42,7 +42,7 @@ If the length of the message happens not to be divisible by five, it may be padd
 
 The ciphertext alphabet is sometimes different from the plaintext alphabet; for example, in the [pigpen cipher](https://www.wikiwand.com/en/Pigpen\_cipher), the ciphertext consists of a set of symbols derived from a grid. For example:
 
-![An example pigpen message](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/A-pigpen-message.svg/640px-A-pigpen-message.svg.png)
+![An example pigpen message](.gitbook/assets/1663772268.png)
 
 Such features make little difference to the security of a scheme, however – at the very least, any set of strange symbols can be transcribed back into an A-Z alphabet and dealt with as normal.
 
@@ -60,7 +60,7 @@ According to the [unicity distance](https://www.wikiwand.com/en/Unicity\_distanc
 
 ### Nomenclator
 
-![A French nomenclator code table](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Nomenclator-French\_17th\_cent.jpg/440px-Nomenclator-French\_17th\_cent.jpg)
+![A French nomenclator code table](.gitbook/assets/1663772268.jpg)
 
 A French nomenclator code table
 
@@ -111,19 +111,19 @@ Modern [stream ciphers](https://www.wikiwand.com/en/Stream\_cipher) can also be 
 
 In a polygraphic substitution cipher, plaintext letters are substituted in larger groups, instead of substituting letters individually. The first advantage is that the frequency distribution is much flatter than that of individual letters (though not actually flat in real languages; for example, 'TH' is much more common than 'XQ' in English). Second, the larger number of symbols requires correspondingly more ciphertext to productively analyze letter frequencies.
 
-To substitute _pairs_ of letters would take a substitution alphabet 676 symbols long (![{\displaystyle 26^{2))](https://wikimedia.org/api/rest\_v1/media/math/render/svg/a012c01138dd507693b463ecd5078e8ca15e1f44)). In the same _De Furtivis Literarum Notis_ mentioned above, della Porta actually proposed such a system, with a 20 x 20 tableau (for the 20 letters of the Italian/Latin alphabet he was using) filled with 400 unique [glyphs](https://www.wikiwand.com/en/Glyph). However the system was impractical and probably never actually used.
+To substitute _pairs_ of letters would take a substitution alphabet 676 symbols long (![{\displaystyle 26^{2))](.gitbook/assets/1663772268.svg/a012c01138dd507693b463ecd5078e8ca15e1f44)). In the same _De Furtivis Literarum Notis_ mentioned above, della Porta actually proposed such a system, with a 20 x 20 tableau (for the 20 letters of the Italian/Latin alphabet he was using) filled with 400 unique [glyphs](https://www.wikiwand.com/en/Glyph). However the system was impractical and probably never actually used.
 
 The earliest practical **digraphic cipher** (pairwise substitution), was the so-called [Playfair cipher](https://www.wikiwand.com/en/Playfair\_cipher), invented by Sir [Charles Wheatstone](https://www.wikiwand.com/en/Charles\_Wheatstone) in 1854. In this cipher, a 5 x 5 grid is filled with the letters of a mixed alphabet (two letters, usually I and J, are combined). A digraphic substitution is then simulated by taking pairs of letters as two corners of a rectangle, and using the other two corners as the ciphertext (see the [Playfair cipher](https://www.wikiwand.com/en/Playfair\_cipher) main article for a diagram). Special rules handle double letters and pairs falling in the same row or column. Playfair was in military use from the [Boer War](https://www.wikiwand.com/en/Second\_Boer\_War) through [World War II](https://www.wikiwand.com/en/World\_War\_II).
 
 Several other practical polygraphics were introduced in 1901 by [Felix Delastelle](https://www.wikiwand.com/en/Felix\_Delastelle), including the [bifid](https://www.wikiwand.com/en/Bifid\_cipher) and [four-square ciphers](https://www.wikiwand.com/en/Four-square\_cipher) (both digraphic) and the [trifid cipher](https://www.wikiwand.com/en/Trifid\_cipher) (probably the first practical trigraphic).
 
-The [Hill cipher](https://www.wikiwand.com/en/Hill\_cipher), invented in 1929 by [Lester S. Hill](https://www.wikiwand.com/en/Lester\_S.\_Hill), is a polygraphic substitution which can combine much larger groups of letters simultaneously using [linear algebra](https://www.wikiwand.com/en/Linear\_algebra). Each letter is treated as a digit in [base 26](https://www.wikiwand.com/en/Numeral\_system): A = 0, B =1, and so on. (In a variation, 3 extra symbols are added to make the [basis](https://www.wikiwand.com/en/Basis\_\(linear\_algebra\)) [prime](https://www.wikiwand.com/en/Prime\_number).) A block of n letters is then considered as a [vector](https://www.wikiwand.com/en/Vector\_space) of n [dimensions](https://www.wikiwand.com/en/Dimension), and multiplied by a n x n [matrix](https://www.wikiwand.com/en/Matrix\_\(mathematics\)), [modulo](https://www.wikiwand.com/en/Modular\_arithmetic) 26. The components of the matrix are the key, and should be [random](https://www.wikiwand.com/en/Random) provided that the matrix is invertible in ![{\mathbb  {Z))\_((26))^{n}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/304685422a2b7d486bee3ecfd056f90549310edd) (to ensure decryption is possible). A mechanical version of the Hill cipher of dimension 6 was patented in 1929.[\[8\]](https://www.wikiwand.com/en/Substitution\_cipher#citenote8)
+The [Hill cipher](https://www.wikiwand.com/en/Hill\_cipher), invented in 1929 by [Lester S. Hill](https://www.wikiwand.com/en/Lester\_S.\_Hill), is a polygraphic substitution which can combine much larger groups of letters simultaneously using [linear algebra](https://www.wikiwand.com/en/Linear\_algebra). Each letter is treated as a digit in [base 26](https://www.wikiwand.com/en/Numeral\_system): A = 0, B =1, and so on. (In a variation, 3 extra symbols are added to make the [basis](https://www.wikiwand.com/en/Basis\_\(linear\_algebra\)) [prime](https://www.wikiwand.com/en/Prime\_number).) A block of n letters is then considered as a [vector](https://www.wikiwand.com/en/Vector\_space) of n [dimensions](https://www.wikiwand.com/en/Dimension), and multiplied by a n x n [matrix](https://www.wikiwand.com/en/Matrix\_\(mathematics\)), [modulo](https://www.wikiwand.com/en/Modular\_arithmetic) 26. The components of the matrix are the key, and should be [random](https://www.wikiwand.com/en/Random) provided that the matrix is invertible in ![{\mathbb  {Z))\_((26))^{n}](.gitbook/assets/1663772268.svg/304685422a2b7d486bee3ecfd056f90549310edd) (to ensure decryption is possible). A mechanical version of the Hill cipher of dimension 6 was patented in 1929.[\[8\]](https://www.wikiwand.com/en/Substitution\_cipher#citenote8)
 
 The Hill cipher is vulnerable to a [known-plaintext attack](https://www.wikiwand.com/en/Known-plaintext\_attack) because it is completely [linear](https://www.wikiwand.com/en/Linear), so it must be combined with some [non-linear](https://www.wikiwand.com/en/Non-linear) step to defeat this attack. The combination of wider and wider weak, linear [diffusive](https://www.wikiwand.com/en/Confusion\_and\_diffusion) steps like a Hill cipher, with non-linear substitution steps, ultimately leads to a [substitution–permutation network](https://www.wikiwand.com/en/Substitution%E2%80%93permutation\_network) (e.g. a [Feistel cipher](https://www.wikiwand.com/en/Feistel\_cipher)), so it is possible – from this extreme perspective – to consider modern [block ciphers](https://www.wikiwand.com/en/Block\_cipher) as a type of polygraphic substitution.
 
 ### Mechanical substitution ciphers
 
-![Enigma cipher machine as used by the German military in World War II](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/HGM\_Enigma.jpg/440px-HGM\_Enigma.jpg)
+![Enigma cipher machine as used by the German military in World War II](.gitbook/assets/1663772269.jpg)
 
 [Enigma cipher](https://www.wikiwand.com/en/Enigma\_cipher) machine as used by the German military in World War II
 

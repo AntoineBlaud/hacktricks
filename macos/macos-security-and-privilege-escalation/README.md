@@ -293,7 +293,7 @@ Apple issues the **updates for XProtect and MRT automatically** based on the lat
 
 From a user’s perspective, they see TCC in action **when an application wants access to one of the features protected by TCC**. When this happens the user is prompted with a dialog asking them whether they want to allow access or not. This response is then stored in the TCC database.
 
-![An example of a TCC prompt](https://rainforest.engineering/images/posts/macos-tcc/tcc-prompt.png?1620047855)
+![An example of a TCC prompt](.gitbook/assets/1663772313.png?1620047855)
 
 Check some of the **already given permissions** to apps in `System Preferences --> Security & Privacy --> Privacy --> Files and Folders`.
 

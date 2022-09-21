@@ -48,7 +48,7 @@ rundll32.exe advpack.dll,LaunchINFSection test.inf,DefaultInstall_SingleUser,1,
 
 As shown in the following screenshot, our INF-SCT-Calc Scriptet payload was successfully launched:
 
-![LaunchInfSection](https://bohops.files.wordpress.com/2018/02/launchinfsection.png?w=756)
+![LaunchInfSection](.gitbook/assets/1663772500.png?w=756)
 
 Take note that we can also launch our payload in other, slightly different ways.  If we change the INF file entry point section to ‘DefaultInstall’, we can launch our payload without section specification using the following command:
 
@@ -58,11 +58,11 @@ rundll32.exe advpack.dll,LaunchINFSection test.inf,,1,
 
 The same payload is successfully launched:
 
-![LaunchInfSection2](https://bohops.files.wordpress.com/2018/02/launchinfsection2.png?w=756)
+![LaunchInfSection2](.gitbook/assets/1663772500.png?w=756)
 
 Additionally, we can change the OCX unregister directive to a register directive (‘RegisterOCXs’) and supply a random name (e.g. ‘MoreFun’) to invoke the same payload:
 
-![LaunchInfSection3](https://bohops.files.wordpress.com/2018/02/launchinfsection3.png?w=756)
+![LaunchInfSection3](.gitbook/assets/1663772501.png?w=756)
 
 ### Some Use Cases & Defensive Considerations
 
@@ -72,19 +72,19 @@ In addition to the environmental considerations above, defenders should keep an 
 
 In the wild, actors have leveraged malware INF payloads.  @ItsReallyNick discovered several [malware samples](https://twitter.com/ItsReallyNick/status/958789644165894146) that actually took advantage of @NickTyrer’s CMSTP technique a few years ago.  Other samples show malware from the early 2000s that appear to take advantage of more native administrative techniques using LaunchINFSection without INF-SCT execution.
 
-![LaunchInfSectionMalware](https://bohops.files.wordpress.com/2018/02/launchinfsectionmalware.png?w=756)
+![LaunchInfSectionMalware](.gitbook/assets/1663772501.png?w=756)
 
-![LaunchInfSectionMalware2](https://bohops.files.wordpress.com/2018/02/launchinfsectionmalware2.png?w=756)
+![LaunchInfSectionMalware2](.gitbook/assets/1663772502.png?w=756)
 
 **Bypass, Evasion, & Persistence**
 
 In addition to [bypassing](https://msitpros.com/?p=3960) Operating System security controls such as Application Whitelisting and User Account Control, CMSTP can be used for AutoRuns evasion and persistence.  Here is a screenshot that does not show CMSTP when the ‘Hide Windows Entries’ flag is enabled within AutoRuns:
 
-![cmstp\_autoruns1](https://bohops.files.wordpress.com/2018/02/cmstp\_autoruns1.png?w=756)
+![cmstp\_autoruns1](.gitbook/assets/1663772502.png?w=756)
 
 Here is a screenshot with CMSTP present without any filtering:
 
-![cmstp\_autoruns2](https://bohops.files.wordpress.com/2018/02/cmstp\_autoruns2.png?w=756)
+![cmstp\_autoruns2](.gitbook/assets/1663772503.png?w=756)
 
 \*Note: LaunchINFSection and InstallHinfSection do not appear to be evasive candidates for (newer) versions of AutoRuns because these methods rely on rundll32.exe to invoke the respective dll.  These methods are not filtered after hiding Windows and Microsoft entries.  However, LaunchINFSection proves to be a valid application whitelisting bypass technique as we were able to “gain code execution” against [default](https://oddvar.moe/2017/12/13/applocker-case-study-how-insecure-is-it-really-part-1/) AppLocker rules.
 
@@ -92,7 +92,7 @@ Here is a screenshot with CMSTP present without any filtering:
 
 Hopefully, network analysis is still important these days.  Here is a sample GET request invoked by scrobj.dll to fetch a fake SCT file:
 
-![get\_request](https://bohops.files.wordpress.com/2018/02/get\_request.png?w=756)
+![get\_request](.gitbook/assets/1663772503.png?w=756)
 
 Take note of the User-Agent.  Interestingly enough, I have seen this with other Microsoft utilities that have the ability to perform such requests.  These days, it may be worth treating anything that remote fetches with scrutiny (I know – easier said than done).
 
@@ -100,7 +100,7 @@ Take note of the User-Agent.  Interestingly enough, I have seen this with other 
 
 **Now for a kicker** – SCT files are merely text/XML files and INF files are text files.  In my basic testing, these files **do not need a proper extension for invocation**.  In this example, we call ‘test.notinf’ and ‘test.notsct’ to successfully execute our ‘sct’ payload:
 
-![notsct](https://bohops.files.wordpress.com/2018/02/notsct1.png?w=756)
+![notsct](.gitbook/assets/1663772503.png?w=756)
 
 **Other Considerations**
 

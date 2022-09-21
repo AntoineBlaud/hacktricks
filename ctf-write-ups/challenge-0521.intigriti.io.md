@@ -12,7 +12,7 @@ Anyway, it was found a way to bypass the regexp protection and execute `alert(do
 ### Accessing the HTML <a href="accessing-the-html" id="accessing-the-html"></a>
 
 It was found that the letter `e` is permitted as user input. It was also found that there is an HTLM element using the `id="e"`. Therefore, this HtML element is accesible from Javascript just using the variable `e`:\
-![](https://i.imgur.com/Slq2Xal.png)
+![](.gitbook/assets/1663772281.png)
 
 Also, it’s important to know that in JS you can **access the attributes of an objects with a dot or with a string between brackets**. So, you can access the `domain` attribute of a `document` object in either of the following ways:
 
@@ -168,8 +168,8 @@ Then, you need to **generate a HTML page** that, when loaded, it’s going to **
 Finally, **serve the poc in a HTTP** server and access it from the browser:\
 
 
-![](https://i.imgur.com/qack7GO.png)
+![](.gitbook/assets/1663772281.png)
 
 Just press **submit** on the captcha form and the alert will be executed:
 
-![](https://i.imgur.com/mCORty3.png)
+![](.gitbook/assets/1663772281.png)
