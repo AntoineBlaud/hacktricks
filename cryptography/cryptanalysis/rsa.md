@@ -32,7 +32,7 @@ L'étape de création des clés est à la charge d'Alice. Elle n'intervient pas 
 
 Comme _e_ est premier avec φ(_n_), d'après le [théorème de Bachet-Bézout](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_de\_Bachet-B%C3%A9zout) il existe deux entiers _d_ et _k_ tels que _ed_ = 1 + \_k\_φ(_n_), c'est-à-dire que _ed_ ≡ 1 (mod φ(_n_)) : _e_ est bien inversible modulo φ(_n_).
 
-Dans tout le paragraphe précédent, on peut utiliser l’[indicatrice de Carmichael](https://fr.wikipedia.org/wiki/Indicatrice\_de\_Carmichael), ![{\displaystyle \lambda (n)}](.gitbook/assets/1663772257.svg/8f06b26d7cb84392c1891a14c32c4dbe7e3f5e92), qui divise φ(_n_)[\[réf. souhaitée\]](https://fr.wikipedia.org/wiki/Aide:R%C3%A9f%C3%A9rence\_n%C3%A9cessaire).
+Dans tout le paragraphe précédent, on peut utiliser l’[indicatrice de Carmichael](https://fr.wikipedia.org/wiki/Indicatrice\_de\_Carmichael), ![{\displaystyle \lambda (n)}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/8f06b26d7cb84392c1891a14c32c4dbe7e3f5e92), qui divise φ(_n_)[\[réf. souhaitée\]](https://fr.wikipedia.org/wiki/Aide:R%C3%A9f%C3%A9rence\_n%C3%A9cessaire).
 
 Le couple (_n_, _e_) — ou (_e_, _n_)[\[3\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-RSAp122-3) — est la _clé publique_ du chiffrement, alors que sa _clé privée_ est[\[4\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-4) le nombre _d_, sachant que l'opération de déchiffrement ne demande que la clef privée _d_ et l'entier _n_, connu par la clé publique (la clé privée est parfois aussi définie comme le couple (_d_, _n_)[\[3\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-RSAp122-3) ou le triplet (_p, q_, _d_)[\[5\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-5)).
 
@@ -40,7 +40,7 @@ Le couple (_n_, _e_) — ou (_e_, _n_)[\[3\]](https://fr.wikipedia.org/wiki/Chif
 
 Si _M_ est un entier naturel strictement inférieur à _n_ représentant un message, alors le message chiffré sera représenté par
 
-![{\displaystyle C\equiv M^{e}{\pmod {n\}},}](.gitbook/assets/1663772257.svg/c0f8acb6662bf4e913410838aacff91b035e2c7a)
+![{\displaystyle C\equiv M^{e}{\pmod {n\}},}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/c0f8acb6662bf4e913410838aacff91b035e2c7a)
 
 l'entier naturel _C_ étant choisi strictement inférieur à _n_.
 
@@ -48,7 +48,7 @@ l'entier naturel _C_ étant choisi strictement inférieur à _n_.
 
 Pour déchiffrer _C_, on utilise _d_, l'inverse de _e_ modulo (_p_ – 1)(_q_ – 1), et l'on retrouve le message clair _M_ par
 
-![{\displaystyle M\equiv C^{d}{\pmod {n\}}.}](.gitbook/assets/1663772257.svg/1221183ab1f0b1cae65f0dd666edd7fb490adeec)
+![{\displaystyle M\equiv C^{d}{\pmod {n\}}.}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/1221183ab1f0b1cae65f0dd666edd7fb490adeec)
 
 #### Exemple
 
@@ -71,31 +71,31 @@ Le mécanisme de signature par Alice, à l'aide de sa clé privée, est analogue
 
 La démonstration repose sur le [petit théorème de Fermat](https://fr.wikipedia.org/wiki/Petit\_th%C3%A9or%C3%A8me\_de\_Fermat), à savoir que comme _p_ et _q_ sont deux nombres premiers, si _M_ n'est pas un multiple de _p_ on a la première égalité, et la seconde s'il n'est pas un multiple de _q_ :
 
-![{\displaystyle M^{p-1}\equiv 1{\pmod {p\}}\ ,\ \ M^{q-1}\equiv 1{\pmod {q\}}.}](.gitbook/assets/1663772257.svg/b1c2321a24eb9a55d03ca240f8b2b51c5f860d0c)
+![{\displaystyle M^{p-1}\equiv 1{\pmod {p\}}\ ,\ \ M^{q-1}\equiv 1{\pmod {q\}}.}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/b1c2321a24eb9a55d03ca240f8b2b51c5f860d0c)
 
 En effet
 
-![{\displaystyle C^{d}\equiv (M^{e})^{d}\equiv M^{ed}{\pmod {n\}}.}](.gitbook/assets/1663772257.svg/8eb4eeb60c891ce7c2e73d70342ee1d91487bcec)
+![{\displaystyle C^{d}\equiv (M^{e})^{d}\equiv M^{ed}{\pmod {n\}}.}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/8eb4eeb60c891ce7c2e73d70342ee1d91487bcec)
 
 Or
 
-![ed\equiv 1{\pmod {(p-1)(q-1)\}}](.gitbook/assets/1663772257.svg/2e65b9bacf7a59054fa2ae1c693102ba015b9524)
+![ed\equiv 1{\pmod {(p-1)(q-1)\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/2e65b9bacf7a59054fa2ae1c693102ba015b9524)
 
 ce qui signifie qu'il existe un entier _k tel que_
 
-![{\displaystyle ed=1+k(p-1)(q-1)}](.gitbook/assets/1663772257.svg/0a0a645caa162834c7b69f6161fe61f07a09b1c8)
+![{\displaystyle ed=1+k(p-1)(q-1)}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/0a0a645caa162834c7b69f6161fe61f07a09b1c8)
 
 donc, si _M_ n'est pas multiple de _p_ d'après le petit théorème de Fermat
 
-![M^{ed}\equiv M^{1+k(p-1)(q-1)}\equiv M\cdot \left(M^{p-1}\right)^{k(q-1)}\equiv M{\pmod {p\}}](.gitbook/assets/1663772257.svg/3919f97fa0a4ed054262a9b4c731281f1a0e7c36)
+![M^{ed}\equiv M^{1+k(p-1)(q-1)}\equiv M\cdot \left(M^{p-1}\right)^{k(q-1)}\equiv M{\pmod {p\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/3919f97fa0a4ed054262a9b4c731281f1a0e7c36)
 
 et de même, si _M_ n'est pas multiple de _q_
 
-![{\displaystyle M^{ed}\equiv M{\pmod {q\}}.}](.gitbook/assets/1663772257.svg/e900c285bd155943941ba28ee67844fddd59286a)
+![{\displaystyle M^{ed}\equiv M{\pmod {q\}}.}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/e900c285bd155943941ba28ee67844fddd59286a)
 
 Les deux égalités sont en fait réalisées pour n'importe quel entier _M_, car si _M_ est un multiple de _p_, _M_ et toutes ses puissances non nulles sont congrues à 0 modulo _p_. De même pour _q_.
 
-L'entier ![M^{ed}-M](.gitbook/assets/1663772257.svg/57915051431bc63b43bf448eeb25f6f006b35bd5) est donc un multiple de _p_ et de _q_, qui sont premiers distincts, donc de leur produit _pq_ = _n_ (on peut le voir comme une conséquence de l'unicité de la [décomposition en facteurs premiers](https://fr.wikipedia.org/wiki/D%C3%A9composition\_en\_facteurs\_premiers), ou plus directement du [lemme de Gauss](https://fr.wikipedia.org/wiki/Lemme\_d'Euclide#Lien\_entre\_PGCD\_et\_PPCM), sachant que _p_ et _q_ sont premiers entre eux, étant premiers et distincts).
+L'entier ![M^{ed}-M](https://wikimedia.org/api/rest\_v1/media/math/render/svg/57915051431bc63b43bf448eeb25f6f006b35bd5) est donc un multiple de _p_ et de _q_, qui sont premiers distincts, donc de leur produit _pq_ = _n_ (on peut le voir comme une conséquence de l'unicité de la [décomposition en facteurs premiers](https://fr.wikipedia.org/wiki/D%C3%A9composition\_en\_facteurs\_premiers), ou plus directement du [lemme de Gauss](https://fr.wikipedia.org/wiki/Lemme\_d'Euclide#Lien\_entre\_PGCD\_et\_PPCM), sachant que _p_ et _q_ sont premiers entre eux, étant premiers et distincts).
 
 #### Asymétrie
 
@@ -109,7 +109,7 @@ Le chiffrement demande donc de pouvoir vérifier que de « très grands » nombr
 
 La valeur φ(_n_) de l'[indicatrice d'Euler](https://fr.wikipedia.org/wiki/Indicatrice\_d'Euler) en _n_ est l'[ordre du groupe](https://fr.wikipedia.org/wiki/Ordre\_\(th%C3%A9orie\_des\_groupes\)) des éléments inversibles de l’[anneau ℤ/nℤ](https://fr.wikipedia.org/wiki/Anneau\_%E2%84%A4/n%E2%84%A4). Ceci permet de voir immédiatement, par le [théorème d'Euler](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_d'Euler\_\(arithm%C3%A9tique\)) (conséquence du [théorème de Lagrange](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_de\_Lagrange)), que si _M_ est premier avec _n_, donc inversible (ce qui est le cas de « la plupart » des entiers naturels _M_ strictement inférieurs à _n_)
 
-![M^{ed}\equiv M^{1+k\varphi (n)}\equiv M{\pmod {n\}}](.gitbook/assets/1663772257.svg/03f657f5c0e024f0cae845e7e6b291b4b3560cab)
+![M^{ed}\equiv M^{1+k\varphi (n)}\equiv M{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/03f657f5c0e024f0cae845e7e6b291b4b3560cab)
 
 soit de justifier le chiffrement RSA (pour de tels _M_).
 
@@ -127,19 +127,19 @@ La méthode demande cependant un test de primalité très rapide. En pratique on
 
 **Propriétés requises**
 
-Pour éviter les failles de sécurité, les deux nombres premiers ![p](.gitbook/assets/1663772257.svg/81eac1e205430d1f40810df36a0edffdc367af36) et ![q](.gitbook/assets/1663772257.svg/06809d64fa7c817ffc7e323f85997f783dbdf71d) choisis pour construire le couple de clefs doivent satisfaire les propriétés suivantes[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9):
+Pour éviter les failles de sécurité, les deux nombres premiers ![p](https://wikimedia.org/api/rest\_v1/media/math/render/svg/81eac1e205430d1f40810df36a0edffdc367af36) et ![q](https://wikimedia.org/api/rest\_v1/media/math/render/svg/06809d64fa7c817ffc7e323f85997f783dbdf71d) choisis pour construire le couple de clefs doivent satisfaire les propriétés suivantes[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9):
 
-L'exposant ![e](.gitbook/assets/1663772257.svg/cd253103f0876afc68ebead27a5aa9867d927467) choisi doit quant à lui vérifier les propriétés suivantes[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9):
+L'exposant ![e](https://wikimedia.org/api/rest\_v1/media/math/render/svg/cd253103f0876afc68ebead27a5aa9867d927467) choisi doit quant à lui vérifier les propriétés suivantes[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9):
 
 #### Chiffrer et déchiffrer
 
-Le calcul de ![\scriptstyle M=c^{d}\mod {n}](.gitbook/assets/1663772257.svg/0ed86df60240dd9e20b80b62886dd29633eaf0ae) ne peut se faire en calculant d'abord _cd_, puis le reste modulo _n_, car cela demanderait de manipuler des entiers beaucoup trop grands. Il existe des méthodes efficaces pour le calcul de l'[exponentiation modulaire](https://fr.wikipedia.org/wiki/Exponentiation\_modulaire).
+Le calcul de ![\scriptstyle M=c^{d}\mod {n}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/0ed86df60240dd9e20b80b62886dd29633eaf0ae) ne peut se faire en calculant d'abord _cd_, puis le reste modulo _n_, car cela demanderait de manipuler des entiers beaucoup trop grands. Il existe des méthodes efficaces pour le calcul de l'[exponentiation modulaire](https://fr.wikipedia.org/wiki/Exponentiation\_modulaire).
 
 On peut conserver une forme différente de la clé privée pour permettre un déchiffrement plus rapide à l'aide du [théorème des restes chinois](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_des\_restes\_chinois).
 
 ### Sécurité
 
-[![](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/2017-fr.wp-orange-source.svg/25px-2017-fr.wp-orange-source.svg.png)](.gitbook/assets/1663772260.svg?uselang=fr)
+[![](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/2017-fr.wp-orange-source.svg/25px-2017-fr.wp-orange-source.svg.png)](https://commons.wikimedia.org/wiki/File:2017-fr.wp-orange-source.svg?uselang=fr)
 
 Il faut distinguer les [attaques par la force brute](https://fr.wikipedia.org/wiki/Attaque\_par\_force\_brute), qui consistent à retrouver _p_ et _q_ sur base de la connaissance de _n_ uniquement, et les attaques sur base de la connaissance de _n_ mais aussi de la manière dont _p_ et _q_ ont été générés, du logiciel de cryptographie utilisé, d'un ou plusieurs messages éventuellement interceptés etc.
 
@@ -175,11 +175,11 @@ Plusieurs attaques ont été proposées pour casser le chiffrement RSA[\[11\]](h
 
 #### Attaque de Wiener
 
-L'[attaque de Wiener](https://fr.wikipedia.org/wiki/Attaque\_de\_Wiener) (1989) est exploitable si l'exposant secret _d_ est inférieur à ![{\displaystyle {\frac {1}{3\}}N^{\frac {1}{4\}}}](.gitbook/assets/1663772257.svg/31f4ed927296743c5934d2c34fb51284a430e0f3)[\[12\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-12). On peut retrouver dans ce cas l'exposant secret à l'aide du développement en fractions continues de ![{\frac {e}{N\}}](.gitbook/assets/1663772257.svg/e61bceedd1a63fbc0c421a051903584c1491fa3b)[\[13\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-wiener-13),[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9).
+L'[attaque de Wiener](https://fr.wikipedia.org/wiki/Attaque\_de\_Wiener) (1989) est exploitable si l'exposant secret _d_ est inférieur à ![{\displaystyle {\frac {1}{3\}}N^{\frac {1}{4\}}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/31f4ed927296743c5934d2c34fb51284a430e0f3)[\[12\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-12). On peut retrouver dans ce cas l'exposant secret à l'aide du développement en fractions continues de ![{\frac {e}{N\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/e61bceedd1a63fbc0c421a051903584c1491fa3b)[\[13\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-wiener-13),[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9).
 
 #### Attaque de Håstad
 
-L'attaque de [Håstad](https://fr.wikipedia.org/wiki/Johan\_H%C3%A5stad), l'une des premières attaques découvertes (en 1985), repose sur la possibilité que l'exposant public _e_ soit suffisamment petit. En interceptant le même message envoyé à au moins ![e](.gitbook/assets/1663772257.svg/cd253103f0876afc68ebead27a5aa9867d927467) destinataires différents, il est possible de retrouver le message originel à l'aide du [théorème des restes chinois](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_des\_restes\_chinois)[\[14\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-14),[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9).
+L'attaque de [Håstad](https://fr.wikipedia.org/wiki/Johan\_H%C3%A5stad), l'une des premières attaques découvertes (en 1985), repose sur la possibilité que l'exposant public _e_ soit suffisamment petit. En interceptant le même message envoyé à au moins ![e](https://wikimedia.org/api/rest\_v1/media/math/render/svg/cd253103f0876afc68ebead27a5aa9867d927467) destinataires différents, il est possible de retrouver le message originel à l'aide du [théorème des restes chinois](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_des\_restes\_chinois)[\[14\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-14),[\[9\]](https://fr.wikipedia.org/wiki/Chiffrement\_RSA#cite\_note-boyer-9).
 
 #### Attaque par chronométrage (_timing attacks_)
 
@@ -187,7 +187,7 @@ L'attaque de [Håstad](https://fr.wikipedia.org/wiki/Johan\_H%C3%A5stad), l'une 
 
 En 2003, Boneh et Brumley ont montré une attaque plus pratique permettant de retrouver la factorisation RSA sur une connexion réseau ([SSL](https://fr.wikipedia.org/wiki/Transport\_Layer\_Security)) en s’appuyant sur les informations que laissent filtrer certaines optimisations appliquées au théorème des restes chinois. Une façon de contrecarrer ces attaques est d'assurer que l'opération de déchiffrement prend un temps constant. Cependant, cette approche peut en réduire significativement la performance. C'est pourquoi la plupart des implémentations (mises en œuvre) RSA utilisent plutôt une technique différente connue sous le nom d'« aveuglement cryptographique » (_blinding_).
 
-L'aveuglement se sert des propriétés multiplicatives de RSA en insérant dans le calcul une valeur secrète aléatoire dont l'effet peut être annulé. Cette valeur étant différente à chaque chiffrement, le temps de déchiffrement n'est plus directement corrélé aux données à chiffrer, ce qui met en échec l'attaque par chronométrage : au lieu de calculer ![\scriptstyle c^{d}{\pmod {n\}}](.gitbook/assets/1663772257.svg/90005e390fce4d91ae05b2e48c134b2661e2ae41), Alice choisit d'abord une valeur aléatoire secrète _r_ et calcule ![\scriptstyle (r^{e}c)^{d}{\pmod {n\}}](.gitbook/assets/1663772257.svg/887c4f329d3f129c4e78c87b48b4018c7df9468a). Le résultat de ce calcul est ![\scriptstyle rm{\pmod {n\}}](.gitbook/assets/1663772257.svg/e436fbeb5f7aa438a0ca754bb4094f293fb0daba) et donc l'effet de _r_ peut être annulé en multipliant par son inverse.
+L'aveuglement se sert des propriétés multiplicatives de RSA en insérant dans le calcul une valeur secrète aléatoire dont l'effet peut être annulé. Cette valeur étant différente à chaque chiffrement, le temps de déchiffrement n'est plus directement corrélé aux données à chiffrer, ce qui met en échec l'attaque par chronométrage : au lieu de calculer ![\scriptstyle c^{d}{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/90005e390fce4d91ae05b2e48c134b2661e2ae41), Alice choisit d'abord une valeur aléatoire secrète _r_ et calcule ![\scriptstyle (r^{e}c)^{d}{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/887c4f329d3f129c4e78c87b48b4018c7df9468a). Le résultat de ce calcul est ![\scriptstyle rm{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/e436fbeb5f7aa438a0ca754bb4094f293fb0daba) et donc l'effet de _r_ peut être annulé en multipliant par son inverse.
 
 #### Attaque à chiffrés choisis (_Adaptive chosen ciphertext attacks_)
 

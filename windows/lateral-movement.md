@@ -61,7 +61,7 @@ The main advantage of the program is that the server component, `psexecsvc.exe`,
 
 A great alternative for Linux users. However, this tool will most probably alert the antiviruses. As said above, this is because of the service copied to the remote host. The problem can be fixed by specifying an arbitrary command in the implementation of the `createService()` method in `/usr/local/lib/python3.7/dist-packages/impacket/examples/serviceinstall.py`; this command will be executed instead of the launched remote admin service.
 
-<figure><img src=".gitbook/assets/1663772460.png" alt="Arbitrary command conceals the launch of the remote admin service"><figcaption><p>Arbitrary command conceals the launch of the remote admin service</p></figcaption></figure>
+<figure><img src="https://st768.s3.eu-central-1.amazonaws.com/ee4a8d5e4108d764d303f0929e282db7/16354/image1.png" alt="Arbitrary command conceals the launch of the remote admin service"><figcaption><p>Arbitrary command conceals the launch of the remote admin service</p></figcaption></figure>
 
 To prevent `psexec.py` from copying the suspicious component, you forcefully specify the file that must be used as a service. Because you have already written the command manually, this file can be anything.
 
@@ -227,7 +227,7 @@ Critical components of the internal infrastructure (e.g. the domain controller) 
 
 The table below summarizes the strengths and weaknesses of different authenticated code execution techniques in their default variants (i.e. without modifications).
 
-<figure><img src=".gitbook/assets/1663772461.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://hackmag.com/wp-content/uploads/2021/12/Table1.png" alt=""><figcaption></figcaption></figure>
 
 Every hacker has a set of favorite tools. But in some situations, you preferred technique may fail, and you must be able to execute arbitrary code using alternative methods. The above table can be used for reference purposes.
 
@@ -434,13 +434,13 @@ Congrats! You have just injected code into the domain admin’s context, and thi
 
 And a familiar picture appears.
 
-<figure><img src=".gitbook/assets/1663772461.png" alt="Shellcode injected into an admin"><figcaption><p>Shellcode injected into an admin’s process activates a backdoor on the domain controller</p></figcaption></figure>
+<figure><img src="https://st768.s3.eu-central-1.amazonaws.com/ee4a8d5e4108d764d303f0929e282db7/16355/image2.png" alt="Shellcode injected into an admin"><figcaption><p>Shellcode injected into an admin’s process activates a backdoor on the domain controller</p></figcaption></figure>
 
 You gained access to the domain controller and can now replicate domain accounts, including the `krbtgt` system account. Using it, you can generate a Kerberos TGT ticket belonging to that same admin and authenticate on behalf of this admin without knowledge of their password (this technique is called [golden ticket](https://pentestlab.blog/2018/04/09/golden-ticket/)).
 
 The table below summarizes the properties of various types of Windows hashes and their application areas.
 
-<figure><img src=".gitbook/assets/1663772462.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://hackmag.com/wp-content/uploads/2021/12/Table2.png" alt=""><figcaption></figcaption></figure>
 
 ### Lateral movement <a href="#h2-6" id="h2-6"></a>
 

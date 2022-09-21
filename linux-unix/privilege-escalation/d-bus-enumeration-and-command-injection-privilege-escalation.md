@@ -14,11 +14,11 @@ I used two tools to communicate with the D-Bus interface: CLI tool named **gdbus
 sudo apt-get install d-feet
 ```
 
-![](.gitbook/assets/1663772307.png)
+![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-21.png)
 
 _Figure 1. D-Feet main window_
 
-![](.gitbook/assets/1663772308.png)
+![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-22.png)
 
 _Figure 2. D-Feet interface window_
 
@@ -28,13 +28,13 @@ We can also see the **pid of the process** that hosts each service, as well as i
 
 D-Feet also allows one to call the various methods. In the method input screen we can specify a list of Python expressions, delimited by commas, to be interpreted as the parameters to the invoked function, shown in Figure 3. Python types are marshaled to D-Bus types and passed to the service.
 
-![](.gitbook/assets/1663772308.png)
+![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-23.png)
 
 _Figure 3. Calling D-Bus Methods through D-Feet_
 
 Some methods require authentication before allowing us to invoke them. We will ignore these methods, since our goal is to elevate our privileges without credentials in the first place.
 
-![](.gitbook/assets/1663772308.png)
+![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-24.png)
 
 _Figure 4. A method that requires authorization_
 
@@ -235,8 +235,6 @@ dbus-monitor "type=method_call" "type=method_return" "type=error"
 
 See the [D-Bus documentation](http://dbus.freedesktop.org/doc/dbus-specification.html) for more information on match rule syntax.
 
-
-
 ### More
 
 `busctl` have even more options, [**find all of them here**](https://www.freedesktop.org/software/systemd/man/busctl.html).
@@ -289,7 +287,7 @@ In the other side of the D-Bus connection there is some C compiled binary runnin
 
 ### Exploit it
 
-At the end of this page you can find the **complete C code of the D-Bus application**. Inside of it you can find between the lines 91-97 **how the **_**D-Bus object path**_ **and **_**interface name**_** are registered**. This information will be necessary to send information to the D-Bus connection:
+At the end of this page you can find the **complete C code of the D-Bus application**. Inside of it you can find between the lines 91-97 **how the \_D-Bus object path**\_ **and \_interface name**\_\*\* are registered\*\*. This information will be necessary to send information to the D-Bus connection:
 
 ```c
         /* Install the object */

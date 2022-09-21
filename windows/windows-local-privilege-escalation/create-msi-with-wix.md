@@ -43,7 +43,7 @@ We will use `candle.exe` from wixtools to create a wixobject from `msi.xml`
 candle.exe -out C:\tem\wix C:\tmp\Ethereal\msi.xml
 ```
 
-![](.gitbook/assets/1663772499.png)
+![](https://0xrick.github.io/images/hackthebox/ethereal/65.png)
 
 Then we will use `light.exe` to create the msi file from the wixobject:
 
@@ -51,4 +51,4 @@ Then we will use `light.exe` to create the msi file from the wixobject:
 light.exe -out C:\tm\Ethereal\rick.msi C:\tmp\wix
 ```
 
-![](.gitbook/assets/1663772499.png)
+![](https://0xrick.github.io/images/hackthebox/ethereal/66.png)

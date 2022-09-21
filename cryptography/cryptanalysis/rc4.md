@@ -42,7 +42,7 @@ endfor
 
 #### Pseudo-random generation algorithm (PRGA)\[[edit](https://en.wikipedia.org/w/index.php?title=RC4\&action=edit\&section=4)]
 
-[![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/RC4.svg/320px-RC4.svg.png)](.gitbook/assets/1663772257.svg)
+[![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/RC4.svg/320px-RC4.svg.png)](https://en.wikipedia.org/wiki/File:RC4.svg)
 
 The lookup stage of RC4. The output byte is selected by looking up the values of S\[i] and
 

@@ -3,14 +3,13 @@
 {% hint style="warning" %}
 **Support HackTricks and get benefits!**
 
-Do you work in a **cybersecurity company**? Do you want to see your **company advertised in HackTricks**? or do you want to have access the **latest version of the PEASS or download HackTricks in PDF**?
-Check the [**SUBSCRIPTION PLANS**](https://github.com/sponsors/carlospolop)!
+Do you work in a **cybersecurity company**? Do you want to see your **company advertised in HackTricks**? or do you want to have access the **latest version of the PEASS or download HackTricks in PDF**? Check the [**SUBSCRIPTION PLANS**](https://github.com/sponsors/carlospolop)!
 
 Discover [**The PEASS Family**](https://opensea.io/collection/the-peass-family), our collection of exclusive [**NFTs**](https://opensea.io/collection/the-peass-family)
 
 Get the [**official PEASS & HackTricks swag**](https://peass.creator-spring.com)
 
-**Join the** [**💬**](https://emojipedia.org/speech-balloon/)    [**Discord group**](https://discord.gg/hRep4RUj7f) or the [**telegram group**](https://t.me/peass)  or **follow** me on **Twitter** [**🐦**](https://github.com/carlospolop/hacktricks/tree/7af18b62b3bdc423e11444677a6a73d4043511e9/\[https:/emojipedia.org/bird/README.md)[**@carlospolopm**](https://twitter.com/carlospolopm)**.**
+**Join the** [**💬**](https://emojipedia.org/speech-balloon/) [**Discord group**](https://discord.gg/hRep4RUj7f) or the [**telegram group**](https://t.me/peass) or **follow** me on **Twitter** [**🐦**](https://github.com/carlospolop/hacktricks/tree/7af18b62b3bdc423e11444677a6a73d4043511e9/\[https:/emojipedia.org/bird/README.md)[**@carlospolopm**](https://twitter.com/carlospolopm)**.**
 
 **Share your hacking tricks submitting PRs to the** [**hacktricks github repo**](https://github.com/carlospolop/hacktricks)**.**
 {% endhint %}
@@ -32,7 +31,7 @@ First of all, please note that **most of the tricks about privilege escalation a
     * `defaults read config.plist`
     * `/usr/libexec/PlistBuddy -c print config.plsit`
     * `plutil -p config.plist`
-* **`.app`**: Apple applications that follows  directory structure.
+* **`.app`**: Apple applications that follows directory structure.
 * **`.dylib`**: Dynamic libraries (like Windows DLL files)
 * **`.pkg`**: Are the same as xar (eXtensible Archive format). The installer command can be use to install the contents of these files.
 
@@ -52,7 +51,7 @@ First of all, please note that **most of the tricks about privilege escalation a
 * **/usr**: Config and system binaries
 * **/var**: Log files
 * **/Volumes**: The mounted drives will apear here.
-* **/.vol**: Running `stat a.txt` you obtain something like `16777223 7545753 -rw-r--r-- 1 username wheel ...` where the first number is the id number of the volume where the file exists and the second one is the inode number. You can access the content of this file through /.vol/ with that information running  `cat /.vol/16777223/7545753`
+* **/.vol**: Running `stat a.txt` you obtain something like `16777223 7545753 -rw-r--r-- 1 username wheel ...` where the first number is the id number of the volume where the file exists and the second one is the inode number. You can access the content of this file through /.vol/ with that information running `cat /.vol/16777223/7545753`
 
 ### Special MacOS files and folders
 
@@ -60,7 +59,7 @@ First of all, please note that **most of the tricks about privilege escalation a
 * **`.Spotlight-V100`**: This folder appears on the root directory of every volume on the system.
 * **`.metadata_never_index`**: If this file is at the root of a volume Spotlight won't index that volume.
 * **`<name>.noindex`**: Files and folder with this extension won't be indexed by Spotlight.
-* **`$HOME/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV`**2: Contains information about downloaded files, like the URL from where they were downloaded.
+* \*\*`$HOME/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV`\*\*2: Contains information about downloaded files, like the URL from where they were downloaded.
 * **`/var/log/system.log`**: Main log of OSX systems. com.apple.syslogd.plist is responsible for the execution of syslogging (you can check if it's disabled looking for "com.apple.syslogd" in `launchctl list`.
 * **`/private/var/log/asl/*.asl`**: These are the Apple System Logs which may contain interesting information.
 * **`$HOME/Library/Preferences/com.apple.recentitems.plist`**: Stores recently accessed files and applications through "Finder".
@@ -72,7 +71,7 @@ First of all, please note that **most of the tricks about privilege escalation a
 
 ### Common users
 
-*   **Daemon**: User reserved for system daemons. The default daemon account names usually start with  a "\_":
+*   **Daemon**: User reserved for system daemons. The default daemon account names usually start with a "\_":
 
     ```bash
     _amavisd, _analyticsd, _appinstalld, _appleevents, _applepay, _appowner, _appserver, _appstore, _ard, _assetcache, _astris, _atsserver, _avbdeviced, _calendar, _captiveagent, _ces, _clamav, _cmiodalassistants, _coreaudiod, _coremediaiod, _coreml, _ctkd, _cvmsroot, _cvs, _cyrus, _datadetectors, _demod, _devdocs, _devicemgr, _diskimagesiod, _displaypolicyd, _distnote, _dovecot, _dovenull, _dpaudio, _driverkit, _eppc, _findmydevice, _fpsd, _ftp, _fud, _gamecontrollerd, _geod, _hidd, _iconservices, _installassistant, _installcoordinationd, _installer, _jabber, _kadmin_admin, _kadmin_changepw, _knowledgegraphd, _krb_anonymous, _krb_changepw, _krb_kadmin, _krb_kerberos, _krb_krbtgt, _krbfast, _krbtgt, _launchservicesd, _lda, _locationd, _logd, _lp, _mailman, _mbsetupuser, _mcxalr, _mdnsresponder, _mobileasset, _mysql, _nearbyd, _netbios, _netstatistics, _networkd, _nsurlsessiond, _nsurlstoraged, _oahd, _ondemand, _postfix, _postgres, _qtss, _reportmemoryexception, _rmd, _sandbox, _screensaver, _scsd, _securityagent, _softwareupdate, _spotlight, _sshd, _svn, _taskgated, _teamsserver, _timed, _timezone, _tokend, _trustd, _trustevaluationagent, _unknown, _update_sharing, _usbmuxd, _uucp, _warmd, _webauthserver, _windowserver, _www, _wwwproxy, _xserverdocs
@@ -281,7 +280,7 @@ system_profiler SPInstallHistoryDataType 2>/dev/null | grep -A 4 "XProtectPlistC
 
 ### MRT: Malware Removal Tool
 
-Should malware make its way onto a Mac, macOS also includes technology to remediate infections. The _Malware Removal Tool (MRT)_ is an engine in macOS that remediates infections based on updates automatically delivered from Apple (as part of automatic updates of system data files and security updates). **MRT removes malware upon receiving updated information** and it continues to check for infections on restart and login. MRT doesn’t automatically reboot the Mac. (From [here](https://support.apple.com/en-gb/guide/security/sec469d47bd8/web#:\~:text=The%20Malware%20Removal%20Tool%20\(MRT,data%20files%20and%20security%20updates\).))
+Should malware make its way onto a Mac, macOS also includes technology to remediate infections. The _Malware Removal Tool (MRT)_ is an engine in macOS that remediates infections based on updates automatically delivered from Apple (as part of automatic updates of system data files and security updates). **MRT removes malware upon receiving updated information** and it continues to check for infections on restart and login. MRT doesn’t automatically reboot the Mac. (From [here](https://support.apple.com/en-gb/guide/security/sec469d47bd8/web))
 
 ### Automatic Security Updates
 
@@ -293,7 +292,7 @@ Apple issues the **updates for XProtect and MRT automatically** based on the lat
 
 From a user’s perspective, they see TCC in action **when an application wants access to one of the features protected by TCC**. When this happens the user is prompted with a dialog asking them whether they want to allow access or not. This response is then stored in the TCC database.
 
-![An example of a TCC prompt](.gitbook/assets/1663772313.png?1620047855)
+![An example of a TCC prompt](https://rainforest.engineering/images/posts/macos-tcc/tcc-prompt.png?1620047855)
 
 Check some of the **already given permissions** to apps in `System Preferences --> Security & Privacy --> Privacy --> Files and Folders`.
 
@@ -382,7 +381,7 @@ ls -lO /System/Library/LaunchDaemons/com.apple.UpdateSettings.plist
 -rw-r--r--@ 1 root  wheel  restricted,compressed 412  1 Jan  2020 /System/Library/LaunchDaemons/com.apple.UpdateSettings.plist
 ```
 
-**SIP** handles a number of **other limitations as well**. Like it **doesn't allows for the loading of unsigned kexts**.  SIP is also responsible for **ensuring** that no OS X **system processes are debugged**. This also means that Apple put a stop to dtrace inspecting system processes.
+**SIP** handles a number of **other limitations as well**. Like it **doesn't allows for the loading of unsigned kexts**. SIP is also responsible for **ensuring** that no OS X **system processes are debugged**. This also means that Apple put a stop to dtrace inspecting system processes.
 
 Check if SIP is enabled with:
 
@@ -391,7 +390,7 @@ csrutil status
 System Integrity Protection status: enabled.
 ```
 
-If you want to **disable** **it**, you need to put the computer in recovery mode (start it pressing command+R) and execute: `csrutil disable` \
+If you want to **disable** **it**, you need to put the computer in recovery mode (start it pressing command+R) and execute: `csrutil disable`\
 You can also maintain it **enable but without debugging protections** doing:
 
 ```bash
@@ -537,7 +536,7 @@ For more information about [**kernel extensions check this section**](mac-os-arc
 
 ### **Login Items**
 
-In System Preferences -> Users & Groups -> **Login Items** you can find  **items to be executed when the user logs in**.\
+In System Preferences -> Users & Groups -> **Login Items** you can find **items to be executed when the user logs in**.\
 It it's possible to list them, add and remove from the command line:
 
 ```bash
@@ -1220,7 +1219,6 @@ sudo apachectl (start|status|restart|stop)
 #Remove DNS cache
 dscacheutil -flushcache
 sudo killall -HUP mDNSResponder
-
 ```
 
 ## References

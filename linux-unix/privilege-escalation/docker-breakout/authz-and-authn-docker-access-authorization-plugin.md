@@ -10,9 +10,9 @@ When an **HTTP** **request** is made to the Docker **daemon** through the CLI or
 
 The sequence diagrams below depict an allow and deny authorization flow:
 
-![Authorization Allow flow](.gitbook/assets/1663772311.png)
+![Authorization Allow flow](https://docs.docker.com/engine/extend/images/authz\_allow.png)
 
-![Authorization Deny flow](.gitbook/assets/1663772312.png)
+![Authorization Deny flow](https://docs.docker.com/engine/extend/images/authz\_deny.png)
 
 Each request sent to the plugin **includes the authenticated user, the HTTP headers, and the request/response body**. Only the **user name** and the **authentication method** used are passed to the plugin. Most importantly, **no** user **credentials** or tokens are passed. Finally, **not all request/response bodies are sent** to the authorization plugin. Only those request/response bodies where the `Content-Type` is either `text/*` or `application/json` are sent.
 
@@ -107,7 +107,7 @@ Note also that if you can **mount `/etc`** or any other folder **containing conf
 
 The of the sysadmin configuring this plugin would be to control which actions and with which privileges each user can perform. Therefore, if the admin takes a **blacklist** approach with the endpoints and the attributes he might **forget some of them** that could allow an attacker to **escalate privileges.**
 
-You can check the docker API in [https://docs.docker.com/engine/api/v1.40/#](https://docs.docker.com/engine/api/v1.40/#)
+You can check the docker API in [https://docs.docker.com/engine/api/v1.40/#](https://docs.docker.com/engine/api/v1.40/)
 
 ### Unchecked JSON Structure
 

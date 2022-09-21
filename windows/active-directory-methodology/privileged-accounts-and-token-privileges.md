@@ -137,7 +137,7 @@ In most of the infrastructures, service accounts are typical user accounts with 
 
 gMSA accounts have their passwords stored in a LDAP property called _**msDS-ManagedPassword**_ which **automatically** get **resets** by the DC’s every 30 days, are **retrievable** by **authorized administrators** and by the **servers** who they are installed on. _**msDS-ManagedPassword**_ is an encrypted data blob called [MSDS-MANAGEDPASSWORD\_BLOB](https://docs.microsoft.com/en-us/openspecs/windows\_protocols/ms-adts/a9019740-3d73-46ef-a9ae-3ea8eb86ac2e) and it’s only retrievable when the connection is secured, **LDAPS** or when the authentication type is ‘Sealing & Secure’ for an example.
 
-![Image from .gitbook/assets/1663772476.png)
+![Image from https://cube0x0.github.io/Relaying-for-gMSA/](../../.gitbook/assets/asd1.png)
 
 So, if gMSA is being used, find if it has **special privileges** and also check if you have **permissions** to **read** the password of the services.
 

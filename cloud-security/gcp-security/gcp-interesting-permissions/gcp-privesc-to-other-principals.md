@@ -37,9 +37,9 @@ Note that **iam.serviceAccountKeys.update won't work to modify the key** of a SA
 
 ### iam.serviceAccounts.implicitDelegation
 
-If you have the _**iam.serviceAccounts.implicitDelegation**_** permission on a Service Account** that has the _**iam.serviceAccounts.getAccessToken**_** permission on a third Service Account**, then you can use implicitDelegation to **create a token for that third Service Account**. Here is a diagram to help explain.
+If you have the _**iam.serviceAccounts.implicitDelegation**_\*\* permission on a Service Account\*\* that has the _**iam.serviceAccounts.getAccessToken**_\*\* permission on a third Service Account\*\*, then you can use implicitDelegation to **create a token for that third Service Account**. Here is a diagram to help explain.
 
-![](.gitbook/assets/1663772236.png)
+![](https://rhinosecuritylabs.com/wp-content/uploads/2020/04/image2-500x493.png)
 
 You can find a script to automate the [**creation, exploit and cleaning of a vuln environment here**](https://github.com/carlospolop/gcp\_privesc\_scripts/blob/main/tests/5-iam.serviceAccounts.implicitDelegation.sh) and a python script to abuse this privilege [**here**](https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation/blob/master/ExploitScripts/iam.serviceAccounts.implicitDelegation.py). For more information check the [**original research**](https://rhinosecuritylabs.com/gcp/privilege-escalation-google-cloud-platform-part-1/).
 
@@ -210,14 +210,13 @@ Apparently this permission might be useful to gather auth credentials (basic aut
 
 **Kubernetes** by default **prevents** principals from being able to **create** or **update** **Roles** and **ClusterRoles** with **more permissions** that the ones the principal has. However, a **GCP** principal with that permissions will be **able to create/update Roles/ClusterRoles with more permissions** that ones he held, effectively bypassing the Kubernetes protection against this behaviour.
 
-**container.roles.create** and/or **container.roles.update** OR **container.clusterRoles.create** and/or **container.clusterRoles.update** respectively are also **necessary** to perform those privilege escalation actions.\
-
+**container.roles.create** and/or **container.roles.update** OR **container.clusterRoles.create** and/or **container.clusterRoles.update** respectively are also **necessary** to perform those privilege escalation actions.\\
 
 ### container.roles.bind/container.clusterRoles.bind
 
 **Kubernetes** by default **prevents** principals from being able to **create** or **update** **RoleBindings** and **ClusterRoleBindings** to give **more permissions** that the ones the principal has. However, a **GCP** principal with that permissions will be **able to create/update RolesBindings/ClusterRolesBindings with more permissions** that ones he has, effectively bypassing the Kubernetes protection against this behaviour.
 
-**container.roleBindings.create** and/or **container.roleBindings.update** OR **container.clusterRoleBindings.create** and/or **container.clusterRoleBindings.update** respectively  are also **necessary** to perform those privilege escalation actions.
+**container.roleBindings.create** and/or **container.roleBindings.update** OR **container.clusterRoleBindings.create** and/or **container.clusterRoleBindings.update** respectively are also **necessary** to perform those privilege escalation actions.
 
 ### container.cronJobs.create, container.cronJobs.update container.daemonSets.create, container.daemonSets.update container.deployments.create, container.deployments.update container.jobs.create, container.jobs.update container.pods.create, container.pods.update container.replicaSets.create, container.replicaSets.update container.replicationControllers.create, container.replicationControllers.update container.scheduledJobs.create, container.scheduledJobs.update container.statefulSets.create, container.statefulSets.update
 
@@ -259,7 +258,7 @@ There is a feature of Cloud Storage, “interoperability”, that provides a way
 
 HMAC keys belonging to your user cannot be accessed through the API and must be accessed through the web console, but what’s nice is that both the access key and secret key are available at any point. This means we could take an existing pair and store them for backup access to the account. HMAC keys belonging to Service Accounts **can** be accessed through the API, but after creation, you are not able to see the access key and secret again.
 
-![](.gitbook/assets/1663772236.png)
+![](https://rhinosecuritylabs.com/wp-content/uploads/2020/04/image2-1.png)
 
 The exploit script for this method can be found [here](https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation/blob/master/ExploitScripts/storage.hmacKeys.create.py).
 

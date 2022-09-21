@@ -4,7 +4,7 @@ If **enumerating** a machine **internally** or **externally** you find **Splunk 
 
 Also if you are **already root and the Splunk service is not listening only on localhost**, you can **steal** the **password** file **from** the Splunk service and **crack** the passwords, or **add new** credentials to it. And maintain persistence on the host.
 
-In the first  image below you can see how a Splunkd web page looks like.
+In the first image below you can see how a Splunkd web page looks like.
 
 **The following information was copied from** [**https://eapolsniper.github.io/2020/08/14/Abusing-Splunk-Forwarders-For-RCE-And-Persistence/**](https://eapolsniper.github.io/2020/08/14/Abusing-Splunk-Forwarders-For-RCE-And-Persistence/)
 
@@ -56,43 +56,43 @@ To show an exploitation example I set up a test environment using the latest Spl
 
 1- Requesting the /etc/passwd file through PySplunkWhisper2
 
-![1](.gitbook/assets/1663772310.png)
+![1](https://eapolsniper.github.io/assets/2020AUG14/1\_RequestingPasswd.png)
 
 2- Receiving the /etc/passwd file on the attacker system through Netcat
 
-![2](.gitbook/assets/1663772310.png)
+![2](https://eapolsniper.github.io/assets/2020AUG14/2\_ReceivingPasswd.png)
 
 3- Requesting the /etc/shadow file through PySplunkWhisper2
 
-![3](.gitbook/assets/1663772310.png)
+![3](https://eapolsniper.github.io/assets/2020AUG14/3\_RequestingShadow.png)
 
 4- Receiving the /etc/shadow file on the attacker system through Netcat
 
-![4](.gitbook/assets/1663772311.png)
+![4](https://eapolsniper.github.io/assets/2020AUG14/4\_ReceivingShadow.png)
 
 5- Adding the user attacker007 to the /etc/passwd file
 
-![5](.gitbook/assets/1663772311.png)
+![5](https://eapolsniper.github.io/assets/2020AUG14/5\_AddingUserToPasswd.png)
 
 6- Adding the user attacker007 to the /etc/shadow file
 
-![6](.gitbook/assets/1663772311.png)
+![6](https://eapolsniper.github.io/assets/2020AUG14/6\_AddingUserToShadow.png)
 
 7- Receiving the new /etc/shadow file showing attacker007 is successfully added
 
-![7](.gitbook/assets/1663772311.png)
+![7](https://eapolsniper.github.io/assets/2020AUG14/7\_ReceivingShadowFileAfterAdd.png)
 
 8- Confirming SSH access to the victim using the attacker007 account
 
-![8](.gitbook/assets/1663772311.png)
+![8](https://eapolsniper.github.io/assets/2020AUG14/8\_SSHAccessUsingAttacker007.png)
 
 9- Adding a backdoor root account with username root007, with the uid/gid set to 0
 
-![9](.gitbook/assets/1663772311.png)
+![9](https://eapolsniper.github.io/assets/2020AUG14/9\_AddingBackdoorRootAccount.png)
 
 10- Confirming SSH access using attacker007, and then escalating to root using root007
 
-![10](.gitbook/assets/1663772311.png)
+![10](https://eapolsniper.github.io/assets/2020AUG14/10\_EscalatingToRoot.png)
 
 At this point I have persistent access to the host both through Splunk and through the two user accounts created, one of which provides root. I can disable remote logging to cover my tracks and continue attacking the system and network using this host.
 
@@ -145,4 +145,4 @@ Related blog posts:
 * https://medium.com/@airman604/splunk-universal-forwarder-hijacking-5899c3e0e6b2
 * https://www.hurricanelabs.com/splunk-tutorials/using-splunk-as-an-offensive-security-tool
 
-_** Note: **_ This issue is a serious issue with Splunk systems and it has been exploited by other testers for years. While Remote Code Execution is an intended feature of Splunk Universal Forwarder, the implimentaion of this is dangerous. I attempted to submit this bug via Splunk’s bug bounty program in the very unlikely chance they are not aware of the design implications, but was notified that any bug submissions implement the Bug Crowd/Splunk disclosure policy which states no details of the vulnerability may be discussed publically _ever_ without Splunk’s permission. I requested a 90 day disclosure timeline and was denied. As such, I did not responsibly disclose this since I am reasonably sure Splunk is aware of the issue and has chosen to ignore it, I feel this could severely impact companies, and it is the responsibility of the infosec community to educate businesses.
+_\*\* Note: \*\*_ This issue is a serious issue with Splunk systems and it has been exploited by other testers for years. While Remote Code Execution is an intended feature of Splunk Universal Forwarder, the implimentaion of this is dangerous. I attempted to submit this bug via Splunk’s bug bounty program in the very unlikely chance they are not aware of the design implications, but was notified that any bug submissions implement the Bug Crowd/Splunk disclosure policy which states no details of the vulnerability may be discussed publically _ever_ without Splunk’s permission. I requested a 90 day disclosure timeline and was denied. As such, I did not responsibly disclose this since I am reasonably sure Splunk is aware of the issue and has chosen to ignore it, I feel this could severely impact companies, and it is the responsibility of the infosec community to educate businesses.
