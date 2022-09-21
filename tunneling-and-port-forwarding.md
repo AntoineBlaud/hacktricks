@@ -132,7 +132,7 @@ background# meterpreter session
 route add <IP_victim> <Netmask> <Session> # (ex: route add 10.10.10.14 255.255.255.0 8)
 use auxiliary/server/socks_proxy
 run #Proxy port 1080 by default
-echo "socks4 127.0.0.1 1080" > /etc/proxychains.conf #Proxychains
+append socks4 127.0.0.1 1080 to /etc/proxy4chains.conf 
 ```
 
 Another way:
@@ -366,6 +366,28 @@ listen [lhost:]lport rhost:rport #Ex: listen 127.0.0.1:8080 10.0.0.20:80, this b
 #### Change proxychains DNS
 
 Proxychains intercepts `gethostbyname` libc call and tunnels tcp DNS request through the socks proxy. By **default** the **DNS** server that proxychains use is **4.2.2.2** (hardcoded). To change it, edit the file: _/usr/lib/proxychains3/proxyresolv_ and change the IP. If you are in a **Windows environment** you could set the IP of the **domain controller**.
+
+## Proxychains with Nmap
+
+_ICMP ping can not be done to see if a host is alive, since ICMP is not TCP. So you might need to skip the host discovery step if your targets are only accessible through the proxy (-Pn). Since (the unsupported) SOCKS5 ICMP does not support ICMP either this will not change in the future._
+
+You have to use the `-Pn` option to get nmap working with `proxychains` utility. So the command would be
+
+```
+proxychains nmap -sT -Pn -v www.example.com
+```
+
+Here, `-sT` is for scanning TCP ports. And also u can't use the `-O` flag as host discovery can not be done using TCP.
+
+But the most easy way and workaround is to edit the `/etc/proxychains.conf` file.
+
+You need to set your timeouts in /etc/proxychains.conf lower. I recommend 800 and 1200, respectively. Currently, it waits several seconds before determining the TCP handshake failed
+
+We just have to comment out the `proxy_dns` line ans everything will work perfectly.
+
+```
+echo 10.9.30.10 10.9.30.11 |  sed -e 's/ /\n/g' | xargs -P 50 -I %  proxychains4 -q nmap --top-ports 100 -sT -Pn --open -n -T4 --min-parallelism 100 --min-rate 1 -oG proxychains_nmap --append-output  %
+```
 
 ## Tunnels in Go
 

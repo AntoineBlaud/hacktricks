@@ -421,6 +421,12 @@ python vol.py --profile=LinuxDebian-3_2x64 -f susnf.lime linux_netfilter
 python vol.py -f avgcoder.mem --profile=LinuxCentOS63x64 linux_find_file -F "/var/run/utmp"
 ```
 
+## Search for lib artifacts added manually ( maybe malware)
+
+```bash
+find /lib printf "%T: %p\n"
+```
+
 ## References
 
 * [https://cdn.ttgtmedia.com/rms/security/Malware%20Forensics%20Field%20Guide%20for%20Linux%20Systems\_Ch3.pdf](https://cdn.ttgtmedia.com/rms/security/Malware%20Forensics%20Field%20Guide%20for%20Linux%20Systems\_Ch3.pdf)

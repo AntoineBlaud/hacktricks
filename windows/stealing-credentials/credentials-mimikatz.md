@@ -19,7 +19,7 @@ _The LSA, which includes the Local Security Authority Server Service (LSASS) pro
 Enabling LSA protection:
 
 1. Open the Registry Editor (RegEdit.exe), and navigate to the registry key that is located at: HKEY\_LOCAL\_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa and Set the value of the registry key to: “RunAsPPL”=dword:00000001.
-2. Create a new GPO and browse to Computer Configuration, Preferences, Windows Settings. Right-click Registry, point to New, and then click Registry Item. The New Registry Properties dialog box appears. In the Hive list, click HKEY\_LOCAL\_MACHINE. In the Key Path list, browse to SYSTEM\CurrentControlSet\Control\Lsa.  In the Value name box, type RunAsPPL. In the Value type box, click the REG\_DWORD. In the Value data box, type 00000001.Click OK.
+2. Create a new GPO and browse to Computer Configuration, Preferences, Windows Settings. Right-click Registry, point to New, and then click Registry Item. The New Registry Properties dialog box appears. In the Hive list, click HKEY\_LOCAL\_MACHINE. In the Key Path list, browse to SYSTEM\CurrentControlSet\Control\Lsa. In the Value name box, type RunAsPPL. In the Value type box, click the REG\_DWORD. In the Value data box, type 00000001.Click OK.
 
 LSA Protection prevents non-protected processes from interacting with LSASS. Mimikatz can still bypass this with a driver (“!+”).
 
@@ -38,7 +38,7 @@ LSA Protection prevents non-protected processes from interacting with LSASS. Mim
 [![Mimikatz-Event-Drop](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Event-Drop.png)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Event-Drop.png)
 
 Note:\
-Run privilege::debug then event::drop to patch the event log.  Then run Event::Clear to clear the event log without any log cleared event (1102) being logged.
+Run privilege::debug then event::drop to patch the event log. Then run Event::Clear to clear the event log without any log cleared event (1102) being logged.
 
 ### KERBEROS
 
@@ -54,7 +54,7 @@ The Mimikatz command to create a golden ticket is “kerberos::golden”
 
 * /domain – the fully qualified domain name. In this example: “lab.adsecurity.org”.
 * /sid – the SID of the domain. In this example: “S-1-5-21-1473643419-774954089-2222329127”.
-* /sids – Additional SIDs for accounts/groups in the AD forest with rights you want the ticket to spoof. Typically, this will be the Enterprise Admins group for the root domain  “S-1-5-21-1473643419-774954089-5872329127-519”. T[his parameter adds the provided SIDs to the SID History parameter.](https://adsecurity.org/?p=1640)
+* /sids – Additional SIDs for accounts/groups in the AD forest with rights you want the ticket to spoof. Typically, this will be the Enterprise Admins group for the root domain “S-1-5-21-1473643419-774954089-5872329127-519”. T[his parameter adds the provided SIDs to the SID History parameter.](https://adsecurity.org/?p=1640)
 * /user – username to impersonate
 * /groups (optional) – group RIDs the user is a member of (the first is the primary group).\
   Add user or computer account RIDs to receive the same access.\
@@ -75,7 +75,7 @@ Golden Ticket Default Groups:
 * Domain Users SID: S-1-5-21\<DOMAINID>-513
 * Domain Admins SID: S-1-5-21\<DOMAINID>-512
 * Schema Admins SID: S-1-5-21\<DOMAINID>-518
-* Enterprise Admins SID: S-1-5-21\<DOMAINID>-519  (this is only effective when the forged ticket is created in the Forest root domain, though add using /sids parameter for AD forest admin rights)
+* Enterprise Admins SID: S-1-5-21\<DOMAINID>-519 (this is only effective when the forged ticket is created in the Forest root domain, though add using /sids parameter for AD forest admin rights)
 * Group Policy Creator Owners SID: S-1-5-21\<DOMAINID>-520
 
 ```
@@ -117,10 +117,10 @@ Mimikatz “Kerberos::golden /domain:child.lab.adsecurity.org /sid:S-1-5-21-3677
 
 Trust Ticket Specific Required Parameters:
 
-* **/**target – the target domain’s FQDN.
-* **/**service – the kerberos service running in the target domain (krbtgt).
-* **/**rc4 – the NTLM hash for the service kerberos service account (krbtgt).
-* **/**ticket – provide a path and name for saving the forged ticket file to for later use or use /ptt to immediately inject the golden ticket into memory for use.
+* \*\*/\*\*target – the target domain’s FQDN.
+* \*\*/\*\*service – the kerberos service running in the target domain (krbtgt).
+* \*\*/\*\*rc4 – the NTLM hash for the service kerberos service account (krbtgt).
+* \*\*/\*\*ticket – provide a path and name for saving the forged ticket file to for later use or use /ptt to immediately inject the golden ticket into memory for use.
 
 #### **More KERBEROS**
 
@@ -187,7 +187,7 @@ Pull password data for the Administrator user account in the rd.adsecurity.org d
 _Mimikatz “lsadump::dcsync /domain:rd.adsecurity.org /user:Administrator” exit_
 
 Pull password data for the ADSDC03 Domain Controller computer account in the lab.adsecurity.org domain:\
-_Mimikatz  “lsadump::dcsync /domain:lab.adsecurity.org /user:adsdc03$” exit_
+_Mimikatz “lsadump::dcsync /domain:lab.adsecurity.org /user:adsdc03$” exit_
 
 **LSADUMP::LSA** – Ask LSA Server to retrieve SAM/AD enterprise (normal, patch on the fly or inject). Use /patch for a subset of data, use /inject for everything. _Requires System or Debug rights._
 
@@ -199,12 +199,12 @@ _Mimikatz  “lsadump::dcsync /domain:lab.adsecurity.org /user:adsdc03$” exit_
 Often service accounts are members of Domain Admins (or equivalent) or a Domain Admin was recently logged on to the computer an attacker dump credentials from. Using these credentials, an attacker can gain access to a Domain Controller and get all domain credentials, including the KRBTGT account NTLM hash which is used to create Kerberos Golden Tickets.
 
 ```
-mimikatz lsadump::lsa /inject exit
+mimikatz lsadump::lsa /inject /name:c.boyd
 ```
 
 **LSADUMP::NetSync**
 
-NetSync provides a simple way to use a DC computer account password data to impersonate a Domain Controller via a Silver Ticket and DCSync the target account’s information including the password data_._
+NetSync provides a simple way to use a DC computer account password data to impersonate a Domain Controller via a Silver Ticket and DCSync the target account’s information including the password data\_.\_
 
 **LSADUMP::SAM** – get the SysKey to decrypt SAM entries (from registry or hive). The SAM option connects to the local Security Account Manager (SAM) database and dumps credentials for local accounts.
 
@@ -245,7 +245,7 @@ NetSync provides a simple way to use a DC computer account password data to impe
 **SEKURLSA::LogonPasswords** – lists all available provider credentials. This usually shows recently logged on user and computer credentials.
 
 * Dumps password data in LSASS for currently logged on (or recently logged on) accounts as well as services running under the context of user credentials.
-* Account passwords are stored in memory in a reversible manner. If they are in memory (prior to Windows 8.1/Windows Server 2012 R2 they were), they are displayed. Windows 8.1/Windows Server 2012 R2 doesn’t store the account password in this manner in most cases. KB2871997 “back-ports” this security capability to  Windows 7, Windows 8, Windows Server 2008R2, and Windows Server 2012, though the computer needs additional configuration after applying KB2871997.
+* Account passwords are stored in memory in a reversible manner. If they are in memory (prior to Windows 8.1/Windows Server 2012 R2 they were), they are displayed. Windows 8.1/Windows Server 2012 R2 doesn’t store the account password in this manner in most cases. KB2871997 “back-ports” this security capability to Windows 7, Windows 8, Windows Server 2008R2, and Windows Server 2012, though the computer needs additional configuration after applying KB2871997.
 * Requires administrator access (with debug rights) or Local SYSTEM rights
 
 **SEKURLSA::Minidump** – switch to LSASS minidump process context (read lsass dump)
@@ -271,7 +271,7 @@ This is extremely useful if an attacker has compromised a web server configured 
 
 The “kerberos::tickets” mimikatz command dumps the current logged-on user’s Kerberos tickets and does not require elevated rights. Leveraging the sekurlsa module’s capability to read from protected memory (LSASS), all Kerberos tickets on the system can be dumped.
 
-Command:  _mimikatz sekurlsa::tickets exit_
+Command: _mimikatz sekurlsa::tickets exit_
 
 * Dumps all authenticated Kerberos tickets on a system.
 * Requires administrator access (with debug) or Local SYSTEM rights
@@ -319,6 +319,4 @@ Find a domain admin credential on the box and use that token: _token::elevate /d
 
 \
 \
-\
-
-
+\\

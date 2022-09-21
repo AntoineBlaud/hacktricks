@@ -1,5 +1,9 @@
 # Windows Forensics
 
+## Capture Memory
+
+{% embed url="https://www.exterro.com/ftk-imager" %}
+
 ## Generic Windows Artifacts
 
 ### Windows 10 Notifications
@@ -556,3 +560,7 @@ python vol.py -f Win7SP1x64.raw --profile=Win7SP1x64 filescan | grep -i mft
 * PipeList
 * CoreInfo
 * RAMmap
+
+## Lost Clusters
+
+CHKDSK is a system tool in Windows that authenticates the file system reliability of a volume and repairs logical file system errors
