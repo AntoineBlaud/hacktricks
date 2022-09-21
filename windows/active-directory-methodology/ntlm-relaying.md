@@ -4,7 +4,7 @@ With the rise of PetitPotam recently, I was inspired to do a bit more research i
 
 For experienced pentesters, this probably isn’t anything groundbreaking or new, but I hadn’t seen a complete attack chain like this post anywhere else, so I figured I might as well write it up.
 
-![](https://miro.medium.com/max/1050/1\*P\_fB9CnsEhWdLqZ3FQyWTA.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788081/qvwpiukv5pqdpl5tk4xb.png)
 
 NTLM relay has been used and reused in several attacks
 
@@ -36,7 +36,7 @@ The first step for this attack path is to gather a list of IPs in the LAN that h
 
 `crackmapexec smb — gen-relay-list smb_targets.txt 192.168.1.0/24`
 
-![](https://miro.medium.com/max/1050/1\*FDbfecz85M55kPRjBVQ3UQ.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788082/gneos71frwe3icijyyoo.png)
 
 Output of CrackMapExec against the local subnet
 
@@ -52,7 +52,7 @@ Now that we have our lists of targets (smb\_targets.txt), we can set up [NTLMRel
 
 The -tf flag automatically tests any captured credentials against the list of IPs in the file and the -socks flag opens up a SOCKS server on port 1080 that we will use to relay captured credentials.
 
-![](https://miro.medium.com/max/1050/1\*eibz\_t2FrsIOfkPbh0t-fw.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788083/afunigizdbbvhtc1dker.png)
 
 Ntlmrelayx.py activation
 
@@ -60,7 +60,7 @@ Ntlmrelayx.py activation
 
 To send requests through the SOCKS proxy created, we use proxychains. Edit /etc/proxychains4.conf with `sudo nano /etc/proxychains4.conf` and change the last line to be `socks4 127.0.0.1 1080` to point at the newly created SOCKS server.
 
-![](https://miro.medium.com/max/425/1\*BgpX5NQJTjUwNc5QVvfGdQ.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788084/jxslvv92ugqkdijtfmjt.png)
 
 Proxychains configuration
 
@@ -70,7 +70,7 @@ Now that the prerequisites are out of the way, lets get the fun part set up!
 
 [Responder](https://github.com/lgandx/Responder) is a well-known LLMNR/NBT-NS/mDNS Poisoner and NTLMv1/2 Relay that will automatically capture any requests on the network. Since ntlmrelayx.py uses the SMB/HTTP ports itself, make sure to disable the Responder ports by editing the appropriate lines in `/etc/responder/Responder.conf` from On to Off.
 
-![](https://miro.medium.com/max/1050/1\*aVr4t86h8zqW0QC4DXzrYw.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788085/qy0vokucogipeqcjrqz6.png)
 
 Responder Configuration
 
@@ -78,7 +78,7 @@ Then start up Responder on the correct interface, eth0 in my case.
 
 `sudo responder -I eth0  --analyze --lm --disable-ess`&#x20;
 
-![](https://miro.medium.com/max/704/1\*x9G3fjeZFzEKkQN6RD8cdA.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788086/lhc7zku6oaur7cwlfpz9.png)
 
 Responder startup
 
@@ -88,13 +88,13 @@ At this point, it’s just a waiting game to capture credentials on the network.
 
 1. If you have some form of command execution on an endpoint, have that endpoint attempt to connect to a fake share via CMD or Run.
 
-![](https://miro.medium.com/max/768/1\*eVO2rVVZneEX4pU4boT0Sw.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788087/ai35tzyd4zfxfj8ud3jw.png)
 
 Coercing a NTLMv2 hash via CMD
 
 2\. Alternatively, if social engineering is in scope, you can email the user a link to this fake network share and try to get them to click it to load instead.
 
-![](https://miro.medium.com/max/1050/1\*hkeQjVuS5CQvJLWnG0HIGg.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788088/d37cw1dmiyantcrmlaqc.png)
 
 Responder catching the requests made
 
@@ -102,7 +102,7 @@ Responder catching the requests made
 
 Whether by time or exploitation, you should start to see sessions being initiated in the ntlmrelayx output. To see the full list of captured sessions, type `socks` in the ntlmrelayx console and you will see the target IP, User, and even if that user is an Admin.
 
-![](https://miro.medium.com/max/716/1\*xtbHuc3oFC-FZX1gtbi0Wg.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788088/ijboibwqwcmu8hbprf2j.png)
 
 Ntlmrelayx socks output
 
@@ -110,7 +110,7 @@ If the user you have captured has SMB rights to the target, and there is no Anti
 
 `proxychains4 -q smbexec.py test/testadmin:test@192.168.1.161`
 
-![](https://miro.medium.com/max/1050/1\*XIGVtN2WxlSnrRnNRMYKGw.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788089/ywuodtd9roaaknmraups.png)
 
 smbexec via captured login session
 
@@ -122,7 +122,7 @@ The first step is to get the local NTLM hashes for the target. To do this we use
 
 `proxychains4 -q secretsdump.py test/Testadmin:test@192.168.1.161`
 
-![](https://miro.medium.com/max/1050/1\*DNzItkDvk7PO57ToeQr\_yg.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788091/wthgqro1sifaoio4yukp.png)
 
 Secretsdump.py to pull local hashes
 
@@ -144,7 +144,7 @@ wmiexec.py -hashes ‘00000000000000000000000000000000:2b576acbe6bcfda7294d6bd18
 
 > Note: You have to replace the front part of the NTLM hash with 0’s in order for this to work.
 
-![](https://miro.medium.com/max/1050/1\*9FcLoWPOS87ZjRGNGjmkEA.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788091/njmgghbbiste4tx2wu8q.png)
 
 wmicexec.py to bypass AV
 
@@ -156,7 +156,7 @@ If WINRM is enabled on the endpoint, the awesome tool Evil-WinRm supports using 
 evil-winrm -u Administrator -H ‘2b576acbe6bcfda7294d6bd18041b8fe’ -i 192.168.1.161
 ```
 
-![](https://miro.medium.com/max/1050/1\*llyF-cl4h\_O5rCSCC-o7GQ.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788092/djzlqkrlmhy0nbwpxy8i.png)
 
 Evil-WinRM PTH
 
@@ -168,7 +168,7 @@ For a more GUI centered attack, can use Xfreerdp to gain RDP access to an endpoi
 xfreerdp /u:Administrator /pth:2b576acbe6bcfda7294d6bd18041b8fe /v:192.168.1.161
 ```
 
-![](https://miro.medium.com/max/1050/1\*kc29xuHOSW9-uDltchMU6Q.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788093/yw1kaffqbxq5qjmctf7q.png)
 
 XfreeRDP access via PTH
 
@@ -191,7 +191,7 @@ In the details pane, double-click **Microsoft network server: Digitally sign com
 
 Verify that the **Define this policy setting** check box is selected, click **Enabled** to enable SMB packet signing, and then click **OK**
 
-![](https://miro.medium.com/max/572/1\*G5OPi5DAKBDtOBD147\_Qmw.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788094/enb0v2erfvk6s41k6mri.png)
 
 Enabling SMB Signing
 
@@ -240,7 +240,7 @@ It's still possible to do with Cobalt Strike, but requires the use of multiple c
 
 The flow looks something like this:
 
-![](https://rto-assets.s3.eu-west-2.amazonaws.com/relaying/overview.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788095/fqdar8uxuwsw9dwnvuk8.png)
 
 [PortBender](https://github.com/praetorian-inc/PortBender) is a reflective DLL and Aggressor script specifically designed to help facilitate this through Cobalt Strike.  It requires local admin access in order for the driver to be loaded, and that the driver be located in the current working directory of the Beacon.  It makes sense to use `C:\Windows\System32\drivers` since this is where most Windows drivers go.
 
@@ -311,7 +311,7 @@ Disconnect from 10.10.17.132:50332 to 10.10.17.231:445
 
 ntlmrelayx will then spring into action.  By default it will use [secretsdump](https://github.com/SecureAuthCorp/impacket/blob/master/impacket/examples/secretsdump.py) to dump the local SAM hashes from the target machine.  In this example, I'm relaying from WKSTN-2 to SRV-2.
 
-![](https://rto-assets.s3.eu-west-2.amazonaws.com/relaying/dump-sam.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788095/mvwnna8my3rrjjoojhvp.png)
 
 Local NTLM hashes could then be cracked or used with pass-the-hash.
 
@@ -345,7 +345,7 @@ beacon> link srv-2
 [+] established link to child beacon: 10.10.17.68
 ```
 
-![](https://rto-assets.s3.eu-west-2.amazonaws.com/relaying/chain.png)
+![.gitbook/assets/1663788082.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788096/k2x71vqnrjcnhwjkcp2n.png)
 
 To stop PortBender, stop the job and kill the spawned process.
 

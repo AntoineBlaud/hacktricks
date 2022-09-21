@@ -242,13 +242,13 @@ Idx Name          Size      VMA               LMA               File off  Algn
 
 If we plot the locations where _good_ fault patterns appear, we get:
 
-![Fault patterns across CHES2016 binary](https://blog.quarkslab.com/resources/2016-12-16-wb-dfa/plotfaults.png)
+![.gitbook/assets/1663786970.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786970/y3vwbcmjmy1dvbzy3csx.png)
 
 When restricting the address range to the last blob, in the address range 0x3bab0 - 0x3d300, the attack takes 1.5s and about 70-90 traces to find the right key. Actually restricting the range to addresses above 0x34000 is enough as any of the last three blobs can reveal the key.
 
 One may find strange that the good spots are pretty early in the tables (roughly between 0x34000 and 0x3e000, while the table ends at 0xa0ac0). Having a look at a visual trace reveals that the tables are actually read backwards, from the highest addresses for the earliest rounds to the lowest addresses for the last rounds. If you have never seen our trace visualizations before (e.g. in DCA context), here is how to read it: Y-axis is time going from the top to the bottom, X-axis is the (virtual) memory layout, instructions are in black, data reads in green and data writes in red.
 
-![Visualization of one CHES2016 execution trace](https://blog.quarkslab.com/resources/2016-12-16-wb-dfa/ches2016\_visual\_trace\_full.png)
+![.gitbook/assets/1663786971.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786970/j8gmpi9dy2wnjwoucazu.png)
 
 Of course this kind of visualization can also be used to get an idea at what address range to shoot if you have difficulties in getting a successful DFA attack. It was obtained with TraceGraph, which is part of the [Tracer](https://github.com/SideChannelMarvels/Tracer) project.
 
@@ -260,7 +260,7 @@ With this challenge the source code is made available but it is completely unrol
 
 Unfortunately for us, if Go is neat as source code, it is not the same story when it comes to the underlying execution. To understand what we mean, have a look at the execution trace:
 
-![Visualization of one OpenWhiteBox Chow execution trace](https://blog.quarkslab.com/resources/2016-12-16-wb-dfa/owbchow\_visual\_trace\_full.png)
+![.gitbook/assets/1663786972.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786972/p1jki0ba3dgczwsvghd9.png)
 
 Again, as for CHES2016, using the framework parameters with their default values fail because of _false positives_: traces with a _good_ pattern but that cannot be broken.
 
@@ -283,7 +283,7 @@ A quick inspection of the logs shows that the faults with a _good_ pattern occur
 
 The OpenWhiteBox project features also another implementation based on Xiao and Lai design. So far, it could not be broken with our DFA attack but we still do not know if it is because of the mess caused by Go at runtime (and maybe tuning a DFA properly could succeed in breaking it) or if Xiao-Lai is intrinsically safe against this type of DFA. Here is its execution trace:
 
-![Visualization of one OpenWhiteBox Xiao and Lai execution trace](https://blog.quarkslab.com/resources/2016-12-16-wb-dfa/owbxiaolai\_visual\_trace\_full.png)
+![.gitbook/assets/1663786973.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786974/gmwzb9rstvqwlevrgbeo.png)
 
 ### DFA on AES-128 Decryption
 
@@ -410,7 +410,7 @@ To avoid spilling garbage in people's terminal if they provide the wrong key, dr
 
 There is no large data section in the binary and a quick look at the trace visualization shows indeed that there are only instructions and some stack accesses. drmless operates four blocks by four blocks which explains why the same pattern can be seen four times.
 
-![Visualization of one PlaidCTF2013 execution trace (4 AES blocks)](https://blog.quarkslab.com/resources/2016-12-16-wb-dfa/plaidctf\_visual\_trace\_full.png)
+![.gitbook/assets/1663786975.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786975/wflbj9dkiedrqfd2g5hn.png)
 
 Because we have to fault the code itself, rather than injecting random faults we will inject NOP instructions, i.e. 0x90, and reduce slightly the initial size of the faulted area (as faulting a binary by erasing very large instruction blocks has very little chance to work). With those two minor tunings of the DFA attack, the key is recovered in 17s and 1000 traces (actually about 500 traces, the other half of the executions crashed).
 
@@ -496,11 +496,11 @@ Ok, maybe this is an AES-192 or AES-256... To check this we need to crack the pr
 
 The only remaining solution is that this AES is not a standard AES implementation. It cannot use external encodings because the DFA attack would not work in this case. Let us have a look at the trace visualization.
 
-![Visualization of one Kryptologik execution trace](https://blog.quarkslab.com/resources/2016-12-16-wb-dfa/kryptologik\_visual\_trace\_full.png)
+![.gitbook/assets/1663786976.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786975/ppagnld3f5rugywfkew2.png)
 
 This is not very informative... Let us zoom on the stack.
 
-![Visualization of one Kryptologik execution trace: the stack](https://blog.quarkslab.com/resources/2016-12-16-wb-dfa/kryptologik\_visual\_trace\_stack2.png)
+![.gitbook/assets/1663786977.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786976/nkhlogqgzncbufhwvirz.png)
 
 It is not that easy to see but there are 7 very similar patterns, the last one a bit shortened. This could be indicative of 14 rounds, so an AES-256.
 

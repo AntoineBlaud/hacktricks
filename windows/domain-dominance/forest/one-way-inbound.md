@@ -49,7 +49,7 @@ DEV\Subsidiary Admins
 
 If this is confusing, this is how it looks from the perspective of the subsidiary.external's domain controller.
 
-![](https://rto-assets.s3.eu-west-2.amazonaws.com/domain-trusts/subsidiary-foreign-group-member.png)
+![.gitbook/assets/1663788103.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788102/tr82bi9sxx1ek0criyk3.png)
 
 `Get-NetLocalGroupMember` can enumerate the local group membership of a machine. This shows that `DEV\Subsidiary Admins` is a member of the local Administrators group on the domain controller.
 

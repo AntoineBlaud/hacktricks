@@ -23,7 +23,7 @@ Enabling LSA protection:
 
 LSA Protection prevents non-protected processes from interacting with LSASS. Mimikatz can still bypass this with a driver (“!+”).
 
-[![Mimikatz-Driver-Remove-LSASS-Protection](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Driver-Remove-LSASS-Protection.jpg)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Driver-Remove-LSASS-Protection.jpg)
+[![Mimikatz-Driver-Remove-LSASS-Protection](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788114/bs4wqwx82q2kzn7xknej.jpg)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788114/bs4wqwx82q2kzn7xknej.jpg)
 
 ## Main
 
@@ -31,11 +31,11 @@ LSA Protection prevents non-protected processes from interacting with LSASS. Mim
 
 **EVENT::Clear** – Clear an event log\
 [\
-![Mimikatz-Event-Clear](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Event-Clear.png)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Event-Clear.png)
+![Mimikatz-Event-Clear](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788115/spw2r6peqgfr4yntimfy.png)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788115/spw2r6peqgfr4yntimfy.png)
 
 **EVENT:::Drop** – (_**experimental**_) Patch Events service to avoid new events
 
-[![Mimikatz-Event-Drop](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Event-Drop.png)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Event-Drop.png)
+[![Mimikatz-Event-Drop](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788116/iqtph34zimd3ekqsvcir.png)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788116/iqtph34zimd3ekqsvcir.png)
 
 Note:\
 Run privilege::debug then event::drop to patch the event log. Then run Event::Clear to clear the event log without any log cleared event (1102) being logged.
@@ -132,7 +132,7 @@ Similar to functionality of “klist”.
 
 A good example of Mimikatz’s kerberos::ptc is when [exploiting MS14-068 with PyKEK](https://adsecurity.org/?p=676). PyKEK generates a ccache file which can be injected with Mimikatz using kerberos::ptc.
 
-[![Mimikatz-PTC-PyKEK-ccacheFile](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-PTC-PyKEK-ccacheFile.jpg)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-PTC-PyKEK-ccacheFile.jpg)
+[![Mimikatz-PTC-PyKEK-ccacheFile](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788118/qufc4oumwxjliduwstwh.jpg)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788118/qufc4oumwxjliduwstwh.jpg)
 
 **KERBEROS::PTT** – pass the ticket\
 After a [Kerberos ticket is found](https://adsecurity.org/?p=1667), it can be copied to another system and passed into the current session effectively simulating a logon without any communication with the Domain Controller. No special rights required.\
@@ -141,16 +141,16 @@ Similar to SEKURLSA::PTH (Pass-The-Hash).
 * /filename – the ticket’s filename (can be multiple)
 * /diretory – a directory path, all .kirbi files inside will be injected.
 
-[![KerberosUnConstrainedDelegation-Mimikatz-PTT-LS-Ticket2](https://adsecurity.org/wp-content/uploads/2015/09/KerberosUnConstrainedDelegation-Mimikatz-PTT-LS-Ticket2.png)](https://adsecurity.org/wp-content/uploads/2015/09/KerberosUnConstrainedDelegation-Mimikatz-PTT-LS-Ticket2.png)
+[![KerberosUnConstrainedDelegation-Mimikatz-PTT-LS-Ticket2](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788119/nj4n3uriakwtzpqfla88.png)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788119/nj4n3uriakwtzpqfla88.png)
 
 **KERBEROS::Purge** – purge all Kerberos tickets\
 Similar to functionality of “klist purge”. Run this command before passing tickets (PTC, PTT, etc) to ensure the correct user context is used.
 
-[![Mimikatz-Kerberos-Purge](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Kerberos-Purge.png)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Kerberos-Purge.png)
+[![Mimikatz-Kerberos-Purge](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788120/n7t3tlcfsae48cgzn6r7.png)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788120/n7t3tlcfsae48cgzn6r7.png)
 
 **KERBEROS::TGT** – get current TGT for current user.
 
-[![Mimikatz-Kerberos-TGT](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Kerberos-TGT.png)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Kerberos-TGT.png)
+[![Mimikatz-Kerberos-TGT](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788121/gkjjgzqakndsbzchmtfk.png)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788121/gkjjgzqakndsbzchmtfk.png)
 
 ### LSADUMP
 
@@ -259,7 +259,7 @@ _Mimikatz can perform the well-known operation ‘Pass-The-Hash’ to run a proc
 * /rc4 or /ntlm – optional – the RC4 key / NTLM hash of the user’s password.
 * /run – optional – the command line to run – default is: cmd to have a shell.
 
-[![Mimikatz-Sekurlsa-PTH](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Sekurlsa-PTH.jpg)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Sekurlsa-PTH.jpg)
+[![Mimikatz-Sekurlsa-PTH](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788123/xfgwlmv7sfgqswktvwtz.jpg)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788123/xfgwlmv7sfgqswktvwtz.jpg)
 
 **SEKURLSA::Tickets** – Lists all available Kerberos tickets for all recently authenticated users, including services running under the context of a user account and the local computer’s AD computer account.\
 Unlike kerberos::list, sekurlsa uses memory reading and is not subject to key export restrictions. sekurlsa can access tickets of others sessions (users).
@@ -282,11 +282,11 @@ The Mimikatz SID module replaces MISC::AddSID. Use SID::Patch to patch the ntds 
 
 **SID::add** – Add a SID to SIDHistory of an object
 
-[![Mimikatz-SID-add](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-SID-add.png)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-SID-add.png)
+[![Mimikatz-SID-add](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788124/e7mqyuoktqqbcycgtrvl.png)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788124/e7mqyuoktqqbcycgtrvl.png)
 
 **SID::modify** – Modify object SID of an object
 
-[![Mimikatz-SID-Modify](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-SID-Modify.png)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-SID-Modify.png)
+[![Mimikatz-SID-Modify](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788126/k5u0hknb5zjnsiipjmor.png)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788126/k5u0hknb5zjnsiipjmor.png)
 
 ### **TOKEN**
 
@@ -295,11 +295,11 @@ The Mimikatz Token module enables Mimikatz to interact with Windows authenticati
 **TOKEN::Elevate** – impersonate a token. Used to elevate permissions to SYSTEM (default) or find a domain admin token on the box using the Windows API.\
 _Requires Administrator rights._
 
-[![Mimikatz-Token-Elevate1](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Token-Elevate1-1.png)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Token-Elevate1-1.png)
+[![Mimikatz-Token-Elevate1](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788127/d5rhztthnvq4kdao7s0t.png)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788127/d5rhztthnvq4kdao7s0t.png)
 
 Find a domain admin credential on the box and use that token: _token::elevate /domainadmin_
 
-[![Mimikatz-Token-Elevate-DomainAdmin](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Token-Elevate-DomainAdmin.jpg)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-Token-Elevate-DomainAdmin.jpg)
+[![Mimikatz-Token-Elevate-DomainAdmin](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788128/sk1lsp5rd5afsvlrphsb.jpg)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788128/sk1lsp5rd5afsvlrphsb.jpg)
 
 **TOKEN::List** – list all tokens of the system
 
@@ -307,11 +307,11 @@ Find a domain admin credential on the box and use that token: _token::elevate /d
 
 **TS::MultiRDP** – (experimental) Patch Terminal Server service to allow multiple users
 
-[![Mimikatz-TS-MultiRDP](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-TS-MultiRDP.png)](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-TS-MultiRDP.png)
+[![Mimikatz-TS-MultiRDP](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788130/imyevhwohhm7m6yq4obz.png)](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788130/imyevhwohhm7m6yq4obz.png)
 
 **TS::Sessions** – List TS/RDP sessions.
 
-![](https://adsecurity.org/wp-content/uploads/2017/11/Mimikatz-TS-Sessions.png)
+![.gitbook/assets/1663788131.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788131/egc1m2x2stpjbomorpwu.png)
 
 ### Vault
 
