@@ -17,7 +17,7 @@
 * [Search Exploits](search-exploits.md)
 * [Persistence](persistence/README.md)
   * [Windows Persistance techniques](https://app.gitbook.com/s/AHEFW4POxlzDF5ApseF3/offensive-security/persistence)
-  * [AD Persistance techniques](https://app.gitbook.com/s/djPOU9Er6kcKTLO7sngF/\~/changes/rRKoBRJiGLDZSJk9gsdz/ad/persistence)
+  * [AD Persistance techniques](https://app.gitbook.com/s/djPOU9Er6kcKTLO7sngF/ad/persistence)
 
 ## Shells
 

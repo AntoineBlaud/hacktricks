@@ -34,7 +34,7 @@ sudo dnschef --fakeip 10.9.10.10
 proxychains -q certipy req -u Robet.Ortiz -p <password> -dc-ip cydc.cyber.local -ns 127.0.0.1 -template CyberSigning -a CYBER-CA -debug
 ```
 
-![](<../../.gitbook/assets/image (2).png>)
+![](<../../.gitbook/assets/image (3).png>)
 
 ## Template Attacks - ESC1, 2, 3, 9 & 10
 
