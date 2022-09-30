@@ -12,8 +12,6 @@ $$
 Decryption(c1,c2,d)	 m:= c2/c1^d
 $$
 
-safe prime Q = 2\*p + 1&#x20;
-
 ### Breaking the ElGamal Scheme using a QR generator
 
 <figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>

@@ -40,7 +40,7 @@ Le couple (_n_, _e_) — ou (_e_, _n_)[\[3\]](https://fr.wikipedia.org/wiki/Chif
 
 Si _M_ est un entier naturel strictement inférieur à _n_ représentant un message, alors le message chiffré sera représenté par
 
-![.gitbook/assets/1663786981.svg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786980/oca92nbfswvcusuc6nrz.svg)
+![{\displaystyle C\equiv M^{e}{\pmod {n\}},}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/c0f8acb6662bf4e913410838aacff91b035e2c7a)
 
 l'entier naturel _C_ étant choisi strictement inférieur à _n_.
 
@@ -48,7 +48,7 @@ l'entier naturel _C_ étant choisi strictement inférieur à _n_.
 
 Pour déchiffrer _C_, on utilise _d_, l'inverse de _e_ modulo (_p_ – 1)(_q_ – 1), et l'on retrouve le message clair _M_ par
 
-![.gitbook/assets/1663786983.svg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786982/dhxxlaugducvy0pvjc2w.svg)
+![{\displaystyle M\equiv C^{d}{\pmod {n\}}.}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/1221183ab1f0b1cae65f0dd666edd7fb490adeec)
 
 #### Exemple
 
@@ -71,27 +71,27 @@ Le mécanisme de signature par Alice, à l'aide de sa clé privée, est analogue
 
 La démonstration repose sur le [petit théorème de Fermat](https://fr.wikipedia.org/wiki/Petit\_th%C3%A9or%C3%A8me\_de\_Fermat), à savoir que comme _p_ et _q_ sont deux nombres premiers, si _M_ n'est pas un multiple de _p_ on a la première égalité, et la seconde s'il n'est pas un multiple de _q_ :
 
-![.gitbook/assets/1663786985.svg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786984/i9nrvhqoqnrykxlmna1n.svg)
+![{\displaystyle M^{p-1}\equiv 1{\pmod {p\}}\ ,\ \ M^{q-1}\equiv 1{\pmod {q\}}.}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/b1c2321a24eb9a55d03ca240f8b2b51c5f860d0c)
 
 En effet
 
-![.gitbook/assets/1663786987.svg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786986/dtdh2ywlbcsxtams4j9j.svg)
+![{\displaystyle C^{d}\equiv (M^{e})^{d}\equiv M^{ed}{\pmod {n\}}.}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/8eb4eeb60c891ce7c2e73d70342ee1d91487bcec)
 
 Or
 
-![.gitbook/assets/1663786989.svg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786988/fxkyq6k7t7z52he5h9k3.svg)
+![ed\equiv 1{\pmod {(p-1)(q-1)\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/2e65b9bacf7a59054fa2ae1c693102ba015b9524)
 
 ce qui signifie qu'il existe un entier _k tel que_
 
-![.gitbook/assets/1663786991.svg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786990/nfvj2bmgoyxnoqqfwoxx.svg)
+![{\displaystyle ed=1+k(p-1)(q-1)}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/0a0a645caa162834c7b69f6161fe61f07a09b1c8)
 
 donc, si _M_ n'est pas multiple de _p_ d'après le petit théorème de Fermat
 
-![.gitbook/assets/1663786993.svg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786992/dkw7rlkkttxqbr47jdep.svg)
+![M^{ed}\equiv M^{1+k(p-1)(q-1)}\equiv M\cdot \left(M^{p-1}\right)^{k(q-1)}\equiv M{\pmod {p\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/3919f97fa0a4ed054262a9b4c731281f1a0e7c36)
 
 et de même, si _M_ n'est pas multiple de _q_
 
-![.gitbook/assets/1663786995.svg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786994/acguyjdpafrb4pgqctu9.svg)
+![{\displaystyle M^{ed}\equiv M{\pmod {q\}}.}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/e900c285bd155943941ba28ee67844fddd59286a)
 
 Les deux égalités sont en fait réalisées pour n'importe quel entier _M_, car si _M_ est un multiple de _p_, _M_ et toutes ses puissances non nulles sont congrues à 0 modulo _p_. De même pour _q_.
 
@@ -109,7 +109,7 @@ Le chiffrement demande donc de pouvoir vérifier que de « très grands » nombr
 
 La valeur φ(_n_) de l'[indicatrice d'Euler](https://fr.wikipedia.org/wiki/Indicatrice\_d'Euler) en _n_ est l'[ordre du groupe](https://fr.wikipedia.org/wiki/Ordre\_\(th%C3%A9orie\_des\_groupes\)) des éléments inversibles de l’[anneau ℤ/nℤ](https://fr.wikipedia.org/wiki/Anneau\_%E2%84%A4/n%E2%84%A4). Ceci permet de voir immédiatement, par le [théorème d'Euler](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_d'Euler\_\(arithm%C3%A9tique\)) (conséquence du [théorème de Lagrange](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me\_de\_Lagrange)), que si _M_ est premier avec _n_, donc inversible (ce qui est le cas de « la plupart » des entiers naturels _M_ strictement inférieurs à _n_)
 
-![.gitbook/assets/1663786998.svg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786996/ktbx0n5wodurlyalswbb.svg)
+![M^{ed}\equiv M^{1+k\varphi (n)}\equiv M{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/03f657f5c0e024f0cae845e7e6b291b4b3560cab)
 
 soit de justifier le chiffrement RSA (pour de tels _M_).
 
@@ -187,11 +187,13 @@ L'attaque de [Håstad](https://fr.wikipedia.org/wiki/Johan\_H%C3%A5stad), l'une 
 
 En 2003, Boneh et Brumley ont montré une attaque plus pratique permettant de retrouver la factorisation RSA sur une connexion réseau ([SSL](https://fr.wikipedia.org/wiki/Transport\_Layer\_Security)) en s’appuyant sur les informations que laissent filtrer certaines optimisations appliquées au théorème des restes chinois. Une façon de contrecarrer ces attaques est d'assurer que l'opération de déchiffrement prend un temps constant. Cependant, cette approche peut en réduire significativement la performance. C'est pourquoi la plupart des implémentations (mises en œuvre) RSA utilisent plutôt une technique différente connue sous le nom d'« aveuglement cryptographique » (_blinding_).
 
-L'aveuglement se sert des propriétés multiplicatives de RSA en insérant dans le calcul une valeur secrète aléatoire dont l'effet peut être annulé. Cette valeur étant différente à chaque chiffrement, le temps de déchiffrement n'est plus directement corrélé aux données à chiffrer, ce qui met en échec l'attaque par chronométrage : au lieu de calculer ![\scriptstyle c^{d}{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/90005e390fce4d91ae05b2e48c134b2661e2ae41), Alice choisit d'abord une valeur aléatoire secrète _r_ et calcule ![\scriptstyle (r^{e}c)^{d}{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/887c4f329d3f129c4e78c87b48b4018c7df9468a). Le résultat de ce calcul est ![.gitbook/assets/1663787001.svg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663787000/bm3wzbtyobifmruroyac.svg) et donc l'effet de _r_ peut être annulé en multipliant par son inverse.
+L'aveuglement se sert des propriétés multiplicatives de RSA en insérant dans le calcul une valeur secrète aléatoire dont l'effet peut être annulé. Cette valeur étant différente à chaque chiffrement, le temps de déchiffrement n'est plus directement corrélé aux données à chiffrer, ce qui met en échec l'attaque par chronométrage : au lieu de calculer ![\scriptstyle c^{d}{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/90005e390fce4d91ae05b2e48c134b2661e2ae41), Alice choisit d'abord une valeur aléatoire secrète _r_ et calcule ![\scriptstyle (r^{e}c)^{d}{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/887c4f329d3f129c4e78c87b48b4018c7df9468a). Le résultat de ce calcul est ![\scriptstyle rm{\pmod {n\}}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/e436fbeb5f7aa438a0ca754bb4094f293fb0daba) et donc l'effet de _r_ peut être annulé en multipliant par son inverse.
 
 #### Attaque à chiffrés choisis (_Adaptive chosen ciphertext attacks_)
 
 Tel que décrit dans cet article, RSA est un chiffrement déterministe, et ne peut donc pas être [sémantiquement sûr](https://fr.wikipedia.org/wiki/S%C3%A9curit%C3%A9\_s%C3%A9mantique). Une contremesure est l’utilisation d’un [schéma de remplissage](https://fr.wikipedia.org/wiki/Remplissage\_\(cryptographie\)) probabiliste de manière telle qu'aucune valeur de message, une fois chiffré, ne donne un résultat peu sûr, par exemple si _C = Me ≤ N_, une attaque simple est le calcul direct de la racine e-ième de C, qui n’aura pas été réduite modulo N.
+
+
 
 ## RSA Encryption
 
@@ -360,6 +362,7 @@ q * q * e = q * (k * p + 1)
 (q ^ 2) * e = (k * N) + q                          # N = p * q
 ((q ^ 2) * e) - q = k * N
 q = ((k * N) / e) ^ 2
+
 ```
 
 \

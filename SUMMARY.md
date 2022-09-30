@@ -17,7 +17,7 @@
 * [Search Exploits](search-exploits.md)
 * [Persistence](persistence/README.md)
   * [Windows Persistance techniques](https://app.gitbook.com/s/AHEFW4POxlzDF5ApseF3/offensive-security/persistence)
-  * [AD Persistance techniques](https://app.gitbook.com/s/djPOU9Er6kcKTLO7sngF/ad/persistence)
+  * [AD Persistance techniques](https://app.gitbook.com/s/djPOU9Er6kcKTLO7sngF/\~/changes/rRKoBRJiGLDZSJk9gsdz/ad/persistence)
 
 ## Shells
 
@@ -731,6 +731,7 @@
 * [6881/udp - Pentesting BitTorrent](6881-udp-pentesting-bittorrent.md)
 * [CTF Write-ups](ctf-write-ups/README.md)
   * [Backup Crytp](ctf-write-ups/backup-crytp.md)
+  * [challenge-0521.intigriti.io](ctf-write-ups/challenge-0521.intigriti.io.md)
   * [Try Hack Me](ctf-write-ups/try-hack-me/README.md)
     * [hc0n Christmas CTF - 2019](ctf-write-ups/try-hack-me/hc0n-christmas-ctf-2019.md)
     * [Pickle Rick](ctf-write-ups/try-hack-me/pickle-rick.md)

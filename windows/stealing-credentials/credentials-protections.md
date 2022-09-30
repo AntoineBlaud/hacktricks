@@ -28,7 +28,7 @@ reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA /v RunAsPPL
 
 It is possible to bypass this protection using Mimikatz driver mimidrv.sys:
 
-![.gitbook/assets/1663788133.png](../../.gitbook/assets/mimidrv.png)
+![](../../.gitbook/assets/mimidrv.png)
 
 ### Crendential manager
 
@@ -86,7 +86,7 @@ Vault : {77bc582b-f0a6-4e15-4e80-61736b6f3b29}
 
 If you go to the **Control Panel > Credential Manager** on WKSTN-1 and select **Windows Credentials**, you will see how this credential appears to the user. And opening the **Remote Desktop Connection** client shows how these creds are automatically populated for the target server.
 
-![.gitbook/assets/1663788133.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788132/hx2odevam6hfpkuaue6f.png)
+![](https://rto-assets.s3.eu-west-2.amazonaws.com/dpapi/cred-manager.png)
 
 To decrypt the credential, we need to find the master encryption key.
 
@@ -188,7 +188,7 @@ Using _Restricted Admin mode for RDP_, when you connect to a remote computer usi
 
 Note that as your credentials are not being saved on the RDP session if **try to access network resources** your credentials won't be used. **The machine identity will be used instead**.
 
-![.gitbook/assets/1663788133.png](../../.gitbook/assets/ram.png)
+![](../../.gitbook/assets/RAM.png)
 
 From [here](https://blog.ahasayen.com/restricted-admin-mode-for-rdp/).
 

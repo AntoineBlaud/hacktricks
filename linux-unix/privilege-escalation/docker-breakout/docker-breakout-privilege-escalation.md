@@ -104,7 +104,7 @@ docker run --rm -it --privileged ubuntu bash
 
 Well configured docker containers won't allow command like **fdisk -l**. However on miss-configured docker command where the flag `--privileged` or `--device=/dev/sda1` with caps is specified, it is possible to get the privileges to see the host drive.
 
-![.gitbook/assets/1663787126.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663787126/lkyvyalmzjmskami6lbz.png)
+![](https://bestestredteam.com/content/images/2019/08/image-16.png)
 
 So to take over the host machine, it is trivial:
 

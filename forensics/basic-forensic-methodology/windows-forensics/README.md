@@ -32,7 +32,7 @@ When a file is deleted in this folder are created 2 files:
 * `$I{id}`: File information (date of when it was deleted}
 * `$R{id}`: Content of the file
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (486).png>)
+![](<../../../.gitbook/assets/image (486).png>)
 
 Having these files you can sue the tool [**Rifiuti**](https://github.com/abelcheung/rifiuti2) to get the original address of the deleted files and the date it was deleted (use `rifiuti-vista.exe` for Vista – Win10).
 
@@ -40,22 +40,22 @@ Having these files you can sue the tool [**Rifiuti**](https://github.com/abelche
 .\rifiuti-vista.exe C:\Users\student\Desktop\Recycle
 ```
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (495) (1) (1).png>)
+![](<../../../.gitbook/assets/image (495) (1) (1) (1).png>)
 
 ### Volume Shadow Copies
 
 Shadow Copy is a technology included in Microsoft Windows that can create **backup copies** or snapshots of computer files or volumes, even when they are in use.\
 These backups are usually located in the `\System Volume Information` from the roof of the file system and the name is composed by **UIDs** as in the following image:
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (520).png>)
+![](<../../../.gitbook/assets/image (520).png>)
 
 Mounting the forensics image with the **ArsenalImageMounter**, the tool [**ShadowCopyView**](https://www.nirsoft.net/utils/shadow\_copy\_view.html) can be used to inspect a shadow copy and even **extract the files** from the shadow copy backups.
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (521).png>)
+![](<../../../.gitbook/assets/image (521).png>)
 
 The registry entry `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BackupRestore` contains the files and keys **to not backup**:
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (522).png>)
+![](<../../../.gitbook/assets/image (522).png>)
 
 The registry `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VSS` also contains configuration information about the `Volume Shadow Copies`.
 
@@ -108,7 +108,7 @@ The **created time** of any jumplist indicates the **first time the file was acc
 
 You can inspect the jumplists using [**JumplistExplorer**](https://ericzimmerman.github.io/#!index.md).
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (474).png>)
+![](<../../../.gitbook/assets/image (474).png>)
 
 (_Note that the timestamps provided by JumplistExplorer are related to the jumplist file itself_)
 
@@ -126,7 +126,7 @@ It's possible to identify that a USB device was used thanks to the creation of:
 
 Note that some LNK file instead of pointing to the original path, points to the WPDNSE folder:
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (476).png>)
+![](<../../../.gitbook/assets/image (476).png>)
 
 The files in the folder WPDNSE are a copy of the original ones, then won't survive a restart of the PC and the GUID is taken from a shellbag.
 
@@ -138,20 +138,20 @@ The files in the folder WPDNSE are a copy of the original ones, then won't survi
 
 Check the file `C:\Windows\inf\setupapi.dev.log` to get the timestamps about when the USB connection was produced (search for `Section start`).
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (477) (2) (2) (2) (2) (2) (2) (2) (3) (1) (1) (2).png>)
+![](<../../../.gitbook/assets/image (477) (2) (2) (2) (2) (2) (2) (2) (3) (1) (1) (1).png>)
 
 ### USB Detective
 
 [**USBDetective**](https://usbdetective.com) can be used to obtain information about the USB devices that have been connected to an image.
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (483).png>)
+![](<../../../.gitbook/assets/image (483).png>)
 
 ### Plug and Play Cleanup
 
 The 'Plug and Play Cleanup' scheduled task is responsible for **clearing** legacy versions of drivers. It would appear (based upon reports online) that it also picks up **drivers which have not been used in 30 days**, despite its description stating that "the most current version of each driver package will be kept". As such, **removable devices which have not been connected for 30 days may have their drivers removed**.\
 The scheduled task itself is located at ‘C:\Windows\System32\Tasks\Microsoft\Windows\Plug and Play\Plug and Play Cleanup’, and its content is displayed below:
 
-![.gitbook/assets/1663787028.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663787027/cnew5zahjadagsxdcqps.png)
+![](https://2.bp.blogspot.com/-wqYubtuR\_W8/W19bV5S9XyI/AAAAAAAANhU/OHsBDEvjqmg9ayzdNwJ4y2DKZnhCdwSMgCLcBGAs/s1600/xml.png)
 
 The task references 'pnpclean.dll' which is responsible for performing the cleanup activity additionally we see that the ‘UseUnifiedSchedulingEngine’ field is set to ‘TRUE’ which specifies that the generic task scheduling engine is used to manage the task. The ‘Period’ and ‘Deadline’ values of 'P1M' and 'P2M' within ‘MaintenanceSettings’ instruct Task Scheduler to execute the task once every month during regular Automatic maintenance and if it fails for 2 consecutive months, to start attempting the task during.\
 **This section was copied from** [**here**](https://blog.1234n6.com/2018/07/windows-plug-and-play-cleanup.html)**.**
@@ -165,7 +165,7 @@ The emails contains **2 interesting parts: The headers and the content** of the 
 
 Also, inside the `References` and `In-Reply-To` headers you can find the ID of the messages:
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (484).png>)
+![](<../../../.gitbook/assets/image (484).png>)
 
 ### Windows Mail App
 
@@ -193,7 +193,7 @@ The registry path `HKEY_CURRENT_USER\Software\Microsoft\WindowsNT\CurrentVersion
 
 You can open the PST file using the tool [**Kernel PST Viewer**](https://www.nucleustechnologies.com/es/visor-de-pst.html).
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (485).png>)
+![](<../../../.gitbook/assets/image (485).png>)
 
 ### Outlook OST
 
@@ -310,7 +310,7 @@ To inspect these files you can use the tool [**PEcmd.exe**](https://github.com/E
 .\PECmd.exe -d C:\Users\student\Desktop\Prefetch --html "C:\Users\student\Desktop\out_folder"
 ```
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (487).png>)
+![](<../../../.gitbook/assets/image (487).png>)
 
 ### Superprefetch
 
@@ -365,7 +365,7 @@ This information can be found in the registry in:
 
 You can use the tool [**AppCompatCacheParser**](https://github.com/EricZimmerman/AppCompatCacheParser) to parse this information.
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (488).png>)
+![](<../../../.gitbook/assets/image (488).png>)
 
 ### Amcache
 
@@ -460,7 +460,7 @@ Inside the EventID 4634/4647 there are interesting sub-types:
 
 The Status and sub status information of the event s can indicate more details about the causes of the event. For example take a look to the following Status and Sub Status Codes of the Event ID 4625:
 
-![.gitbook/assets/1663787028.png](<../../../.gitbook/assets/image (455).png>)
+![](<../../../.gitbook/assets/image (455).png>)
 
 ### Recovering Windows Events
 
