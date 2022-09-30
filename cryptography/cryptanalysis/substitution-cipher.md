@@ -1,7 +1,5 @@
 # Substitution cipher
 
-
-
 ![](https://upload.wikimedia.org/wikipedia/commons/e/e0/Babington\_postscript.jpg)
 
 In [cryptography](https://www.wikiwand.com/en/Cryptography), a **substitution cipher** is a method of [encrypting](https://www.wikiwand.com/en/Encrypting) in which units of [plaintext](https://www.wikiwand.com/en/Plaintext) are replaced with the [ciphertext](https://www.wikiwand.com/en/Ciphertext), in a defined manner, with the help of a key; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing the inverse substitution process to extract the original message.
@@ -12,7 +10,7 @@ There are a number of different types of substitution cipher. If the cipher oper
 
 ### Simple substitution
 
-![ROT13 is a Caesar cipher, a type of substitution cipher. In ROT13, the alphabet is rotated 13 steps.](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/ROT13.png/600px-ROT13.png)
+![.gitbook/assets/1663787020.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663787019/byzxgsqz7mdrsshndjif.png)
 
 [ROT13](https://www.wikiwand.com/en/ROT13) is a [Caesar cipher](https://www.wikiwand.com/en/Caesar\_cipher), a type of substitution cipher. In ROT13, the alphabet is rotated 13 steps.
 

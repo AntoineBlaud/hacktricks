@@ -1,14 +1,12 @@
 # IAM Attack
 
-
-
 ### **Executive Summary**
 
 In the spring of 2020, the Unit 42 Cloud Threat Intelligence Team was approached by a customer who wanted the group to test the defenses of their Amazon Web Services (AWS) infrastructure. The customer ran thousands of workloads, hundreds of Amazon Simple Storage Service (S3) buckets and maintained cloud native databases with over 500 active development users and nearly 1,000 roles across four AWS accounts. For this Red Team exercise, Unit 42 researchers were provided limited information about the internal architecture and were given limited access to the environment itself. The researchers were able to gain privileged access to two AWS accounts using two different identity and access management (IAM) misconfigurations. The misconfigurations allowed the researchers to gain access to the cloud as anonymous users and then pivot to source code repositories hosted outside the cloud.
 
 The first identified misconfiguration (see “Risky Combination of Policies”) exploited a risky combination of [policies](https://aws.amazon.com/iam/features/manage-permissions/) that allow users with an IAM role to elevate to [AdministratorAccess](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/AdministratorAccess). When hundreds of users are given this role, this opens up many potential avenues for exploiting this vulnerability to gain AdministratorAccess and compromise the entire cloud. The second identified misconfiguration (see “Overly Permissive IAM Trust Policy”) exploits an overly permissive [IAM trust policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id\_roles\_terms-and-concepts.html) that allows unauthenticated users to gain access to internal resources anonymously. The researchers successfully moved laterally inside the cloud to eventually obtain private keys for certificates, database credentials and repository source code.
 
-![The conceptual image illustrates the idea of the risks that misconfigured IAM roles can pose for cloud workloads.](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/Cloud-malware.png)
+![.gitbook/assets/1663786858.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786857/vw76vvcvnhhzetlq9aqd.png)
 
 After analyzing the severity of overly permissive IAM trust policies, Unit 42 researchers then conducted [reconnaissance research](https://unit42.paloaltonetworks.com/iam-roles-compromised-workloads/#post-109032-p8p3dxoyy8ju) on GitHub to look for AWS accounts with misconfigured IAM trust policies. The research found misconfigured accounts belonging to billion-dollar organizations – a U.S. pharmaceutical company and a financial company based in Brazil.
 
@@ -52,7 +50,7 @@ In Figure 1 below, on the left is a permissions policy that allows a principal t
 3. The target service is listed in the permissions policy’s condition field. If there is no condition field, the principal can pass a role to any service.
 4. The role's trust policy allows the target service to assume the role.
 
-![The code shown in the image displays an example of a principal's permissions policy and the trust policy of an IAM Role (in this case, DevOpsEC2-EU-NAT)](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-9.png)
+![.gitbook/assets/1663786859.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786858/tpol0rbzktwtayglo1mk.png)
 
 Figure 1. The conditions for a principal to pass a role to a service.
 
@@ -60,7 +58,7 @@ If the role is more privileged (has more allowed permissions) than the principal
 
 Figure 2 illustrates how Unit 42 researchers discovered, exploited and eventually gained AdministratorAccess in the customer's AWS cloud environment. Researchers identified and confirmed the step-by-step actions an attacker could take to compromise the environment.
 
-![The figure displays how an attacker can use permission chaining to escalate privilege. The steps are: 1) Check my permission policies to see my allowed permissions; 2) Check PassRole condition, find list of IAM roles allowed to be passed; 3) Check role trust policies and services I can access, look for roles assumable by some services that I can access; 4) Check role permission policies; 5) Attach a more privileged role to my service](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-10.png)
+![.gitbook/assets/1663786860.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786859/utflszm8nvkn1h3hsntr.png)
 
 Figure 2. Attacker’s use of permission chaining to escalate privilege.
 
@@ -74,19 +72,19 @@ Figure 3. An unrestricted PassRole permission.
 
 3\. The attacker checks the existing roles and their trust policies. Normally, each role can only be assumed by a service. The attacker needs to find roles assumable by services to access. The attacker can move forward after finding a subset of roles that meet the conditions.
 
-![This shows a list of existing IAM roles and their trust policies. Each IAM role is partially obscured and followed by a list of trusted entities, in the form of specific AWS services.](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-12.png)
+![.gitbook/assets/1663786861.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786860/dpayciarnpe8jpqz5jcd.png)
 
 Figure 4. Existing roles and their trust policies.
 
 4\. The attacker checks the permissions policies of the roles that can be exploited. If any of these roles are more privileged (i.e. have more permissions) than the attacker’s current identity, the attacker can pass this role to a service and gain the elevated privilege from the service. The attacker finds multiple roles with AdministratorAccess that can be assumed by EC2.
 
-![This screenshot shows an example of what an attacker in search of IAM Roles with AdministratorAccess could check. Under the tab "policy usage" is a list labeled "permissions," filtered by roles.](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-13.png)
+![.gitbook/assets/1663786862.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786861/l9nvwvjsexmg1yjufe3s.png)
 
 Figure 5. Existing roles with AdministratorAccess
 
 5\. The attacker creates a new EC2 instance and attaches EC2ManagerRole to the VM. The attacker then logs in to the VM and calls the [metadata service API](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-retrieval.html) at http://169.254.169\[.]254/latest/meta-data to retrieve the session token. This session token gives the attacker AdministratorAccess to the entire cloud.
 
-![The code shown in the screenshot illustrates how an attacker could create a new EC2 instance and attach an IAM Role with elevated privileges, EC2ManagerRole, to the VM. The attacker then logs in to the VM and calls the metadata service API to retrieve the session token. The session token gives the attacker AdministratorAccess to the entire cloud.](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-14.png)
+![.gitbook/assets/1663786863.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786862/jdellzutwdl9psiayqco.png)
 
 Figure 6. Obtain the session token with AdministratorAccess in an EC2 instance.
 
@@ -100,31 +98,31 @@ Upon identifying the issues, Unit 42 researchers immediately worked with the cus
 
 Unit 42 researchers found the customer’s production AWS account ID from the customer’s GitHub page. The GitHub page hosts instructions and scripts used for integrating with the customer’s products. With the account ID, researchers were able to enumerate the misconfigured IAM Roles by attempting to [assume](https://docs.aws.amazon.com/STS/latest/APIReference/API\_AssumeRole.html) a list of role names. It did not take long to find a misconfigured role that can be assumed anonymously. Figure 7 illustrates how researchers identified and confirmed the step-by-step actions an attacker could take to compromise the environment:
 
-![The figure shows an attacker's path to compromise the cloud: 1) Enumerate names in search of misconfigured IAM roles; 2) Enumerate session token permissions in search of EC2, S3, KMSAccess; 3) Enumerate EC2 userdata and get a list of S3 buckets, leading to accessing S3; 4) Get encrypted objects from S3, allowing for KMS decryption; 5) Decrypt objects using KMS, obtaining service credentials; 6) Access more services.](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-15.png)
+![.gitbook/assets/1663786864.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786863/vopoz1bsc3w5vukrbomh.png)
 
 Figure 7. Attacker’s path to compromise the cloud.
 
 1. An attacker obtains a list of role names (e.g., prodApp-nat, prodApp-app2-nat) through reconnaissance and enumeration. Because the role names are not long and somewhat predictable, it is feasible to find a misconfigured role through enumeration.
 
-![The code in the image shows an example of an IAM roles trust policy that allows anonymous access: "Effect": "Allow", "Principal": { "AWS": "\*"}, "Action": "sts:AssumeRole"](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-16.png)
+![.gitbook/assets/1663786865.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786864/k1yxligbtewhw6dub2za.png)
 
 Figure 8. IAM roles trust policy that allows anonymous access.
 
-2\.  The attacker obtains a temporary access token by assuming the misconfigured role. With the access token, the attacker can enumerate the permissions and find the resources it can access.
+2\. The attacker obtains a temporary access token by assuming the misconfigured role. With the access token, the attacker can enumerate the permissions and find the resources it can access.
 
-![This breaks down the specific lines of code in a misconfigured IAM role that enumerate permissions for EC2, S3 and KMS services and show what resources an attacker can access after gaining access to the role.](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-17.png)
+![.gitbook/assets/1663786865.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786864/zvxmw71nzkmoshz0afhr.png)
 
 Figure 9. The misconfigured IAM role has limited access to EC2, S3 and KMS services.
 
 3\. The attacker can see all the EC2 instances and read their metadata. From the startup script in the metadata, the attacker can obtain information such as the Docker images the VM deploys, the database that the VM queries and the S3 buckets the VM pulls data from.
 
-![Once gaining access through misconfigured IAM roles, the attacker can see all the EC2 instances and read their metadata. This allows the attacker to obtain information sucha s the Docker images the VM deploys, the database that the VM queries and the S3 buckets the VM pulls data from.](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-18.png)
+![.gitbook/assets/1663786866.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786865/g0klex2lgmi9qwpybz5z.png)
 
 Figure 10. A sample of EC2 metadata shows the S3 buckets that the VM can access.
 
 4\. The attacker then accesses the S3 buckets found in the EC2 metadata and downloads all the data. There are certificate keys, multiple shell scripts used for deploying applications and a few encrypted files containing credentials.
 
-![The attacker then accesses the S3 buckets found in the EC metadata and downloads all the data. The screenshots shown illustrate the types of sensitive files found in the compromised S3 bucket, including certificate keys, multiple shell scripts used for deploying applications and a few encrypted files containing credentials.](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-19.png)
+![.gitbook/assets/1663786867.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786866/an5ieeeskwhhh9gcowu8.png)
 
 Figure 11. Sensitive files in the compromised S3 bucket.
 
@@ -132,7 +130,7 @@ Figure 11. Sensitive files in the compromised S3 bucket.
 
 6\. After obtaining the plaintext credentials, the attacker can move laterally and access the Docker Hub repository, Splunk server and databases.
 
-![The screenshot shows the compromised source code repository in Docker Hub, which is one of the assets the attacker can move laterally and access after obtaining the plaintext credentials.](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-20.png)
+![.gitbook/assets/1663786868.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786867/dit5pvocuyzm7hjmpdgg.png)
 
 Figure 12. Compromised source code repository in Docker Hub.
 
@@ -146,7 +144,7 @@ Searching for misconfigured IAM roles is similar to searching for exposed databa
 
 Overall, Unit 42 researchers analyzed 283,751 files across 145,623 repositories and identified 32,987 confirmed AWS account IDs and 68,361 role names. Figure 13 illustrates the research methodology:
 
-![The figure shows the steps taken to find misconfigured IAM roles on GitHub: 1) GitHub search, 2) File Analysis, 3) validation, 4) Role name enumeration, 5) Check misconfigured IAM roles](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-21.png)
+![.gitbook/assets/1663786869.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786868/n3ma0xx2gcphxzktwdv7.png)
 
 Figure 13. Methodology of finding misconfigured IAM roles on GitHub.
 
@@ -154,13 +152,13 @@ Figure 13. Methodology of finding misconfigured IAM roles on GitHub.
 2. Once all the files had been downloaded, Unit 42 researchers first extracted potential account IDs and role names using regular expressions. If a file was in [AWS CloudFormation](https://aws.amazon.com/cloudformation/) or [Terraform](https://www.terraform.io/) format, the file was further parsed into a JSON object and had all the property names analyzed. Due to the popularity of IaC templates, more than 70% of the downloaded files were IaC, which made the analysis easier and more accurate.
 3. Because not all the extracted account IDs are valid, researchers used the [AWS Management Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/console.html) page to validate each account ID. AWS creates a console page at https://**account\_alias\_or\_id**.signin.aws.amazon.com/console/ for each active account. If an account ID exists and is active, sending an http request to this URL will receive an HTTP 200 response. AWS accounts in aws-cn and aws-us-gov partitions can also be tested similarly using URLs https://**account\_alias\_or\_id**.signin.amazonaws.cn/console/ and https://**account\_alias\_or\_id**.signin.amazonaws-us-gov.com/console/, respectively.
 
-![This is the 404 page that shows when an attacker attempts to access the console page of a non-existent AWS account ID.](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-22.png)
+![.gitbook/assets/1663786869.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786868/kjadrascet29aar9ys1o.png)
 
 Figure 14. Attempt to access the console page of a non-existent AWS account ID.
 
 4\. Finding existing role names in an AWS account is similar to brute-forcing passwordless user names in a database. Thanks to the technique published by [Rhino Security Labs](https://rhinosecuritylabs.com/aws/aws-role-enumeration-iam-p2/), it is possible to check if a role name exists in an AWS account without leaving any trace in the target account. The technique abuses the AWS IAM trust policy validator to check if an IAM role specified in the Principal field exists. Unit 42 researchers enumerated each verified account ID with a subset of role names identified in Step 2. Role names found in the same GitHub repository as the account ID were tested first, followed by the top 500 most common IAM role names found in GitHub.
 
-![This shows the code that could be used in an attempt to set the principal to a non-existent IAM role, as well as the resulting error message, "Invalid principal in policy."](https://unit42.paloaltonetworks.com/wp-content/uploads/2020/10/word-image-23.png)
+![.gitbook/assets/1663786870.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786869/ugzzldj1sxansw9sv7u7.png)
 
 Figure 15. Attempt to set the principal to a non-existent IAM role.
 
@@ -382,7 +380,7 @@ An example command to exploit this method might look like this:
 
 Where the policy looks like the following, which gives the user permission to assume the role:
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/image-3-750x292.png)
+![.gitbook/assets/1663786871.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786870/tok0vifk5qo5jtkfr2ag.png)
 
 **Potential Impact:** This would give the attacker the privileges that are attached to any role in the account, which could range from no privilege escalation to full administrator access to the account.
 
@@ -516,13 +514,13 @@ While any of these privilege escalation methods can be checked manually, by eith
 
 To automate this process, we have written a tool to do all that checking for you: [aws\_escalate.py.](https://github.com/RhinoSecurityLabs/Security-Research/blob/master/tools/aws-pentest-tools/aws\_escalate.py)
 
-Using the script ([Github available here](https://github.com/RhinoSecurityLabs/Security-Research/blob/master/tools/aws-pentest-tools/aws\_escalate.py)), it is possible to detect what users have access to what privilege escalation methods in an AWS environment. It can be run against any single user or every user in the account if the access keys being used have IAM read access.  Results output is in csv, including a breakdown of users scanned and the privilege escalation methods they are vulnerable to.
+Using the script ([Github available here](https://github.com/RhinoSecurityLabs/Security-Research/blob/master/tools/aws-pentest-tools/aws\_escalate.py)), it is possible to detect what users have access to what privilege escalation methods in an AWS environment. It can be run against any single user or every user in the account if the access keys being used have IAM read access. Results output is in csv, including a breakdown of users scanned and the privilege escalation methods they are vulnerable to.
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/scanner2.gif)
+![.gitbook/assets/1663786871.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786871/xmkfwq4ijeygq7tbjfed.gif)
 
 When opened in Excel, the left-most column contains the names of all the privilege escalation methods that were checked for and the top-most row includes the names of all the IAM users that were checked.
 
-Every field (intersecting a specific vulnerability and tested key) has three possible values:  Confirmed,  Potential, or Blank (the associated account is not vulnerable).  “Confirmed” means it is _confirmed_ that that privilege escalation method works for that user.
+Every field (intersecting a specific vulnerability and tested key) has three possible values: Confirmed, Potential, or Blank (the associated account is not vulnerable). “Confirmed” means it is _confirmed_ that that privilege escalation method works for that user.
 
 If the cell is “Potential”, that means that that privilege escalation method will _potentially_ work, but further investigation is required.
 
@@ -544,8 +542,8 @@ _permission misconfigurations to see what privilege escalation methods are_\
 _possible. Available attack paths will be output to a .csv file in the same directory._\
 \
 _optional arguments:_\
-_-h, –help            show this help message and exit_\
-_–all-users           Run this module against every user in the account._\
+_-h, –help show this help message and exit_\
+_–all-users Run this module against every user in the account._\
 _._\
 _–user-name USER\_NAME_\
 _A single username of a user to run this module_\
@@ -568,12 +566,11 @@ _python3 aws\_escalate.py –access-key-id ABCDEFGHIJK –secret-key hdj6kshakl3
 _Check what privilege escalation methods a specific user has access to:_\
 _python3 aws\_escalate.py –user-name some\_other\_user –access-key-id ABCDEFGHIJK –secret-key hdj6kshakl31/1asdhui1hka_\
 _Check what privilege escalation methods all users have access to:_\
-_python3 aws\_escalate.py –all-users –access-key-id ABCDEFGHIJK –secret-key hdj6kshakl31/1asdhui1hka_\
+_python3 aws\_escalate.py –all-users –access-key-id ABCDEFGHIJK –secret-key hdj6kshakl31/1asdhui1hka_\\
 
+Here is an example .csv output of the aws\_escalate.py scan I ran against a test environment. This sandbox environment has 10 separate IAM users, two of which already have administrator privileges (Dave and Spencer) and two are not vulnerable to any of the privilege escalation methods (Bill and BurpS3Checker).
 
-Here is an example .csv output of the aws\_escalate.py scan I ran against a test environment.  This sandbox environment has 10 separate IAM users, two of which already have administrator privileges (Dave and Spencer) and two are not vulnerable to any of the privilege escalation methods (Bill and BurpS3Checker).
-
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/csv-example.png)
+![.gitbook/assets/1663786871.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786872/fq3nzepw5k7stqbkdteb.png)
 
 ### Defense and Mitigation
 
@@ -587,13 +584,13 @@ By using the “aws:username” variable, it is possible to give users a variety
 
 A policy like that might look like the following:
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/Screenshot\_1-750x345.png)
+![.gitbook/assets/1663786871.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786873/guqfqxphdcfzdqanukwe.png)
 
 Now for any user that this policy is attached to, they can only perform those four actions on themselves, because of the user of the “aws:username” variables. This example policy shows how to correctly format those variables to be recognized correctly by IAM, which is done by putting the IAM variable name inside curly-brackets that begin with a money sign (${example-variable}).
 
 To restrict access to a certain IP address, the IAM policy must user the “Condition” key to set a condition that the IAM user is allowed to perform these actions, if and only if this condition is set. The following IAM policy document snippet shows “Condition” being used to restrict access to only those users who run API calls after a certain time (2013-08-16T12:00:00Z), before another time (2013-08-16T15:00:00Z) and having an IP address originating from a certain CIDR range (192.0.2.0/24 or 203.0.113.0/24).
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/Screenshot\_1-1-500x315.png)
+![.gitbook/assets/1663786871.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786874/fb1hsiqijze4xxzwxxn8.png)
 
 ### Preview: AWS Exploitation and Pacu
 
@@ -601,11 +598,11 @@ This AWS privilege escalation scanner came from a larger Rhino project currently
 
 Pacu is an open source AWS post-exploitation framework, designed for offensive security testing against AWS environments.
 
-Created and maintained by Rhino Security Labs, the framework allows penetration testers to identify areas of attack once initial access is obtained to an AWS account.  Like other open source offensive security tools, Pacu is built to identify AWS flaws and misconfigurations, helping AWS users better understand the impact of those risks.
+Created and maintained by Rhino Security Labs, the framework allows penetration testers to identify areas of attack once initial access is obtained to an AWS account. Like other open source offensive security tools, Pacu is built to identify AWS flaws and misconfigurations, helping AWS users better understand the impact of those risks.
 
-One of these modules will be a similar privilege escalation scanner, with the option to exploit any vulnerable account automatically.  This following video shows Pacu identifying a privilege escalation route and exploiting it for immediate AWS administrator access.
+One of these modules will be a similar privilege escalation scanner, with the option to exploit any vulnerable account automatically. This following video shows Pacu identifying a privilege escalation route and exploiting it for immediate AWS administrator access.
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/pacu.gif)
+![.gitbook/assets/1663786871.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786875/eed6lhuipcaqueshaked.gif)
 
 ### Pacu Beta Testing
 
@@ -617,5 +614,4 @@ A supporting OWASP Talk can be found on [YouTube here.](https://youtu.be/XfetW1V
 
 AWS security can be a tough task to accurately and successfully take on, but by protecting against privilege escalation attacks, security of an AWS environment can be improved significantly.
 
-This striving for security maturation in the cloud is why we’re developing an AWS post-exploitation tool, Pacu.  Pacu will be publicly released as an open source project early August 2018.
-
+This striving for security maturation in the cloud is why we’re developing an AWS post-exploitation tool, Pacu. Pacu will be publicly released as an open source project early August 2018.

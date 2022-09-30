@@ -1,7 +1,5 @@
 # Know Plaintext Attacks
 
-
-
 The first crypto challenge of UMassCTF 2021 was "malware", where we were given a zip archive containing `malware.py` and `files.zip`, which when decompressed yielded `malware.py.enc`, `CTF-favicon.png.enc`, `shopping_list.txt.enc`, and `flag.txt.enc`. The contents of `malware.py` were
 
 ```
@@ -46,7 +44,7 @@ $$
 
 of those other files, thus completing our known-plaintext attack. However, we require keystream reuse across files, and that necessitates a closer inspection of how the keystream is constructed. The keystream is an AES encryption in [ECB mode](https://en.wikipedia.org/wiki/Block\_cipher\_mode\_of\_operation#Electronic\_codebook\_\(ECB\)) of the counter blocks, and requires the encryption key, an initial counter value, and any additional random nonces to be appended or prepended to the counter as parameters. The counter block sequence is in the form
 
-![Construction of counter block sequence](https://pycryptodome.readthedocs.io/en/latest/\_images/counter\_be.png)
+![.gitbook/assets/1663786979.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786978/z57obolibgcv07pvrtu6.png)
 
 and the program initializes the sequence using
 

@@ -10,9 +10,9 @@ When an **HTTP** **request** is made to the Docker **daemon** through the CLI or
 
 The sequence diagrams below depict an allow and deny authorization flow:
 
-![Authorization Allow flow](https://docs.docker.com/engine/extend/images/authz\_allow.png)
+![.gitbook/assets/1663787124.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663787124/l3wysnsvn3mu4yc9mdy6.png)
 
-![Authorization Deny flow](https://docs.docker.com/engine/extend/images/authz\_deny.png)
+![.gitbook/assets/1663787125.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663787124/ypvfeuaux02cvqljhpfg.png)
 
 Each request sent to the plugin **includes the authenticated user, the HTTP headers, and the request/response body**. Only the **user name** and the **authentication method** used are passed to the plugin. Most importantly, **no** user **credentials** or tokens are passed. Finally, **not all request/response bodies are sent** to the authorization plugin. Only those request/response bodies where the `Content-Type` is either `text/*` or `application/json` are sent.
 

