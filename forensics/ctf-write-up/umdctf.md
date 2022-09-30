@@ -2,7 +2,7 @@
 
 This includes my write-up for UMDCTF which had many interesting and new forensics challenges along with other categories!
 
-![](https://miro.medium.com/max/910/1\*9k6kTpMHFjVhQgJrPflTPw.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/910/1\*9k6kTpMHFjVhQgJrPflTPw.png)
 
 We finished 37th, top 6.6%!
 
@@ -12,7 +12,7 @@ We finished 37th, top 6.6%!
 
 We’re given an image file `usb.img` which after loading in FTK shows the deleted files from the unallocated space. Simple one to begin with, nothing too complex.
 
-![](https://miro.medium.com/max/1400/1\*663VAjr1LAcZIlaQ3Fk9pA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*663VAjr1LAcZIlaQ3Fk9pA.png)
 
 **UMDCTF{Sn00p1N9\_L1K3\_4\_SL317H!}**
 
@@ -20,23 +20,23 @@ We’re given an image file `usb.img` which after loading in FTK shows the delet
 
 For this one, we are given a `.pcap` file, which seems to include USB data.
 
-![](https://miro.medium.com/max/1400/1\*XJQDW7qd8W8eHa1bhp7pXA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*XJQDW7qd8W8eHa1bhp7pXA.png)
 
 Quickly going through the packets, you can notice the section of data that changes and one that stays the same. The interesting field here is `Leftover Capture Data` which includes the keystroke data sent from the keyboard to the host. Also notice that all packets have a field `usb.urb_type` which determines the direction of data transmission. `URB_COMPLETE` & `URB_SUBMIT` are the possible values for the same. We are looking for the direction keyboard to host, so let’s apply a filter for it: `usb.urb_type==URB_COMPLETE`
 
-![](https://miro.medium.com/max/1400/1\*qZdUJsekrdhvY16U1ghLoA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*qZdUJsekrdhvY16U1ghLoA.png)
 
 The 8th byte will be set to a ‘C’ or an ‘S’ depending on the direction and the last 5 bytes (Byte 64–68) is what we want to extract which is the leftover capture data.
 
 To get all the leftover capture data we can use tshark to redirect the output. We apply the same filter to get all the packets from keyboard to host first and then export the `usb.capdata` field which is our ‘Leftover Capture Data’ in wireshark.
 
-![](https://miro.medium.com/max/1358/1\*HND6PtvcmkC5yyvVX5xk4Q.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1358/1\*HND6PtvcmkC5yyvVX5xk4Q.png)
 
 `tshark -r how_to_breakdance.pcapng -Y ‘usb.urb_type==URB_COMPLETE’ -T fields -e usb.capdata > keystrokes.txt`
 
 Now all we need to do is map the HID usage codes in hex to the actual keys pressed. I wrote a python script to do the mapping and then removed all the newlines to get a big chunk of text to work with.
 
-![](https://miro.medium.com/max/1400/1\*YfRf\_UYNkg1QL-uIPwDPgA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*YfRf\_UYNkg1QL-uIPwDPgA.png)
 
 **UMDCTF{1\_luv\_70\_f1nd\_c7f\_fl46s}**
 
@@ -44,13 +44,13 @@ Now all we need to do is map the HID usage codes in hex to the actual keys press
 
 For this one, we’re given a large `.zip` file which had numerous `.png` files. Opening up the first image in HxD we can see a byte worth of data replacing the first byte of the default file signature for a `.png` which should be a `%` in ascii. Fixing the header results into a blank image for all files, which means the data that is being written is of interest.
 
-![](https://miro.medium.com/max/1400/1\*2g2F6720nAJrXX0Hexxltw.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*2g2F6720nAJrXX0Hexxltw.png)
 
 This pattern follows throughout the entirety of 4464 images.
 
 We can extract the first byte from all files like so: `head -c 1 * > firstchars.txt`and then simply process out the data from the additional noise.
 
-![](https://miro.medium.com/max/1400/1\*c0skhvAXs5t4nVORPC\_6-g.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*c0skhvAXs5t4nVORPC\_6-g.png)
 
 **UMDCTF{d4r7h\_pl46u315\_w45\_m461c}**
 
@@ -58,19 +58,19 @@ We can extract the first byte from all files like so: `head -c 1 * > firstchars.
 
 For this we have a `.zip` file that includes only an image inside at first glance, but I found a binary embedded inside it.
 
-![](https://miro.medium.com/max/1400/1\*vPH-p2tlDRCrCz6EuZMLWg.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*vPH-p2tlDRCrCz6EuZMLWg.png)
 
 Extract the elf binary so we can take a look in ghidra.
 
 `binwalk — dd=’.*’ jdata.zip` will search and extract every known file signature embedded.
 
-![](https://miro.medium.com/max/1400/1\*k3gWqWxWCanfv1Bob\_AXDg.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*k3gWqWxWCanfv1Bob\_AXDg.png)
 
 There is a function called **hehe**, which calls many other functions which only have a return statement. The function identifiers however, spell out something in reverse.
 
 `ghidraisforbinariesbroand` is the first half of the flag.
 
-![](https://miro.medium.com/max/1400/1\*LKQdUzLvkSz7YDILhy61tQ.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*LKQdUzLvkSz7YDILhy61tQ.png)
 
 Second half is in plaintext in the image, as aptly shown by the much useful red ellipse and arrow :) **UMDCTF{ghidraisforbinariesbroandpubl1sh\_s0m3\_r3al\_w0rk}**
 
@@ -78,11 +78,11 @@ Second half is in plaintext in the image, as aptly shown by the much useful red 
 
 For this we’re given a VM image. In time crunch, instead of booting it up as a VM with provided password, I mounted it with Arsenal and used FTK to quickly look for interesting files in the filesystem.
 
-![](https://miro.medium.com/max/1400/1\*P0xRBlHP2ORm8nnPGEvU2Q.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*P0xRBlHP2ORm8nnPGEvU2Q.png)
 
 Right away, we have the flag base64 encoded.
 
-![](https://miro.medium.com/max/890/1\*fXpvXd0jJn6FEJ58GJ2qWw.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/890/1\*fXpvXd0jJn6FEJ58GJ2qWw.png)
 
 **UMDCTF{f0rk\_b0mb5\_4r3\_4\_b4d\_71m3}**
 
@@ -90,29 +90,29 @@ Right away, we have the flag base64 encoded.
 
 This was the first time I came across a `.kdump` file. It stands for Kernel Dump, which is a mechanism in the Linux kernel to capture memory during a Kernel Panic. I used the crash utility to debug the memory dump.
 
-![](https://miro.medium.com/max/1400/1\*Sil9iMQ4fay1pClVzFK5nA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*Sil9iMQ4fay1pClVzFK5nA.png)
 
 From the prompt we can see it hinting at **pwd**.
 
 The crash utility accepts 2 parameters, first is the Linux Kernel Object File that has the debugging switch set. You can get it from the corresponding OS index. Here we have a dump from `ubuntu20.04–5.4.0–99-generic` so find the equivalent debug symbol package and grab the object file from it.
 
-![](https://miro.medium.com/max/1148/1\*sfAh5YUKvm87eLh\_aG64ew.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1148/1\*sfAh5YUKvm87eLh\_aG64ew.png)
 
 The hint was ‘**pwd**’ which stands for present working directory, so I examined the backtrace first to determine which process caused the kernel panic. Then we can use the file command with the PID of that process.
 
-![](https://miro.medium.com/max/1400/1\*cZiiMGKceGRvhFQZWBN8cQ.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*cZiiMGKceGRvhFQZWBN8cQ.png)
 
-![](https://miro.medium.com/max/1400/1\*mqk6ewhxTKNFfTLLtEwM8g.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*mqk6ewhxTKNFfTLLtEwM8g.png)
 
 We can see a bash process with PID 5206 in backtrace.
 
-![](https://miro.medium.com/max/1400/1\*-w5OimXn6alb5z-w7qCiHA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*-w5OimXn6alb5z-w7qCiHA.png)
 
 Here we can see the current working directory for the same process.
 
 The challenge author wasn’t aware of the `files` command, and posted the intended solve on discord, which I wasn’t able to replicate but basically you have to traverse the `task_struct` structure to get the directory name, similar to how we would traverse an `_EPROCESS` structure to get ‘next process name’ and ‘previous process name’ from `ActiveProcessLinks` structure in a Windows memory dump.
 
-![](https://miro.medium.com/max/934/1\*k-5RpuwC8H21aLDOSLUjwg.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/934/1\*k-5RpuwC8H21aLDOSLUjwg.png)
 
 **UMDCTF{T0ta11yCR45H!!}**
 
@@ -120,19 +120,19 @@ The challenge author wasn’t aware of the `files` command, and posted the inten
 
 Again we have a VM image zipped and password protected, and an encrypted pdf. I started by cracking the pdf password using `john`.
 
-![](https://miro.medium.com/max/586/1\*BBNMOeMZwnt3fqtsNeHiHQ.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/586/1\*BBNMOeMZwnt3fqtsNeHiHQ.png)
 
-![](https://miro.medium.com/max/1130/1\*cvbCVzjAVtqfEfj7DK5wJQ.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1130/1\*cvbCVzjAVtqfEfj7DK5wJQ.png)
 
 Use the same password to extract the VM image.
 
 Again, I just wanted to look at the filesystem so I didn’t boot up as it would take a lot of time. This time instead of FTK, I used R-studio as FTK wasn’t showing me some necessary deleted files. There were many deleted audio and image files to misdirect the players into deep steganography and spectral analysis rabbit holes. However I was able to find this hint so I quickly pivoted.
 
-![](https://miro.medium.com/max/1400/1\*Gad7oCIB5j8ZD3Z1MXdgHA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*Gad7oCIB5j8ZD3Z1MXdgHA.png)
 
 I found this hint in this deleted file, to which my first thought was to do a keyword search.
 
-![](https://miro.medium.com/max/1400/1\*clKF0Of9\_vPX11lidYsWag.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*clKF0Of9\_vPX11lidYsWag.png)
 
 **UMDCTF{7h3r3'5\_4\_pl4c3\_c4ll3d\_k0k0m0}**
 
@@ -140,7 +140,7 @@ I found this hint in this deleted file, to which my first thought was to do a ke
 
 For this one, we’re asked to find the address of the CR3 register.
 
-![](https://miro.medium.com/max/1022/1\*H1PuNMbNiBWMOu9HC3nR0g.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1022/1\*H1PuNMbNiBWMOu9HC3nR0g.png)
 
 CR3 enables the processor to translate logical addresses into physical addresses by locating the page directory and page tables for the current task.
 
@@ -148,7 +148,7 @@ CR3 contains the physical address of the page of the page directory table, so it
 
 So, we just need to walk the `task_struct` to get to the `pgd` pointer.
 
-![](https://miro.medium.com/max/1400/1\*4fJAZu2CAyBygHN\_RAxV6A.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*4fJAZu2CAyBygHN\_RAxV6A.png)
 
 **UMDCTF{0xffff9b187a8e6000}**
 
@@ -156,31 +156,31 @@ So, we just need to walk the `task_struct` to get to the `pgd` pointer.
 
 ### 1. ChungusBot v2
 
-![](https://miro.medium.com/max/1036/1\*DDIPx4ydJcPbqHixb5D89A.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1036/1\*DDIPx4ydJcPbqHixb5D89A.png)
 
 Visiting UMDCSEC’s github, we can find it’s [repo](https://github.com/UMD-CSEC/ChungusBot\_v2/blob/main/chungus.py).
 
 We had to use this Discord bot and it’s custom commands to make it reveal the flag. After looking at the code I noticed there were two checks, one checking the amount of pixels same as the bot’s Discord profile picture, and other is some value in 45–50 & 14–19. I tried fetching the original source of the profile picture using Discord web app, but I just couldn’t reach the demanding 92% similarity.
 
-![](https://miro.medium.com/max/1220/1\*0bYzsNTQRflwNMcTJmhK0A.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1220/1\*0bYzsNTQRflwNMcTJmhK0A.png)
 
 There is a command missing from here called ‘tellme avatar’.
 
-![](https://miro.medium.com/max/990/1\*Une4reyAESD7MM9pS52kWQ.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/990/1\*Une4reyAESD7MM9pS52kWQ.png)
 
 The function check1 verifies the pixel similarity. (See code)
 
-![](https://miro.medium.com/max/1266/1\*7suyk\_iItLEeA0fTFunHNw.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1266/1\*7suyk\_iItLEeA0fTFunHNw.png)
 
-![](https://miro.medium.com/max/1400/1\*tTV6d3KK9ojp2MQSv9o\_8g.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*tTV6d3KK9ojp2MQSv9o\_8g.png)
 
 It gives us an image to work with. Now we just have to remove the red lines enough to match at 92% similarity.
 
 I used the good old MS Paint to set the exact black used for background, remove majority of the reds, and set it as my Discord profile picture. That second check was for the metadata of the image created and not when you use the command. So while the minutes fall in that custom range, save the edited picture.
 
-![](https://miro.medium.com/max/1120/1\*vZanesNdPOdZQIDDWg5uNQ.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1120/1\*vZanesNdPOdZQIDDWg5uNQ.png)
 
-![](https://miro.medium.com/max/1400/1\*dUYRtLnyTl6VIK-FQ6B3zA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*dUYRtLnyTl6VIK-FQ6B3zA.png)
 
 `**UMDCTF{Chungus_15_wh0_w3_str1v3_t0_b3c0m3}**`
 
@@ -188,7 +188,7 @@ I used the good old MS Paint to set the exact black used for background, remove 
 
 We’re provided with `.osr` files which are replay files for the game ‘osu!’. So, naturally I install the game and try to open the file in it.
 
-![](https://miro.medium.com/max/688/1\*p27r2uFCwWyNiA4\_NCQGmw.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/688/1\*p27r2uFCwWyNiA4\_NCQGmw.png)
 
 I’m faced with this error.
 
@@ -198,19 +198,19 @@ First we need to generate an API key, we can do that [here](https://osu.ppy.sh/p
 
 Reading the official API [docs](https://github.com/ppy/osu-api/wiki#apiget\_beatmaps), `get_beatmaps` needs `k` and `h` for our scenario.
 
-![](https://miro.medium.com/max/1400/1\*40iUf6w8uysyoBTIFQHIKA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*40iUf6w8uysyoBTIFQHIKA.png)
 
 To get the beatmap hash, we can again refer to the `.osr` file structure and obtain it.
 
-![](https://miro.medium.com/max/1400/1\*mvcxPY97jFBaWm0q-Jn3QA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*mvcxPY97jFBaWm0q-Jn3QA.png)
 
-![](https://miro.medium.com/max/1400/1\*MOI2tb3V30UjoGeVT0eUJA.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*MOI2tb3V30UjoGeVT0eUJA.png)
 
 We can now send the following request:
 
 `https://osu.ppy.sh/api/get_beatmaps?k=<YOUR_API_KEY_HERE>&h=2d687e5ee79f3862ad0c60651471cdcc`
 
-![](https://miro.medium.com/max/1400/1\*8CBvOaF9wCgZZ1CwUGj5tw.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*8CBvOaF9wCgZZ1CwUGj5tw.png)
 
 Now we have the **beatmap\_id.**
 
@@ -218,19 +218,19 @@ We can go to following URL to download and install the beatmap:
 
 `[https://osu.ppy.sh/s/131891](https://osu.ppy.sh/s/131891)`
 
-![](https://miro.medium.com/max/1400/1\*3TlOOlnlSmVCJZO5zXhQtg.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*3TlOOlnlSmVCJZO5zXhQtg.png)
 
 Now, we can view our replay which reveals the flag but it isn’t very clear. So I switched to a different approach. I studied the `.osr` file structure which is officially documented [here](https://osu.ppy.sh/wiki/en/Client/File\_formats/Osr\_\(file\_format\)). The Replay data is LZMA compressed. So, I decompressed the data and we have values in the format mentioned in the file structure.
 
-![](https://miro.medium.com/max/1400/1\*uB0GpMGuwOVVP3u87WON9w.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*uB0GpMGuwOVVP3u87WON9w.png)
 
-![](https://miro.medium.com/max/1400/1\*8bGVhsL1fgTm0Fe-EsVKNg.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*8bGVhsL1fgTm0Fe-EsVKNg.png)
 
 We can safely discard **w** and **z** values.
 
 Now that we have our coordinates, we can plot them and find the flag in clear text!
 
-![](https://miro.medium.com/max/1400/1\*xqYLGCXAPhwNsD8\_BaUqcw.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*xqYLGCXAPhwNsD8\_BaUqcw.png)
 
 The flag is flipped vertically, after moving around we can see it: **UMDCTF{CL1CK\_TO\_THE\_BEAT}**
 
@@ -238,18 +238,18 @@ The flag is flipped vertically, after moving around we can see it: **UMDCTF{CL1C
 
 For this one, we are only concerned with this Byte Array.
 
-![](https://miro.medium.com/max/1400/1\*lFWK-taK3ATwJvwPEOTiHg.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*lFWK-taK3ATwJvwPEOTiHg.png)
 
 This compressed data is what we’re after.
 
-![](https://miro.medium.com/max/1400/1\*KH4otm8Hwf3zb2oPLzDL0g.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*KH4otm8Hwf3zb2oPLzDL0g.png)
 
 Map out the section using the file structure. The LZMA compressed data is highlighted here.
 
-![](https://miro.medium.com/max/1400/1\*PIOZPldKWwueLP-b\_rVcJw.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*PIOZPldKWwueLP-b\_rVcJw.png)
 
 Decompressing the LZMA stream gives us ascii values which we can decode.
 
-![](https://miro.medium.com/max/1400/1\*zANgttydXMZ6YzVHNe2bfw.png)
+![.gitbook/assets/1664529919_773.png](https://miro.medium.com/max/1400/1\*zANgttydXMZ6YzVHNe2bfw.png)
 
 **UMDCTF{wE1c0m3\_t0\_o5u!}**

@@ -368,15 +368,15 @@ The disadvantage of this method is a lack of [diffusion](https://www.wikiwand.co
 
 A striking example of the degree to which ECB can leave plaintext data patterns in the ciphertext can be seen when ECB mode is used to encrypt a [bitmap image](https://www.wikiwand.com/en/Bitmap\_image) which uses large areas of uniform color. While the color of each individual [pixel](https://www.wikiwand.com/en/Pixel) is encrypted, the overall image may still be discerned, as the pattern of identically colored pixels in the original remains in the encrypted version.
 
-![](https://upload.wikimedia.org/wikipedia/commons/5/56/Tux.jpg)
+![.gitbook/assets/1664529909_3806.jpg](https://upload.wikimedia.org/wikipedia/commons/5/56/Tux.jpg)
 
 Original image
 
-![](https://upload.wikimedia.org/wikipedia/commons/f/f0/Tux\_ecb.jpg)
+![.gitbook/assets/1664529909_3806.jpg](https://upload.wikimedia.org/wikipedia/commons/f/f0/Tux\_ecb.jpg)
 
 Encrypted using ECB mode
 
-![](https://upload.wikimedia.org/wikipedia/commons/a/a0/Tux\_secure.jpg)
+![.gitbook/assets/1664529909_3806.jpg](https://upload.wikimedia.org/wikipedia/commons/a/a0/Tux\_secure.jpg)
 
 Modes other than ECB result in pseudo-randomness
 

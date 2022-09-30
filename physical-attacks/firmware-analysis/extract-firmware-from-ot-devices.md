@@ -40,7 +40,7 @@ Figure 2, below, shows the PCB of the Annke N48PBB, which we will analyze and fi
 
 The figures above represent the supposed pinout of our flash memory (Figure 9a), with a closer look at it (Figure 9b), to highlight the correct orientation.
 
-![](https://www.nozominetworks.com/wp-content/uploads/2021/09/idea-icon.png)
+![.gitbook/assets/1664529979_7812.png](https://www.nozominetworks.com/wp-content/uploads/2021/09/idea-icon.png)
 
 _**Pro tip:** One corner of every PCB-mounted component has a small circle. It’s important to orient the circle in the same position for both the schematic and the real component to correctly identify the pinout._
 

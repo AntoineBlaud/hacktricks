@@ -13,7 +13,7 @@ beacon> getuid
 beacon> execute-assembly C:\Tools\Certify\Certify\bin\Release\Certify.exe find /vulnerable
 ```
 
-![](https://rto-assets.s3.eu-west-2.amazonaws.com/adcs/certify-vuln-template.png)
+![.gitbook/assets/1664529981_9613.png](https://rto-assets.s3.eu-west-2.amazonaws.com/adcs/certify-vuln-template.png)
 
 Let's go through the key parts of this output.
 

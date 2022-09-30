@@ -74,7 +74,7 @@ class bcs(object):
 
 We can see the mysterious `bcs` cipher creates two seperate encryption objects `bc1` and `bc2` with the two keys supplied to it. We also see that input data is padded to a multiple of the blocksize (64 bits in this case) and that it employs a [block cipher mode of operation](https://en.wikipedia.org/wiki/Block\_cipher\_mode\_of\_operation) that looks a bit like [CBC mode](https://en.wikipedia.org/wiki/Block\_cipher\_mode\_of\_operation#Cipher\_Block\_Chaining\_.28CBC.29) but isn’t, the prime difference being that this mode of operation XORs the intermediate ciphertext with the IV rather than the intermediate plaintext. This image illustrates the construction:
 
-![](http://samvartaka.github.io/images/mode\_of\_operation.png)
+![.gitbook/assets/1664529909_4050.png](http://samvartaka.github.io/images/mode\_of\_operation.png)
 
 It looks like we’re faced with a block cipher constructed out of two seperate block ciphers (one used in encryption direction, the other in decryption direction) so the best way to go about this is probably to attack both block ciphers seperately, recover their corresponding round keys and use those to decrypt our flag.
 
@@ -115,7 +115,7 @@ class bc1(object):
 
     def __init__(self, key_data):
         assert (len(key_data) == 6*4)
-        self.subkeys = []
+        self.subkeys = [.gitbook/assets/1664529909_4050.png]
         for i in xrange(0, 6*4, 4):
             self.subkeys.append(array.array('B', key_data[i:i+4]))
 
@@ -206,7 +206,7 @@ Lets clarify some things by example here. Consider FEAL-4’s round function (al
 
 In order to find a good differential characteristic we need to find one that holds with high probability for any given set of inputs to our target round function. One way to approach this is by running every combination of input pairs through the round function and noting down the occurances of a differential characteristic but this process tends to become infeasible quickly for target functions with larger input sizes. So let’s break things down. Our target round function, `f-box`, is composed of several applications of `g-box`. This `g-box` is a modular addition function followed by some bitshifting which looks as follows (using King’s image of the regular FEAL-4 round function and its `g-box` here):
 
-![](http://samvartaka.github.io/images/feal\_round.jpg)
+![.gitbook/assets/1664529909_4050.png](http://samvartaka.github.io/images/feal\_round.jpg)
 
 In code:
 
@@ -291,7 +291,7 @@ A good differential characteristic of the above s-box is `4 -> 7` (since there a
 We know plaintexts `(1, 5)` and ciphertexts `(0, 7)` so we can confirm whether subkey guesses `k0, k1` hold by matching them against the corresponding `s-box` inputs and outputs since `plaintext ^ s_box_input = k0` and `ciphertext ^ s_box_output = k1`. Eg. if we guess `k0 = 9` that would make the `s-box` inputs `(8, 12)` and outputs `(8, 13)` and hence the output differential `8 ^ k1 ^ 13 ^ k1 = 5` which doesn’t match our differential characteristic so we discard this guess. If we guess `k0 = 8` however we get `s-box` mapping `(9,13) -> (11, 12)` with output differential `11 ^ 12 = 7` which does match our differential characteristic so we increment the score of candidate round key `k0 = 8` until we have a candidate for which the score is equal to the number of chosen plaintext/ciphertext pairs (ie. matches all of them). If we do, we add this candidate to the valid candidate list (since multiple candidates might validate). This last part is where we diverge from King (as did h4x0rpsch0rr) as his approach is prone to false positives from which the algorithm cannot recover (since it simply goes with the first validating candidate and moves on to the next round keys). Cracking a 32-bit round key looks as follows in pseudo-code:
 
 ```
-valid_candidates = []
+valid_candidates = [.gitbook/assets/1664529909_4050.png]
 for keyguess in xrange(0, 2**32):
   score[keyguess] = 0
   for j in number_of_plaintext_pairs:
@@ -348,9 +348,9 @@ Note that the above code assumes we retrieve only 1 candidate round key. In prac
 Once we complete this process we have subkeys 1 to 3 and we move on to the first round to obtain subkey 0. We can’t use differentials here to test its subkey and in addition there are the two initialization subkeys (4 and 5). We will recover all three in one cracking attempt by guessing a candidate `subkey[0]` and decrypting the first round (using the material obtained from decrypting the other rounds with our recovered subkeys). We then use our chosen plaintext pair to determine the `subkey[4]` and `subkey[5]` corresponding to this candidate `subkey[0]`. The `subkey[0]` candidate which keeps the corresponding `subkey[4]` and `subkey[5]` consistent among all chosen-plaintext pairs is the correct `subkey[0]` which gives us both a way to validate `subkey[0]` guess and recover the initialization subkeys in one go. Again, here too we have to take false positive keys into account. In pseudocode this looks as follows:
 
 ```
-k0_candidates = []
-k4_candidates = []
-k5_candidates = []
+k0_candidates = [.gitbook/assets/1664529909_4050.png]
+k4_candidates = [.gitbook/assets/1664529909_4050.png]
+k5_candidates = [.gitbook/assets/1664529909_4050.png]
 
 for k0_guess in xrange(0, 2**32):
   k4_guess, k5_guess = 0
@@ -401,7 +401,7 @@ So, to summarize, we:
 ```
 # Round key cracking function
 def crack_round_key(pairs, output_differential):
-    valid_candidates = []
+    valid_candidates = [.gitbook/assets/1664529909_4050.png]
     candidate_key = 0
     while (candidate_key < 2**32):
         score = 0
@@ -474,8 +474,8 @@ def undo_final_operation(pairs):
     return pairs
 
 # Backtracking approach to cracking rounds 2 to 4 (subkeys 2, 3 and 4)
-def phase1(current_round, subkeys = [], output_differential = 0, chosen_pairs = []):
-    valid_candidates = []
+def phase1(current_round, subkeys = [.gitbook/assets/1664529909_4050.png], output_differential = 0, chosen_pairs = [.gitbook/assets/1664529909_4050.png]):
+    valid_candidates = [.gitbook/assets/1664529909_4050.png]
     # Work our way back from final round 4 (index 3) to round 2 (index 1)
     if (current_round == 0):
         # If we get to this point in a path, we recovered a candidate partial key schedule that's valid from rounds 4 to 2
@@ -494,7 +494,7 @@ def phase1(current_round, subkeys = [], output_differential = 0, chosen_pairs = 
         
         if (len(candidate_roundkeys) == 0):
             # Failed to find any subkey candidates for this round using given recovered keyschedule, backtrack...
-            return []
+            return [.gitbook/assets/1664529909_4050.png]
         else:
             for candidate_k in candidate_roundkeys:
                 print "[*] Trying candidate subkey [0x%08x] for round %d ..." % (candidate_k, current_round+1)
@@ -506,8 +506,8 @@ def phase1(current_round, subkeys = [], output_differential = 0, chosen_pairs = 
     return valid_candidates
 
 # Crack round 1 and subkeys 1, 5 and 6
-def phase2(candidate_schedules = [], chosen_pairs = [], multi = False):
-    valid_schedules = []
+def phase2(candidate_schedules = [.gitbook/assets/1664529909_4050.png], chosen_pairs = [.gitbook/assets/1664529909_4050.png], multi = False):
+    valid_schedules = [.gitbook/assets/1664529909_4050.png]
     for subkeys in candidate_schedules:
         # Take pairs for round 2, strip to round 1
         pairs = undo_last_round(chosen_pairs[1], subkeys[0])
@@ -557,7 +557,7 @@ def phase2(candidate_schedules = [], chosen_pairs = [], multi = False):
 
 # Combine backtracking routines into single complete differential cryptanalysis routine
 def differential_cryptanalysis(output_differential, chosen_pairs):
-    subkeys = []
+    subkeys = [.gitbook/assets/1664529909_4050.png]
 
     # Crack final 3 round keys
     candidate_schedules = phase1(3, subkeys, output_differential, chosen_pairs)

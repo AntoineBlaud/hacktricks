@@ -382,7 +382,7 @@ An example command to exploit this method might look like this:
 
 Where the policy looks like the following, which gives the user permission to assume the role:
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/image-3-750x292.png)
+![.gitbook/assets/1664529902_665.png](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/image-3-750x292.png)
 
 **Potential Impact:** This would give the attacker the privileges that are attached to any role in the account, which could range from no privilege escalation to full administrator access to the account.
 
@@ -518,7 +518,7 @@ To automate this process, we have written a tool to do all that checking for you
 
 Using the script ([Github available here](https://github.com/RhinoSecurityLabs/Security-Research/blob/master/tools/aws-pentest-tools/aws\_escalate.py)), it is possible to detect what users have access to what privilege escalation methods in an AWS environment. It can be run against any single user or every user in the account if the access keys being used have IAM read access.  Results output is in csv, including a breakdown of users scanned and the privilege escalation methods they are vulnerable to.
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/scanner2.gif)
+![.gitbook/assets/1664529902_665.png](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/scanner2.gif)
 
 When opened in Excel, the left-most column contains the names of all the privilege escalation methods that were checked for and the top-most row includes the names of all the IAM users that were checked.
 
@@ -573,7 +573,7 @@ _python3 aws\_escalate.py –all-users –access-key-id ABCDEFGHIJK –secret-ke
 
 Here is an example .csv output of the aws\_escalate.py scan I ran against a test environment.  This sandbox environment has 10 separate IAM users, two of which already have administrator privileges (Dave and Spencer) and two are not vulnerable to any of the privilege escalation methods (Bill and BurpS3Checker).
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/csv-example.png)
+![.gitbook/assets/1664529902_665.png](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/csv-example.png)
 
 ### Defense and Mitigation
 
@@ -587,13 +587,13 @@ By using the “aws:username” variable, it is possible to give users a variety
 
 A policy like that might look like the following:
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/Screenshot\_1-750x345.png)
+![.gitbook/assets/1664529902_665.png](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/Screenshot\_1-750x345.png)
 
 Now for any user that this policy is attached to, they can only perform those four actions on themselves, because of the user of the “aws:username” variables. This example policy shows how to correctly format those variables to be recognized correctly by IAM, which is done by putting the IAM variable name inside curly-brackets that begin with a money sign (${example-variable}).
 
 To restrict access to a certain IP address, the IAM policy must user the “Condition” key to set a condition that the IAM user is allowed to perform these actions, if and only if this condition is set. The following IAM policy document snippet shows “Condition” being used to restrict access to only those users who run API calls after a certain time (2013-08-16T12:00:00Z), before another time (2013-08-16T15:00:00Z) and having an IP address originating from a certain CIDR range (192.0.2.0/24 or 203.0.113.0/24).
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/Screenshot\_1-1-500x315.png)
+![.gitbook/assets/1664529902_665.png](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/Screenshot\_1-1-500x315.png)
 
 ### Preview: AWS Exploitation and Pacu
 
@@ -605,7 +605,7 @@ Created and maintained by Rhino Security Labs, the framework allows penetration 
 
 One of these modules will be a similar privilege escalation scanner, with the option to exploit any vulnerable account automatically.  This following video shows Pacu identifying a privilege escalation route and exploiting it for immediate AWS administrator access.
 
-![](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/pacu.gif)
+![.gitbook/assets/1664529902_665.png](https://rhinosecuritylabs.com/wp-content/uploads/2018/06/pacu.gif)
 
 ### Pacu Beta Testing
 

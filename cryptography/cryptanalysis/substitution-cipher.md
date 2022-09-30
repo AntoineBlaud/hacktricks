@@ -2,7 +2,7 @@
 
 
 
-![](https://upload.wikimedia.org/wikipedia/commons/e/e0/Babington\_postscript.jpg)
+![.gitbook/assets/1664529910_9067.jpg](https://upload.wikimedia.org/wikipedia/commons/e/e0/Babington\_postscript.jpg)
 
 In [cryptography](https://www.wikiwand.com/en/Cryptography), a **substitution cipher** is a method of [encrypting](https://www.wikiwand.com/en/Encrypting) in which units of [plaintext](https://www.wikiwand.com/en/Plaintext) are replaced with the [ciphertext](https://www.wikiwand.com/en/Ciphertext), in a defined manner, with the help of a key; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing the inverse substitution process to extract the original message.
 
