@@ -18,7 +18,7 @@ A stream cipher generates successive elements of the keystream based on an inter
 
 #### Synchronous stream ciphers\[[edit](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=3)]
 
-[![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Lorenz\_Cipher\_Machine.jpg/220px-Lorenz\_Cipher\_Machine.jpg)](https://en.wikipedia.org/wiki/File:Lorenz\_Cipher\_Machine.jpg)
+[![.gitbook/assets/1664528940_4592.jpg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1664528940/monyjifwtcs92o7s4ote.jpg)](https://en.wikipedia.org/wiki/File:Lorenz\_Cipher\_Machine.jpg)
 
 In a **synchronous stream cipher** a stream of pseudorandom digits is generated independently of the plaintext and ciphertext messages, and then combined with the plaintext (to encrypt) or the ciphertext (to decrypt). In the most common form, binary digits are used ([bits](https://en.wikipedia.org/wiki/Bit)), and the keystream is combined with the plaintext using the [exclusive or](https://en.wikipedia.org/wiki/Exclusive\_or) operation (XOR). This is termed a **binary additive stream cipher**.
 
@@ -38,7 +38,7 @@ Binary stream ciphers are often constructed using [linear-feedback shift registe
 
 #### Non-linear combining functions\[[edit](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=6)]
 
-[![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Nonlinear-combo-generator.png/220px-Nonlinear-combo-generator.png)](https://en.wikipedia.org/wiki/File:Nonlinear-combo-generator.png)
+[![.gitbook/assets/1664528940_4592.jpg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1664528940/m564mawfqcrcqbyp3dm2.png)](https://en.wikipedia.org/wiki/File:Nonlinear-combo-generator.png)
 
 One approach is to use _n_ LFSRs in parallel, their outputs combined using an _n_-input binary Boolean function (_F_).
 
@@ -66,7 +66,7 @@ Another approach to improving the security of an LFSR is to pass the entire stat
 
 ### Other designs
 
-[![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/RC4.svg/280px-RC4.svg.png)](https://en.wikipedia.org/wiki/File:RC4.svg)
+[![.gitbook/assets/1664528940_4592.jpg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1664528941/bnrnjl2qh3lfqaiylr6p.png)](https://en.wikipedia.org/wiki/File:RC4.svg)
 
 [RC4](https://en.wikipedia.org/wiki/RC4) is one of the most widely used stream cipher designs.
 
