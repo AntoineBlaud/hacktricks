@@ -2,7 +2,7 @@
 
 
 
-![.gitbook/assets/1664529910_9067.jpg](https://upload.wikimedia.org/wikipedia/commons/e/e0/Babington\_postscript.jpg)
+![.gitbook/assets/1664530371_5783.jpg](https://upload.wikimedia.org/wikipedia/commons/e/e0/Babington\_postscript.jpg)
 
 In [cryptography](https://www.wikiwand.com/en/Cryptography), a **substitution cipher** is a method of [encrypting](https://www.wikiwand.com/en/Encrypting) in which units of [plaintext](https://www.wikiwand.com/en/Plaintext) are replaced with the [ciphertext](https://www.wikiwand.com/en/Ciphertext), in a defined manner, with the help of a key; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing the inverse substitution process to extract the original message.
 
@@ -12,7 +12,7 @@ There are a number of different types of substitution cipher. If the cipher oper
 
 ### Simple substitution
 
-![ROT13 is a Caesar cipher, a type of substitution cipher. In ROT13, the alphabet is rotated 13 steps.](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/ROT13.png/600px-ROT13.png)
+![.gitbook/assets/1664530371_3384.png](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/ROT13.png/600px-ROT13.png)
 
 [ROT13](https://www.wikiwand.com/en/ROT13) is a [Caesar cipher](https://www.wikiwand.com/en/Caesar\_cipher), a type of substitution cipher. In ROT13, the alphabet is rotated 13 steps.
 
@@ -42,7 +42,7 @@ If the length of the message happens not to be divisible by five, it may be padd
 
 The ciphertext alphabet is sometimes different from the plaintext alphabet; for example, in the [pigpen cipher](https://www.wikiwand.com/en/Pigpen\_cipher), the ciphertext consists of a set of symbols derived from a grid. For example:
 
-![An example pigpen message](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/A-pigpen-message.svg/640px-A-pigpen-message.svg.png)
+![.gitbook/assets/1664530371_7390.png](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/A-pigpen-message.svg/640px-A-pigpen-message.svg.png)
 
 Such features make little difference to the security of a scheme, however – at the very least, any set of strange symbols can be transcribed back into an A-Z alphabet and dealt with as normal.
 
@@ -60,7 +60,7 @@ According to the [unicity distance](https://www.wikiwand.com/en/Unicity\_distanc
 
 ### Nomenclator
 
-![A French nomenclator code table](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Nomenclator-French\_17th\_cent.jpg/440px-Nomenclator-French\_17th\_cent.jpg)
+![.gitbook/assets/1664530371_6010.jpg](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Nomenclator-French\_17th\_cent.jpg/440px-Nomenclator-French\_17th\_cent.jpg)
 
 A French nomenclator code table
 
@@ -123,7 +123,7 @@ The Hill cipher is vulnerable to a [known-plaintext attack](https://www.wikiwand
 
 ### Mechanical substitution ciphers
 
-![Enigma cipher machine as used by the German military in World War II](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/HGM\_Enigma.jpg/440px-HGM\_Enigma.jpg)
+![.gitbook/assets/1664530371_4084.jpg](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/HGM\_Enigma.jpg/440px-HGM\_Enigma.jpg)
 
 [Enigma cipher](https://www.wikiwand.com/en/Enigma\_cipher) machine as used by the German military in World War II
 

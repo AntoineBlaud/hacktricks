@@ -18,7 +18,7 @@ A stream cipher generates successive elements of the keystream based on an inter
 
 #### Synchronous stream ciphers\[[edit](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=3)]
 
-[![.gitbook/assets/1664529909_4221.jpg](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Lorenz\_Cipher\_Machine.jpg/220px-Lorenz\_Cipher\_Machine.jpg)](https://en.wikipedia.org/wiki/File:Lorenz\_Cipher\_Machine.jpg)
+[![.gitbook/assets/1664530369_524.jpg](https://en.wikipedia.org/wiki/File:Lorenz\_Cipher\_Machine.jpg)
 
 In a **synchronous stream cipher** a stream of pseudorandom digits is generated independently of the plaintext and ciphertext messages, and then combined with the plaintext (to encrypt) or the ciphertext (to decrypt). In the most common form, binary digits are used ([bits](https://en.wikipedia.org/wiki/Bit)), and the keystream is combined with the plaintext using the [exclusive or](https://en.wikipedia.org/wiki/Exclusive\_or) operation (XOR). This is termed a **binary additive stream cipher**.
 
@@ -38,13 +38,13 @@ Binary stream ciphers are often constructed using [linear-feedback shift registe
 
 #### Non-linear combining functions\[[edit](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=6)]
 
-[![.gitbook/assets/1664529909_4221.jpg](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Nonlinear-combo-generator.png/220px-Nonlinear-combo-generator.png)](https://en.wikipedia.org/wiki/File:Nonlinear-combo-generator.png)
+[![.gitbook/assets/1664530370_2028.png](https://en.wikipedia.org/wiki/File:Nonlinear-combo-generator.png)
 
 One approach is to use _n_ LFSRs in parallel, their outputs combined using an _n_-input binary Boolean function (_F_).
 
 Because LFSRs are inherently linear, one technique for removing the linearity is to feed the outputs of several parallel LFSRs into a non-linear [Boolean function](https://en.wikipedia.org/wiki/Boolean\_function) to form a _combination generator_. Various properties of such a _combining function_ are critical for ensuring the security of the resultant scheme, for example, in order to avoid [correlation attacks](https://en.wikipedia.org/wiki/Correlation\_attack).
 
-| [![\[icon\]](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Wiki\_letter\_w\_cropped.svg/20px-Wiki\_letter\_w\_cropped.svg.png)](https://en.wikipedia.org/wiki/File:Wiki\_letter\_w\_cropped.svg) | This section **needs expansion**. You can help by [adding to it](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=). _(June 2008)_ |
+| [![.gitbook/assets/1664530370_1495.svg](https://en.wikipedia.org/wiki/File:Wiki\_letter\_w\_cropped.svg) | This section **needs expansion**. You can help by [adding to it](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=). _(June 2008)_ |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 #### Clock-controlled generators\[[edit](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=7)]
@@ -61,18 +61,18 @@ The [shrinking generator](https://en.wikipedia.org/wiki/Shrinking\_generator) ta
 
 Another approach to improving the security of an LFSR is to pass the entire state of a single LFSR into a non-linear _filtering function_.
 
-| [![\[icon\]](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Wiki\_letter\_w\_cropped.svg/20px-Wiki\_letter\_w\_cropped.svg.png)](https://en.wikipedia.org/wiki/File:Wiki\_letter\_w\_cropped.svg) | This section **needs expansion**. You can help by [adding to it](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=). _(June 2008)_ |
+| [![.gitbook/assets/1664530370_1495.svg](https://en.wikipedia.org/wiki/File:Wiki\_letter\_w\_cropped.svg) | This section **needs expansion**. You can help by [adding to it](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=). _(June 2008)_ |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ### Other designs
 
-[![.gitbook/assets/1664529909_4221.jpg](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/RC4.svg/280px-RC4.svg.png)](https://en.wikipedia.org/wiki/File:RC4.svg)
+[![.gitbook/assets/1664530371_682.svg](https://en.wikipedia.org/wiki/File:RC4.svg)
 
 [RC4](https://en.wikipedia.org/wiki/RC4) is one of the most widely used stream cipher designs.
 
 Instead of a linear driving device, one may use a nonlinear update function. For example, Klimov and Shamir proposed triangular functions ([T-functions](https://en.wikipedia.org/wiki/T-function)) with a single cycle on n-bit words.
 
-| [![\[icon\]](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Wiki\_letter\_w\_cropped.svg/20px-Wiki\_letter\_w\_cropped.svg.png)](https://en.wikipedia.org/wiki/File:Wiki\_letter\_w\_cropped.svg) | This section **needs expansion**. You can help by [adding to it](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=). _(June 2008)_ |
+| [![.gitbook/assets/1664530370_1495.svg](https://en.wikipedia.org/wiki/File:Wiki\_letter\_w\_cropped.svg) | This section **needs expansion**. You can help by [adding to it](https://en.wikipedia.org/w/index.php?title=Stream\_cipher\&action=edit\&section=). _(June 2008)_ |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 ### Security

@@ -4,7 +4,7 @@
 
 (ECB) Electronic Code Book - symmetric encryption scheme which **replaces each block of the clear text** by the **block of ciphertext**. It is the **simplest** encryption scheme. The main idea is to **split** the clear text into **blocks of N bits** (depends on the size of the block of input data, encryption algorithm) and then to encrypt (decrypt) each block of clear text using the only key.
 
-![.gitbook/assets/1664529909_1202.png](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ECB\_decryption.svg/601px-ECB\_decryption.svg.png)
+![.gitbook/assets/1664530355_8390.png](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ECB\_decryption.svg/601px-ECB\_decryption.svg.png)
 
 Using ECB has multiple security implications:
 

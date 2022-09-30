@@ -1,6 +1,6 @@
 # Awesome-Anti-Forensic
 
-[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License](https://img.shields.io/badge/LICENSE-CC\_BY\_4.0-00a2ff?\&style=flat-square)](https://creativecommons.org/licenses/by/4.0/)
+[![.gitbook/assets/1664530372_8232.svg](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License](https://img.shields.io/badge/LICENSE-CC\_BY\_4.0-00a2ff?\&style=flat-square)](https://creativecommons.org/licenses/by/4.0/)
 
 Tools and packages that are used for countering forensic activities, including encryption, steganography, and anything that modify attributes. This all includes tools to work with anything in general that makes changes to a system for the purposes of hiding information.
 

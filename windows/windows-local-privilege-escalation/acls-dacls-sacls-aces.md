@@ -49,7 +49,7 @@ The following figure shows the canonical order of ACEs:
 
 ### Canonical order of ACEs
 
-![ACE](https://www.ntfs.com/images/screenshots/ACEs.gif)
+![.gitbook/assets/1664530484_9715.gif](https://www.ntfs.com/images/screenshots/ACEs.gif)
 
 The canonical order ensures that the following takes place:
 

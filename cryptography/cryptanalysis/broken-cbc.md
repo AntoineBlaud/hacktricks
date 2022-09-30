@@ -35,7 +35,7 @@ P3 = D(k, C1) ⊕ Z = D(k, C1) = P1 ⊕ IV
 
 ### **Bit Flipping attack**
 
-![CBC BitFlip](https://pequalsnp-team.github.io/assets/cbc\_bitflip.png)
+![.gitbook/assets/1664530362_4538.png](https://pequalsnp-team.github.io/assets/cbc\_bitflip.png)
 
 Note that if we XOR a ciphertext block, the next plaintext block will be XORed as well (X propagates like in the image).
 

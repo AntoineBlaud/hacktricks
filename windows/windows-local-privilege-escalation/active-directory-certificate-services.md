@@ -23,7 +23,7 @@ Enumerate the HTTP ports on the servers, enumerate the shares to find **CertEnro
 
 ## Template Attacks - ESC1, 2, 3, 9 & 10
 
-[![image-1640805125672.png](https://hideandsec.sh/uploads/images/gallery/2021-12/scaled-1680-/mlK5E1SH1D1CzLOG-image-1640805125672.png)](https://hideandsec.sh/uploads/images/gallery/2021-12/mlK5E1SH1D1CzLOG-image-1640805125672.png)
+[![.gitbook/assets/1664530485_2454.png](https://hideandsec.sh/uploads/images/gallery/2021-12/mlK5E1SH1D1CzLOG-image-1640805125672.png)
 
 * **ESC1** : SAN authorized & Low Privileged Users can enroll & Authentication EKU
 * **ESC2** : Low Privileged Users can enroll & Any or No EKU

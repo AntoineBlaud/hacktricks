@@ -74,7 +74,7 @@ class bcs(object):
 
 We can see the mysterious `bcs` cipher creates two seperate encryption objects `bc1` and `bc2` with the two keys supplied to it. We also see that input data is padded to a multiple of the blocksize (64 bits in this case) and that it employs a [block cipher mode of operation](https://en.wikipedia.org/wiki/Block\_cipher\_mode\_of\_operation) that looks a bit like [CBC mode](https://en.wikipedia.org/wiki/Block\_cipher\_mode\_of\_operation#Cipher\_Block\_Chaining\_.28CBC.29) but isn’t, the prime difference being that this mode of operation XORs the intermediate ciphertext with the IV rather than the intermediate plaintext. This image illustrates the construction:
 
-![.gitbook/assets/1664529909_4050.png](http://samvartaka.github.io/images/mode\_of\_operation.png)
+![.gitbook/assets/1664530361_8476.png](http://samvartaka.github.io/images/mode\_of\_operation.png)
 
 It looks like we’re faced with a block cipher constructed out of two seperate block ciphers (one used in encryption direction, the other in decryption direction) so the best way to go about this is probably to attack both block ciphers seperately, recover their corresponding round keys and use those to decrypt our flag.
 
@@ -115,7 +115,7 @@ class bc1(object):
 
     def __init__(self, key_data):
         assert (len(key_data) == 6*4)
-        self.subkeys = [.gitbook/assets/1664529909_4050.png]
+        self.subkeys = [.gitbook/assets/1664530361_8476.png]
         for i in xrange(0, 6*4, 4):
             self.subkeys.append(array.array('B', key_data[i:i+4]))
 
@@ -180,7 +180,7 @@ Without going too much in-depth i will outline some basics of differential crypt
 
 A lot of cryptanalytic attacks on symmetric ciphers involve a principle known as [divide-and-conquer](http://www.cs.ru.nl/\~rverdult/Introduction\_to\_Cryptanalysis-Attacking\_Stream\_Ciphers.pdf) where we partition the cipher state into isolated parts which we can attack by themselves, for example by splitting up an iterated block cipher into its constituent round functions. The expected attack complexity cipher should be `2**64` (as that is it’s key size) in a brute-force attack but if we can attack each round seperately and recover the target round keys one by one, the attack complexity becomes `2**32 + 2**32 + .. + 2**32 < 2**64`. See for example the following image taken from [Verdult’s Streamcipher Cryptanalysis introduction](http://www.cs.ru.nl/\~rverdult/Introduction\_to\_Cryptanalysis-Attacking\_Stream\_Ciphers.pdf)
 
-![alt divide-and-conquer-verdult](http://samvartaka.github.io/images/divide\_and\_conquer.png)
+![.gitbook/assets/1664530361_3716.png](http://samvartaka.github.io/images/divide\_and\_conquer.png)
 
 A good block-cipher structure (using proper diffusion) is designed to ensure that we can know at most the initial and final state (ie. plaintext and ciphertext) but not the intermediate states which would be required for divide-and-conquer. However in differential cryptanalysis we don’t care about the precise value of the internal state as long as a differential relation between inputs propagates throughout the cipher structure far enough to allow us to effectively ‘unroll’ the cipher rounds and thus attack the rounds one by one.
 
@@ -188,7 +188,7 @@ Differential cryptanalysis is usually a chosen plaintext attack (though there ar
 
 In particular ciphers with an iterated number of individually weak functions (eg. feistel ciphers with a weak round function) are susceptible to differential cryptanalysis. We apply this process for as much rounds as possible to recover as much of the key schedule as possible, filling in any remaining gaps with additional bruteforce, other cryptanalytic attacks or clever heuristics depending on the nature of the cipher. In general we seek to attack `r-1` out of `r` rounds with our analysis. The idea behind differential cryptanalysis is to find a mapping from properties of inputs to properties of outputs and trace this mapping throughout the cipher. Consider block ciphers composed of multiple applications of a round function with each round function combining the intermediate state with the current round key (eg. feistel ciphers). These round functions ought to be non-linear in nature and behave somewhat like Pseudorandom Number Generators (PRNGs) in that we should not be able to predict the output of a round function given its input if we do not know the key. If we can find a property of an input that maps to a certain property in the output with a probability other than what one would expect of a random function (eg. `~0.5**n`) this can potentially be exploited to discover information about the key. The way in which properties of inputs map to properties of their corresponding outputs are called characteristics. Consider two inputs `x0` and `x1` and their ‘input differential’ `di = x0 ^ x1`. We obtain the output differential as follows:
 
-![alt diffchar](http://samvartaka.github.io/images/diff\_char.png)
+![.gitbook/assets/1664530361_3393.png](http://samvartaka.github.io/images/diff\_char.png)
 
 The mapping `di -> do` is called a differential characteristic. The process of a differential cryptanalytic attack is as follows:
 
@@ -206,7 +206,7 @@ Lets clarify some things by example here. Consider FEAL-4’s round function (al
 
 In order to find a good differential characteristic we need to find one that holds with high probability for any given set of inputs to our target round function. One way to approach this is by running every combination of input pairs through the round function and noting down the occurances of a differential characteristic but this process tends to become infeasible quickly for target functions with larger input sizes. So let’s break things down. Our target round function, `f-box`, is composed of several applications of `g-box`. This `g-box` is a modular addition function followed by some bitshifting which looks as follows (using King’s image of the regular FEAL-4 round function and its `g-box` here):
 
-![.gitbook/assets/1664529909_4050.png](http://samvartaka.github.io/images/feal\_round.jpg)
+![.gitbook/assets/1664530361_8476.png](http://samvartaka.github.io/images/feal\_round.jpg)
 
 In code:
 
@@ -250,7 +250,7 @@ Now that we have our differential characteristics for FEAL-4’s round function 
 
 Consider King’s illustration of the full differential tracing path through FEAL-4 below:
 
-![alt feal\_path](http://samvartaka.github.io/images/feal\_path.jpg)
+![.gitbook/assets/1664530361_1140.jpg](http://samvartaka.github.io/images/feal\_path.jpg)
 
 Note that the 0x00 next to the round keys does not denote their value but their differential (as the round keys do not change between plaintext/ciphertext pairs). When a differential hits a round function we cannot predict what the output differential will be except in one of two cases:
 
@@ -282,16 +282,16 @@ But what do we do with all this information about differentials? How does this a
 
 In order to understand a bit better how the differentials can help us recover a subkey faster than bruteforce consider the following toy scenario: we have two inputs `x0` and `x1` related by input differential `di = x0 ^ x1` and their outputs `y0` and `y1` where `yi = sbox(xi)` and the outputs are related by output differential `do = y0 ^ y1`. Consider the following 4-bit `sbox` given as an example by Jon King:
 
-![alt king\_sbox](http://samvartaka.github.io/images/king\_sbox.jpg)
+![.gitbook/assets/1664530361_5334.jpg](http://samvartaka.github.io/images/king\_sbox.jpg)
 
 A good differential characteristic of the above s-box is `4 -> 7` (since there are 6 out of 16 values for which this holds, eg. `(5 ^ 1) = 4 -> (9 ^ 14) = 7`). Now we target a simple cipher using this `sbox` as a round function and use it to illustrate our approach for attacking a round:
 
-![alt simple\_cipher](http://samvartaka.github.io/images/simple\_cipher.png)
+![.gitbook/assets/1664530361_2256.png](http://samvartaka.github.io/images/simple\_cipher.png)
 
 We know plaintexts `(1, 5)` and ciphertexts `(0, 7)` so we can confirm whether subkey guesses `k0, k1` hold by matching them against the corresponding `s-box` inputs and outputs since `plaintext ^ s_box_input = k0` and `ciphertext ^ s_box_output = k1`. Eg. if we guess `k0 = 9` that would make the `s-box` inputs `(8, 12)` and outputs `(8, 13)` and hence the output differential `8 ^ k1 ^ 13 ^ k1 = 5` which doesn’t match our differential characteristic so we discard this guess. If we guess `k0 = 8` however we get `s-box` mapping `(9,13) -> (11, 12)` with output differential `11 ^ 12 = 7` which does match our differential characteristic so we increment the score of candidate round key `k0 = 8` until we have a candidate for which the score is equal to the number of chosen plaintext/ciphertext pairs (ie. matches all of them). If we do, we add this candidate to the valid candidate list (since multiple candidates might validate). This last part is where we diverge from King (as did h4x0rpsch0rr) as his approach is prone to false positives from which the algorithm cannot recover (since it simply goes with the first validating candidate and moves on to the next round keys). Cracking a 32-bit round key looks as follows in pseudo-code:
 
 ```
-valid_candidates = [.gitbook/assets/1664529909_4050.png]
+valid_candidates = [.gitbook/assets/1664530361_8476.png]
 for keyguess in xrange(0, 2**32):
   score[keyguess] = 0
   for j in number_of_plaintext_pairs:
@@ -343,14 +343,14 @@ for i in [3..1]
 
 Note that the above code assumes we retrieve only 1 candidate round key. In practice we will retrieve a set of candidate round keys only 1 of which is correct. Thus it might occur we work our way to the next round key using a false round key and we will have to revert. I wrote a backtracking-based approach capable of dealing with false positives to address this.
 
-![alt backtracking](http://samvartaka.github.io/images/backtracking.png)
+![.gitbook/assets/1664530361_4166.png](http://samvartaka.github.io/images/backtracking.png)
 
 Once we complete this process we have subkeys 1 to 3 and we move on to the first round to obtain subkey 0. We can’t use differentials here to test its subkey and in addition there are the two initialization subkeys (4 and 5). We will recover all three in one cracking attempt by guessing a candidate `subkey[0]` and decrypting the first round (using the material obtained from decrypting the other rounds with our recovered subkeys). We then use our chosen plaintext pair to determine the `subkey[4]` and `subkey[5]` corresponding to this candidate `subkey[0]`. The `subkey[0]` candidate which keeps the corresponding `subkey[4]` and `subkey[5]` consistent among all chosen-plaintext pairs is the correct `subkey[0]` which gives us both a way to validate `subkey[0]` guess and recover the initialization subkeys in one go. Again, here too we have to take false positive keys into account. In pseudocode this looks as follows:
 
 ```
-k0_candidates = [.gitbook/assets/1664529909_4050.png]
-k4_candidates = [.gitbook/assets/1664529909_4050.png]
-k5_candidates = [.gitbook/assets/1664529909_4050.png]
+k0_candidates = [.gitbook/assets/1664530361_8476.png]
+k4_candidates = [.gitbook/assets/1664530361_8476.png]
+k5_candidates = [.gitbook/assets/1664530361_8476.png]
 
 for k0_guess in xrange(0, 2**32):
   k4_guess, k5_guess = 0
@@ -401,7 +401,7 @@ So, to summarize, we:
 ```
 # Round key cracking function
 def crack_round_key(pairs, output_differential):
-    valid_candidates = [.gitbook/assets/1664529909_4050.png]
+    valid_candidates = [.gitbook/assets/1664530361_8476.png]
     candidate_key = 0
     while (candidate_key < 2**32):
         score = 0
@@ -474,8 +474,8 @@ def undo_final_operation(pairs):
     return pairs
 
 # Backtracking approach to cracking rounds 2 to 4 (subkeys 2, 3 and 4)
-def phase1(current_round, subkeys = [.gitbook/assets/1664529909_4050.png], output_differential = 0, chosen_pairs = [.gitbook/assets/1664529909_4050.png]):
-    valid_candidates = [.gitbook/assets/1664529909_4050.png]
+def phase1(current_round, subkeys = [.gitbook/assets/1664530361_8476.png], output_differential = 0, chosen_pairs = [.gitbook/assets/1664530361_8476.png]):
+    valid_candidates = [.gitbook/assets/1664530361_8476.png]
     # Work our way back from final round 4 (index 3) to round 2 (index 1)
     if (current_round == 0):
         # If we get to this point in a path, we recovered a candidate partial key schedule that's valid from rounds 4 to 2
@@ -494,7 +494,7 @@ def phase1(current_round, subkeys = [.gitbook/assets/1664529909_4050.png], outpu
         
         if (len(candidate_roundkeys) == 0):
             # Failed to find any subkey candidates for this round using given recovered keyschedule, backtrack...
-            return [.gitbook/assets/1664529909_4050.png]
+            return [.gitbook/assets/1664530361_8476.png]
         else:
             for candidate_k in candidate_roundkeys:
                 print "[*] Trying candidate subkey [0x%08x] for round %d ..." % (candidate_k, current_round+1)
@@ -506,8 +506,8 @@ def phase1(current_round, subkeys = [.gitbook/assets/1664529909_4050.png], outpu
     return valid_candidates
 
 # Crack round 1 and subkeys 1, 5 and 6
-def phase2(candidate_schedules = [.gitbook/assets/1664529909_4050.png], chosen_pairs = [.gitbook/assets/1664529909_4050.png], multi = False):
-    valid_schedules = [.gitbook/assets/1664529909_4050.png]
+def phase2(candidate_schedules = [.gitbook/assets/1664530361_8476.png], chosen_pairs = [.gitbook/assets/1664530361_8476.png], multi = False):
+    valid_schedules = [.gitbook/assets/1664530361_8476.png]
     for subkeys in candidate_schedules:
         # Take pairs for round 2, strip to round 1
         pairs = undo_last_round(chosen_pairs[1], subkeys[0])
@@ -557,7 +557,7 @@ def phase2(candidate_schedules = [.gitbook/assets/1664529909_4050.png], chosen_p
 
 # Combine backtracking routines into single complete differential cryptanalysis routine
 def differential_cryptanalysis(output_differential, chosen_pairs):
-    subkeys = [.gitbook/assets/1664529909_4050.png]
+    subkeys = [.gitbook/assets/1664530361_8476.png]
 
     # Crack final 3 round keys
     candidate_schedules = phase1(3, subkeys, output_differential, chosen_pairs)
@@ -647,7 +647,7 @@ Our next step is to break the second block cipher which is part of our target sc
 
 The above cipher consists of 4 rounds and uses 4 subkeys of 16 bits each (having a total key schedule size of 64 bits). Its structure is a [Lai-Massey scheme](https://en.wikipedia.org/wiki/Lai-Massey\_scheme) (used in eg. [IDEA](https://en.wikipedia.org/wiki/International\_Data\_Encryption\_Algorithm)) whose rounds look as follows: `(L1, R1) = M(L0, R0, K0) = (orth((L + A)), (R + A))` where `A = F(L - R, K0)`. Note that all addition and subtraction here is modular. The `orth` function applied to the left half is an [‘almost’ orthomorphism](https://en.wikipedia.org/wiki/Orthomorphism) commonly used in Lai-Massey schemes intended to prevent a trivial distinguishing attack via `L0 - R0 = Ln+1 - Rn+1`. Also note that the round function `F` does not have to be invertible.
 
-![alt Lai\_Massey\_scheme](http://samvartaka.github.io/images/Lai\_Massey\_scheme.png)
+![.gitbook/assets/1664530361_2820.png](http://samvartaka.github.io/images/Lai\_Massey\_scheme.png)
 
 Considering the hint `Are the rounds of the second block cipher completely dependent or independent of each other? Or is the truth somewhere in the middle?` we suspect a [Meet-in-the-Middle](https://en.wikipedia.org/wiki/Meet-in-the-middle\_attack) (MitM) attack.
 
@@ -668,7 +668,7 @@ for k1_candidate in xrange(2**n):
 
 This concept applies equally whether we are dealing with 2 applications of a full block cipher or simply a block cipher with 2 rounds. The principle is illustrated in this image by [agilebits](https://blog.agilebits.com/2011/08/18/aes-encryption-isnt-cracked/):
 
-![alt meet-in-middle](http://samvartaka.github.io/images/meet-in-middle.png)
+![.gitbook/assets/1664530362_9307.png](http://samvartaka.github.io/images/meet-in-middle.png)
 
 The principle also extends to multiple rounds, called a [multi-dimensional MitM](https://en.wikipedia.org/wiki/Meet-in-the-middle\_attack#Multidimensional-MITM). This does, however, involve additional computation since we will have to guess intermediate states we cannot reach from the plaintext or ciphertext. Depending on the intermediate state size (possibly a whole block) this doesn’t seem like an attractive path to go down. The alternative seems to be meeting all combinations between `k0,k1` with all combinations of `k2,k3` which would be of complexity `2**32 + 2**32 = 2**33`, feasible but with a large lookup table (`2**32 * 8B = 32GB`). Not attractive either.
 

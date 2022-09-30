@@ -97,13 +97,13 @@ This is probably the only encryption algorithm that is used more than RSA (both 
 
 Here is a visualization of how AES encrypts one block of data.
 
-![aes\_base](https://blog.h25.io/images/2019-04-swamp/aes\_base.png)
+![.gitbook/assets/1664530356_2530.png](https://blog.h25.io/images/2019-04-swamp/aes\_base.png)
 
 Note that the output data looks like random noise, and that’s the point of the encryption. If there were any information in the output that could lead to information about the input, the algorithm is broken. Luckily, AES isn’t broken (yet), so the output bytes seem completely random.
 
 The inverse operation takes a ciphertext and the key, and outputs the original plaintext. It’s impossible (if used correctly) to guess the original plaintext without having the key.
 
-![aes\_decrypt](https://blog.h25.io/images/2019-04-swamp/aes\_decrypt.png)
+![.gitbook/assets/1664530356_4630.png](https://blog.h25.io/images/2019-04-swamp/aes\_decrypt.png)
 
 It’s safe to assume in CTFs that we are not breaking the AES algorithm itself, but rather its implementation (choice of keys, compression, padding, …). Actually, AES is only a building block of the challenge, but we should be focusing on entering through open doors instead of breaking through the concrete walls. Remember the `AES.MODE_CBC` ? It defines how the data is actually encrypted with the block cipher. Let’s have a deeper look into it.
 
@@ -117,11 +117,11 @@ Well, that’s quite easy isn’t it ? We can simply break the text into smaller
 
 ECB is the retarded cousin of CBC, and here’s why: let’s imagine we are encrypting the message `Today's code: 4975384264852. Bye` using AES-ECB and sharing it with an ally :
 
-![ecb1](https://blog.h25.io/images/2019-04-swamp/ecb1.png)
+![.gitbook/assets/1664530357_7924.png](https://blog.h25.io/images/2019-04-swamp/ecb1.png)
 
 In this case the encryption is done correctly, and there is no way for an enemy intercepting the encrypted message to recover the ciphertext. However, fast forward a few weeks, we’re sending a different code `Today's code: 4935412269921. Bye` encrypted with the same key.
 
-![ecb2](https://blog.h25.io/images/2019-04-swamp/ecb2.png)
+![.gitbook/assets/1664530357_5253.png](https://blog.h25.io/images/2019-04-swamp/ecb2.png)
 
 If you have a closer look at the ciphertext on the left, you will notice it’s exactly the same as the previous one because the block’s input is the same ! This might reveal some precious information on your code (in this case, the first 2 digits of the code) if someone intercepts the ciphertext and has enough information about older plaintexts. The supposedly perfect cryptosystem we invented has turned into a mediocre cryptosystem which can leak information. Using ECB is the easiest and fastest way to encrypt long plaintexts with block ciphers, but it’s recommended to use another way of chaining blocks, such as CBC.
 
@@ -133,7 +133,7 @@ It’s actually quite simple : a random value (called the initialization vector 
 
 In practice, the mixing is done with XOR, which is a reversible transformation. If the IV is chosen randomly and never reused, the cascading property (aka butterfly effect in cryptography) of AES makes the cipher unbreakable.
 
-![cbc1](https://blog.h25.io/images/2019-04-swamp/cbc1.png)
+![.gitbook/assets/1664530357_536.png](https://blog.h25.io/images/2019-04-swamp/cbc1.png)
 
 The IV is transmitted along with the ciphertext, making each transmission 16 bytes longer.
 
@@ -153,7 +153,7 @@ XOR has several properties (for example, XOR is its own inverse, and 0 is its ne
 
 So we have successfully recovered the plaintext. The full operation is detailed here :
 
-![cbc2](https://blog.h25.io/images/2019-04-swamp/cbc2.png)
+![.gitbook/assets/1664530357_2558.png](https://blog.h25.io/images/2019-04-swamp/cbc2.png)
 
 Now, we have all the knowledge needed to find an attack on the cryptosystem.
 
@@ -178,7 +178,7 @@ encrypt_message(key, key)
 
 Not only is the IV reused for all messages, it also contains a value that should be kept secret ! To attack this, we don’t even need to use the encrypt function - let’s look at what happens if we decrypt a made-up ciphertext full of null bytes :
 
-![attack](https://blog.h25.io/images/2019-04-swamp/attack.png)
+![.gitbook/assets/1664530357_9643.png](https://blog.h25.io/images/2019-04-swamp/attack.png)
 
 Since the only thing that determines the output of AES encryption/decryption is the data and the key, all three AES decryption blocks output the same data.
 
@@ -300,7 +300,7 @@ GCM is defined for block ciphers with a block size of 128 bits. Galois message a
 
 Like in CTR, blocks are numbered sequentially, and then this block number is combined with an IV and encrypted with a block cipher E, usually AES. The result of this encryption is then XORed with the plaintext to produce the ciphertext. Like all counter modes, this is essentially a stream cipher, and so it is essential that a different IV is used for each stream that is encrypted.
 
-![GCM encryption operation](https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/GCM-Galois\_Counter\_Mode\_with\_IV.svg/1000px-GCM-Galois\_Counter\_Mode\_with\_IV.svg.png)
+![.gitbook/assets/1664530357_1515.png](https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/GCM-Galois\_Counter\_Mode\_with\_IV.svg/1000px-GCM-Galois\_Counter\_Mode\_with\_IV.svg.png)
 
 The ciphertext blocks are considered coefficients of a [polynomial](https://www.wikiwand.com/en/Polynomial) which is then evaluated at a key-dependent point H, using [finite field arithmetic](https://www.wikiwand.com/en/Finite\_field\_arithmetic). The result is then encrypted, producing an authentication tag that can be used to verify the integrity of the data. The encrypted text then contains the IV, ciphertext, and authentication tag.
 
@@ -360,23 +360,23 @@ Note: _g_(_i_) is any deterministic function, often the [identity function](http
 
 The simplest (and not to be used anymore) of the encryption modes is the **electronic codebook** (ECB) mode (named after conventional physical [codebooks](https://www.wikiwand.com/en/Codebook)[\[19\]](https://www.wikiwand.com/en/Block\_cipher\_modes\_of\_operation#citenote19)). The message is divided into blocks, and each block is encrypted separately.
 
-![ECB encryption.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/ECB\_encryption.svg/1202px-ECB\_encryption.svg.png)
+![.gitbook/assets/1664530357_7497.png](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/ECB\_encryption.svg/1202px-ECB\_encryption.svg.png)
 
-![ECB decryption.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ECB\_decryption.svg/1202px-ECB\_decryption.svg.png)
+![.gitbook/assets/1664530357_9220.png](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ECB\_decryption.svg/1202px-ECB\_decryption.svg.png)
 
 The disadvantage of this method is a lack of [diffusion](https://www.wikiwand.com/en/Confusion\_and\_diffusion). Because ECB encrypts identical [plaintext](https://www.wikiwand.com/en/Plaintext) blocks into identical [ciphertext](https://www.wikiwand.com/en/Ciphertext) blocks, it does not hide data patterns well. ECB is not recommended for use in cryptographic protocols.[\[20\]](https://www.wikiwand.com/en/Block\_cipher\_modes\_of\_operation#citenote20)[\[21\]](https://www.wikiwand.com/en/Block\_cipher\_modes\_of\_operation#citenote21)[\[22\]](https://www.wikiwand.com/en/Block\_cipher\_modes\_of\_operation#citenote22)
 
 A striking example of the degree to which ECB can leave plaintext data patterns in the ciphertext can be seen when ECB mode is used to encrypt a [bitmap image](https://www.wikiwand.com/en/Bitmap\_image) which uses large areas of uniform color. While the color of each individual [pixel](https://www.wikiwand.com/en/Pixel) is encrypted, the overall image may still be discerned, as the pattern of identically colored pixels in the original remains in the encrypted version.
 
-![.gitbook/assets/1664529909_3806.jpg](https://upload.wikimedia.org/wikipedia/commons/5/56/Tux.jpg)
+![.gitbook/assets/1664530358_7788.jpg](https://upload.wikimedia.org/wikipedia/commons/5/56/Tux.jpg)
 
 Original image
 
-![.gitbook/assets/1664529909_3806.jpg](https://upload.wikimedia.org/wikipedia/commons/f/f0/Tux\_ecb.jpg)
+![.gitbook/assets/1664530358_7788.jpg](https://upload.wikimedia.org/wikipedia/commons/f/f0/Tux\_ecb.jpg)
 
 Encrypted using ECB mode
 
-![.gitbook/assets/1664529909_3806.jpg](https://upload.wikimedia.org/wikipedia/commons/a/a0/Tux\_secure.jpg)
+![.gitbook/assets/1664530358_7788.jpg](https://upload.wikimedia.org/wikipedia/commons/a/a0/Tux\_secure.jpg)
 
 Modes other than ECB result in pseudo-randomness
 
@@ -395,9 +395,9 @@ ECB mode can also make protocols without integrity protection even more suscepti
 
 Ehrsam, Meyer, Smith and Tuchman invented the cipher block chaining (CBC) mode of operation in 1976.[\[23\]](https://www.wikiwand.com/en/Block\_cipher\_modes\_of\_operation#citenote23) In CBC mode, each block of plaintext is [XORed](https://www.wikiwand.com/en/XOR) with the previous ciphertext block before being encrypted. This way, each ciphertext block depends on all plaintext blocks processed up to that point. To make each message unique, an [initialization vector](https://www.wikiwand.com/en/Initialization\_vector) must be used in the first block.
 
-![Cipher block chaining (CBC) mode encryption](https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/CBC\_encryption.svg/1200px-CBC\_encryption.svg.png)
+![.gitbook/assets/1664530358_9339.png](https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/CBC\_encryption.svg/1200px-CBC\_encryption.svg.png)
 
-![Cipher block chaining (CBC) mode decryption](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/CBC\_decryption.svg/1200px-CBC\_decryption.svg.png)
+![.gitbook/assets/1664530358_4877.png](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/CBC\_decryption.svg/1200px-CBC\_decryption.svg.png)
 
 If the first block has index 1, the mathematical formula for CBC encryption is
 
@@ -413,9 +413,9 @@ while the mathematical formula for CBC decryption is
 
 **Example**
 
-![CBC example with a toy 2-bit cipher](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/CBC\_example\_v3.svg/800px-CBC\_example\_v3.svg.png)
+![.gitbook/assets/1664530358_9596.png](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/CBC\_example\_v3.svg/800px-CBC\_example\_v3.svg.png)
 
-![CBC example with a toy 2-bit cipher](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Rev\_CBC\_example\_v3.svg/800px-Rev\_CBC\_example\_v3.svg.png)
+![.gitbook/assets/1664530358_9596.png](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Rev\_CBC\_example\_v3.svg/800px-Rev\_CBC\_example\_v3.svg.png)
 
 CBC has been the most commonly used mode of operation. Its main drawbacks are that encryption is sequential (i.e., it cannot be parallelized), and that the message must be padded to a multiple of the cipher block size. One way to handle this last issue is through the method known as [ciphertext stealing](https://www.wikiwand.com/en/Ciphertext\_stealing). Note that a one-bit change in a plaintext or initialization vector (IV) affects all following ciphertext blocks.
 
@@ -434,9 +434,9 @@ _Explicit initialization vectors_[\[24\]](https://www.wikiwand.com/en/Block\_cip
 
 The _propagating cipher block chaining_[\[25\]](https://www.wikiwand.com/en/Block\_cipher\_modes\_of\_operation#citenote25) or _plaintext cipher-block chaining_[\[26\]](https://www.wikiwand.com/en/Block\_cipher\_modes\_of\_operation#citenote26) mode was designed to cause small changes in the ciphertext to propagate indefinitely when decrypting, as well as when encrypting. In PCBC mode, each block of plaintext is XORed with both the previous plaintext block and the previous ciphertext block before being encrypted. Like with CBC mode, an initialization vector is used in the first block.
 
-![Propagating cipher block chaining (PCBC) mode encryption](https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PCBC\_encryption.svg/1200px-PCBC\_encryption.svg.png)
+![.gitbook/assets/1664530359_4910.png](https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PCBC\_encryption.svg/1200px-PCBC\_encryption.svg.png)
 
-![Propagating cipher block chaining (PCBC) mode decryption](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/PCBC\_decryption.svg/1200px-PCBC\_decryption.svg.png)
+![.gitbook/assets/1664530359_6515.png](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/PCBC\_decryption.svg/1200px-PCBC\_decryption.svg.png)
 
 Encryption and decryption algorithms are as follows:
 
@@ -461,9 +461,9 @@ The _cipher feedback_ (CFB) mode, in its simplest form uses the entire output of
 
 ![{\displaystyle {\begin{aligned}C\_{i}&={\begin{cases}{\text{IV)),\&i=0\E\_{K}(C\_{i-1})\oplus P\_{i},&{\text{otherwise))\end{cases))\P\_{i}&=E\_{K}(C\_{i-1})\oplus C\_{i},\end{aligned))}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/067d50816cc5b2282a73540cb0ea4d52b18c753f)
 
-![CFB encryption.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/CFB\_encryption.svg/1202px-CFB\_encryption.svg.png)
+![.gitbook/assets/1664530359_4094.png](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/CFB\_encryption.svg/1202px-CFB\_encryption.svg.png)
 
-![CFB decryption.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/CFB\_decryption.svg/1202px-CFB\_decryption.svg.png)
+![.gitbook/assets/1664530359_6575.png](https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/CFB\_decryption.svg/1202px-CFB\_decryption.svg.png)
 
 **CFB-1, CFB-8, CFB-64, CFB-128, etc.**
 
@@ -512,9 +512,9 @@ Because of the symmetry of the XOR operation, encryption and decryption are exac
 
 ![{\displaystyle I\_{0}={\text{IV)).}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/89585f1821f70e464640e3494e159592dc4d3fa4)
 
-![OFB encryption.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/OFB\_encryption.svg/1202px-OFB\_encryption.svg.png)
+![.gitbook/assets/1664530360_4875.png](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/OFB\_encryption.svg/1202px-OFB\_encryption.svg.png)
 
-![OFB decryption.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/OFB\_decryption.svg/1202px-OFB\_decryption.svg.png)
+![.gitbook/assets/1664530360_9582.png](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/OFB\_decryption.svg/1202px-OFB\_decryption.svg.png)
 
 Each output feedback block cipher operation depends on all previous ones, and so cannot be performed in parallel. However, because the plaintext or ciphertext is only used for the final XOR, the block cipher operations may be performed in advance, allowing the final step to be performed in parallel once the plaintext or ciphertext is available.
 
@@ -543,9 +543,9 @@ If the IV/nonce is random, then they can be combined with the counter using any 
 
 Note that the [nonce](https://www.wikiwand.com/en/Cryptographic\_nonce) in this diagram is equivalent to the [initialization vector](https://www.wikiwand.com/en/Initialization\_vector) (IV) in the other diagrams. However, if the offset/location information is corrupt, it will be impossible to partially recover such data due to the dependence on byte offset.
 
-![CTR encryption 2.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/CTR\_encryption\_2.svg/1202px-CTR\_encryption\_2.svg.png)
+![.gitbook/assets/1664530360_8307.png](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/CTR\_encryption\_2.svg/1202px-CTR\_encryption\_2.svg.png)
 
-![CTR decryption 2.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/CTR\_decryption\_2.svg/1202px-CTR\_decryption\_2.svg.png)
+![.gitbook/assets/1664530361_675.png](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/CTR\_decryption\_2.svg/1202px-CTR\_decryption\_2.svg.png)
 
 ### Error propagation
 

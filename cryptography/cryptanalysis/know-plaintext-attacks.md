@@ -30,7 +30,7 @@ where it can be seen that each of the `*.enc` files are AES encrypted with CTR m
 
 A good place to start learning about the cipher is in the documentation of the cryptography library you're using. In this case, it's the `pycryptodome` Python package. [The documentation describes the operation of the CTR mode as the exclusive-or of the plaintext with a keystream to obtain the ciphertext. The keystream itself is an AES encrypted sequence of counter blocks in ECB mode.](https://pycryptodome.readthedocs.io/en/latest/src/cipher/classic.html#ctr-mode)
 
-![Block diagram of CTR mode](https://upload.wikimedia.org/wikipedia/commons/4/4d/CTR\_encryption\_2.svg)
+![.gitbook/assets/1664530363_1458.svg](https://upload.wikimedia.org/wikipedia/commons/4/4d/CTR\_encryption\_2.svg)
 
 Since we have one known plaintext-ciphertext pair, we can recover the keystream used to encrypt that pair by taking the exclusive-or of the plaintext and the ciphertext
 
@@ -46,7 +46,7 @@ $$
 
 of those other files, thus completing our known-plaintext attack. However, we require keystream reuse across files, and that necessitates a closer inspection of how the keystream is constructed. The keystream is an AES encryption in [ECB mode](https://en.wikipedia.org/wiki/Block\_cipher\_mode\_of\_operation#Electronic\_codebook\_\(ECB\)) of the counter blocks, and requires the encryption key, an initial counter value, and any additional random nonces to be appended or prepended to the counter as parameters. The counter block sequence is in the form
 
-![Construction of counter block sequence](https://pycryptodome.readthedocs.io/en/latest/\_images/counter\_be.png)
+![.gitbook/assets/1664530363_397.png](https://pycryptodome.readthedocs.io/en/latest/\_images/counter\_be.png)
 
 and the program initializes the sequence using
 

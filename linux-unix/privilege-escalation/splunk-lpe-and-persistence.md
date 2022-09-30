@@ -26,7 +26,7 @@ Splunk is a data aggregation and search tool often used as a Security Informatio
 
 Universal Forwarder is accessible on each host at https://host:8089. Accessing any of the protected API calls, such as /service/ pops up a Basic authentication box. The username is always admin, and the password default used to be changeme until 2016 when Splunk required any new installations to set a password of 8 characters or higher. As you will note in my demo, complexity is not a requirement as my agent password is 12345678. A remote attacker can brute force the password without lockout, which is a necessity of a log host, since if the account locked out then logs would no longer be sent to the Splunk server and an attacker could use this to hide their attacks. The following screenshot shows the Universal Forwarder agent, this initial page is accessible without authentication and can be used to enumerate hosts running Splunk Universal Forwarder.
 
-![0](https://eapolsniper.github.io/assets/2020AUG14/11\_SplunkAgent.png)
+![.gitbook/assets/1664530385_7992.png](https://eapolsniper.github.io/assets/2020AUG14/11\_SplunkAgent.png)
 
 Splunk documentaiton shows using the same Universal Forwarding password for all agents, I don’t remember for sure if this is a requirement or if individual passwords can be set for each agent, but based on documentaiton and memory from when I was a Splunk admin, I believe all agents must use the same password. This means if the password is found or cracked on one system, it is likely to work on all Splunk UF hosts. This has been my personal experience, allowing compromise of hundreds of hosts quickly.
 
@@ -56,43 +56,43 @@ To show an exploitation example I set up a test environment using the latest Spl
 
 1- Requesting the /etc/passwd file through PySplunkWhisper2
 
-![1](https://eapolsniper.github.io/assets/2020AUG14/1\_RequestingPasswd.png)
+![.gitbook/assets/1664530386_2012.png](https://eapolsniper.github.io/assets/2020AUG14/1\_RequestingPasswd.png)
 
 2- Receiving the /etc/passwd file on the attacker system through Netcat
 
-![2](https://eapolsniper.github.io/assets/2020AUG14/2\_ReceivingPasswd.png)
+![.gitbook/assets/1664530386_7963.png](https://eapolsniper.github.io/assets/2020AUG14/2\_ReceivingPasswd.png)
 
 3- Requesting the /etc/shadow file through PySplunkWhisper2
 
-![3](https://eapolsniper.github.io/assets/2020AUG14/3\_RequestingShadow.png)
+![.gitbook/assets/1664530386_2679.png](https://eapolsniper.github.io/assets/2020AUG14/3\_RequestingShadow.png)
 
 4- Receiving the /etc/shadow file on the attacker system through Netcat
 
-![4](https://eapolsniper.github.io/assets/2020AUG14/4\_ReceivingShadow.png)
+![.gitbook/assets/1664530386_547.png](https://eapolsniper.github.io/assets/2020AUG14/4\_ReceivingShadow.png)
 
 5- Adding the user attacker007 to the /etc/passwd file
 
-![5](https://eapolsniper.github.io/assets/2020AUG14/5\_AddingUserToPasswd.png)
+![.gitbook/assets/1664530387_2104.png](https://eapolsniper.github.io/assets/2020AUG14/5\_AddingUserToPasswd.png)
 
 6- Adding the user attacker007 to the /etc/shadow file
 
-![6](https://eapolsniper.github.io/assets/2020AUG14/6\_AddingUserToShadow.png)
+![.gitbook/assets/1664530387_8617.png](https://eapolsniper.github.io/assets/2020AUG14/6\_AddingUserToShadow.png)
 
 7- Receiving the new /etc/shadow file showing attacker007 is successfully added
 
-![7](https://eapolsniper.github.io/assets/2020AUG14/7\_ReceivingShadowFileAfterAdd.png)
+![.gitbook/assets/1664530387_3736.png](https://eapolsniper.github.io/assets/2020AUG14/7\_ReceivingShadowFileAfterAdd.png)
 
 8- Confirming SSH access to the victim using the attacker007 account
 
-![8](https://eapolsniper.github.io/assets/2020AUG14/8\_SSHAccessUsingAttacker007.png)
+![.gitbook/assets/1664530387_499.png](https://eapolsniper.github.io/assets/2020AUG14/8\_SSHAccessUsingAttacker007.png)
 
 9- Adding a backdoor root account with username root007, with the uid/gid set to 0
 
-![9](https://eapolsniper.github.io/assets/2020AUG14/9\_AddingBackdoorRootAccount.png)
+![.gitbook/assets/1664530387_3065.png](https://eapolsniper.github.io/assets/2020AUG14/9\_AddingBackdoorRootAccount.png)
 
 10- Confirming SSH access using attacker007, and then escalating to root using root007
 
-![10](https://eapolsniper.github.io/assets/2020AUG14/10\_EscalatingToRoot.png)
+![.gitbook/assets/1664530388_8142.png](https://eapolsniper.github.io/assets/2020AUG14/10\_EscalatingToRoot.png)
 
 At this point I have persistent access to the host both through Splunk and through the two user accounts created, one of which provides root. I can disable remote logging to cover my tracks and continue attacking the system and network using this host.
 

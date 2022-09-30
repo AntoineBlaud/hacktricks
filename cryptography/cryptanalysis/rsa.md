@@ -139,7 +139,7 @@ On peut conserver une forme différente de la clé privée pour permettre un dé
 
 ### Sécurité
 
-[![.gitbook/assets/1664529909_8129.png](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/2017-fr.wp-orange-source.svg/25px-2017-fr.wp-orange-source.svg.png)](https://commons.wikimedia.org/wiki/File:2017-fr.wp-orange-source.svg?uselang=fr)
+[![.gitbook/assets/1664530366_2550.svg](https://commons.wikimedia.org/wiki/File:2017-fr.wp-orange-source.svg?uselang=fr)
 
 Il faut distinguer les [attaques par la force brute](https://fr.wikipedia.org/wiki/Attaque\_par\_force\_brute), qui consistent à retrouver _p_ et _q_ sur base de la connaissance de _n_ uniquement, et les attaques sur base de la connaissance de _n_ mais aussi de la manière dont _p_ et _q_ ont été générés, du logiciel de cryptographie utilisé, d'un ou plusieurs messages éventuellement interceptés etc.
 

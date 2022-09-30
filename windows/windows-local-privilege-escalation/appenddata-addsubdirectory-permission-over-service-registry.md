@@ -9,7 +9,7 @@ According to the output of the script, the current user has some write permissio
 
 Let’s manually check the permissions of the `RpcEptMapper` service using the `regedit` GUI. One thing I really like about the _Advanced Security Settings_ window is the _Effective Permissions_ tab. You can pick any user or group name and immediately see the effective permissions that are granted to this principal without the need to inspect all the ACEs separately. The following screenshot shows the result for the low privileged `lab-user` account.
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/02\_regsitry-rpceptmapper-permissions.png)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/02\_regsitry-rpceptmapper-permissions.png)
 
 Most permissions are standard (e.g.: `Query Value`) but one in particular stands out: `Create Subkey`. The generic name corresponding to this permission is `AppendData/AddSubdirectory`, which is exactly what was reported by the script:
 
@@ -37,7 +37,7 @@ UserCanRestart    : False
 
 What does this mean exactly? It means that we cannot just modify the `ImagePath` value for example. To do so, we would need the `WriteData/AddFile` permission. Instead, we can only create a new subkey.
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/03\_registry-imagepath-access-denied.png)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/03\_registry-imagepath-access-denied.png)
 
 Does it mean that it was indeed a false positive? Surely not. Let the fun begin!
 
@@ -45,17 +45,17 @@ Does it mean that it was indeed a false positive? Surely not. Let the fun begin!
 
 At this point, we know that we can create arbirary subkeys under `HKLM\SYSTEM\CurrentControlSet\Services\RpcEptMapper` but we cannot modify existing subkeys and values. These already existing subkeys are `Parameters` and `Security`, which are quite common for Windows services.
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/04\_registry-rpceptmapper-config.png)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/04\_registry-rpceptmapper-config.png)
 
 Therefore, the first question that came to mind was: _is there any other predefined subkey - such as `Parameters` and `Security`- that we could leverage to effectively modify the configuration of the service and alter its behavior in any way?_
 
 To answer this question, my initial plan was to enumerate all existing keys and try to identify a pattern. The idea was to see which subkeys are _meaningful_ for a service’s configuration. I started to think about how I could implement that in PowerShell and then sort the result. Though, before doing so, I wondered if this registry structure was already documented. So, I googled something like `windows service configuration registry site:microsoft.com` and here is the very first [result](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree) that came out.
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/05\_google-search-registry-services.png)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/05\_google-search-registry-services.png)
 
 Looks promising, doesn’t it? At first glance, the documentation did not seem to be exhaustive and complete. Considering the title, I expected to see some sort of tree structure detailing all the subkeys and values defining a service’s configuration but it was clearly not there.
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/06\_doc-registry-services.png)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/06\_doc-registry-services.png)
 
 Still, I did take a quick look at each paragraph. And, I quickly spotted the keywords “_**Performance**_” and “_**DLL**_”. Under the subtitle “**Perfomance**”, we can read the following:
 
@@ -63,13 +63,13 @@ Still, I did take a quick look at each paragraph. And, I quickly spotted the key
 
 According to this short paragraph, one can theoretically register a DLL in a driver service in order to monitor its performances thanks to the `Performance` subkey. **OK, this is really interesting!** This key doesn’t exist by default for the `RpcEptMapper` service so it looks like it is _exactly_ what we need. There is a slight problem though, this service is definitely not a driver service. Anyway, it’s still worth the try, but we need more information about this “_Perfomance Monitoring_” feature first.
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/07\_sc-qc-rpceptmapper.png)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/07\_sc-qc-rpceptmapper.png)
 
 > **Note:** in Windows, each service has a given `Type`. A service type can be one of the following values: `SERVICE_KERNEL_DRIVER (1)`, `SERVICE_FILE_SYSTEM_DRIVER (2)`, `SERVICE_ADAPTER (4)`, `SERVICE_RECOGNIZER_DRIVER (8)`, `SERVICE_WIN32_OWN_PROCESS (16)`, `SERVICE_WIN32_SHARE_PROCESS (32)` or `SERVICE_INTERACTIVE_PROCESS (256)`.
 
 After some googling, I found this resource in the documentation: [Creating the Application’s Performance Key](https://docs.microsoft.com/en-us/windows/win32/perfctrs/creating-the-applications-performance-key).
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/08\_performance-subkey-documentation.png)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/08\_performance-subkey-documentation.png)
 
 First, there is a nice tree structure that lists all the keys and values we have to create. Then, the description gives the following key information:
 
@@ -238,20 +238,20 @@ Before going any further, I always make sure that my payload is working properly
 C:\Users\lab-user\Downloads\>rundll32 DllRpcEndpointMapperPoc.dll,OpenPerfData
 ```
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/09\_test-poc-rundll32.gif)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/09\_test-poc-rundll32.gif)
 
-Great, the log file was created and, if we open it, we can see two entries. The first one was written when the DLL was loaded by `rundll32.exe`. The second one was written when `OpenPerfData` was called. Looks good! ![:slightly\_smiling\_face:](https://github.githubassets.com/images/icons/emoji/unicode/1f642.png)
+Great, the log file was created and, if we open it, we can see two entries. The first one was written when the DLL was loaded by `rundll32.exe`. The second one was written when `OpenPerfData` was called. Looks good! ![.gitbook/assets/1664530486_7443.png](https://github.githubassets.com/images/icons/emoji/unicode/1f642.png)
 
 ```
 [21:25:34] - PID=3040 - PPID=2964 - USER='lab-user' - CMD='rundll32  DllRpcEndpointMapperPoc.dll,OpenPerfData' - METHOD='DllMain'
 [21:25:34] - PID=3040 - PPID=2964 - USER='lab-user' - CMD='rundll32  DllRpcEndpointMapperPoc.dll,OpenPerfData' - METHOD='OpenPerfData'
 ```
 
-Ok, now we can focus on the actual vulnerability and start by creating the required registry key and values. We can either do this manually using `reg.exe` / `regedit.exe` or programmatically with a script. Since I already went through the manual steps during my initial research, I’ll show a cleaner way to do the same thing with a PowerShell script. Besides, creating registry keys and values in PowerShell is as easy as calling `New-Item` and `New-ItemProperty`, isn’t it? ![:thinking:](https://github.githubassets.com/images/icons/emoji/unicode/1f914.png)
+Ok, now we can focus on the actual vulnerability and start by creating the required registry key and values. We can either do this manually using `reg.exe` / `regedit.exe` or programmatically with a script. Since I already went through the manual steps during my initial research, I’ll show a cleaner way to do the same thing with a PowerShell script. Besides, creating registry keys and values in PowerShell is as easy as calling `New-Item` and `New-ItemProperty`, isn’t it? ![.gitbook/assets/1664530487_6065.png](https://github.githubassets.com/images/icons/emoji/unicode/1f914.png)
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/10\_powershell-new-item-access-denied.png)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/10\_powershell-new-item-access-denied.png)
 
-`Requested registry access is not allowed`… Hmmm, ok… It looks like it won’t be that easy after all. ![:stuck\_out\_tongue:](https://github.githubassets.com/images/icons/emoji/unicode/1f61b.png)
+`Requested registry access is not allowed`… Hmmm, ok… It looks like it won’t be that easy after all. ![.gitbook/assets/1664530487_7379.png](https://github.githubassets.com/images/icons/emoji/unicode/1f61b.png)
 
 I didn’t really investigate this issue but my guess is that when we call `New-Item`, `powershell.exe` actually tries to open the parent registry key with some flags that correspond to permissions we don’t have.
 
@@ -261,7 +261,7 @@ Anyway, if the built-in cmdlets don’t do the job, we can always go down one le
 [Microsoft.Win32.Registry]::LocalMachine.CreateSubKey("SYSTEM\CurrentControlSet\Services\RpcEptMapper\Performance")
 ```
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/11\_powershell-dotnet-createsubkey.png)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/11\_powershell-dotnet-createsubkey.png)
 
 Here we go! In the end, I put together the following script in order to create the appropriate key and values, wait for some user input and finally terminate by cleaning everything up.
 
@@ -299,7 +299,7 @@ So, I first enumerated the WMI classes that are related to _Performace Data_ in 
 Get-WmiObject -List | Where-Object { $_.Name -Like "Win32_Perf*" }
 ```
 
-![.gitbook/assets/1664529992_4047.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/12\_powershell-get-wmiobject.gif)
+![.gitbook/assets/1664530485_1434.png](https://itm4n.github.io/assets/posts/2020-11-12-windows-registry-rpceptmapper-eop/12\_powershell-get-wmiobject.gif)
 
 And, I saw that my log file was created almost right away! Here is the content of the file.
 
@@ -319,7 +319,7 @@ And, I saw that my log file was created almost right away! Here is the content o
 [21:17:49] - PID=4904 - PPID=664 - USER='SYSTEM' - CMD='C:\Windows\system32\wbem\wmiprvse.exe' - METHOD='CollectPerfData'
 ```
 
-I expected to get arbitary code execution as `NETWORK SERVICE` in the context of the `RpcEptMapper` service at most but, it looks like I got a much better result than anticipated. I actually got arbitrary code execution in the context of the `WMI` service itself, which runs as `LOCAL SYSTEM`. How amazing is that?! ![:sunglasses:](https://github.githubassets.com/images/icons/emoji/unicode/1f60e.png)
+I expected to get arbitary code execution as `NETWORK SERVICE` in the context of the `RpcEptMapper` service at most but, it looks like I got a much better result than anticipated. I actually got arbitrary code execution in the context of the `WMI` service itself, which runs as `LOCAL SYSTEM`. How amazing is that?! ![.gitbook/assets/1664530487_2753.png](https://github.githubassets.com/images/icons/emoji/unicode/1f60e.png)
 
 > **Note:** if I had got arbirary code execution as `NETWORK SERVICE`, I would have been just a token away from the `LOCAL SYSTEM` account thanks to the trick that was demonstrated by James Forshaw a few months ago in this blog post: [Sharing a Logon Session a Little Too Much](https://www.tiraniddo.dev/2020/04/sharing-logon-session-little-too-much.html).
 
