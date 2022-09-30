@@ -289,7 +289,7 @@ Once you have installed and configured your LDAP service you can run it with the
 
 The screen shot below shows an example of the output when we run the connection test on the printer. As you can see the username and password are passed from the LDAP client to server.
 
-![.gitbook/assets/1663788080.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788080/otnfhqmgamdbjms49w0i.png)
+![slapd terminal output containing the username "MyUser" and password "MyPassword"](https://i1.wp.com/grimhacker.com/wp-content/uploads/2018/03/slapd\_output.png?resize=474%2C163\&ssl=1)
 
 ## How bad can it be?
 

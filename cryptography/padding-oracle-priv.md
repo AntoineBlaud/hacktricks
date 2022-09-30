@@ -4,11 +4,11 @@
 
 In CBC mode the **previous encrypted block is used as IV** to XOR with the next block:
 
-![.gitbook/assets/1663786907.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786906/kr0vlafwgkggthrosnfm.png)
+![CBC encryption](https://defuse.ca/images/cbc\_encryption.png)
 
 To decrypt CBC the **opposite** **operations** are done:
 
-![.gitbook/assets/1663786908.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663786907/vycco7jn8lramrjklqhe.png)
+![CBC decryption](https://defuse.ca/images/cbc\_decryption.png)
 
 Notice how it's needed to use an **encryption** **key** and an **IV**.
 

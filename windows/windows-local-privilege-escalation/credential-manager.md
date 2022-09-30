@@ -54,7 +54,7 @@ Vault : {77bc582b-f0a6-4e15-4e80-61736b6f3b29}
 
 If you go to the **Control Panel > Credential Manager** on WKSTN-1 and select **Windows Credentials**, you will see how this credential appears to the user. And opening the **Remote Desktop Connection** client shows how these creds are automatically populated for the target server.
 
-![.gitbook/assets/1663788151.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788150/twfdd8cuu4i6vl4sjldj.png)
+![](https://rto-assets.s3.eu-west-2.amazonaws.com/dpapi/cred-manager.png)
 
 To decrypt the credential, we need to find the master encryption key.
 

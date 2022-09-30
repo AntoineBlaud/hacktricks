@@ -8,7 +8,7 @@ Trusts can be **one-way** or **two-way**; and **transitive** or **non-transitive
 
 A one-way trust allows principals in the **trusted** domain to access resources in the **trusting** domain, but not vice versa. A two-way trust is actually just two one-way trusts that go in the opposite directions, and allows users in each domain to access resources in the other. Trust directions are confusing as the direction of the trust is the opposite to the direction of access.
 
-![.gitbook/assets/1663788108.png](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663788107/scwmdwd6mgkajmhrqfib.png)
+![](https://rto-assets.s3.eu-west-2.amazonaws.com/domain-trusts/trust\_direction.png)
 
 If Domain A trusts Domain B, Domain A is the trusting domain and Domain B is the trusted domain. But this allows users in Domain B to access Domain A, not A to B. To further complicate things, one-way trusts can be labelled as **Inbound** or **Outbound** depending on your perspective. In Domain A, this would be an Outbound trust; and in Domain B, this would be an Inbound trust.
 

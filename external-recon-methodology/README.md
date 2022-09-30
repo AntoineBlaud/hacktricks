@@ -118,7 +118,7 @@ cat my_targets.txt | xargs -I %% bash -c 'echo "http://%%/favicon.ico"' > target
 python3 favihash.py -f https://target/favicon.ico -t targets.txt -s
 ```
 
-![.gitbook/assets/1663787022.jpg](http://res.cloudinary.com/dr4gsg09f/image/upload/v1663787021/h9tlxvrukw012b1aov7u.jpg)
+![favihash - discover domains with the same favicon icon hash](https://www.infosecmatter.com/wp-content/uploads/2020/07/favihash.jpg)
 
 Simply said, favihash will allow us to discover domains that have the same favicon icon hash as our target.
 
