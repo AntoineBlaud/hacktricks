@@ -141,3 +141,4 @@ Et dire que toute cette panoplie de méthodes de factorisation ont leur origine
 
 <figure><img src="https://accromath.uqam.ca/wp-content/uploads/2019/10/Fermat-5.png" alt=""><figcaption></figcaption></figure>
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
