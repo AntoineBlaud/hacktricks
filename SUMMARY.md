@@ -617,6 +617,8 @@
 ## Physical attacks
 
 * [Physical Attacks](physical-attacks/physical-attacks.md)
+* [RowHammer](physical-attacks/rowhammer.md)
+* [Anc ASLR](physical-attacks/anc-aslr.md)
 * [Escaping from KIOSKs](physical-attacks/escaping-from-gui-applications/README.md)
   * [Show file extensions](physical-attacks/escaping-from-gui-applications/show-file-extensions.md)
 * [Firmware Analysis](physical-attacks/firmware-analysis/README.md)
