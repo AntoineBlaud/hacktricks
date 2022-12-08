@@ -191,6 +191,7 @@
   * [Google CTF 2018 - Shall We Play a Game?](mobile-apps-pentesting/android-app-pentesting/google-ctf-2018-shall-we-play-a-game.md)
   * [Inspeckage Tutorial](mobile-apps-pentesting/android-app-pentesting/inspeckage-tutorial.md)
   * [Intent Injection](mobile-apps-pentesting/android-app-pentesting/intent-injection.md)
+  * [Strace](mobile-apps-pentesting/android-app-pentesting/strace.md)
   * [Make APK Accept CA Certificate](mobile-apps-pentesting/android-app-pentesting/make-apk-accept-ca-certificate.md)
   * [Manual DeObfuscation](mobile-apps-pentesting/android-app-pentesting/manual-deobfuscation.md)
   * [React Native Application](mobile-apps-pentesting/android-app-pentesting/react-native-application.md)
