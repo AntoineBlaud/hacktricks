@@ -86,7 +86,7 @@ VistaSP0x86                                   - A Profile for Windows Vista SP0 
 
 You can **download Linux and Mac profiles** from [https://github.com/volatilityfoundation/profiles](https://github.com/volatilityfoundation/profiles)
 
-In the previous chunk you can see that the profile is called `LinuxCentOS7_3_10_0-123_el7_x86_64_profilex64`  , and you can use it executing something like:
+In the previous chunk you can see that the profile is called `LinuxCentOS7_3_10_0-123_el7_x86_64_profilex64` , and you can use it executing something like:
 
 ```bash
 ./vol -f file.dmp --plugins=. --profile=LinuxCentOS7_3_10_0-123_el7_x86_64_profilex64 linux_netscan
@@ -314,7 +314,6 @@ volatility --profile=Win7SP1x86_23418 -f file.dmp handles [--pid=<pid>]
 ```bash
 ./vol.py -f file.dmp windows.dlllist.DllList [--pid <pid>] #List dlls used by each
 ./vol.py -f file.dmp windows.dumpfiles.DumpFiles --pid <pid> #Dump the .exe and dlls of the process in the current directory process
-
 ```
 {% endtab %}
 
@@ -770,4 +769,3 @@ volatility --profile=Win7SP1x86_23418 mbrparser -f file.dmp
 ```
 
 The MBR holds the information on how the logical partitions, containing [file systems](https://en.wikipedia.org/wiki/File\_system), are organized on that medium. The MBR also contains executable code to function as a loader for the installed operating system—usually by passing control over to the loader's [second stage](https://en.wikipedia.org/wiki/Second-stage\_boot\_loader), or in conjunction with each partition's [volume boot record](https://en.wikipedia.org/wiki/Volume\_boot\_record) (VBR). This MBR code is usually referred to as a [boot loader](https://en.wikipedia.org/wiki/Boot\_loader). From [here](https://en.wikipedia.org/wiki/Master\_boot\_record).
-

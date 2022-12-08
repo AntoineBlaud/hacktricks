@@ -139,7 +139,7 @@ On peut conserver une forme différente de la clé privée pour permettre un dé
 
 ### Sécurité
 
-[![.gitbook/assets/1664530366_2550.svg](https://commons.wikimedia.org/wiki/File:2017-fr.wp-orange-source.svg?uselang=fr)
+\[![.gitbook/assets/1664530366\_2550.svg](https://commons.wikimedia.org/wiki/File:2017-fr.wp-orange-source.svg?uselang=fr)
 
 Il faut distinguer les [attaques par la force brute](https://fr.wikipedia.org/wiki/Attaque\_par\_force\_brute), qui consistent à retrouver _p_ et _q_ sur base de la connaissance de _n_ uniquement, et les attaques sur base de la connaissance de _n_ mais aussi de la manière dont _p_ et _q_ ont été générés, du logiciel de cryptographie utilisé, d'un ou plusieurs messages éventuellement interceptés etc.
 
@@ -192,8 +192,6 @@ L'aveuglement se sert des propriétés multiplicatives de RSA en insérant dans 
 #### Attaque à chiffrés choisis (_Adaptive chosen ciphertext attacks_)
 
 Tel que décrit dans cet article, RSA est un chiffrement déterministe, et ne peut donc pas être [sémantiquement sûr](https://fr.wikipedia.org/wiki/S%C3%A9curit%C3%A9\_s%C3%A9mantique). Une contremesure est l’utilisation d’un [schéma de remplissage](https://fr.wikipedia.org/wiki/Remplissage\_\(cryptographie\)) probabiliste de manière telle qu'aucune valeur de message, une fois chiffré, ne donne un résultat peu sûr, par exemple si _C = Me ≤ N_, une attaque simple est le calcul direct de la racine e-ième de C, qui n’aura pas été réduite modulo N.
-
-
 
 ## RSA Encryption
 
@@ -362,7 +360,6 @@ q * q * e = q * (k * p + 1)
 (q ^ 2) * e = (k * N) + q                          # N = p * q
 ((q ^ 2) * e) - q = k * N
 q = ((k * N) / e) ^ 2
-
 ```
 
 \

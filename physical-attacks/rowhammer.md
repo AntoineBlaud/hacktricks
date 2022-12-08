@@ -58,7 +58,8 @@ Disturbance errors (explained in the [section above](https://www.wikiwand.com/en
   clflush (X)    // flush cache for address X
   clflush (Y)    // flush cache for address Y
   mfence
-  jmp hammer</code></pre>                                                                                                                                                                                                                                                           |
+  jmp hammer
+</code></pre>                                                                                                                                                                                                                                                          |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A snippet of [x86 assembly](https://www.wikiwand.com/en/X86\_assembly\_language) code that induces the row hammer effect (memory addresses `X` and `Y` must map to different DRAM rows in the same [memory bank](https://www.wikiwand.com/en/Memory\_bank))[\[1\]](https://www.wikiwand.com/en/Row\_hammer#citenoteisca14paper1): 3 [\[4\]](https://www.wikiwand.com/en/Row\_hammer#citenotegoogleprojectzero4)[\[18\]](https://www.wikiwand.com/en/Row\_hammer#citenoteblackhat18): 13–15  |
 

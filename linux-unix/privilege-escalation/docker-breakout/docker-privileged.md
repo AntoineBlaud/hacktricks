@@ -51,7 +51,6 @@ cpuacct on /sys/fs/cgroup/cpuacct type cgroup (ro,nosuid,nodev,noexec,relatime,c
 ```bash
 # docker run --rm --privileged -it alpine sh
 mount  | grep '(ro'
-
 ```
 {% endtab %}
 {% endtabs %}

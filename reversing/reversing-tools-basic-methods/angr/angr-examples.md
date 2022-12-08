@@ -1,7 +1,7 @@
 # Angr - Examples
 
 {% hint style="info" %}
-If the program is using **`scanf` ** to get **several values at once from stdin** you need to generate a state that starts after the **`scanf`**.
+If the program is using \*\*`scanf` \*\* to get **several values at once from stdin** you need to generate a state that starts after the **`scanf`**.
 {% endhint %}
 
 ### Input to reach address (indicating the address)
@@ -832,5 +832,4 @@ def main(argv):
 
 if __name__ == '__main__':
   main(sys.argv)
-
 ```

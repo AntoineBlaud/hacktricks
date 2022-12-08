@@ -66,5 +66,4 @@ for proj in $(gcloud projects list --format="get(projectId)"); do
               echo "[!] Open to all authenticated users: $bucket"
         fi
     done
-
 ```
