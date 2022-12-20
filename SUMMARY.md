@@ -195,6 +195,7 @@
   * [Make APK Accept CA Certificate](mobile-apps-pentesting/android-app-pentesting/make-apk-accept-ca-certificate.md)
   * [Manual DeObfuscation](mobile-apps-pentesting/android-app-pentesting/manual-deobfuscation.md)
   * [React Native Application](mobile-apps-pentesting/android-app-pentesting/react-native-application.md)
+  * [dart](mobile-apps-pentesting/android-app-pentesting/dart.md)
   * [Reversing Native Libraries](mobile-apps-pentesting/android-app-pentesting/reversing-native-libraries.md)
   * [Smali - Decompiling/\[Modifying\]/Compiling](mobile-apps-pentesting/android-app-pentesting/smali-changes.md)
   * [Spoofing your location in Play Store](mobile-apps-pentesting/android-app-pentesting/spoofing-your-location-in-play-store.md)
