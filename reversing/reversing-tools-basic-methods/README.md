@@ -129,7 +129,11 @@ Then, looking to this ca see when the execution was stopped in the dll you want 
 
 ## GUI Apps / Videogames
 
+<<<<<<< HEAD
 \*\*\*\*[**Cheat Engine**](https://www.cheatengine.org/downloads.php) is a useful program to find where important values are saved inside the memory of a running game and change them. More info in:
+=======
+[**Cheat Engine**](https://www.cheatengine.org/downloads.php) is a useful program to find where important values are saved inside the memory of a running game and change them. More info in:
+>>>>>>> master
 
 {% content-ref url="cheat-engine.md" %}
 [cheat-engine.md](cheat-engine.md)
@@ -155,7 +159,11 @@ You can find a slightly modified version of Blobrunner in the following link. In
 
 ### Debugging a shellcode with jmp2it
 
+<<<<<<< HEAD
 \*\*\*\*[**jmp2it** ](https://github.com/adamkramer/jmp2it/releases/tag/v1.4)is very similar to blobrunner. It will **allocate** the **shellcode** inside a space of memory, and start an **eternal loop**. You then need to **attach the debugger** to the process, **play start wait 2-5 secs and press stop** and you will find yourself inside the **eternal loop**. Jump to the next instruction of the eternal loop as it will be a call to the shellcode, and finally you will find yourself executing the shellcode.
+=======
+[**jmp2it** ](https://github.com/adamkramer/jmp2it/releases/tag/v1.4)is very similar to blobrunner. It will **allocate** the **shellcode** inside a space of memory, and start an **eternal loop**. You then need to **attach the debugger** to the process, **play start wait 2-5 secs and press stop** and you will find yourself inside the **eternal loop**. Jump to the next instruction of the eternal loop as it will be a call to the shellcode, and finally you will find yourself executing the shellcode.
+>>>>>>> master
 
 ![](<../../.gitbook/assets/image (397).png>)
 
@@ -163,7 +171,11 @@ You can download a compiled version of [jmp2it inside the releases page](https:/
 
 ### Debugging shellcode using Cutter
 
+<<<<<<< HEAD
 \*\*\*\*[**Cutter**](https://github.com/rizinorg/cutter/releases/tag/v1.12.0) is the GUI of radare. Using cutter you can emulate the shellcode and inspect it dynamically.
+=======
+[**Cutter**](https://github.com/rizinorg/cutter/releases/tag/v1.12.0) is the GUI of radare. Using cutter you can emulate the shellcode and inspect it dynamically.
+>>>>>>> master
 
 Note that Cutter allows you to "Open File" and "Open Shellcode". In my case when I opened the shellcode as a file it decompiled it correctly, but when I opened it as a shellcode it didn't:
 
@@ -234,7 +246,11 @@ Having the **name** of the **functions** being called, search for them on the **
 
 For Delphi compiled binaries you can use [https://github.com/crypto2011/IDR](https://github.com/crypto2011/IDR)
 
+<<<<<<< HEAD
 I you have to reverse a Delphi binary I would suggest you to use the IDA plugin [https://github.com/Coldzer0/IDA-For-Delphi](https://github.com/Coldzer0/IDA-For-Delphi)\*\*\*\*
+=======
+I you have to reverse a Delphi binary I would suggest you to use the IDA plugin [https://github.com/Coldzer0/IDA-For-Delphi](https://github.com/Coldzer0/IDA-For-Delphi)
+>>>>>>> master
 
 Just press **ATL+f7** (import python plugin in IDA) and select the python plugin.
 
@@ -262,9 +278,15 @@ In this page you can find how to get the python code from an ELF/EXE python comp
 
 If you get the **binary** of a GBA game you can use different tools to **emulate** and **debug** it:
 
+<<<<<<< HEAD
 * \*\*\*\*[**no$gba**](https://problemkaputt.de/gba.htm) (_Download the debug version_) - Contains a debugger with interface
 * \*\*\*\*[**mgba** ](https://mgba.io)- Contains a CLI debugger
 * \*\*\*\*[**gba-ghidra-loader**](https://github.com/pudii/gba-ghidra-loader) - Ghidra plugin
+=======
+* [**no$gba**](https://problemkaputt.de/gba.htm) (_Download the debug version_) - Contains a debugger with interface
+* [**mgba** ](https://mgba.io)- Contains a CLI debugger
+* [**gba-ghidra-loader**](https://github.com/pudii/gba-ghidra-loader) - Ghidra plugin
+>>>>>>> master
 * [**GhidraGBA**](https://github.com/SiD3W4y/GhidraGBA) - Ghidra plugin
 
 In [**no$gba**](https://problemkaputt.de/gba.htm), in _**Options --> Emulation Setup --> Controls**_\*\* \*\* you can see how to press the Game Boy Advance **buttons**
@@ -369,7 +391,11 @@ In the previous code you can see that we are comparing **uVar1** (the place wher
 
 So, in this challenge, knowing the values of the buttons, you needed to **press a combination with a length smaller than 8 that the resulting addition is 0xf3.**
 
+<<<<<<< HEAD
 **Reference for this tutorial:** [**https://exp.codes/Nostalgia/**](https://exp.codes/Nostalgia/)\*\*\*\*
+=======
+**Reference for this tutorial:** [**https://exp.codes/Nostalgia/**](https://exp.codes/Nostalgia/)
+>>>>>>> master
 
 ## Game Boy
 

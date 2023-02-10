@@ -45,9 +45,15 @@ In this case, the user could **create an impersonation token** and add to it a p
 ### SeLoadDriverPrivilege (3.1.7)
 
 **Load and unload device drivers.**\
+<<<<<<< HEAD
 **You need to create an entry in the registry with values for ImagePath and Type.**\
 **As you don't have access to write to HKLM, you have to use HKCU. But HKCU doesn't mean anything for the kernel, the way to guide the kernel here and use the expected path for a driver config is to use the path: "\Registry\User\S-1-5-21-582075628-3447520101-2530640108-1003\System\CurrentControlSet\Services\DriverName" (the ID is the RID of the current user).**\
 **So, you have to create all that path inside HKCU and set the ImagePath (path to the binary that is going to be executed) and Type (SERVICE\_KERNEL\_DRIVER 0x00000001).**\
+=======
+You need to create an entry in the registry with values for ImagePath and Type.\
+As you don't have access to write to HKLM, you have to **use HKCU**. But HKCU doesn't mean anything for the kernel, the way to guide the kernel here and use the expected path for a driver config is to use the path: "\Registry\User\S-1-5-21-582075628-3447520101-2530640108-1003\System\CurrentControlSet\Services\DriverName" (the ID is the **RID** of the current user).\
+So, you have to **create all that path inside HKCU and set the ImagePath** (path to the binary that is going to be executed) **and Type** (SERVICE\_KERNEL\_DRIVER 0x00000001).\
+>>>>>>> master
 [**Learn how to exploit it here.**](../active-directory-methodology/privileged-accounts-and-token-privileges.md#seloaddriverprivilege)
 
 ### SeTakeOwnershipPrivilege (3.1.8)

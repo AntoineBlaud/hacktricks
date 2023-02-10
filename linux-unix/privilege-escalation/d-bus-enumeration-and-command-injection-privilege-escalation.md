@@ -14,11 +14,11 @@ I used two tools to communicate with the D-Bus interface: CLI tool named **gdbus
 sudo apt-get install d-feet
 ```
 
-![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-21.png)
+![.gitbook/assets/1664530385_656.png](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-21.png)
 
 _Figure 1. D-Feet main window_
 
-![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-22.png)
+![.gitbook/assets/1664530385_656.png](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-22.png)
 
 _Figure 2. D-Feet interface window_
 
@@ -28,13 +28,13 @@ We can also see the **pid of the process** that hosts each service, as well as i
 
 D-Feet also allows one to call the various methods. In the method input screen we can specify a list of Python expressions, delimited by commas, to be interpreted as the parameters to the invoked function, shown in Figure 3. Python types are marshaled to D-Bus types and passed to the service.
 
-![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-23.png)
+![.gitbook/assets/1664530385_656.png](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-23.png)
 
 _Figure 3. Calling D-Bus Methods through D-Feet_
 
 Some methods require authentication before allowing us to invoke them. We will ignore these methods, since our goal is to elevate our privileges without credentials in the first place.
 
-![](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-24.png)
+![.gitbook/assets/1664530385_656.png](https://unit42.paloaltonetworks.com/wp-content/uploads/2019/07/word-image-24.png)
 
 _Figure 4. A method that requires authorization_
 
@@ -235,8 +235,6 @@ dbus-monitor "type=method_call" "type=method_return" "type=error"
 
 See the [D-Bus documentation](http://dbus.freedesktop.org/doc/dbus-specification.html) for more information on match rule syntax.
 
-
-
 ### More
 
 `busctl` have even more options, [**find all of them here**](https://www.freedesktop.org/software/systemd/man/busctl.html).
@@ -289,7 +287,7 @@ In the other side of the D-Bus connection there is some C compiled binary runnin
 
 ### Exploit it
 
-At the end of this page you can find the **complete C code of the D-Bus application**. Inside of it you can find between the lines 91-97 **how the **_**D-Bus object path**_ **and **_**interface name**_** are registered**. This information will be necessary to send information to the D-Bus connection:
+At the end of this page you can find the **complete C code of the D-Bus application**. Inside of it you can find between the lines 91-97 **how the \_D-Bus object path**\_ **and \_interface name**\_\*\* are registered\*\*. This information will be necessary to send information to the D-Bus connection:
 
 ```c
         /* Install the object */
@@ -336,7 +334,7 @@ dbus-send --system --print-reply --dest=htb.oouch.Block /htb/oouch/Block htb.oou
 
 _Note that in `htb.oouch.Block.Block`, the first part (`htb.oouch.Block`) references the service object and the last part (`.Block`) references the method name._
 
-### C code&#x20;
+### C code
 
 {% code title="d-bus_server.c" %}
 ```c
@@ -362,7 +360,7 @@ static int method_block(sd_bus_message *m, void *userdata, sd_bus_error *ret_err
                 return r;
         }
 
-        char command[] = "iptables -A PREROUTING -s %s -t mangle -j DROP";
+        char command[.gitbook/assets/1664530385_656.png] = "iptables -A PREROUTING -s %s -t mangle -j DROP";
 
         int command_len = strlen(command);
         int host_len = strlen(host);
@@ -398,20 +396,20 @@ static int method_block(sd_bus_message *m, void *userdata, sd_bus_error *ret_err
 
 
 /* The vtable of our little object, implements the net.poettering.Calculator interface */
-static const sd_bus_vtable block_vtable[] = {
+static const sd_bus_vtable block_vtable[.gitbook/assets/1664530385_656.png] = {
         SD_BUS_VTABLE_START(0),
         SD_BUS_METHOD("Block", "s", "s", method_block, SD_BUS_VTABLE_UNPRIVILEGED),
         SD_BUS_VTABLE_END
 };
 
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[.gitbook/assets/1664530385_656.png]) {
         /*
          * Main method, registeres the htb.oouch.Block service on the system dbus.
          *
          * Paramaters:
          *      argc            (int)             Number of arguments, not required
-         *      argv[]          (char**)          Argument array, not required
+         *      argv[.gitbook/assets/1664530385_656.png]          (char**)          Argument array, not required
          *
          * Returns:
          *      Either EXIT_SUCCESS ot EXIT_FAILURE. Howeverm ideally it stays alive

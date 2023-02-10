@@ -38,6 +38,15 @@ Local Port --> Compromised host (SSH) --> Wherever
 ssh -f -N -D <attacker_port> <username>@<ip_compromised> #All sent to local port will exit through the compromised server (use as proxy)
 ```
 
+### Port2HostPort (bypass source port firewall rule)
+
+```bash
+ncat -l 4444 --sh-exec "ncat 192.168.5.2 987 -p 53" &
+ssh -p 4444 user@192.168.5.2 
+```
+
+
+
 ### VPN-Tunnel
 
 You need **root in both devices** (as you are going to create new interfaces) and the sshd config has to allow root login:\
@@ -61,6 +70,38 @@ Set new route on client side
 
 ```
 route add -net 10.0.0.0/16 gw 1.1.1.1
+```
+
+### VPN-Tunnel (V2.0)
+
+Sur le serveur Pivot Tout d'abord on édite la configuration SSH pour autoriser le login root et le mode tunnel. Dans notre cas on peut se loger en root sur le serveur via SSH et la clée du root ou directement en déposer sa clée publique sur le serveur.
+
+```
+PermitTunnel point-to-point
+PermitRootLogin without-password
+```
+
+Ensuite on tape les commandes suivantes sur le serveur pivot pour: \* Activer l'interface tun0 \* Configurer l'IP de l'interface et son point-to-point \* Le masquerade pour être router automatique vers le réseau qui nous intéresse : 172.16.1.0/24.
+
+```
+echo 1 > /proc/sys/net/ipv4/ip_forward
+ip tuntap add mode tun dev tun0
+ifconfig tun0 10.43.43.2 netmask 255.255.255.0 pointopoint 10.43.43.1
+sudo iptables -t nat -A POSTROUTING -s 10.43.43.0/24 -o eth0 -j MASQUERADE
+```
+
+Sur le serveur du hacker Ensuite sur le client (la machine qui attaque) on exécute les commandes suivantes
+
+```
+ip tuntap add mode tun dev tun1
+ifconfig tun1 10.43.43.1/24 pointtopoint 10.43.43.2
+route add -net 172.16.1.0/24 gw 10.43.43.2
+```
+
+Lancer la connexion SSH depuis la machine hacker
+
+```
+ssh -i id_rsa root@10.10.110.100 -w 1:0
 ```
 
 ## SSHUTTLE
@@ -91,7 +132,7 @@ background# meterpreter session
 route add <IP_victim> <Netmask> <Session> # (ex: route add 10.10.10.14 255.255.255.0 8)
 use auxiliary/server/socks_proxy
 run #Proxy port 1080 by default
-echo "socks4 127.0.0.1 1080" > /etc/proxychains.conf #Proxychains
+append socks4 127.0.0.1 1080 to /etc/proxy4chains.conf 
 ```
 
 Another way:
@@ -325,6 +366,31 @@ listen [lhost:]lport rhost:rport #Ex: listen 127.0.0.1:8080 10.0.0.20:80, this b
 #### Change proxychains DNS
 
 Proxychains intercepts `gethostbyname` libc call and tunnels tcp DNS request through the socks proxy. By **default** the **DNS** server that proxychains use is **4.2.2.2** (hardcoded). To change it, edit the file: _/usr/lib/proxychains3/proxyresolv_ and change the IP. If you are in a **Windows environment** you could set the IP of the **domain controller**.
+<<<<<<< HEAD
+=======
+
+## Proxychains with Nmap
+
+_ICMP ping can not be done to see if a host is alive, since ICMP is not TCP. So you might need to skip the host discovery step if your targets are only accessible through the proxy (-Pn). Since (the unsupported) SOCKS5 ICMP does not support ICMP either this will not change in the future._
+
+You have to use the `-Pn` option to get nmap working with `proxychains` utility. So the command would be
+
+```
+proxychains nmap -sT -Pn -v www.example.com
+```
+
+Here, `-sT` is for scanning TCP ports. And also u can't use the `-O` flag as host discovery can not be done using TCP.
+
+But the most easy way and workaround is to edit the `/etc/proxychains.conf` file.
+
+You need to set your timeouts in /etc/proxychains.conf lower. I recommend 800 and 1200, respectively. Currently, it waits several seconds before determining the TCP handshake failed
+
+We just have to comment out the `proxy_dns` line ans everything will work perfectly.
+
+```
+echo 10.9.30.10 10.9.30.11 |  sed -e 's/ /\n/g' | xargs -P 50 -I %  proxychains4 -q nmap --top-ports 100 -sT -Pn --open -n -T4 --min-parallelism 100 --min-rate 1 -oG proxychains_nmap --append-output  %
+```
+>>>>>>> master
 
 ## Tunnels in Go
 

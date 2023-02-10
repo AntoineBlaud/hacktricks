@@ -10,7 +10,7 @@ If you ends in a code **using shift rights and lefts, xors and several arithmeti
 
 If this function is used, you can find which **algorithm is being used** checking the value of the second parameter:
 
-![](<../../.gitbook/assets/image (375).png>)
+![](<../../.gitbook/assets/image (254) (1).png>)
 
 Check here the table of possible algorithms and their assigned values: [https://docs.microsoft.com/en-us/windows/win32/seccrypto/alg-id](https://docs.microsoft.com/en-us/windows/win32/seccrypto/alg-id)
 
@@ -20,7 +20,7 @@ Compresses and decompresses a given buffer of data.
 
 #### CryptAcquireContext
 
-&#x20;The **CryptAcquireContext** function is used to acquire a handle to a particular key container within a particular cryptographic service provider (CSP). **This returned handle is used in calls to CryptoAPI** functions that use the selected CSP.
+The **CryptAcquireContext** function is used to acquire a handle to a particular key container within a particular cryptographic service provider (CSP). **This returned handle is used in calls to CryptoAPI** functions that use the selected CSP.
 
 #### CryptCreateHash
 
@@ -67,7 +67,7 @@ It's composed of 3 main parts:
 **In order to identify a RC4 in a disassembly/decompiled code you can check for 2 loops of size 0x100 (with the use of a key) and then a XOR of the input data with the 256 values created before in the 2 loops probably using a %256 (mod 256)**
 {% endhint %}
 
-### **Initialization stage/Substitution Box:** ****(Note the number 256 used as counter and how a 0 is written in each place of the 256 chars)
+### **Initialization stage/Substitution Box:** (Note the number 256 used as counter and how a 0 is written in each place of the 256 chars)
 
 ![](<../../.gitbook/assets/image (377).png>)
 
@@ -96,7 +96,7 @@ It's composed of 3 main parts:
 ### Characteristics
 
 * It's rare to find some malware using it but there are examples (Ursnif)
-* Simple to determine if an algorithm is Serpent or not based on it's length (extremely long function)&#x20;
+* Simple to determine if an algorithm is Serpent or not based on it's length (extremely long function)
 
 ### Identifying
 
@@ -145,7 +145,7 @@ You can identify both of them checking the constants. Note that the sha\_init ha
 
 Note the use of more constants
 
-![](<../../.gitbook/assets/image (253) (1) (1) (1).png>)
+![](<../../.gitbook/assets/image (253) (1) (1).png>)
 
 ## CRC (hash)
 
@@ -158,13 +158,9 @@ Check **lookup table constants**:
 
 ![](<../../.gitbook/assets/image (387).png>)
 
-
-
 A CRC hash algorithm looks like:
 
 ![](<../../.gitbook/assets/image (386).png>)
-
-
 
 ## APLib (Compression)
 
@@ -177,7 +173,7 @@ A CRC hash algorithm looks like:
 
 The graph is quiet large:
 
-![](<../../.gitbook/assets/image (207) (2) (1).png>)
+![](<../../.gitbook/assets/image (207) (2).png>)
 
 Check **3 comparisons to recognise it**:
 

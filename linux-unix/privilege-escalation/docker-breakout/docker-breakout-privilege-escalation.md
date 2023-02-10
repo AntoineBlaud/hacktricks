@@ -2,11 +2,11 @@
 
 ## Automatic Enumeration & Escape
 
-* ****[**linpeas**](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS): It can also **enumerate containers**
-* ****[**CDK**](https://github.com/cdk-team/CDK#installationdelivery): This tool is pretty **useful to enumerate the container you are into even try to escape automatically**
-* ****[**amicontained**](https://github.com/genuinetools/amicontained): Useful tool to get the privileges the container has in order to find ways to escape from it
-* ****[**deepce**](https://github.com/stealthcopter/deepce): Tool to enumerate and escape from containers
-* ****[**grype**](https://github.com/anchore/grype): Get the CVEs contained in the software installed in the image
+* [**linpeas**](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS): It can also **enumerate containers**
+* [**CDK**](https://github.com/cdk-team/CDK#installationdelivery): This tool is pretty **useful to enumerate the container you are into even try to escape automatically**
+* [**amicontained**](https://github.com/genuinetools/amicontained): Useful tool to get the privileges the container has in order to find ways to escape from it
+* [**deepce**](https://github.com/stealthcopter/deepce): Tool to enumerate and escape from containers
+* [**grype**](https://github.com/anchore/grype): Get the CVEs contained in the software installed in the image
 
 ## Mounted Docker Socket Escape
 
@@ -104,7 +104,7 @@ docker run --rm -it --privileged ubuntu bash
 
 Well configured docker containers won't allow command like **fdisk -l**. However on miss-configured docker command where the flag `--privileged` or `--device=/dev/sda1` with caps is specified, it is possible to get the privileges to see the host drive.
 
-![](https://bestestredteam.com/content/images/2019/08/image-16.png)
+![.gitbook/assets/1664530388_1232.png](https://bestestredteam.com/content/images/2019/08/image-16.png)
 
 So to take over the host machine, it is trivial:
 

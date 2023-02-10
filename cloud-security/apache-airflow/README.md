@@ -2,7 +2,11 @@
 
 ## Basic Information
 
+<<<<<<< HEAD
 [**Apache Airflow**](https://airflow.apache.org) **** is used for the **scheduling and **_**orchestration of data pipelines**_** or workflows**. Orchestration of data pipelines refers to the sequencing, coordination, scheduling, and managing complex **data pipelines from diverse sources**. These data pipelines deliver data sets that are ready for consumption either by business intelligence applications and data science, machine learning models that support big data applications.
+=======
+[**Apache Airflow**](https://airflow.apache.org)  is used for the **scheduling and **_**orchestration of data pipelines**_** or workflows**. Orchestration of data pipelines refers to the sequencing, coordination, scheduling, and managing complex **data pipelines from diverse sources**. These data pipelines deliver data sets that are ready for consumption either by business intelligence applications and data science, machine learning models that support big data applications.
+>>>>>>> master
 
 Basically, Apache Airflow will allow you to **schedule de execution of code when something** (event, cron) **happens**.
 
@@ -10,7 +14,11 @@ Basically, Apache Airflow will allow you to **schedule de execution of code when
 
 ### Docker-Compose
 
+<<<<<<< HEAD
 You can use the **docker-compose config file from** [**https://raw.githubusercontent.com/apache/airflow/main/docs/apache-airflow/start/docker-compose.yaml**](https://raw.githubusercontent.com/apache/airflow/main/docs/apache-airflow/start/docker-compose.yaml) **** to launch a complete apache airflow docker environment. (If you are in MacOS make sure to give at least 6GB of RAM to the docker VM).
+=======
+You can use the **docker-compose config file from** [**https://raw.githubusercontent.com/apache/airflow/main/docs/apache-airflow/start/docker-compose.yaml**](https://raw.githubusercontent.com/apache/airflow/main/docs/apache-airflow/start/docker-compose.yaml)  to launch a complete apache airflow docker environment. (If you are in MacOS make sure to give at least 6GB of RAM to the docker VM).
+>>>>>>> master
 
 ### Minikube
 
@@ -65,7 +73,11 @@ flask-unsign --sign --secret '<secret_key>' --cookie "{'_fresh': True, '_id': '1
 ### DAG Backdoor (RCE in Airflow worker)
 
 If you have **write access** to the place where the **DAGs are saved**, you can just **create one** that will send you a **reverse shell.**\
+<<<<<<< HEAD
 ****Note that this reverse shell is going to be executed inside an **airflow worker container**:
+=======
+Note that this reverse shell is going to be executed inside an **airflow worker container**:
+>>>>>>> master
 
 ```python
 import pendulum

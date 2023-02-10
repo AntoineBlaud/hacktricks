@@ -77,6 +77,16 @@ Check the [code](https://code.google.com/archive/p/binvis/) and the [web page to
 
 BinVis is a great **start-point to get familiar with an unknown target** in a black-boxing scenario.
 
+
+
+### FSCK.exe
+
+Used to fix corrupted filesystems
+
+### USBRip
+
+Simple CLI forensics tool for tracking USB device artifacts (history of USB events) on GNU/Linux.Simple CLI forensics tool for tracking USB device artifacts (history of USB events) on GNU/Linux.
+
 ## Specific Data Carving Tools
 
 ### FindAES
@@ -85,7 +95,7 @@ Searches for AES keys by searching for their key schedules. Able to find 128. 19
 
 Download [here](https://sourceforge.net/projects/findaes/).
 
-## Complementary tools&#x20;
+## Complementary tools
 
 You can use [**viu** ](https://github.com/atanunq/viu)to see images form the terminal.\
 You can use the linux command line tool **pdftotext** to transform a pdf into text and read it.

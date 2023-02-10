@@ -64,7 +64,6 @@ for proj in $(gcloud projects list --format="get(projectId)"); do
         fi
     done
 done
-
 ```
 
 ## App Engine Configurations <a href="#reviewing-app-engine-configurations" id="reviewing-app-engine-configurations"></a>
@@ -147,7 +146,6 @@ for proj in $(gcloud projects list --format="get(projectId)"); do
         fi
     done
 done
-
 ```
 
 ## References

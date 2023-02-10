@@ -11,7 +11,11 @@ otool -tv /bin/ps #Decompile application
 
 ### SuspiciousPackage
 
+<<<<<<< HEAD
 \*\*\*\*[**SuspiciousPackage**](https://mothersruin.com/software/SuspiciousPackage/get.html) is a tool useful to inspect **.pkg** files (installers) and see what is inside before installing it.\
+=======
+[**SuspiciousPackage**](https://mothersruin.com/software/SuspiciousPackage/get.html) is a tool useful to inspect **.pkg** files (installers) and see what is inside before installing it.\
+>>>>>>> master
 These installers have `preinstall` and `postinstall` bash scripts that malware authors usually abuse to **persist** **the** **malware**.
 
 ### hdiutil
@@ -32,7 +36,11 @@ When a function is called in a binary that uses objective-C, the compiled code i
 
 The params this function expects are:
 
+<<<<<<< HEAD
 * The first parameter (**self**) is "a pointer that points to the **instance of the class that is to receive the message**". Or more simply put, it’s the object that the method is being invoked upon. If the method is a class method, this will be an instance of the class object (as a whole), whereas for an instance method, self will point to an instantiated instance of the class as an object.
+=======
+* The first parameter (**self**) is "a pointer that points to the **instance of the class that is to receive the message**". Or more simply put, it’s the object that the method is being invoked upon. If the method is a class method, this will be an instance of the class object (as a whole), whereas for an instance method, self  will point to an instantiated instance of the class as an object.
+>>>>>>> master
 * The second parameter, (**op**), is "the selector of the method that handles the message". Again, more simply put, this is just the **name of the method.**
 * The remaining parameters are any **values that are required by the method** (op).
 
@@ -148,11 +156,19 @@ sudo dtrace -s syscalls_info.d -c "cat /etc/hosts"
 
 ### ProcessMonitor
 
+<<<<<<< HEAD
 \*\*\*\*[**ProcessMonitor**](https://objective-see.com/products/utilities.html#ProcessMonitor) is a very useful tool to check the process related actions a process is performing (for example, monitor which new processes a process is creating).
 
 ### FileMonitor
 
 \*\*\*\*[**FileMonitor**](https://objective-see.com/products/utilities.html#FileMonitor) allows to monitor file events (such as creation, modifications, and deletions) providing detailed information about such events.
+=======
+[**ProcessMonitor**](https://objective-see.com/products/utilities.html#ProcessMonitor) is a very useful tool to check the process related actions a process is performing (for example, monitor which new processes a process is creating).
+
+### FileMonitor
+
+[**FileMonitor**](https://objective-see.com/products/utilities.html#FileMonitor) allows to monitor file events (such as creation, modifications, and deletions) providing detailed information about such events.
+>>>>>>> master
 
 ### fs\_usage
 
@@ -165,7 +181,11 @@ fs_usage -w -f network curl #This tracks network actions
 
 ### TaskExplorer
 
+<<<<<<< HEAD
 \*\*\*\*[**Taskexplorer**](https://objective-see.com/products/taskexplorer.html) is useful to see the **libraries** used by a binary, the **files** it's using and the **network** connections.\
+=======
+[**Taskexplorer**](https://objective-see.com/products/taskexplorer.html) is useful to see the **libraries** used by a binary, the **files** it's using and the **network** connections.\
+>>>>>>> master
 It also checks the binary processes against **virustotal** and show information about the binary.
 
 ### lldb
@@ -287,6 +307,10 @@ Or use `netstat` or `lsof`
 
 ## References
 
+<<<<<<< HEAD
 * [**OS X Incident Response: Scripting and Analysis**](https://www.amazon.com/OS-Incident-Response-Scripting-Analysis-ebook/dp/B01FHOHHVS)\*\*\*\*
+=======
+* [**OS X Incident Response: Scripting and Analysis**](https://www.amazon.com/OS-Incident-Response-Scripting-Analysis-ebook/dp/B01FHOHHVS)
+>>>>>>> master
 * [**https://www.youtube.com/watch?v=T5xfL9tEg44**](https://www.youtube.com/watch?v=T5xfL9tEg44)
 * [**https://taomm.org/vol1/analysis.html**](https://taomm.org/vol1/analysis.html)

@@ -61,17 +61,17 @@ Under _**Statistics --> I/O Graph**_ you can find a **graph of the communication
 Here you can find wireshark filter depending on the protocol: [https://www.wireshark.org/docs/dfref/](https://www.wireshark.org/docs/dfref/)\
 Other interesting filters:
 
-* &#x20;`(http.request or ssl.handshake.type == 1) and !(udp.port eq 1900)`
+* `(http.request or ssl.handshake.type == 1) and !(udp.port eq 1900)`
   * HTTP and initial HTTPS traffic
-* &#x20;`(http.request or ssl.handshake.type == 1 or tcp.flags eq 0x0002) and !(udp.port eq 1900)`
+* `(http.request or ssl.handshake.type == 1 or tcp.flags eq 0x0002) and !(udp.port eq 1900)`
   * HTTP and initial HTTPS traffic + TCP SYN
-* &#x20;`(http.request or ssl.handshake.type == 1 or tcp.flags eq 0x0002 or dns) and !(udp.port eq 1900)`
+* `(http.request or ssl.handshake.type == 1 or tcp.flags eq 0x0002 or dns) and !(udp.port eq 1900)`
   * HTTP and initial HTTPS traffic + TCP SYN + DNS requests
 
 ### Search
 
 If you want to **search** for **content** inside the **packets** of the sessions press _CTRL+f_\
-__You can add new layers to the main information bar _(No., Time, Source...)_ pressing _right bottom_ and _Edit Column_
+\_\_You can add new layers to the main information bar _(No., Time, Source...)_ pressing _right bottom_ and _Edit Column_
 
 Practice: [https://www.malware-traffic-analysis.net/](https://www.malware-traffic-analysis.net)
 
@@ -96,10 +96,6 @@ In current Wireshark instead of `bootp` you need to search for `DHCP`
 ### From NBNS
 
 ![](<../../../.gitbook/assets/image (405).png>)
-
-
-
-
 
 ## Decrypting TLS
 
@@ -154,4 +150,3 @@ f = open('all_bytes.data', 'w+b')
 f.write(all_bytes)
 f.close()
 ```
-

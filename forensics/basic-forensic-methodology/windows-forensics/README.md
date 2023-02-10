@@ -1,4 +1,8 @@
-# Windows Artifacts
+# Windows Forensics
+
+## Capture Memory
+
+{% embed url="https://www.exterro.com/ftk-imager" %}
 
 ## Generic Windows Artifacts
 
@@ -28,7 +32,7 @@ When a file is deleted in this folder are created 2 files:
 * `$I{id}`: File information (date of when it was deleted}
 * `$R{id}`: Content of the file
 
-![](<../../../.gitbook/assets/image (486).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (486).png>)
 
 Having these files you can sue the tool [**Rifiuti**](https://github.com/abelcheung/rifiuti2) to get the original address of the deleted files and the date it was deleted (use `rifiuti-vista.exe` for Vista – Win10).
 
@@ -36,22 +40,22 @@ Having these files you can sue the tool [**Rifiuti**](https://github.com/abelche
 .\rifiuti-vista.exe C:\Users\student\Desktop\Recycle
 ```
 
-![](<../../../.gitbook/assets/image (495) (1) (1).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (495) (1) (1).png>)
 
 ### Volume Shadow Copies
 
 Shadow Copy is a technology included in Microsoft Windows that can create **backup copies** or snapshots of computer files or volumes, even when they are in use.\
 These backups are usually located in the `\System Volume Information` from the roof of the file system and the name is composed by **UIDs** as in the following image:
 
-![](<../../../.gitbook/assets/image (520).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (520).png>)
 
 Mounting the forensics image with the **ArsenalImageMounter**, the tool [**ShadowCopyView**](https://www.nirsoft.net/utils/shadow\_copy\_view.html) can be used to inspect a shadow copy and even **extract the files** from the shadow copy backups.
 
-![](<../../../.gitbook/assets/image (521).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (521).png>)
 
 The registry entry `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\BackupRestore` contains the files and keys **to not backup**:
 
-![](<../../../.gitbook/assets/image (522).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (522).png>)
 
 The registry `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VSS` also contains configuration information about the `Volume Shadow Copies`.
 
@@ -81,7 +85,7 @@ To inspect these files you can use [**LinkParser**](http://4discovery.com/our-to
 
 In this tools you will find 2 set of timestamps: **FileModifiedDate**, **FileAccessDate** and **FileCreationDate**, and **LinkModifiedDate**, **LinkAccessDate** and **LinkCreationDate**. The first set of timestamp references the **timestamps of the link file itself**. The second set references the **timestamps of the linked file**.
 
-You can get the same information running the Windows cli tool: [**LECmd.exe**](https://github.com/EricZimmerman/LECmd)\*\*\*\*
+You can get the same information running the Windows cli tool: [**LECmd.exe**](https://github.com/EricZimmerman/LECmd)
 
 ```
 LECmd.exe -d C:\Users\student\Desktop\LNKs --csv C:\Users\student\Desktop\LNKs
@@ -104,7 +108,7 @@ The **created time** of any jumplist indicates the **first time the file was acc
 
 You can inspect the jumplists using [**JumplistExplorer**](https://ericzimmerman.github.io/#!index.md).
 
-![](<../../../.gitbook/assets/image (474).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (474).png>)
 
 (_Note that the timestamps provided by JumplistExplorer are related to the jumplist file itself_)
 
@@ -122,7 +126,7 @@ It's possible to identify that a USB device was used thanks to the creation of:
 
 Note that some LNK file instead of pointing to the original path, points to the WPDNSE folder:
 
-![](<../../../.gitbook/assets/image (476).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (476).png>)
 
 The files in the folder WPDNSE are a copy of the original ones, then won't survive a restart of the PC and the GUID is taken from a shellbag.
 
@@ -134,20 +138,24 @@ The files in the folder WPDNSE are a copy of the original ones, then won't survi
 
 Check the file `C:\Windows\inf\setupapi.dev.log` to get the timestamps about when the USB connection was produced (search for `Section start`).
 
+<<<<<<< HEAD
 ![](<../../../.gitbook/assets/image (477) (2) (2) (2) (2) (2) (2) (2) (3) (2) (1) (2).png>)
+=======
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (477) (2) (2) (2) (2) (2) (2) (2) (3) (1) (1) (2).png>)
+>>>>>>> master
 
 ### USB Detective
 
 [**USBDetective**](https://usbdetective.com) can be used to obtain information about the USB devices that have been connected to an image.
 
-![](<../../../.gitbook/assets/image (483).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (483).png>)
 
 ### Plug and Play Cleanup
 
 The 'Plug and Play Cleanup' scheduled task is responsible for **clearing** legacy versions of drivers. It would appear (based upon reports online) that it also picks up **drivers which have not been used in 30 days**, despite its description stating that "the most current version of each driver package will be kept". As such, **removable devices which have not been connected for 30 days may have their drivers removed**.\
 The scheduled task itself is located at ‘C:\Windows\System32\Tasks\Microsoft\Windows\Plug and Play\Plug and Play Cleanup’, and its content is displayed below:
 
-![](https://2.bp.blogspot.com/-wqYubtuR\_W8/W19bV5S9XyI/AAAAAAAANhU/OHsBDEvjqmg9ayzdNwJ4y2DKZnhCdwSMgCLcBGAs/s1600/xml.png)
+![.gitbook/assets/1664530373\_5526.png](https://2.bp.blogspot.com/-wqYubtuR\_W8/W19bV5S9XyI/AAAAAAAANhU/OHsBDEvjqmg9ayzdNwJ4y2DKZnhCdwSMgCLcBGAs/s1600/xml.png)
 
 The task references 'pnpclean.dll' which is responsible for performing the cleanup activity additionally we see that the ‘UseUnifiedSchedulingEngine’ field is set to ‘TRUE’ which specifies that the generic task scheduling engine is used to manage the task. The ‘Period’ and ‘Deadline’ values of 'P1M' and 'P2M' within ‘MaintenanceSettings’ instruct Task Scheduler to execute the task once every month during regular Automatic maintenance and if it fails for 2 consecutive months, to start attempting the task during.\
 **This section was copied from** [**here**](https://blog.1234n6.com/2018/07/windows-plug-and-play-cleanup.html)**.**
@@ -161,7 +169,7 @@ The emails contains **2 interesting parts: The headers and the content** of the 
 
 Also, inside the `References` and `In-Reply-To` headers you can find the ID of the messages:
 
-![](<../../../.gitbook/assets/image (484).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (484).png>)
 
 ### Windows Mail App
 
@@ -189,7 +197,7 @@ The registry path `HKEY_CURRENT_USER\Software\Microsoft\WindowsNT\CurrentVersion
 
 You can open the PST file using the tool [**Kernel PST Viewer**](https://www.nucleustechnologies.com/es/visor-de-pst.html).
 
-![](<../../../.gitbook/assets/image (485).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (485).png>)
 
 ### Outlook OST
 
@@ -232,12 +240,12 @@ The Windows Registry Contains a lot of **information** about the **system and th
 
 The files containing the registry are located in:
 
-* %windir%\System32\Config\*_SAM\*_:  `HKEY_LOCAL_MACHINE`
-* %windir%\System32\Config\*_SECURITY\*_:  `HKEY_LOCAL_MACHINE`
-* %windir%\System32\Config\*_SYSTEM\*_:  `HKEY_LOCAL_MACHINE`
-* %windir%\System32\Config\*_SOFTWARE\*_:  `HKEY_LOCAL_MACHINE`
-* %windir%\System32\Config\*_DEFAULT\*_:  `HKEY_LOCAL_MACHINE`
-* %UserProfile%{User}\*_NTUSER.DAT\*_:  `HKEY_CURRENT_USER`
+* %windir%\System32\Config\*_SAM\*_: `HKEY_LOCAL_MACHINE`
+* %windir%\System32\Config\*_SECURITY\*_: `HKEY_LOCAL_MACHINE`
+* %windir%\System32\Config\*_SYSTEM\*_: `HKEY_LOCAL_MACHINE`
+* %windir%\System32\Config\*_SOFTWARE\*_: `HKEY_LOCAL_MACHINE`
+* %windir%\System32\Config\*_DEFAULT\*_: `HKEY_LOCAL_MACHINE`
+* %UserProfile%{User}\*_NTUSER.DAT\*_: `HKEY_CURRENT_USER`
 
 From Windows Vista and Windows 2008 Server upwards there are some backups of the `HKEY_LOCAL_MACHINE` registry files in **`%Windir%\System32\Config\RegBack\`**.\
 Also from these versions, the registry file **`%UserProfile%\{User}\AppData\Local\Microsoft\Windows\USERCLASS.DAT`** is created saving information about program executions.
@@ -306,7 +314,7 @@ To inspect these files you can use the tool [**PEcmd.exe**](https://github.com/E
 .\PECmd.exe -d C:\Users\student\Desktop\Prefetch --html "C:\Users\student\Desktop\out_folder"
 ```
 
-![](<../../../.gitbook/assets/image (487).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (487).png>)
 
 ### Superprefetch
 
@@ -353,7 +361,7 @@ The cache stores various file metadata depending on the operating system, such a
 
 This information can be found in the registry in:
 
-* `SYSTEM\CurrentControlSet\Control\SessionManager\Appcompatibility\AppcompatCache`&#x20;
+* `SYSTEM\CurrentControlSet\Control\SessionManager\Appcompatibility\AppcompatCache`
   * XP (96 entries)
 * `SYSTEM\CurrentControlSet\Control\SessionManager\AppcompatCache\AppCompatCache`
   * Server 2003 (512 entries)
@@ -361,7 +369,7 @@ This information can be found in the registry in:
 
 You can use the tool [**AppCompatCacheParser**](https://github.com/EricZimmerman/AppCompatCacheParser) to parse this information.
 
-![](<../../../.gitbook/assets/image (488).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (488).png>)
 
 ### Amcache
 
@@ -456,7 +464,7 @@ Inside the EventID 4634/4647 there are interesting sub-types:
 
 The Status and sub status information of the event s can indicate more details about the causes of the event. For example take a look to the following Status and Sub Status Codes of the Event ID 4625:
 
-![](<../../../.gitbook/assets/image (455).png>)
+![.gitbook/assets/1664530373\_5526.png](<../../../.gitbook/assets/image (455).png>)
 
 ### Recovering Windows Events
 
@@ -478,7 +486,7 @@ This event is recorded by the EventID 4616 inside the Security Event log.
 The following System EventIDs are useful:
 
 * 20001 / 20003 / 10000: First time it was used
-* 10100: Driver update&#x20;
+* 10100: Driver update
 
 The EventID 112 from DeviceSetupManager contains the timestamp of each USB device inserted.
 
@@ -489,3 +497,74 @@ The ID 6005 of the "Event Log" service indicates the PC was turned On. The ID 60
 ### Logs Deletion
 
 The Security EventID 1102 indicates the logs were deleted.
+
+## Memory Acquisition
+
+KnTDD
+
+FTK Manager
+
+## Volatility
+
+```
+python vol.py -f lab.mem --profile=WinXPSP3x86 pslist
+                                               psscan    
+                                               psxview      
+                                               pstree                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+python vol.py -f grrcon.img privs -p 1096
+python vol.py -f zeus.vmem --profile=WinXPSP3x86 -p 632 handles
+python vol.py -f zeus.vmem --profile=WinXPSP3x86 -p 632 handles -t File,Mutant --silent
+python vol.py -f laqma.mem --profile=WinXPSP3x86 handles --object-type=Key --pid=1700
+
+python vol.py -f memory.dmp --profile=Win7SP0x64 memmap –p 864
+python vol.py -f memory.dmp --profile=Win7SP1x64 memdump -p 864 -D OUTDIR
+python vol.py –f mem.dmp yarascan --profile=Win7SP1x64 --offset=OFFSET --yara-file=/path/to/your/yara.rules
+
+python vol.py –f mem.dmp --profile=WinXPSP3x86 dlllist –p 3108
+python vol.py -f memory.dmp --profile=Win7SP1x64 procdump --dump-dir=OUTDIR/
+python vol.py -f memory.dmp --profile=Win7SP1x64 procdump --offset=0x000000003e1e6b30 –-dump-dir=OUTDIR/
+
+python vol.py –f stuxnet.mem --profile=WinXPSP3x86 malfind
+
+python vol.py -f stuxnet.vmem --profile=WinXPSP3x86 vadinfo -p 1928,868,680 --addr=0x01000000
+python vol.py -f stuxnet.vmem ldrmodules --profile=WinXPSP3x86 -p 1928
+python vol.py -f win7.vmem --profile=Win7SP0x86 hivelist
+python vol.py –f XPSP3.vmem --profile=WinXPSP3x86 shellbags
+python vol.py sockets -f zeus.bin --profile=WinXPSP3x86
+python vol.py -f Win2K3SP0x64.vmem --profile=Win2003SP2x64 connscan
+python vol.py –f memory.dmp --profile=Win7SP0x64 svcscan --verbose
+
+python vol.py -f memory.vmem --profile=Win7SP1x64 modules
+python vol.py -f memory.vmem --profile=Win7SP1x64 modscan
+python vol.py -f memory.vmem --profile=Win7SP1x64 unloadedmodules
+python vol.py -f memory.vmem --profile=Win7SP1x64 moddump
+python vol.py -f stuxnet.mem devicetree
+python vol.py -f memory.dmp --profile=Win7SP1x64 ssdt
+
+python vol.py -f stuxnet.vmem --profile=WinXPSP3x86 callbacks
+
+python vol.py -f rdp.mem --profile=Win2003SP2x86 sessions
+python vol.py -f rdp.mem --profile=Win2003SP2x86 deskscan
+
+python vol.py –f Win7SP1x64.dmp --profile=Win7SP1x64 mftparser --output-file=mftverbose.txt
+python vol.py -f Win7SP1x64.mem --profile=Win7SP1x64 dumpfiles -S summary.json -D output/
+python vol.py -f Win7SP1x64.raw --profile=Win7SP1x64 filescan | grep -i mft
+```
+
+## SysInternals
+
+* Process Monitor
+* Process Explorer
+* AutoRuns
+* ProcDump
+* VMMAP
+* AccessChk
+* PortMon
+* TCPView
+* PipeList
+* CoreInfo
+* RAMmap
+
+## Lost Clusters
+
+CHKDSK is a system tool in Windows that authenticates the file system reliability of a volume and repairs logical file system errors

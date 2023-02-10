@@ -547,7 +547,11 @@ class HAL9000(object):
 #I'm afraid I can't do that.
 ```
 
+<<<<<<< HEAD
 **More examples** about **format** **string** examples can be found in [**https://pyformat.info/**](https://pyformat.info)\*\*\*\*
+=======
+**More examples** about **format** **string** examples can be found in [**https://pyformat.info/**](https://pyformat.info)
+>>>>>>> master
 
 ### Sensitive Information Disclosure Payloads
 
@@ -565,7 +569,11 @@ class HAL9000(object):
 ## Dissecting Python Objects
 
 {% hint style="info" %}
+<<<<<<< HEAD
 If you want to **learn** about **python bytecode** in depth read these **awesome** post about the topic: [**https://towardsdatascience.com/understanding-python-bytecode-e7edaae8734d**](https://towardsdatascience.com/understanding-python-bytecode-e7edaae8734d)\*\*\*\*
+=======
+If you want to **learn** about **python bytecode** in depth read these **awesome** post about the topic: [**https://towardsdatascience.com/understanding-python-bytecode-e7edaae8734d**](https://towardsdatascience.com/understanding-python-bytecode-e7edaae8734d)
+>>>>>>> master
 {% endhint %}
 
 In some CTFs you could be provided the name of a **custom function where the flag** resides and you need to see the **internals** of the **function** to extract it.
@@ -605,7 +613,11 @@ get_flag.__globals__
 CustomClassObject.__class__.__init__.__globals__
 ```
 
+<<<<<<< HEAD
 [**See here more places to obtain globals**](./#globals-and-locals)\*\*\*\*
+=======
+[**See here more places to obtain globals**](./#globals-and-locals)
+>>>>>>> master
 
 ### **Accessing the function code**
 

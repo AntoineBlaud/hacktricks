@@ -2,7 +2,11 @@
 
 ## eLearnSecurity Mobile Application Penetration Tester (eMAPT) and the respective INE courses
 
+<<<<<<< HEAD
 ### Course: [**Android & Mobile App Pentesting**](https://my.ine.com/CyberSecurity/courses/cfd5ec2b/android-mobile-app-pentesting)\*\*\*\*
+=======
+### Course: [**Android & Mobile App Pentesting**](https://my.ine.com/CyberSecurity/courses/cfd5ec2b/android-mobile-app-pentesting)
+>>>>>>> master
 
 This is the course to **prepare for the eMAPT certificate exam**. It will teach you the **basics of Android** as OS, how the **applications works**, the **most sensitive components** of the Android applications, and how to **configure and use** the main **tools** to test the applications. The goal is to **prepare you to be able to pentest Android applications in the real life**.
 
@@ -11,7 +15,11 @@ I found the course to be a great one for **people that don't have any experience
 Finally, note **two more things** about this course: It has **great labs to practice** what you learn, however, it **doesn't explain every possible vulnerability** you can find in an Android application. Anyway, that's not an issue as **it teach you the basics to be able to understand other Android vulnerabilities**.\
 Besides, once you have completed the course (or before) you can go to the [**Hacktricks Android Applications pentesting section**](../mobile-apps-pentesting/android-app-pentesting/) and learn more tricks.
 
+<<<<<<< HEAD
 ### Course: [**iOS & Mobile App Pentesting**](https://my.ine.com/CyberSecurity/courses/089d060b/ios-mobile-app-pentesting)\*\*\*\*
+=======
+### Course: [**iOS & Mobile App Pentesting**](https://my.ine.com/CyberSecurity/courses/089d060b/ios-mobile-app-pentesting)
+>>>>>>> master
 
 When I performed this course I didn't have much experience with iOS applications, and I found this **course to be a great resource to get me started quickly in the topic, so if you have the chance to perform the course don't miss the opportunity.** As the previous course, this course will teach you the **basics of iOS**, how the **iOS** **applications works**, the **most sensitive components** of the applications, and how to **configure and use** the main **tools** to test the applications.\
 However, there is a very important difference with the Android course, if you want to follow the labs, I would recommend you to **get a jailbroken iOS or pay for some good iOS emulator.**
@@ -33,7 +41,11 @@ In this exam I **missed the opportunity to exploit more vulnerabilities**, howev
 
 ## eLearnSecurity Web application Penetration Tester eXtreme (eWPTXv2) and the INE course related
 
+<<<<<<< HEAD
 ### Course: [**Web Application Penetration Testing eXtreme**](https://my.ine.com/CyberSecurity/courses/630a470a/web-application-penetration-testing-extreme)\*\*\*\*
+=======
+### Course: [**Web Application Penetration Testing eXtreme**](https://my.ine.com/CyberSecurity/courses/630a470a/web-application-penetration-testing-extreme)
+>>>>>>> master
 
 This course is the one meant to **prepare** you for the **eWPTXv2** **certificate** **exam**.\
 Even having been working as web pentester for several years before doing the course, it taught me several **neat hacking tricks about "weird" web vulnerabilities and ways to bypass protections**. Moreover, the course contains **pretty nice labs where you can practice what you learn**, and that is always helpful to fully understand the vulnerabilities.
@@ -74,4 +86,8 @@ It also explains **how to create tree models** with scikit-learn different techn
 
 The only drawback I could find was in some cases some lack of mathematical explanations about how the used algorithm works. However, this course is **pretty useful for people that are learning about Machine Learning**.
 
+<<<<<<< HEAD
 ##
+=======
+## 
+>>>>>>> master

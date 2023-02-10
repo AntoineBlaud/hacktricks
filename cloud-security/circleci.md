@@ -2,7 +2,11 @@
 
 ## Basic Information
 
+<<<<<<< HEAD
 ****[**CircleCI**](https://circleci.com/docs/2.0/about-circleci/) is a Continuos Integration platform where you ca **define templates** indicating what you want it to do with some code and when to do it. This way you can **automate testing** or **deployments** directly **from your repo master branch** for example.
+=======
+[**CircleCI**](https://circleci.com/docs/2.0/about-circleci/) is a Continuos Integration platform where you ca **define templates** indicating what you want it to do with some code and when to do it. This way you can **automate testing** or **deployments** directly **from your repo master branch** for example.
+>>>>>>> master
 
 ## Permissions
 
@@ -17,7 +21,11 @@ According to [**the docs**](https://circleci.com/docs/2.0/env-vars/#) there are 
 
 ### Built-in env variables
 
+<<<<<<< HEAD
 Every container run by CircleCI will always have [**specific env vars defined in the documentation**](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables) **** like **** `CIRCLE_PR_USERNAME`, `CIRCLE_PROJECT_REPONAME` or `CIRCLE_USERNAME`.
+=======
+Every container run by CircleCI will always have [**specific env vars defined in the documentation**](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables) like `CIRCLE_PR_USERNAME`, `CIRCLE_PROJECT_REPONAME` or `CIRCLE_USERNAME`.
+>>>>>>> master
 
 ### Clear text
 
@@ -68,7 +76,11 @@ jobs:
 These are **secrets** that are only going to be **accessible** by the **project** (by **any branch**).\
 You can see them **declared in** _https://app.circleci.com/settings/project/github/\<org\_name>/\<repo\_name>/environment-variables_
 
+<<<<<<< HEAD
 ![](<../.gitbook/assets/image (633).png>)
+=======
+![](<../.gitbook/assets/image (662).png>)
+>>>>>>> master
 
 {% hint style="danger" %}
 The "**Import Variables**" functionality allows to **import variables from other projects** to this one.
@@ -78,7 +90,11 @@ The "**Import Variables**" functionality allows to **import variables from other
 
 These are secrets that are **org wide**. By **default any repo** is going to be able to **access any secret** stored here:
 
+<<<<<<< HEAD
 ![](<../.gitbook/assets/image (647).png>)
+=======
+![](<../.gitbook/assets/image (661).png>)
+>>>>>>> master
 
 {% hint style="success" %}
 However, note that a different group (instead of All members) can be **selected to only give access to the secrets to specific people**.\
@@ -160,6 +176,12 @@ workflows:
 You need to **specify the context name** (this will also exfiltrate the project secrets):
 
 ```yaml
+<<<<<<< HEAD
+=======
+```
+
+```yaml
+>>>>>>> master
 version: 2.1
 
 jobs:
@@ -252,4 +274,9 @@ jobs:
   * _https://app.circleci.com/settings/project/github/\<org>/\<repo>/ssh_
 * It's possible to **create a cron job in hidden branch** in an unexpected project that is **leaking** all the **context env** vars everyday.
   * Or even create in a branch / modify a known job that will **leak** all context and **projects secrets** everyday.
+<<<<<<< HEAD
 * It you are a github owner you can **allow unverified orbs** and configure one in a job as **backdoor**
+=======
+* If you are a github owner you can **allow unverified orbs** and configure one in a job as **backdoor**
+* You can find a **command injection vulnerability** in some task and **inject commands** via a **secret** modifying its value
+>>>>>>> master

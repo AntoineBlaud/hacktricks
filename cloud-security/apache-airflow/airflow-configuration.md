@@ -18,7 +18,11 @@ Some interesting values to check when reading the config file:
 * **`access_control_allow_headers`**: This indicates the **allowed** **headers** for **CORS**
 * **`access_control_allow_methods`**: This indicates the **allowed methods** for **CORS**
 * **`access_control_allow_origins`**: This indicates the **allowed origins** for **CORS**
+<<<<<<< HEAD
 * **`auth_backend`**: [**According to the docs**](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html) **** a few options can be in place to configure who can access to the API:
+=======
+* **`auth_backend`**: [**According to the docs**](https://airflow.apache.org/docs/apache-airflow/stable/security/api.html)  a few options can be in place to configure who can access to the API:
+>>>>>>> master
   * `airflow.api.auth.backend.deny_all`: **By default nobody** can access the API
   * `airflow.api.auth.backend.default`: **Everyone can** access it without authentication
   * `airflow.api.auth.backend.kerberos_auth`: To configure **kerberos authentication**
@@ -86,13 +90,21 @@ Some interesting values to check when reading the config file:
 
 ### Web Authentication
 
+<<<<<<< HEAD
 By default **web authentication** is specified in the file **`webserver_config.py`** and is configured as&#x20;
+=======
+By default **web authentication** is specified in the file **`webserver_config.py`** and is configured as
+>>>>>>> master
 
 ```bash
 AUTH_TYPE = AUTH_DB
 ```
 
+<<<<<<< HEAD
 Which means that the **authentication is checked against the database**. However, other configurations are possible like&#x20;
+=======
+Which means that the **authentication is checked against the database**. However, other configurations are possible like
+>>>>>>> master
 
 ```bash
 AUTH_TYPE = AUTH_OAUTH

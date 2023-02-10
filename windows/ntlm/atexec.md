@@ -20,4 +20,8 @@ schtasks /create /S dcorp-dc.domain.local /SC Weekely /RU "NT Authority\SYSTEM" 
 schtasks /run /tn "MyNewtask" /S dcorp-dc.domain.local
 ```
 
+<<<<<<< HEAD
 More information about the [**use of schtasks with silver tickets here**](../active-directory-methodology/silver-ticket.md#host).
+=======
+More information about the [**use of schtasks with silver tickets here**](../domain-dominance/silver-ticket.md#host).
+>>>>>>> master

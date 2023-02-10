@@ -3,13 +3,13 @@
 {% hint style="warning" %}
 **Support HackTricks and get benefits!**
 
-Do you want to have access the **latest version of Hacktricks and PEASS**, obtain a **PDF copy of Hacktricks**, and more? Discover the **brand new** [**SUBSCRIPTION PLANS**](https://github.com/sponsors/carlospolop?frequency=one-time) **for individuals and companies.**
+Do you work in a **cybersecurity company**? Do you want to see your **company advertised in HackTricks**? or do you want to have access the **latest version of the PEASS or download HackTricks in PDF**? Check the [**SUBSCRIPTION PLANS**](https://github.com/sponsors/carlospolop)!
 
-Discover [**The PEASS Family**](https://opensea.io/collection/the-peass-family), our collection of exclusive [**NFTs**](https://opensea.io/collection/the-peass-family)****
+Discover [**The PEASS Family**](https://opensea.io/collection/the-peass-family), our collection of exclusive [**NFTs**](https://opensea.io/collection/the-peass-family)
 
-Get the [**official PEASS & HackTricks swag**](https://peass.creator-spring.com)****
+Get the [**official PEASS & HackTricks swag**](https://peass.creator-spring.com)
 
-**Join the** [**💬**](https://emojipedia.org/speech-balloon/)  ****  [**Discord group**](https://discord.gg/hRep4RUj7f) or the [**telegram group**](https://t.me/peass) **** or **follow** me on **Twitter** [**🐦**](https://github.com/carlospolop/hacktricks/tree/7af18b62b3bdc423e11444677a6a73d4043511e9/\[https:/emojipedia.org/bird/README.md)[**@carlospolopm**](https://twitter.com/carlospolopm)**.**
+**Join the** [**💬**](https://emojipedia.org/speech-balloon/) [**Discord group**](https://discord.gg/hRep4RUj7f) or the [**telegram group**](https://t.me/peass) or **follow** me on **Twitter** [**🐦**](https://github.com/carlospolop/hacktricks/tree/7af18b62b3bdc423e11444677a6a73d4043511e9/\[https:/emojipedia.org/bird/README.md)[**@carlospolopm**](https://twitter.com/carlospolopm)**.**
 
 **Share your hacking tricks submitting PRs to the** [**hacktricks github repo**](https://github.com/carlospolop/hacktricks)**.**
 {% endhint %}
@@ -118,7 +118,7 @@ cat my_targets.txt | xargs -I %% bash -c 'echo "http://%%/favicon.ico"' > target
 python3 favihash.py -f https://target/favicon.ico -t targets.txt -s
 ```
 
-![favihash - discover domains with the same favicon icon hash](https://www.infosecmatter.com/wp-content/uploads/2020/07/favihash.jpg)
+![.gitbook/assets/1664530372_7359.jpg](https://www.infosecmatter.com/wp-content/uploads/2020/07/favihash.jpg)
 
 Simply said, favihash will allow us to discover domains that have the same favicon icon hash as our target.
 
@@ -229,6 +229,7 @@ For this action you will need some common subdomains lists like:
 {% code title="Gobuster bruteforcing dns" %}
 ```bash
 gobuster dns -d mysite.com -t 50 -w subdomains.txt
+gobuster dns -w /opt/SecLists/Discovery/DNS/subdomains-top1million-110000.txt  -d horizontall.htb -t 100
 ```
 {% endcode %}
 
@@ -265,13 +266,34 @@ vhostbrute.py --url="example.com" --remoteip="10.1.1.15" --base="www.example.com
 
 #https://github.com/codingo/VHostScan
 VHostScan -t example.com
+
+gobuster vhost -u nunchucks.htb -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt  -k
 ```
 
 {% hint style="info" %}
 With this technique you may even be able to access internal/hidden endpoints.
 {% endhint %}
 
-### CORS Brute Force
+## Directories Brute force
+
+Very useful to discover hidden page. You may handle 300-800 requests per seconds.
+
+```
+python3 dirsearch.py -u http://api-prod.horizontall.htb   -w /usr/share/dirbuster/wordlists/directory-list-1.0.txt
+gobuster dir -u http://10.10.11.104   -w /opt/SecLists/Discovery/Web-Content/directory-list-2.3-big.txt -t 100 -e -s "200,301,302,401" -x "php" -t 100
+```
+
+## NPM plugin Brute force
+
+Seen this in AWAE course. Plugin have been placed directly in the web folder.
+
+```
+wget https://github.com/nice-registry/all-the-package-names/raw/master/names.json
+jq '.[0:10000]' names.json | grep ","| cut -d'"' -f 2 > npm-10000.txt
+gobuster dir -w ./npm-10000.txt -u https://openitcockpit/js/vendor/ -k_
+```
+
+## CORS Brute Force
 
 Sometimes you will find pages that only return the header _**Access-Control-Allow-Origin**_ when a valid domain/subdomain is set in the _**Origin**_ header. In these scenarios, you can abuse this behavior to **discover** new **subdomains**.
 
@@ -320,7 +342,7 @@ cat /tmp/domains.txt | httprobe -p http:8080 -p https:8443 #Check port 80, 443 a
 
 Now that you have discovered **all the web servers** present in the scope (among the **IPs** of the company and all the **domains** and **subdomains**) you probably **don't know where to start**. So, let's make it simple and start just taking screenshots of all of them. Just by **taking a look** at the **main page** you can find **weird** endpoints that are more **prone** to be **vulnerable**.
 
-To perform the proposed idea you can use [**EyeWitness**](https://github.com/FortyNorthSecurity/EyeWitness), [**HttpScreenshot**](https://github.com/breenmachine/httpscreenshot), [**Aquatone**](https://github.com/michenriksen/aquatone), **\*\*\[shutter]\(**[https://shutter-project.org/downloads/](https://shutter-project.org/downloads/)**) \*\***or [**webscreenshot**](https://github.com/maaaaz/webscreenshot)**.**
+To perform the proposed idea you can use [**EyeWitness**](https://github.com/FortyNorthSecurity/EyeWitness), [**HttpScreenshot**](https://github.com/breenmachine/httpscreenshot), [**Aquatone**](https://github.com/michenriksen/aquatone), \[shutter]\([**https://shutter-project.org/downloads/**](https://shutter-project.org/downloads/)) or [**webscreenshot**](https://github.com/maaaaz/webscreenshot)**.**
 
 ## Cloud Assets
 

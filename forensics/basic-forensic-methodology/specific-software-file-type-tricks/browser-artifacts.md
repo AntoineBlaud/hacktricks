@@ -30,7 +30,11 @@ Each profile has a "**Path**" variable with the name of the folder where it's da
 
 Inside the folder **of each profile** (_\~/.mozilla/firefox/\<ProfileName>/_) path you should be able to find the following interesting files:
 
+<<<<<<< HEAD
 * _**places.sqlite**_ : History (moz\_\__places), bookmarks (moz\_bookmarks), and downloads (moz_\_\_annos). In windows the tool [BrowsingHistoryView](https://www.nirsoft.net/utils/browsing\_history\_view.html) can be used to read the history inside _**places.sqlite**_.
+=======
+* _**places.sqlite**_ : History (moz_\__places), bookmarks (moz\_bookmarks), and downloads (moz_\__annos). In windows the tool [BrowsingHistoryView](https://www.nirsoft.net/utils/browsing\_history\_view.html) can be used to read the history inside _**places.sqlite**_.
+>>>>>>> master
   * Query to dump history: `select datetime(lastvisitdate/1000000,'unixepoch') as visit_date, url, title, visit_count, visit_type FROM moz_places,moz_historyvisits WHERE moz_places.id = moz_historyvisits.place_id;`
     * Note that the link type is a number that indicates:
       * 1: User followed a link

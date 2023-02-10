@@ -13,11 +13,16 @@
 * [Brute Force - CheatSheet](brute-force.md)
 * [Exfiltration](exfiltration.md)
 * [Tunneling and Port Forwarding](tunneling-and-port-forwarding.md)
+* [CSS Injection Code](css-injection-code.md)
 * [Search Exploits](search-exploits.md)
+* [Persistence](persistence/README.md)
+  * [Windows Persistance techniques](https://app.gitbook.com/s/AHEFW4POxlzDF5ApseF3/offensive-security/persistence)
+  * [AD Persistance techniques](https://app.gitbook.com/s/djPOU9Er6kcKTLO7sngF/ad/persistence)
 
 ## Shells
 
 * [Shells (Linux, Windows, MSFVenom)](shells/shells/README.md)
+  * [Ippsec shell](shells/shells/ippsec-shell.md)
   * [MSFVenom - CheatSheet](shells/shells/msfvenom.md)
   * [Shells - Windows](shells/shells/windows.md)
   * [Shells - Linux](shells/shells/linux.md)
@@ -37,6 +42,7 @@
       * [release\_agent exploit - Relative Paths to PIDs](linux-unix/privilege-escalation/docker-breakout/docker-breakout-privilege-escalation/release\_agent-exploit-relative-paths-to-pids.md)
       * [Docker release\_agent cgroups escape](linux-unix/privilege-escalation/docker-breakout/docker-breakout-privilege-escalation/docker-release\_agent-cgroups-escape.md)
       * [Sensitive Mounts](linux-unix/privilege-escalation/docker-breakout/docker-breakout-privilege-escalation/sensitive-mounts.md)
+      * [Feline HTB](linux-unix/privilege-escalation/docker-breakout/docker-breakout-privilege-escalation/feline-htb.md)
     * [Seccomp](linux-unix/privilege-escalation/docker-breakout/seccomp.md)
     * [AppArmor](linux-unix/privilege-escalation/docker-breakout/apparmor.md)
     * [Namespaces](linux-unix/privilege-escalation/docker-breakout/namespaces.md)
@@ -88,19 +94,29 @@
   * [Integrity Levels](windows/windows-local-privilege-escalation/integrity-levels.md)
   * [JAWS](windows/windows-local-privilege-escalation/jaws.md)
   * [JuicyPotato](windows/windows-local-privilege-escalation/juicypotato.md)
+  * [SweetPotato](windows/windows-local-privilege-escalation/sweetpotato.md)
   * [Leaked Handle Exploitation](windows/windows-local-privilege-escalation/leaked-handle-exploitation.md)
   * [MSI Wrapper](windows/windows-local-privilege-escalation/msi-wrapper.md)
   * [Named Pipe Client Impersonation](windows/windows-local-privilege-escalation/named-pipe-client-impersonation.md)
-  * [PowerUp](windows/windows-local-privilege-escalation/powerup.md)
+  * [PowerUp / SharpUp](windows/windows-local-privilege-escalation/powerup.md)
   * [Privilege Escalation Abusing Tokens](windows/windows-local-privilege-escalation/privilege-escalation-abusing-tokens.md)
   * [Privilege Escalation with Autoruns](windows/windows-local-privilege-escalation/privilege-escalation-with-autorun-binaries.md)
   * [RottenPotato](windows/windows-local-privilege-escalation/rottenpotato.md)
   * [Seatbelt](windows/windows-local-privilege-escalation/seatbelt.md)
+  * [Leveraging INF-SCT Fetch & Execute Techniques For Bypass Applocker, Evasion, & Persistence](windows/windows-local-privilege-escalation/leveraging-inf-sct-fetch-and-execute-techniques-for-bypass-applocker-evasion-and-persistence.md)
   * [SeDebug + SeImpersonate copy token](windows/windows-local-privilege-escalation/sedebug-+-seimpersonate-copy-token.md)
+  * [Credential Manager](windows/windows-local-privilege-escalation/credential-manager.md)
+  * [Always Install Elevated](windows/windows-local-privilege-escalation/always-install-elevated.md)
   * [Windows C Payloads](windows/windows-local-privilege-escalation/windows-c-payloads.md)
+  * [Active Directory Certificate Services](windows/windows-local-privilege-escalation/active-directory-certificate-services.md)
 * [Active Directory Methodology](windows/active-directory-methodology/README.md)
+  * [Cheat Sheet](windows/active-directory-methodology/cheat-sheet.md)
+  * [AD linux recon](windows/active-directory-methodology/ad-linux-recon.md)
+  * [SharpView](windows/active-directory-methodology/sharpview.md)
+  * [Monitoring - EDR](windows/active-directory-methodology/monitoring-edr.md)
   * [Abusing Active Directory ACLs/ACEs](windows/active-directory-methodology/acl-persistence-abuse.md)
   * [AD information in printers](windows/active-directory-methodology/ad-information-in-printers.md)
+  * [Active Directory Certificate Services](windows/active-directory-methodology/active-directory-certificate-services.md)
   * [ASREPRoast](windows/active-directory-methodology/asreproast.md)
   * [BloodHound](windows/active-directory-methodology/bloodhound.md)
   * [Constrained Delegation](windows/active-directory-methodology/constrained-delegation.md)
@@ -108,10 +124,10 @@
   * [DCShadow](windows/active-directory-methodology/dcshadow.md)
   * [DCSync](windows/active-directory-methodology/dcsync.md)
   * [DSRM Credentials](windows/active-directory-methodology/dsrm-credentials.md)
-  * [Golden Ticket](windows/active-directory-methodology/golden-ticket.md)
   * [Kerberos Authentication](windows/active-directory-methodology/kerberos-authentication.md)
   * [Kerberoast](windows/active-directory-methodology/kerberoast.md)
   * [MSSQL Trusted Links](windows/active-directory-methodology/mssql-trusted-links.md)
+  * [MSSQL AttackerV1](windows/active-directory-methodology/mssql-attackerv1.md)
   * [Over Pass the Hash/Pass the Key](windows/active-directory-methodology/over-pass-the-hash-pass-the-key.md)
   * [Pass the Ticket](windows/active-directory-methodology/pass-the-ticket.md)
   * [Password Spraying](windows/active-directory-methodology/password-spraying.md)
@@ -119,9 +135,21 @@
   * [Privileged Accounts and Token Privileges](windows/active-directory-methodology/privileged-accounts-and-token-privileges.md)
   * [Resource-based Constrained Delegation](windows/active-directory-methodology/resource-based-constrained-delegation.md)
   * [Security Descriptors](windows/active-directory-methodology/security-descriptors.md)
-  * [Silver Ticket](windows/active-directory-methodology/silver-ticket.md)
-  * [Skeleton Key](windows/active-directory-methodology/skeleton-key.md)
+  * [Misconfigured certificate Templates](windows/active-directory-methodology/misconfigured-certificate-templates.md)
+  * [Ruler (Exchange)](windows/active-directory-methodology/ruler-exchange.md)
   * [Unconstrained Delegation](windows/active-directory-methodology/unconstrained-delegation.md)
+  * [Relay attacks](https://app.gitbook.com/s/djPOU9Er6kcKTLO7sngF/ad/movement/mitm-and-coerced-authentications)
+  * [NTLM Relaying](windows/active-directory-methodology/ntlm-relaying.md)
+* [Domain Dominance](windows/domain-dominance/README.md)
+  * [Silver Ticket](windows/domain-dominance/silver-ticket.md)
+  * [Golden Ticket](windows/domain-dominance/golden-ticket.md)
+  * [Diamond ticket](windows/domain-dominance/diamond-ticket.md)
+  * [Skeleton Key](windows/domain-dominance/skeleton-key.md)
+  * [Forest](windows/domain-dominance/forest/README.md)
+    * [Parent / Child](windows/domain-dominance/forest/parent-child.md)
+    * [One way (inbound)](windows/domain-dominance/forest/one-way-inbound.md)
+    * [One way (outboud)](windows/domain-dominance/forest/one-way-outboud.md)
+    * [Bidirectional](windows/domain-dominance/forest/bidirectional.md)
 * [NTLM](windows/ntlm/README.md)
   * [Places to steal NTLM creds](windows/ntlm/places-to-steal-ntlm-creds.md)
   * [PsExec/Winexec/ScExec](windows/ntlm/psexec-and-winexec.md)
@@ -130,6 +158,7 @@
   * [AtExec / SchtasksExec](windows/ntlm/atexec.md)
   * [WinRM](windows/ntlm/winrm.md)
 * [Stealing Credentials](windows/stealing-credentials/README.md)
+  * [Decrypt EFS file](windows/stealing-credentials/decrypt-efs-file.md)
   * [Credentials Protections](windows/stealing-credentials/credentials-protections.md)
   * [Mimikatz](windows/stealing-credentials/credentials-mimikatz.md)
 * [Authentication, Credentials, UAC and EFS](windows/authentication-credentials-uac-and-efs.md)
@@ -137,6 +166,7 @@
 * [Basic PowerShell for Pentesters](windows/basic-powershell-for-pentesters/README.md)
   * [PowerView](windows/basic-powershell-for-pentesters/powerview.md)
 * [AV Bypass](windows/av-bypass.md)
+* [Lateral Movement](windows/lateral-movement.md)
 
 ## Mobile Apps Pentesting
 
@@ -147,7 +177,8 @@
   * [ADB Commands](mobile-apps-pentesting/android-app-pentesting/adb-commands.md)
   * [APK decompilers](mobile-apps-pentesting/android-app-pentesting/apk-decompilers.md)
   * [AVD - Android Virtual Device](mobile-apps-pentesting/android-app-pentesting/avd-android-virtual-device.md)
-  * [Burp Suite Configuration for Android](mobile-apps-pentesting/android-app-pentesting/android-burp-suite-settings.md)
+  * [Burp Suite Configuration for Android](mobile-apps-pentesting/android-app-pentesting/android-burp-suite-settings/README.md)
+    * [Burp suite corellium](mobile-apps-pentesting/android-app-pentesting/android-burp-suite-settings/burp-suite-corellium.md)
   * [content:// protocol](mobile-apps-pentesting/android-app-pentesting/content-protocol.md)
   * [Drozer Tutorial](mobile-apps-pentesting/android-app-pentesting/drozer-tutorial/README.md)
     * [Exploiting Content Providers](mobile-apps-pentesting/android-app-pentesting/drozer-tutorial/exploiting-content-providers.md)
@@ -160,9 +191,13 @@
   * [Google CTF 2018 - Shall We Play a Game?](mobile-apps-pentesting/android-app-pentesting/google-ctf-2018-shall-we-play-a-game.md)
   * [Inspeckage Tutorial](mobile-apps-pentesting/android-app-pentesting/inspeckage-tutorial.md)
   * [Intent Injection](mobile-apps-pentesting/android-app-pentesting/intent-injection.md)
+  * [Strace](mobile-apps-pentesting/android-app-pentesting/strace.md)
   * [Make APK Accept CA Certificate](mobile-apps-pentesting/android-app-pentesting/make-apk-accept-ca-certificate.md)
   * [Manual DeObfuscation](mobile-apps-pentesting/android-app-pentesting/manual-deobfuscation.md)
   * [React Native Application](mobile-apps-pentesting/android-app-pentesting/react-native-application.md)
+  * [dart](mobile-apps-pentesting/android-app-pentesting/dart/README.md)
+    * [Part 1](mobile-apps-pentesting/android-app-pentesting/dart/part-1.md)
+    * [Part 2](mobile-apps-pentesting/android-app-pentesting/dart/part-2.md)
   * [Reversing Native Libraries](mobile-apps-pentesting/android-app-pentesting/reversing-native-libraries.md)
   * [Smali - Decompiling/\[Modifying\]/Compiling](mobile-apps-pentesting/android-app-pentesting/smali-changes.md)
   * [Spoofing your location in Play Store](mobile-apps-pentesting/android-app-pentesting/spoofing-your-location-in-play-store.md)
@@ -187,6 +222,7 @@
 
 ## Pentesting
 
+* [Common Ports](pentesting/common-ports.md)
 * [Pentesting Network](pentesting/pentesting-network/README.md)
   * [Spoofing LLMNR, NBT-NS, mDNS/DNS and WPAD and Relay Attacks](pentesting/pentesting-network/spoofing-llmnr-nbt-ns-mdns-dns-and-wpad-and-relay-attacks.md)
   * [Spoofing SSDP and UPnP Devices with EvilSSDP](pentesting/pentesting-network/spoofing-ssdp-and-upnp-devices.md)
@@ -346,6 +382,7 @@
 * [8009 - Pentesting Apache JServ Protocol (AJP)](pentesting/8009-pentesting-apache-jserv-protocol-ajp.md)
 * [8086 - Pentesting InfluxDB](pentesting/8086-pentesting-influxdb.md)
 * [8089 - Pentesting Splunkd](pentesting/8089-splunkd.md)
+* [8333,18333,38333,18444 - Pentesting Bitcoin](pentesting/8333-18333-38333-18444-pentesting-bitcoin.md)
 * [9000 - Pentesting FastCGI](pentesting/9000-pentesting-fastcgi.md)
 * [9001 - Pentesting HSQLDB](pentesting/9001-pentesting-hsqldb.md)
 * [9042/9160 - Pentesting Cassandra](pentesting/cassandra.md)
@@ -364,6 +401,11 @@
 
 ## Pentesting Web
 
+* [CheckList](pentesting-web/checklist.md)
+* [Source Code Review](pentesting-web/source-code-review.md)
+* [SAML / OAUTH](pentesting-web/saml-oauth.md)
+* [PHP Type juggling](pentesting-web/php-type-juggling.md)
+* [HTTP Parameter Pollution](pentesting-web/http-parameter-pollution.md)
 * [Web Vulnerabilities Methodology](pentesting-web/web-vulnerabilities-methodology.md)
 * [Reflecting Techniques - PoCs and Polygloths CheatSheet](pentesting-web/pocs-and-polygloths-cheatsheet/README.md)
   * [Web Vulns List](pentesting-web/pocs-and-polygloths-cheatsheet/web-vulns-list.md)
@@ -404,10 +446,12 @@
   * [phar:// deserialization](pentesting-web/file-inclusion/phar-deserialization.md)
 * [File Upload](pentesting-web/file-upload/README.md)
   * [PDF Upload - XXE and CORS bypass](pentesting-web/file-upload/pdf-upload-xxe-and-cors-bypass.md)
+  * [Exploiting insecure file extraction](pentesting-web/file-upload/exploiting-insecure-file-extraction.md)
 * [Formula Injection](pentesting-web/formula-injection.md)
 * [HTTP Request Smuggling / HTTP Desync Attack](pentesting-web/http-request-smuggling/README.md)
   * [Request Smuggling in HTTP/2 Downgrades](pentesting-web/http-request-smuggling/request-smuggling-in-http-2-downgrades.md)
 * [HTTP Response Smuggling / Desync](pentesting-web/http-response-smuggling-desync.md)
+* [HTTP Host header attacks](pentesting-web/http-host-header-attacks.md)
 * [H2C Smuggling](pentesting-web/h2c-smuggling.md)
 * [hop-by-hop headers](pentesting-web/abusing-hop-by-hop-headers.md)
 * [IDOR](pentesting-web/idor.md)
@@ -419,6 +463,7 @@
 * [OAuth to Account takeover](pentesting-web/oauth-to-account-takeover.md)
 * [Open Redirect](pentesting-web/open-redirect.md)
 * [Parameter Pollution](pentesting-web/parameter-pollution.md)
+* [Password Reset Poisoning](pentesting-web/password-reset-poisoning.md)
 * [PostMessage Vulnerabilities](pentesting-web/postmessage-vulnerabilities.md)
 * [Race Condition](pentesting-web/race-condition.md)
 * [Rate Limit Bypass](pentesting-web/rate-limit-bypass.md)
@@ -466,7 +511,11 @@
 
 ## Forensics
 
+* [CTF Write-up](forensics/ctf-write-up/README.md)
+  * [CrewCTF](forensics/ctf-write-up/crewctf.md)
+  * [UMDCTF](forensics/ctf-write-up/umdctf.md)
 * [Basic Forensic Methodology](forensics/basic-forensic-methodology/README.md)
+  * [Browser Artefacts](forensics/basic-forensic-methodology/browser-artefacts.md)
   * [Baseline Monitoring](forensics/basic-forensic-methodology/file-integrity-monitoring.md)
   * [Anti-Forensic Techniques](forensics/basic-forensic-methodology/anti-forensic-techniques.md)
   * [Docker Forensics](forensics/basic-forensic-methodology/docker-forensics.md)
@@ -494,12 +543,15 @@
     * [PNG tricks](forensics/basic-forensic-methodology/specific-software-file-type-tricks/png-tricks.md)
     * [Video and Audio file analysis](forensics/basic-forensic-methodology/specific-software-file-type-tricks/video-and-audio-file-analysis.md)
     * [ZIPs tricks](forensics/basic-forensic-methodology/specific-software-file-type-tricks/zips-tricks.md)
-  * [Windows Artifacts](forensics/basic-forensic-methodology/windows-forensics/README.md)
+  * [Windows Forensics](forensics/basic-forensic-methodology/windows-forensics/README.md)
+    * [Evtx](forensics/basic-forensic-methodology/windows-forensics/evtx.md)
     * [Windows Processes](forensics/basic-forensic-methodology/windows-forensics/windows-processes.md)
     * [Interesting Windows Registry Keys](forensics/basic-forensic-methodology/windows-forensics/interesting-windows-registry-keys.md)
+* [Awesome-Anti-Forensic](forensics/awesome-anti-forensic.md)
 
 ## Cloud Security
 
+* [Azure](cloud-security/azure.md)
 * [GCP Security](cloud-security/gcp-security/README.md)
   * [GCP - Other Services Enumeration](cloud-security/gcp-security/gcp-looting.md)
   * [GCP - Abuse GCP Permissions](cloud-security/gcp-security/gcp-interesting-permissions/README.md)
@@ -538,12 +590,22 @@
   * [Concourse Architecture](cloud-security/concourse/concourse-architecture.md)
   * [Concourse Lab Creation](cloud-security/concourse/concourse-lab-creation.md)
   * [Concourse Enumeration & Attacks](cloud-security/concourse/concourse-enumeration-and-attacks.md)
+<<<<<<< HEAD
 * [Apache Airflow](cloud-security/apache-airflow/README.md)
   * [Airflow Configuration](cloud-security/apache-airflow/airflow-configuration.md)
   * [Airflow RBAC](cloud-security/apache-airflow/airflow-rbac.md)
 * [CircleCI](cloud-security/circleci.md)
+=======
+* [CircleCI](cloud-security/circleci.md)
+* [Apache Airflow](cloud-security/apache-airflow/README.md)
+  * [Airflow Configuration](cloud-security/apache-airflow/airflow-configuration.md)
+  * [Airflow RBAC](cloud-security/apache-airflow/airflow-rbac.md)
+* [Atlantis](cloud-security/atlantis.md)
+>>>>>>> master
 * [Cloud Security Review](cloud-security/cloud-security-review.md)
 * [AWS Security](cloud-security/aws-security.md)
+  * [Cheat Sheet](cloud-security/aws-security/cheat-sheet.md)
+  * [IAM Attack](cloud-security/aws-security/iam-attack.md)
 
 ## A.I. Exploiting
 
@@ -557,7 +619,8 @@
 
 ## Blockchain
 
-* [Blockchain & Crypto Currencies](blockchain/blockchain-and-crypto-currencies.md)
+* [Blockchain & Crypto Currencies](blockchain/blockchain-and-crypto-currencies/README.md)
+  * [Page 1](blockchain/blockchain-and-crypto-currencies/page-1.md)
 
 ## Courses and Certifications Reviews
 
@@ -566,9 +629,12 @@
 ## Physical attacks
 
 * [Physical Attacks](physical-attacks/physical-attacks.md)
+* [RowHammer](physical-attacks/rowhammer.md)
+* [Anc ASLR](physical-attacks/anc-aslr.md)
 * [Escaping from KIOSKs](physical-attacks/escaping-from-gui-applications/README.md)
   * [Show file extensions](physical-attacks/escaping-from-gui-applications/show-file-extensions.md)
 * [Firmware Analysis](physical-attacks/firmware-analysis/README.md)
+  * [Extract Firmware from OT Devices](physical-attacks/firmware-analysis/extract-firmware-from-ot-devices.md)
   * [Bootloader testing](physical-attacks/firmware-analysis/bootloader-testing.md)
   * [Firmware Integrity](physical-attacks/firmware-analysis/firmware-integrity.md)
 
@@ -601,6 +667,23 @@
 
 ## Cryptography
 
+* [Cryptanalysis](cryptography/cryptanalysis/README.md)
+  * [CTF write-ups](cryptography/cryptanalysis/ctf-write-ups.md)
+  * [Cheat sheet maths](cryptography/cryptanalysis/cheat-sheet-maths.md)
+  * [PBKDF2](cryptography/cryptanalysis/pbkdf2.md)
+  * [RSA](cryptography/cryptanalysis/rsa.md)
+  * [Differential Fault Analysis on White-box AES Implementations](cryptography/cryptanalysis/differential-fault-analysis-on-white-box-aes-implementations.md)
+  * [AES](cryptography/cryptanalysis/aes.md)
+  * [Broken CBC](cryptography/cryptanalysis/broken-cbc.md)
+  * [Broken ECB](cryptography/cryptanalysis/broken-ecb.md)
+  * [Block cipher](cryptography/cryptanalysis/block-cipher.md)
+  * [Know Plaintext Attacks](cryptography/cryptanalysis/know-plaintext-attacks.md)
+  * [Stream cipher](cryptography/cryptanalysis/stream-cipher.md)
+  * [RC4](cryptography/cryptanalysis/rc4.md)
+  * [Shift register cipher](cryptography/cryptanalysis/shift-register-cipher.md)
+  * [Substitution cipher](cryptography/cryptanalysis/substitution-cipher.md)
+  * [El Gamal](cryptography/cryptanalysis/el-gamal.md)
+  * [Transposition cipher](cryptography/cryptanalysis/transposition-cipher.md)
 * [Certificates](cryptography/certificates.md)
 * [Cipher Block Chaining CBC-MAC](cryptography/cipher-block-chaining-cbc-mac-priv.md)
 * [Crypto CTFs Tricks](cryptography/crypto-ctfs-tricks.md)
@@ -623,6 +706,9 @@
 
 ## MISC
 
+* [beeceptor.com](misc/beeceptor.com.md)
+* [gchq](misc/gchq.md)
+* [OneCompiler](misc/onecompiler.md)
 * [Basic Python](misc/basic-python/README.md)
   * [venv](misc/basic-python/venv.md)
   * [Bypass Python sandboxes](misc/basic-python/bypass-python-sandboxes/README.md)
@@ -658,6 +744,7 @@
 * [TR-069](tr-069.md)
 * [6881/udp - Pentesting BitTorrent](6881-udp-pentesting-bittorrent.md)
 * [CTF Write-ups](ctf-write-ups/README.md)
+  * [Backup Crytp](ctf-write-ups/backup-crytp.md)
   * [challenge-0521.intigriti.io](ctf-write-ups/challenge-0521.intigriti.io.md)
   * [Try Hack Me](ctf-write-ups/try-hack-me/README.md)
     * [hc0n Christmas CTF - 2019](ctf-write-ups/try-hack-me/hc0n-christmas-ctf-2019.md)
@@ -666,3 +753,5 @@
 * [Online Platforms with API](online-platforms-with-api.md)
 * [Stealing Sensitive Information Disclosure from a Web](stealing-sensitive-information-disclosure-from-a-web.md)
 * [Post Exploitation](post-exploitation.md)
+* [Meterpreter](meterpreter.md)
+* [NodeJS remove debugging](nodejs-remove-debugging.md)

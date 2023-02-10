@@ -121,7 +121,11 @@ Filetypes:
 * MH\_DYLIB (0x6): A Mach-O dynamic linked library (i.e. .dylib)
 * MH\_BUNDLE (0x8): A Mach-O bundle (i.e. .bundle)
 
+<<<<<<< HEAD
 #### \*\*\*\*
+=======
+####
+>>>>>>> master
 
 #### **Load commands**
 
@@ -187,7 +191,11 @@ A Mach-O binary can contain one or **more** **constructors**, that will be **exe
 The offsets of any constructors are held in the **\_\_mod\_init\_func** section of the **\_\_DATA\_CONST** segment.
 {% endhint %}
 
+<<<<<<< HEAD
 #### \*\*\*\*
+=======
+####
+>>>>>>> master
 
 #### **Data**
 
@@ -224,7 +232,11 @@ ls -lR /Applications/Safari.app/Contents
 
     Contains **UI elements of the application**, such as images, documents, and nib/xib files (that describe various user interfaces).
 * `Contents/Info.plist`\
+<<<<<<< HEAD
   \*\*\*\*The application’s main “**configuration file.**” Apple notes that “the system relies on the presence of this file to identify relevant information about \[the] application and any related files”.
+=======
+  The application’s main “**configuration file.**” Apple notes that “the system relies on the presence of this file to identify relevant information about \[the] application and any related files”.
+>>>>>>> master
   * **Plist** **files** contains configuration information. You can find find information about the meaning of they plist keys in [https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Introduction/Introduction.html](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Introduction/Introduction.html)
   *   Pairs that may be of interest when analyzing an application include:\\
 

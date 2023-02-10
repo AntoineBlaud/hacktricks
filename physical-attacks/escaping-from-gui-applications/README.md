@@ -26,7 +26,11 @@ Maybe **using a \_Open with**\_\*\* option\*\* you can open/execute some kind of
 
 For example _cmd.exe, command.com, Powershell/Powershell ISE, mmc.exe, at.exe, taskschd.msc..._ find more binaries that can be used to execute commands (and perform unexpected actions) here: [https://lolbas-project.github.io/](https://lolbas-project.github.io)
 
+<<<<<<< HEAD
 #### \*NIX \_\_
+=======
+#### \*NIX __
+>>>>>>> master
 
 _bash, sh, zsh..._ More here: [https://gtfobins.github.io/](https://gtfobins.github.io)
 

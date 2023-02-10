@@ -17,8 +17,13 @@
 ## Magic Autosolvers
 
 * [**https://github.com/Ciphey/Ciphey**](https://github.com/Ciphey/Ciphey)
+<<<<<<< HEAD
 * [**https://gchq.github.io/CyberChef/**](https://gchq.github.io/CyberChef/) (Magic module)
 * [**https://github.com/dhondta/python-codext**](https://github.com/dhondta/python-codext)
+=======
+* [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/) (Magic module)
+* [https://github.com/dhondta/python-codext](https://github.com/dhondta/python-codext)
+>>>>>>> master
 
 ## Encoders
 
