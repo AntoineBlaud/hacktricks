@@ -23,6 +23,6 @@ Register an email, before confirming it change the email, then, if the new confi
 
 ### TRACE method
 
-Developers might forget to disable various debugging options in the production environment. For example, the HTTP `TRACE` method is designed for diagnostic purposes. If enabled, the web server will respond to requests that use the `TRACE` method by echoing in the response the exact request that was received. This behaviour is often harmless, but occasionally leads to information disclosure, such as the name of internal authentication headers that may be appended to requests by reverse proxies.![.gitbook/assets/1664530347_7190.png](https://miro.medium.com/max/60/1\*wDFRADTOd9Tj63xucenvAA.png?q=20)
+Developers might forget to disable various debugging options in the production environment. For example, the HTTP `TRACE` method is designed for diagnostic purposes. If enabled, the web server will respond to requests that use the `TRACE` method by echoing in the response the exact request that was received. This behaviour is often harmless, but occasionally leads to information disclosure, such as the name of internal authentication headers that may be appended to requests by reverse proxies.![.gitbook/assets/1667638240_1239.png](https://miro.medium.com/max/60/1\*wDFRADTOd9Tj63xucenvAA.png?q=20)
 
-![.gitbook/assets/1664530347_7190.png](https://miro.medium.com/max/1330/1\*wDFRADTOd9Tj63xucenvAA.png)
+![.gitbook/assets/1667638240_1239.png](https://miro.medium.com/max/1330/1\*wDFRADTOd9Tj63xucenvAA.png)
