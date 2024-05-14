@@ -133,6 +133,7 @@
 * [Linux Post-Exploitation](linux-hardening/linux-post-exploitation/README.md)
   * [PAM - Pluggable Authentication Modules](linux-hardening/linux-post-exploitation/pam-pluggable-authentication-modules.md)
 * [FreeIPA Pentesting](linux-hardening/freeipa-pentesting.md)
+* [Linux Active Directory](linux-hardening/linux-active-directory.md)
 
 ## 🍏 MacOS Hardening
 
@@ -677,6 +678,8 @@
 * [Pentesting Kubernetes](https://cloud.hacktricks.xyz/pentesting-cloud/kubernetes-security)
 * [Pentesting Cloud (AWS, GCP, Az...)](https://cloud.hacktricks.xyz/pentesting-cloud/pentesting-cloud-methodology)
 * [Pentesting CI/CD (Github, Jenkins, Terraform...)](https://cloud.hacktricks.xyz/pentesting-ci-cd/pentesting-ci-cd-methodology)
+* [Aws](cloud-security/aws.md)
+* [Azure](cloud-security/azure.md)
 
 ## 😎 Hardware/Physical Access
 
@@ -685,6 +688,9 @@
 * [Firmware Analysis](hardware-physical-access/firmware-analysis/README.md)
   * [Bootloader testing](hardware-physical-access/firmware-analysis/bootloader-testing.md)
   * [Firmware Integrity](hardware-physical-access/firmware-analysis/firmware-integrity.md)
+  * [Extract Firmware from OT Devices](hardware-physical-access/firmware-analysis/extract-firmware-from-ot-devices.md)
+* [AnC ASLR](hardware-physical-access/anc-aslr.md)
+* [RowHammer](hardware-physical-access/rowhammer.md)
 
 ## 🎯 Binary Exploitation
 
@@ -781,6 +787,21 @@
 * [Stego Tricks](crypto-and-stego/stego-tricks.md)
 * [Esoteric languages](crypto-and-stego/esoteric-languages.md)
 * [Blockchain & Crypto Currencies](crypto-and-stego/blockchain-and-crypto-currencies.md)
+* [AES](crypto-and-stego/aes.md)
+* [Know Plaintext Attacks](crypto-and-stego/know-plaintext-attacks.md)
+* [Substitution cipher](crypto-and-stego/substitution-cipher.md)
+* [Transposition cipher](crypto-and-stego/transposition-cipher.md)
+* [Block cipher](crypto-and-stego/block-cipher.md)
+* [Broken CBC](crypto-and-stego/broken-cbc.md)
+* [Cheat sheet maths](crypto-and-stego/cheat-sheet-maths.md)
+* [Broken ECB](crypto-and-stego/broken-ecb.md)
+* [El Gamal](crypto-and-stego/el-gamal.md)
+* [Know Plaintext Attacks](crypto-and-stego/know-plaintext-attacks-1.md)
+* [PBKDF2](crypto-and-stego/pbkdf2.md)
+* [RC4](crypto-and-stego/rc4.md)
+* [RSA](crypto-and-stego/rsa.md)
+* [Shift register cipher](crypto-and-stego/shift-register-cipher.md)
+* [Stream cipher](crypto-and-stego/stream-cipher.md)
 
 ## 🦂 C2
 
