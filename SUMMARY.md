@@ -289,6 +289,7 @@
 * [Basic PowerShell for Pentesters](windows-hardening/basic-powershell-for-pentesters/README.md)
   * [PowerView/SharpView](windows-hardening/basic-powershell-for-pentesters/powerview.md)
 * [Antivirus (AV) Bypass](windows-hardening/av-bypass.md)
+* [Active Directory Mind Map](windows-hardening/active-directory-mind-map.md)
 
 ## 📱 Mobile Pentesting
 
